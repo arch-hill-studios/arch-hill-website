@@ -1,0 +1,507 @@
+@import 'tailwindcss';
+
+/*
+  ⚠️  CRITICAL CSS DUPLICATION WARNING ⚠️
+
+  Essential layout styles in this file are duplicated in src/app/layout.tsx as inline critical CSS
+  for performance optimization (faster LCP, reduced render blocking).
+
+  When changing these values, update BOTH locations:
+  1. This file (globals.css) - for full styling and consistency
+  2. src/app/layout.tsx inline styles - for critical performance CSS
+  3. src/app/manifest.ts - for PWA theme colors (THEME_COLOR, BACKGROUND_COLOR)
+
+  DUPLICATED STYLES (simplified): scroll-padding-top, main padding-top, brand colors (--color-brand-primary/secondary)
+*/
+
+/* Brand Colors and Typography System - Tailwind v4 */
+@theme {
+  --color-brand-primary: #ff6600;
+  --color-brand-secondary: #ff9d00;
+  --color-brand-charcoal: #282828;
+  --color-brand-charcoal-light: #454545;
+  --color-brand-white: #ffffff;
+  --color-brand-offwhite: #fff0cd;
+
+  /* Charcoal gradient color stops (for use with opacity) */
+  --color-charcoal-gradient-start: 97, 97, 97; /* #616161 in RGB */
+  --color-charcoal-gradient-end: 0, 0, 0; /* #000000 in RGB */
+
+  --background-image-brand-gradient-charcoal-linear: linear-gradient(
+    90deg,
+    #616161 0%,
+    #000000 100%
+  );
+  --background-image-brand-gradient-charcoal-diag: linear-gradient(
+    135deg,
+    #616161 0%,
+    #000000 100%
+  );
+  --background-image-brand-gradient-charcoal-radial: radial-gradient(
+    circle,
+    #616161 0%,
+    #000000 100%
+  );
+  --background-image-brand-gradient-primary: linear-gradient(
+    135deg,
+    var(--color-brand-primary) 0%,
+    var(--color-brand-secondary) 100%
+  );
+  --background-image-brand-gradient-metal: linear-gradient(135deg, #ffffff 0%, #999999 100%);
+  --background-image-brand-gradient-firey: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-brand-primary) 100%, white 20%) 0%,
+    color-mix(in srgb, var(--color-brand-secondary) 100%, black 20%) 100%
+  );
+
+  /* Typography Scale System */
+  --font-scale-base: 1rem; /* WARNING: if changing this please change the same in BodyTextPreview.tsx */
+
+  /* Custom Breakpoints */
+  --breakpoint-xxs: 350px;
+  --breakpoint-xs: 500px;
+}
+
+/* Base styles */
+/*
+  ⚠️ HEADER HEIGHT SYNC: These values MUST match:
+  - src/components/Header/Header.tsx (h-18 md:h-24 = 72px/96px)
+  - src/app/layout.tsx (inline critical CSS scroll-padding)
+  - src/components/HomeHero/styles.module.css (hero-height calc values)
+*/
+html {
+  scroll-padding-top: 4.5rem; /* 72px - matches h-18 mobile header. Must match layout.tsx */
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 6rem; /* 96px - matches h-24 desktop header. Must match layout.tsx */
+  }
+}
+
+/* Font variant utilities */
+.font-variant-small-caps {
+  font-variant: small-caps;
+}
+
+.font-variant-normal {
+  font-variant: normal;
+}
+
+/* Brand gradient utility */
+.bg-brand-gradient {
+  background: var(--background-image-brand-gradient);
+}
+
+/* Card gradient utility */
+.bg-card-gradient {
+  background: var(--background-image-card-gradient);
+}
+
+/* Gradient Text Utilities - Apply gradients to text/icons using background-clip */
+.text-gradient-primary {
+  display: inline-block;
+  background: var(--background-image-brand-gradient-primary);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-charcoal-linear {
+  display: inline-block;
+  background: var(--background-image-brand-gradient-charcoal-linear);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-charcoal-diag {
+  display: inline-block;
+  background: var(--background-image-brand-gradient-charcoal-diag);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-charcoal-radial {
+  display: inline-block;
+  background: var(--background-image-brand-gradient-charcoal-radial);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-metal {
+  display: inline-block;
+  background: var(--background-image-brand-gradient-metal);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-firey {
+  display: inline-block;
+  background: var(--background-image-brand-gradient-firey);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom Typography Utilities with Responsive Behavior 
+ * 
+ * ⚠️  IMPORTANT: KEEP IN SYNC WITH SANITY PREVIEW COMPONENT ⚠️
+ * These @utility definitions must match the corresponding style values in:
+ * src/sanity/components/BodyTextPreview.tsx
+ * 
+ * When updating typography styles:
+ * 1. Update the @utility definitions below (for frontend rendering)
+ * 2. Update the corresponding values in BodyTextPreview.tsx (for Sanity Studio previews)
+ * 
+ * Both files must have identical font-size, line-height, font-weight, and letter-spacing values
+ * to ensure consistency between Sanity Studio previews and frontend display.
+ */
+
+/* Heading Utilities */
+@utility text-h1 {
+  font-size: calc(var(--font-scale-base) * 3);
+  line-height: 1.1;
+  letter-spacing: calc(var(--font-scale-base) * -0.025);
+  font-weight: 700;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 6);
+  }
+}
+
+@utility text-h2 {
+  font-size: calc(var(--font-scale-base) * 2.75);
+  line-height: 1.1;
+  letter-spacing: calc(var(--font-scale-base) * -0.025);
+  font-weight: 700;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 4.5);
+  }
+}
+
+@utility text-h3 {
+  font-size: calc(var(--font-scale-base) * 2);
+  line-height: 1.2;
+  letter-spacing: calc(var(--font-scale-base) * -0.02);
+  font-weight: 600;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 3.5);
+  }
+}
+
+@utility text-h4 {
+  font-size: calc(var(--font-scale-base) * 1.625);
+  line-height: 1.25;
+  letter-spacing: calc(var(--font-scale-base) * -0.01);
+  font-weight: 600;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 2.5);
+  }
+}
+
+@utility text-h5 {
+  font-size: calc(var(--font-scale-base) * 1.375);
+  line-height: 1.3;
+  letter-spacing: 0;
+  font-weight: 600;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 1.875);
+  }
+}
+
+@utility text-h6 {
+  font-size: calc(var(--font-scale-base) * 1.125);
+  line-height: 1.4;
+  letter-spacing: 0;
+  font-weight: 600;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 1.5);
+  }
+}
+
+/* Body Text Utilities 
+ * ⚠️ These values are also duplicated in src/sanity/components/BodyTextPreview.tsx ⚠️ */
+@utility text-body-xs {
+  font-size: calc(var(--font-scale-base) * 0.6875);
+  line-height: 1.5;
+  letter-spacing: 0;
+  font-weight: 400;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 0.8125);
+  }
+}
+
+@utility text-body-sm {
+  font-size: calc(var(--font-scale-base) * 0.8125);
+  line-height: 1.5;
+  letter-spacing: 0;
+  font-weight: 400;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 0.9375);
+  }
+}
+
+@utility text-body-base {
+  font-size: calc(var(--font-scale-base) * 1);
+  line-height: 1.625;
+  letter-spacing: 0;
+  font-weight: 400;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 1.125);
+  }
+}
+
+@utility text-body-lg {
+  font-size: calc(var(--font-scale-base) * 1.125);
+  line-height: 1.625;
+  letter-spacing: 0;
+  font-weight: 400;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 1.375);
+  }
+}
+
+@utility text-body-xl {
+  font-size: calc(var(--font-scale-base) * 1.375);
+  line-height: 1.5;
+  letter-spacing: 0;
+  font-weight: 400;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 1.625);
+  }
+}
+
+@utility text-body-2xl {
+  font-size: calc(var(--font-scale-base) * 1.5);
+  line-height: 1.5;
+  letter-spacing: 0;
+  font-weight: 400;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 1.875);
+  }
+}
+
+@utility text-body-3xl {
+  font-size: calc(var(--font-scale-base) * 1.75);
+  line-height: 1.4;
+  letter-spacing: 0;
+  font-weight: 400;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 2.25);
+  }
+}
+
+@utility text-body-4xl {
+  font-size: calc(var(--font-scale-base) * 2);
+  line-height: 1.3;
+  letter-spacing: calc(var(--font-scale-base) * -0.01);
+  font-weight: 400;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 2.625);
+  }
+}
+
+@utility text-body-5xl {
+  font-size: calc(var(--font-scale-base) * 2.25);
+  line-height: 1.25;
+  letter-spacing: calc(var(--font-scale-base) * -0.015);
+  font-weight: 400;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 3);
+  }
+}
+
+@utility text-body-6xl {
+  font-size: calc(var(--font-scale-base) * 2.5);
+  line-height: 1.2;
+  letter-spacing: calc(var(--font-scale-base) * -0.02);
+  font-weight: 400;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 3.5);
+  }
+}
+
+@utility text-body-7xl {
+  font-size: calc(var(--font-scale-base) * 2.75);
+  line-height: 1.15;
+  letter-spacing: calc(var(--font-scale-base) * -0.02);
+  font-weight: 400;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 4);
+  }
+}
+
+@utility text-body-8xl {
+  font-size: calc(var(--font-scale-base) * 3);
+  line-height: 1.1;
+  letter-spacing: calc(var(--font-scale-base) * -0.025);
+  font-weight: 400;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 4.5);
+  }
+}
+
+@utility text-body-9xl {
+  font-size: calc(var(--font-scale-base) * 3.5);
+  line-height: 1.1;
+  letter-spacing: calc(var(--font-scale-base) * -0.025);
+  font-weight: 400;
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--font-scale-base) * 5);
+  }
+}
+
+/* Custom scrollbar utilities */
+@utility scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Range input reset for audio players - ensures clicks and drags work across all browsers */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Remove default focus outline and add custom one */
+input[type='range']:focus {
+  outline: none;
+}
+
+/* Webkit (Chrome, Safari, Edge) - make the thumb large for easy dragging but invisible */
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  background: transparent;
+  cursor: pointer;
+  height: 100%;
+}
+
+/* Firefox - make the thumb large for easy dragging but invisible */
+input[type='range']::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+input[type='range']::-moz-range-track {
+  background: transparent;
+  cursor: pointer;
+  height: 100%;
+}
+
+/* ===================================================================
+ * DEPRECATED: Old Section Background System
+ * These classes have been replaced by the unified background image system below.
+ * Keeping commented for reference. Safe to delete after confirming migration.
+ * =================================================================== */
+
+/*
+.section-background {
+  position: relative;
+}
+
+.section-background::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.section-background-smokey-1::before {
+  background-image: url('/images/backgrounds/smokey-1.jpg');
+}
+
+.section-background-smokey-2::before {
+  background-image: url('/images/backgrounds/smokey-2.jpg');
+}
+
+.section-background-smokey-3::before {
+  background-image: url('/images/backgrounds/smokey-3.jpg');
+}
+
+.section-background-smokey-4::before {
+  background-image: url('/images/backgrounds/smokey-4.jpg');
+}
+
+.section-background-smokey-5::before {
+  background-image: url('/images/backgrounds/smokey-5.jpg');
+}
+
+.section-background-smokey-6::before {
+  background-image: url('/images/backgrounds/smokey-6.jpg');
+}
+
+.section-background-smokey-7::before {
+  background-image: url('/images/backgrounds/smokey-7.jpg');
+}
+
+.section-background-smokey-8::before {
+  background-image: url('/images/backgrounds/smokey-8.jpg');
+}
+*/
+
+/* ===================================================================
+ * Unified Background Image System
+ * Used by ContentWrapper and PageSection for all background images
+ * (both smokey presets and custom uploaded images)
+ * =================================================================== */
+
+.background-image-wrapper {
+  position: relative;
+  overflow: hidden; /* Ensure background doesn't overflow container */
+  isolation: isolate; /* Create a new stacking context */
+}
+
+.background-image-layer {
+  position: absolute;
+  inset: 0; /* Shorthand for top: 0; right: 0; bottom: 0; left: 0; */
+  z-index: -1;
+  background-repeat: no-repeat;
+  background-size: cover; /* Maintains aspect ratio while covering entire area - same as object-cover */
+  background-position: center; /* Centers the image - same as object-center */
+  /* The image will maintain its aspect ratio and crop to fill the container,
+     just like Next.js Image with fill and object-cover */
+}

@@ -1,0 +1,82 @@
+/* Base styles - shared across ALL dividers */
+.base {
+  height: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* Line element (::before) - shared styling */
+.base::before {
+  content: '';
+  position: absolute;
+  height: 0.5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Diamond element (::after) - shared styling */
+.base::after {
+  content: '✦';
+  position: relative;
+  z-index: 1;
+  padding: 0 1rem;
+  font-size: 0.875rem;
+  line-height: 1;
+}
+
+/* SIZE VARIATIONS - controls width only */
+.full {
+  width: 100%;
+}
+
+.full::before {
+  width: 100%;
+}
+
+.half {
+  width: 50%;
+}
+
+.half::before {
+  width: 100%;
+}
+
+/* COLOR VARIATIONS - controls color scheme only */
+.light::before {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-subtle) 15%,
+    var(--color-subtle) 35%,
+    transparent 50%,
+    var(--color-subtle) 65%,
+    var(--color-subtle) 85%,
+    transparent 100%
+  );
+}
+
+.light::after {
+  color: var(--color-subtle);
+  background: transparent;
+}
+
+.dark::before {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-brand-primary) 15%,
+    var(--color-brand-primary) 35%,
+    transparent 50%,
+    var(--color-brand-primary) 65%,
+    var(--color-brand-primary) 85%,
+    transparent 100%
+  );
+}
+
+.dark::after {
+  color: var(--color-brand-primary);
+  background: transparent;
+}

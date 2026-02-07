@@ -1,0 +1,9 @@
+/*
+  Hero now uses full viewport height since header is transparent on page load
+  and positioned over the hero content.
+*/
+
+.hero-height {
+  /* Full viewport height - hero content extends behind transparent header */
+  min-height: 100svh;
+}

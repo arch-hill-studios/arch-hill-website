@@ -1,0 +1,14 @@
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: opacity 300ms ease-in-out;
+}
+
+.overlayOpen {
+  opacity: 1;
+}
+
+.overlayClosed {
+  opacity: 0;
+}
