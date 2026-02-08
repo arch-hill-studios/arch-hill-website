@@ -23,6 +23,7 @@ import {
   getOrganizationAddress,
   getOrganizationAddressLink,
   getBrandTextImage,
+  getLogo,
 } from '@/lib/organizationInfo';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
@@ -50,6 +51,7 @@ const Footer = ({
   businessContactInfo,
 }: FooterProps) => {
   const { isPageReady } = usePageLoad();
+  const logo = getLogo(businessContactInfo);
   const brandTextImage = getBrandTextImage(businessContactInfo);
 
   // Build contact details array, filtering out empty values
@@ -136,16 +138,19 @@ const Footer = ({
               style={{
                 filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))',
               }}>
-              <UnifiedImage
-                src='/images/logos/logo.png'
-                alt={`${organizationName} Logo`}
-                mode='sized'
-                width={80}
-                height={50}
-                objectFit='contain'
-                className='w-14 md:w-20 h-auto'
-                sizes='(max-width: 768px) 56px, 80px'
-              />
+              {logo?.asset && (
+                <UnifiedImage
+                  src={logo}
+                  alt={logo.alt || `${organizationName} Logo`}
+                  mode='sized'
+                  width={80}
+                  height={50}
+                  sizeContext='logo'
+                  objectFit='contain'
+                  className='w-14 md:w-20 h-auto'
+                  sizes='(max-width: 768px) 56px, 80px'
+                />
+              )}
               {/* Brand Text - Image from CMS or fallback to organization name */}
               <div className='hidden xxs:flex items-baseline gap-2'>
                 {brandTextImage?.asset ? (

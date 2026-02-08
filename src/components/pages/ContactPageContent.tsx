@@ -13,7 +13,9 @@ import {
   getOrganizationEmailLink,
   getOrganizationPhone,
   getOrganizationPhoneLink,
+  getLogo,
 } from '@/lib/organizationInfo';
+import { urlFor } from '@/sanity/lib/image';
 import CardLight from '@/components/UI/CardLight';
 import ExpandingContentWrapper from '@/components/UI/ExpandingContentWrapper';
 import { maxCardWidth } from '@/utils/spacingConstants';
@@ -31,6 +33,8 @@ const ContactPageContent = ({ contactPageData, contactFormSettings, pageBuilderD
   const baseUrl = getBaseUrl();
 
   const { businessContactInfo } = pageBuilderData;
+  const logo = getLogo(businessContactInfo);
+  const logoUrl = logo?.asset ? urlFor(logo).width(512).height(512).url() : undefined;
   const orgName = getOrganizationName(businessContactInfo);
   const email = getOrganizationEmail(businessContactInfo);
   const emailLink = getOrganizationEmailLink(businessContactInfo);
@@ -94,7 +98,7 @@ const ContactPageContent = ({ contactPageData, contactFormSettings, pageBuilderD
     publisher: {
       name: orgName,
       url: baseUrl,
-      logo: `${baseUrl}/logo.png`,
+      ...(logoUrl && { logo: logoUrl }),
     },
     url: `${baseUrl}/contact`,
   });

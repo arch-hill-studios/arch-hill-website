@@ -11,7 +11,7 @@ interface ConfirmationEmailData {
   email: string;
   phone?: string;
   message: string;
-  logoUrl: string;
+  logoUrl?: string;
   organizationName: string;
   emailGreeting?: string;
   emailIntroMessage?: string;
@@ -69,7 +69,7 @@ export function generateConfirmationEmail(data: ConfirmationEmailData): string {
                       <td align="center">
                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="display: inline-block;">
                           <tr>
-                            <td align="center" valign="middle" style="padding-right: 12px;">
+                            ${logoUrl ? `<td align="center" valign="middle" style="padding-right: 12px;">
                               <!-- Logo -->
                               <img
                                 src="${logoUrl}"
@@ -78,7 +78,7 @@ export function generateConfirmationEmail(data: ConfirmationEmailData): string {
                                 height="auto"
                                 style="display: block; margin: 0; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));"
                               />
-                            </td>
+                            </td>` : ''}
                             <td align="left" valign="middle" style="white-space: nowrap;">
                               <!-- Business Name -->
                               <span style="${EMAIL_STYLES.brandNameGold}">${organizationName}</span>

@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import UnifiedImage from '@/components/UI/UnifiedImage';
 import type { HEADER_QUERYResult, BUSINESS_CONTACT_INFO_QUERYResult } from '@/sanity/types';
-import { getBrandTextImage } from '@/lib/organizationInfo';
+import { getBrandTextImage, getLogo } from '@/lib/organizationInfo';
 import HorizontalNav from './HorizontalNav';
 import MenuButton from './MenuButton';
 import VerticalNav from './VerticalNav/VerticalNav';
@@ -20,6 +20,7 @@ interface HeaderProps {
 }
 
 const Header = ({ headerData, organizationName, businessContactInfo }: HeaderProps) => {
+  const logo = getLogo(businessContactInfo);
   const brandTextImage = getBrandTextImage(businessContactInfo);
   const { enableOpacityFade } = useHeader();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -118,17 +119,20 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
           style={{
             filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))',
           }}>
-          <UnifiedImage
-            src='/images/logos/logo.png'
-            alt={`${organizationName} Logo`}
-            mode='sized'
-            width={80}
-            height={50}
-            objectFit='contain'
-            className='w-14 md:w-20 h-auto'
-            sizes='(max-width: 768px) 56px, 80px'
-            priority
-          />
+          {logo?.asset && (
+            <UnifiedImage
+              src={logo}
+              alt={logo.alt || `${organizationName} Logo`}
+              mode='sized'
+              width={80}
+              height={50}
+              sizeContext='logo'
+              objectFit='contain'
+              className='w-14 md:w-20 h-auto'
+              sizes='(max-width: 768px) 56px, 80px'
+              priority
+            />
+          )}
           {/* Brand Text - Image from CMS or fallback to organization name */}
           <div className='hidden xxs:flex items-baseline gap-2'>
             {brandTextImage?.asset ? (

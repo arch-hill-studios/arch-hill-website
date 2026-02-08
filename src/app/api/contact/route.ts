@@ -9,7 +9,9 @@ import {
   getOrganizationPhone,
   getOrganizationAddress,
   getOrganizationAddressLink,
+  getLogo,
 } from '@/lib/organizationInfo';
+import { urlFor } from '@/sanity/lib/image';
 import { getContactConfirmationEmail, getBusinessContactInfo } from '@/actions';
 
 // Initialize Resend with API key from environment variable
@@ -163,11 +165,9 @@ export async function POST(request: Request) {
       );
     }
 
-    // Construct logo URL for email using NEXT_PUBLIC_BASE_URL
-    // Note: In development (localhost), the image won't display in emails - this is expected
-    // In production, ensure NEXT_PUBLIC_BASE_URL is set to your live domain in Vercel
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-    const logoUrl = `${baseUrl}/images/logos/logo.png`;
+    // Construct logo URL from Sanity CMS
+    const logo = getLogo(businessContactInfo);
+    const logoUrl = logo?.asset ? urlFor(logo).width(160).url() : '';
 
     // Fetch confirmation email settings from Sanity for customizable email content
     const confirmationEmailSettings = await getContactConfirmationEmail();

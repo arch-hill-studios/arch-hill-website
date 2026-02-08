@@ -27,6 +27,25 @@ export const businessContactInfoType = defineType({
       validation: (Rule) => Rule.required().max(500),
     }),
     defineField({
+      name: 'logo',
+      title: 'Logo',
+      type: 'image',
+      description:
+        'Optional logo image (used in Header/Footer). If not set, no logo is displayed.',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          description:
+            'Describe the logo for accessibility (e.g., "Company Name Logo")',
+        }),
+      ],
+    }),
+    defineField({
       name: 'brandTextImage',
       title: 'Brand Text Image',
       type: 'image',

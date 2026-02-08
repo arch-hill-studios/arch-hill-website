@@ -78,6 +78,23 @@ export async function fetchOrganizationInfo(): Promise<{
 }
 
 // ============================================================================
+// Logo Helper
+// Returns the logo image if set, otherwise null (no logo rendered)
+// ============================================================================
+
+/**
+ * Get logo from businessContactInfo.
+ * Returns the image data if set, otherwise null.
+ * Used in Header/Footer to display the business logo.
+ * If null, no logo is rendered (valid scenario for text-only branding).
+ */
+export function getLogo(
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null,
+) {
+  return businessContactInfo?.logo || null;
+}
+
+// ============================================================================
 // Brand Display Image Helper
 // Returns the brand text image if set, otherwise null (falls back to org name)
 // ============================================================================

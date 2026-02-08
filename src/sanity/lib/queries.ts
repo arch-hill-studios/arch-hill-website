@@ -333,6 +333,12 @@ export const BUSINESS_CONTACT_INFO_QUERY = defineQuery(`*[_id == "businessContac
   _type,
   organizationName,
   organizationDescription,
+  logo{
+    asset,
+    alt,
+    hotspot,
+    crop
+  },
   brandTextImage{
     asset,
     alt,

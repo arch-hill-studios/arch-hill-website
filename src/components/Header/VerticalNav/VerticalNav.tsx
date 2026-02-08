@@ -20,7 +20,7 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 import styles from './VerticalNav.module.css';
 import { headerHeight } from '@/utils/spacingConstants';
 import type { BUSINESS_CONTACT_INFO_QUERYResult } from '@/sanity/types';
-import { getBrandTextImage } from '@/lib/organizationInfo';
+import { getBrandTextImage, getLogo } from '@/lib/organizationInfo';
 
 interface VerticalNavProps {
   isMenuOpen: boolean;
@@ -32,6 +32,7 @@ interface VerticalNavProps {
 }
 
 const VerticalNav = ({ isMenuOpen, onClose, navLinks, navCtas, organizationName, businessContactInfo }: VerticalNavProps) => {
+  const logo = getLogo(businessContactInfo);
   const brandTextImage = getBrandTextImage(businessContactInfo);
   useBodyScrollLock(isMenuOpen);
   const focusTrapRef = useFocusTrap(isMenuOpen);
@@ -85,16 +86,19 @@ const VerticalNav = ({ isMenuOpen, onClose, navLinks, navCtas, organizationName,
             style={{
               filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))',
             }}>
-            <UnifiedImage
-              src='/images/logos/logo.png'
-              alt={`${organizationName} Logo`}
-              mode='sized'
-              width={80}
-              height={50}
-              objectFit='contain'
-              className='w-14 md:w-20 h-auto'
-              sizes='(max-width: 768px) 56px, 80px'
-            />
+            {logo?.asset && (
+              <UnifiedImage
+                src={logo}
+                alt={logo.alt || `${organizationName} Logo`}
+                mode='sized'
+                width={80}
+                height={50}
+                sizeContext='logo'
+                objectFit='contain'
+                className='w-14 md:w-20 h-auto'
+                sizes='(max-width: 768px) 56px, 80px'
+              />
+            )}
             {/* Brand Text - Image from CMS or fallback to organization name - visible on small screens only */}
             <div className='flex sm:hidden items-baseline gap-2'>
               {brandTextImage?.asset ? (
