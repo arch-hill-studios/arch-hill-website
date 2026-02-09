@@ -79,7 +79,7 @@ const Quote = ({
         </div>
 
         {/* Quote text */}
-        <p className='relative z-10 text-body-2xl md:text-body-3xl text-gradient-primary font-mediumleading-relaxed italic mb-0'>
+        <p className='relative z-10 text-body-2xl md:text-body-3xl text-brand-primary font-mediumleading-relaxed italic mb-0'>
           {cleanText}
         </p>
 
@@ -106,9 +106,9 @@ const Quote = ({
           </footer>
         )}
       </blockquote>
-      {/* Gradient Underline Border */}
+      {/* Underline Border */}
       <div
-        className='mt-4 h-[0.5px] w-1/2 mx-auto bg-linear-to-r from-brand-primary to-brand-secondary'
+        className='mt-4 h-[0.5px] w-1/2 mx-auto bg-brand-primary'
         style={{ opacity: 0.2 }}
       />
     </div>

@@ -75,7 +75,7 @@ const ServiceCard = ({
             <>
               {/* Title */}
               <p
-                className='text-h3 text-gradient-primary font-bold'
+                className='text-h3 text-brand-primary font-bold'
                 {...(documentId && documentType
                   ? createSanityDataAttribute(documentId, documentType, `${fieldPathPrefix}.title`)
                   : {})}>
@@ -131,7 +131,7 @@ const ServiceCard = ({
           {pricingInfo && (
             <AnimateIn animation='slideUp' trigger='scroll' duration={800} threshold={0.5}>
               <p
-                className='text-body-2xl text-gradient-primary font-bold mt-2'
+                className='text-body-2xl text-brand-primary font-bold mt-2'
                 {...(documentId && documentType
                   ? createSanityDataAttribute(
                       documentId,

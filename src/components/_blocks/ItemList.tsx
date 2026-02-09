@@ -75,7 +75,7 @@ const ItemList = ({
               delay={idx * 100}
               threshold={0.5}>
               <div className='shrink-0 mt-1'>
-                <Icon iconKey='dumbell' width={1.5} colorClassName='text-gradient-primary' />
+                <Icon iconKey='dumbell' width={1.5} colorClassName='text-brand-primary' />
               </div>
             </AnimateIn>
 

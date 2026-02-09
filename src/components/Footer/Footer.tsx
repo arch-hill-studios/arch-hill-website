@@ -123,7 +123,7 @@ const Footer = ({
 
   return (
     <footer
-      className={`bg-brand-gradient-dark-linear text-brand-white pt-16 pb-10 ${sitePaddingX} w-full transition-opacity duration-500 ease-in-out ${
+      className={`bg-brand-dark text-brand-white pt-16 pb-10 ${sitePaddingX} w-full transition-opacity duration-500 ease-in-out ${
         isPageReady ? 'opacity-100' : 'opacity-0'
       }`}
       aria-label='Site Footer'>
@@ -166,13 +166,7 @@ const Footer = ({
                   />
                 ) : (
                   <span
-                    className='text-h3'
-                    style={{
-                      background: 'var(--background-image-brand-gradient-primary)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                    }}>
+                    className='text-h3 text-brand-primary'>
                     {organizationName}
                   </span>
                 )}
@@ -198,7 +192,7 @@ const Footer = ({
           <div className='flex flex-col md:flex-row md:justify-between lg:justify-start gap-x-16 gap-y-16 text-center md:text-left'>
             {/* Contact Details */}
             <div className='md:order-last'>
-              <p className='text-h6 mb-6 text-gradient-primary'>Contact</p>
+              <p className='text-h6 mb-6 text-brand-primary'>Contact</p>
               <div className='flex flex-col items-center md:items-start gap-4'>
                 {contactDetails.map((detail, index) => (
                   <a
@@ -217,7 +211,7 @@ const Footer = ({
               {/*  Quick Links */}
               {quickLinks.length > 0 && (
                 <div>
-                  <p className='text-h6 mb-6 text-gradient-primary'>Quick Links</p>
+                  <p className='text-h6 mb-6 text-brand-primary'>Quick Links</p>
                   <div
                     className='flex flex-col items-center md:items-start gap-4'
                     {...createSanityDataAttribute('footer', 'footer', 'quickLinks')}>
@@ -264,7 +258,7 @@ const Footer = ({
               {/* Company Links */}
               {transformedLinks.length > 0 && (
                 <div className=''>
-                  <p className='text-h6 mb-6 text-gradient-primary'>Connect</p>
+                  <p className='text-h6 mb-6 text-brand-primary'>Connect</p>
                   <div
                     className='flex flex-col items-center md:items-start gap-4'
                     {...createSanityDataAttribute('companyLinks', 'companyLinks', 'companyLinks')}>
@@ -301,7 +295,7 @@ const Footer = ({
         {/* BOTTOM ROW */}
         <div className='mt-12'>
           {/* Separator Line */}
-          <div className='w-full h-px bg-brand-gradient-primary opacity-30 mb-6'></div>
+          <div className='w-full h-px bg-brand-primary opacity-30 mb-6'></div>
 
           <div className='flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0'>
             {/* Copyright */}

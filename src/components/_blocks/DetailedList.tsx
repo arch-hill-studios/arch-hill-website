@@ -37,7 +37,7 @@ const DetailedList = ({
             <div key={item._key} className='w-full'>
               {/* Title */}
               <p
-                className='text-h4 font-bold bg-linear-to-r from-brand-primary to-brand-secondary bg-clip-text text-transparent mb-4'
+                className='text-h4 font-bold text-brand-primary mb-4'
                 {...(documentId && documentType
                   ? createSanityDataAttribute(documentId, documentType, `${itemPath}.title`)
                   : {})}>
@@ -62,7 +62,7 @@ const DetailedList = ({
                       <Icon
                         iconKey={item.icon as IconKey}
                         width={2.5}
-                        colorClassName='text-gradient-firey'
+                        colorClassName='text-brand-primary'
                       />
                     </div>
                   </AnimateIn>
@@ -92,9 +92,9 @@ const DetailedList = ({
                 </AnimateIn>
               </div>
 
-              {/* Gradient Underline Border */}
+              {/* Underline Border */}
               <div
-                className='mt-6 h-[0.5px] bg-linear-to-r from-brand-primary to-brand-secondary'
+                className='mt-6 h-[0.5px] bg-brand-primary'
                 style={{ opacity: 0.2 }}
               />
             </div>

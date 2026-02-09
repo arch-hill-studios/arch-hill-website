@@ -152,7 +152,7 @@ const Hero = ({
         <>
           <div
             className='absolute inset-0 z-10'
-            style={{ background: 'var(--background-image-brand-gradient-dark-radial)' }}
+            style={{ backgroundColor: 'var(--color-brand-dark)' }}
           />
           <div className='shrink-0 h-16 md:h-24 lg:h-32' />
         </>

@@ -107,7 +107,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
       <header
         className={`fixed top-0 left-0 right-0 w-full ${sitePaddingX} ${headerHeight} flex items-center justify-between gap-8 z-50 transition-all duration-300`}
         style={{
-          background: `linear-gradient(90deg, rgba(var(--color-dark-gradient-start), ${headerOpacity}) 0%, rgba(var(--color-dark-gradient-end), ${headerOpacity}) 100%)`,
+          backgroundColor: `rgba(10, 10, 10, ${headerOpacity})`,
         }}>
         {/* Logo */}
         <Link
@@ -144,14 +144,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
                 className='h-8 md:h-10 w-auto'
               />
             ) : (
-              <span
-                className='text-h3'
-                style={{
-                  background: 'var(--background-image-brand-gradient-primary)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}>
+              <span className='text-h3 text-brand-primary'>
                 {organizationName}
               </span>
             )}

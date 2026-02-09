@@ -23,7 +23,7 @@ const MoreInfoToggle = ({
       className={`${showOnDesktop ? 'flex' : 'lg:hidden flex'} justify-center ${alwaysCentered ? '' : ' md:justify-start'} items-center gap-2 hover:font-semibold mt-2 cursor-pointer`}
       aria-expanded={isExpanded}
       aria-label={isExpanded ? 'Show less information' : 'Show more information'}>
-      <span className='inline-block text-gradient-primary'>
+      <span className='inline-block text-brand-primary'>
         {isExpanded ? collapseLabel : expandLabel}
       </span>
       <span className='text-brand-primary inline-flex items-center'>

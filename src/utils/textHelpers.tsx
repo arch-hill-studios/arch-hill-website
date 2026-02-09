@@ -4,23 +4,23 @@ type ColorScheme = 'orange-white' | 'white-orange';
 
 /**
  * Parses a string with color markers {text} and returns JSX elements.
- * Handles gradient text properly and preserves spacing and line breaks.
+ * Preserves spacing and line breaks.
  *
  * @param text - The string to parse (e.g., "Welcome to {My} Company")
  * @param colorScheme - The color scheme to use:
- *   - 'orange-white' (default): Default text is orange gradient, {tagged} text is white
- *   - 'white-orange': Default text is white, {tagged} text is orange gradient
+ *   - 'orange-white' (default): Default text is brand primary, {tagged} text is white
+ *   - 'white-orange': Default text is white, {tagged} text is brand primary
  * @returns Array of React elements with appropriate color classes
  *
  * @example
- * // Orange gradient default, white tagged
+ * // Primary default, white tagged
  * parseColoredText("Welcome to {My} Company", 'orange-white')
- * // Renders: "Welcome to " (orange) + "My" (white) + " Company" (orange)
+ * // Renders: "Welcome to " (primary) + "My" (white) + " Company" (primary)
  *
  * @example
- * // White default, orange gradient tagged
+ * // White default, primary tagged
  * parseColoredText("Professional {Development} Services", 'white-orange')
- * // Renders: "Professional " (white) + "Development" (orange) + " Services" (white)
+ * // Renders: "Professional " (white) + "Development" (primary) + " Services" (white)
  */
 export const parseColoredText = (
   text: string,
@@ -33,8 +33,8 @@ export const parseColoredText = (
 
   // Determine colors based on scheme
   const defaultColor =
-    colorScheme === 'orange-white' ? 'text-gradient-primary' : 'text-brand-white';
-  const taggedColor = colorScheme === 'orange-white' ? 'text-brand-white' : 'text-gradient-primary';
+    colorScheme === 'orange-white' ? 'text-brand-primary' : 'text-brand-white';
+  const taggedColor = colorScheme === 'orange-white' ? 'text-brand-white' : 'text-brand-primary';
 
   return parts.map((part, i) => {
     // Skip empty strings but keep them in the array to maintain proper spacing
@@ -46,8 +46,7 @@ export const parseColoredText = (
     const content = isTagged ? part.slice(1, -1).trim() : part;
     const colorClass = isTagged ? taggedColor : defaultColor;
 
-    // For gradient text, we need to handle line breaks differently
-    // Split by newlines to preserve them
+    // Handle line breaks - split by newlines to preserve them
     const lines = content.split('\n');
 
     // Helper function to preserve whitespace by replacing spaces with non-breaking spaces

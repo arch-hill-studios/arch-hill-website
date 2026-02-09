@@ -8,7 +8,7 @@ const getAlignmentClasses = (alignment: string = 'left') => {
     bulletClass: 'list-disc space-y-2 [&>li::marker]:text-brand-secondary',
     numberClass: 'list-decimal space-y-2 [&>li::marker]:text-brand-secondary',
     listItemClass: 'leading-relaxed',
-    standoutClass: 'text-gradient-primary text-body-4xl',
+    standoutClass: 'text-brand-primary text-body-4xl',
   };
 
   const alignmentModifiers = {

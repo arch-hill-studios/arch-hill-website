@@ -44,9 +44,8 @@ export interface IconComponentProps {
    */
   mobileWidth?: number;
   /**
-   * Controls the icon color - supports:
-   * - Solid colors: 'text-brand-primary', 'text-brand-secondary', 'text-brand-dark', 'text-brand-white'
-   * - Gradients: 'gradient-primary', 'gradient-dark-linear', 'gradient-dark-diag', 'gradient-dark-radial', 'gradient-metal', 'gradient-firey'
+   * Controls the icon color via Tailwind text color classes
+   * e.g. 'text-brand-primary', 'text-brand-secondary', 'text-brand-dark', 'text-brand-white'
    */
   colorClassName?: string;
   /**
@@ -71,7 +70,7 @@ export const getIconOptions = () => {
  * - Size control via width prop (in rem units)
  * - Responsive sizing with optional mobileWidth
  * - Automatic aspect ratio maintenance
- * - Color control via solid colors or gradients
+ * - Color control via Tailwind text color classes
  * - Falls back to red star if icon SVG not implemented yet
  *
  * @example
@@ -85,10 +84,6 @@ export const getIconOptions = () => {
  * @example
  * // With solid brand color - 4rem wide
  * <Icon iconKey="dumbell" width={4} colorClassName="text-brand-secondary" />
- *
- * @example
- * // With gradient - 6rem wide
- * <Icon iconKey="dumbell" width={6} colorClassName="gradient-primary" />
  */
 const Icon = ({
   iconKey,

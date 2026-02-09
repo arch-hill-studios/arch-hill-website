@@ -60,8 +60,8 @@ const getVariantStyles = (
     return `${baseStyles} bg-gray-200 text-gray-700 hover:bg-gray-300 focus:ring-gray-400 ${disabledStyles}`.trim();
   }
 
-  // Default to filled variant with brand gradient
-  return `${baseStyles} bg-brand-gradient-primary text-black hover:text-brand-white focus:ring-brand-primary hover:shadow-md ${disabledStyles}`.trim();
+  // Default to filled variant with brand primary
+  return `${baseStyles} bg-brand-primary text-black hover:text-brand-white focus:ring-brand-primary hover:shadow-md ${disabledStyles}`.trim();
 };
 
 const CTA = (props: CTAProps) => {

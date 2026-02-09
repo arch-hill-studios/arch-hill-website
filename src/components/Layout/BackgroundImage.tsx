@@ -71,10 +71,10 @@ const getBackgroundClass = (backgroundImageUrl: string | null): string => {
  * Gets inline styles for background (non-image backgrounds like gradients)
  */
 const getBackgroundStyles = (backgroundStyle?: string): React.CSSProperties => {
-  // Radial gradient (no image)
+  // Solid dark background (no image)
   if (backgroundStyle === 'radial-gradient') {
     return {
-      background: 'var(--background-image-brand-gradient-dark-radial)',
+      backgroundColor: 'var(--color-brand-dark)',
     };
   }
   return {};

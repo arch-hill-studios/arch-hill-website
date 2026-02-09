@@ -20,15 +20,10 @@ const Statement = ({ text, className = '' }: StatementProps) => {
   return (
     <div className={`${maxCardWidth} flex flex-col items-center mx-auto ${className}`.trim()}>
       {/* Statement text */}
-      <p className='text-body-2xl text-gradient-primary text-center mb-4'>{cleanText}</p>
+      <p className='text-body-2xl text-brand-primary text-center mb-4'>{cleanText}</p>
 
-      {/* Underline with gradient */}
-      <div
-        className='w-1/3 h-[0.5px] opacity-50'
-        style={{
-          backgroundImage: 'var(--background-image-brand-gradient-primary)',
-        }}
-      />
+      {/* Underline */}
+      <div className='w-1/3 h-[0.5px] opacity-50 bg-brand-primary' />
     </div>
   );
 };

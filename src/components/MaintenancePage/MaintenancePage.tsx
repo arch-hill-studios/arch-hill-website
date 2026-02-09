@@ -20,7 +20,7 @@ const MaintenancePage = ({ organizationName, businessContactInfo }: MaintenanceP
   const phoneLink = getOrganizationPhoneLink(businessContactInfo);
 
   return (
-    <div className='min-h-svh bg-brand-gradient-brown flex items-center justify-center px-4'>
+    <div className='min-h-svh bg-brand-dark flex items-center justify-center px-4'>
       <div className='max-w-2xl w-full text-center space-y-8'>
         {/* Logo */}
         <div className='flex justify-center'>

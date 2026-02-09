@@ -23,37 +23,6 @@
   --color-brand-white: #fff7db;
   --color-brand-offwhite: #151515;
 
-  /* Dark gradient color stops (for use with opacity) */
-  --color-dark-gradient-start: 42, 42, 42; /* #2a2a2a in RGB */
-  --color-dark-gradient-end: 10, 10, 10; /* #0a0a0a in RGB */
-
-  --background-image-brand-gradient-dark-linear: linear-gradient(
-    90deg,
-    #2a2a2a 0%,
-    #0a0a0a 100%
-  );
-  --background-image-brand-gradient-dark-diag: linear-gradient(
-    135deg,
-    #2a2a2a 0%,
-    #0a0a0a 100%
-  );
-  --background-image-brand-gradient-dark-radial: radial-gradient(
-    circle,
-    #2a2a2a 0%,
-    #0a0a0a 100%
-  );
-  --background-image-brand-gradient-primary: linear-gradient(
-    135deg,
-    var(--color-brand-primary) 0%,
-    var(--color-brand-secondary) 100%
-  );
-  --background-image-brand-gradient-metal: linear-gradient(135deg, #fff7db 0%, #999999 100%);
-  --background-image-brand-gradient-firey: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--color-brand-primary) 100%, white 20%) 0%,
-    color-mix(in srgb, var(--color-brand-secondary) 100%, black 20%) 100%
-  );
-
   /* Typography Scale System */
   --font-scale-base: 1rem; /* WARNING: if changing this please change the same in BodyTextPreview.tsx */
 
@@ -86,65 +55,6 @@ html {
 
 .font-variant-normal {
   font-variant: normal;
-}
-
-/* Brand gradient utility */
-.bg-brand-gradient {
-  background: var(--background-image-brand-gradient);
-}
-
-/* Card gradient utility */
-.bg-card-gradient {
-  background: var(--background-image-card-gradient);
-}
-
-/* Gradient Text Utilities - Apply gradients to text/icons using background-clip */
-.text-gradient-primary {
-  display: inline-block;
-  background: var(--background-image-brand-gradient-primary);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-dark-linear {
-  display: inline-block;
-  background: var(--background-image-brand-gradient-dark-linear);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-dark-diag {
-  display: inline-block;
-  background: var(--background-image-brand-gradient-dark-diag);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-dark-radial {
-  display: inline-block;
-  background: var(--background-image-brand-gradient-dark-radial);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-metal {
-  display: inline-block;
-  background: var(--background-image-brand-gradient-metal);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-firey {
-  display: inline-block;
-  background: var(--background-image-brand-gradient-firey);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 /* Custom Typography Utilities with Responsive Behavior 

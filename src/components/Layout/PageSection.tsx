@@ -73,13 +73,13 @@ const PageSection = ({
   const titleWrapperClasses = isLeftAligned
     ? // Left aligned: Use vertical line on all screen sizes, left-aligned text
       `relative pb-4 md:pb-8 pl-4 text-left
-       before:content-[""] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[0.5] before:bg-linear-to-b before:from-brand-primary before:to-brand-secondary ${pageTitleBottomSpacing}`
+       before:content-[""] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[0.5] before:bg-brand-primary ${pageTitleBottomSpacing}`
     : // Center aligned: Use horizontal line on mobile, vertical line on desktop
       `relative pb-4 md:pb-8 text-center
        md:pl-4 md:text-left
-       after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:w-1/2 after:h-[0.5] after:bg-linear-to-r after:from-brand-primary after:to-brand-secondary
+       after:content-[""] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:w-1/2 after:h-[0.5] after:bg-brand-primary
        md:after:hidden
-       md:before:content-[""] md:before:absolute md:before:left-0 md:before:top-0 md:before:bottom-0 md:before:w-[0.5] md:before:bg-linear-to-b md:before:from-brand-primary md:before:to-brand-secondary ${pageTitleBottomSpacing}`;
+       md:before:content-[""] md:before:absolute md:before:left-0 md:before:top-0 md:before:bottom-0 md:before:w-[0.5] md:before:bg-brand-primary ${pageTitleBottomSpacing}`;
 
   return (
     <PageSectionContext.Provider value={{ hasTitle }}>

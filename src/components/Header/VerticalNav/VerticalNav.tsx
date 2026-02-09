@@ -72,7 +72,7 @@ const VerticalNav = ({ isMenuOpen, onClose, navLinks, navCtas, organizationName,
         role='dialog'
         aria-modal='true'
         aria-label='Main navigation menu'
-        className={`fixed flex flex-col bg-brand-gradient-dark-radial transition-opacity duration-300 inset-0 sm:inset-auto sm:top-0 sm:right-0 sm:bottom-0 sm:w-90 sm:shadow-2xl sm:transition-transform sm:duration-300 sm:ease-in-out ${
+        className={`fixed flex flex-col bg-brand-dark transition-opacity duration-300 inset-0 sm:inset-auto sm:top-0 sm:right-0 sm:bottom-0 sm:w-90 sm:shadow-2xl sm:transition-transform sm:duration-300 sm:ease-in-out ${
           isMenuOpen ? 'sm:translate-x-0' : 'sm:translate-x-full'
         }`}>
         {/* Menu Header - now visible on all screen sizes with logo and close button */}
@@ -113,13 +113,7 @@ const VerticalNav = ({ isMenuOpen, onClose, navLinks, navCtas, organizationName,
                 />
               ) : (
                 <span
-                  className='text-h3'
-                  style={{
-                    background: 'var(--background-image-brand-gradient-primary)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}>
+                  className='text-h3 text-brand-primary'>
                   {organizationName}
                 </span>
               )}

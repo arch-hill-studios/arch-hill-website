@@ -58,7 +58,7 @@ const IconList = ({
                     iconKey={item.icon as IconKey}
                     width={3}
                     mobileWidth={2.5}
-                    colorClassName='text-gradient-firey'
+                    colorClassName='text-brand-primary'
                   />
                 </div>
               </AnimateIn>

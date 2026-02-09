@@ -18,10 +18,8 @@ export interface CustomIconProps {
    */
   mobileWidth?: number;
   /**
-   * Controls the icon color - supports:
-   * - Solid colors: 'text-brand-primary', 'text-brand-secondary', 'text-brand-dark', 'text-brand-white'
-   * - Gradients: 'gradient-primary', 'gradient-dark-linear', 'gradient-dark-diag', 'gradient-dark-radial', 'gradient-metal', 'gradient-firey'
-   * - Legacy text-gradient classes also supported: 'text-gradient-primary', etc.
+   * Controls the icon color via Tailwind text color classes
+   * e.g. 'text-brand-primary', 'text-brand-secondary', 'text-brand-dark', 'text-brand-white'
    */
   colorClassName?: string;
   /**
@@ -38,7 +36,7 @@ export interface CustomIconProps {
  * - Size control via width prop (in rem units)
  * - Responsive sizing with optional mobileWidth
  * - Automatic aspect ratio maintenance
- * - Color control via Tailwind text/gradient classes
+ * - Color control via Tailwind text color classes
  * - Falls back to red star if icon not found
  *
  * @example
@@ -52,10 +50,6 @@ export interface CustomIconProps {
  * @example
  * // With solid brand color - 4rem wide
  * <CustomIcon iconKey="dumbell" width={4} colorClassName="text-brand-primary" />
- *
- * @example
- * // With gradient - 6rem wide
- * <CustomIcon iconKey="dumbell" width={6} colorClassName="text-gradient-primary" />
  */
 const CustomIcon = ({
   iconKey,
@@ -87,20 +81,6 @@ const CustomIcon = ({
   const heightRem = width / iconDef.aspectRatio;
   const mobileHeightRem = mobileWidth ? mobileWidth / iconDef.aspectRatio : undefined;
 
-  // Map gradient names to CSS custom properties
-  const gradientMap: Record<string, string> = {
-    'gradient-primary': 'var(--background-image-brand-gradient-primary)',
-    'gradient-dark-linear': 'var(--background-image-brand-gradient-dark-linear)',
-    'gradient-dark-diag': 'var(--background-image-brand-gradient-dark-diag)',
-    'gradient-dark-radial': 'var(--background-image-brand-gradient-dark-radial)',
-    'gradient-metal': 'var(--background-image-brand-gradient-metal)',
-    'gradient-firey': 'var(--background-image-brand-gradient-firey)',
-  };
-
-  // Check if using a gradient (either new format 'gradient-X' or legacy 'text-gradient-X')
-  const isGradient =
-    colorClassName.startsWith('gradient-') || colorClassName.startsWith('text-gradient-');
-
   // Build responsive styles
   const containerStyle: React.CSSProperties = mobileWidth
     ? ({
@@ -118,39 +98,7 @@ const CustomIcon = ({
     ? 'w-[var(--icon-width-mobile)] h-[var(--icon-height-mobile)] md:w-[var(--icon-width-desktop)] md:h-[var(--icon-height-desktop)]'
     : '';
 
-  // For gradients, apply gradient to wrapper and use mask for the SVG shape
-  if (isGradient) {
-    // Get the gradient value - support both new and legacy formats
-    let gradientValue: string | undefined;
-
-    if (colorClassName.startsWith('gradient-')) {
-      // New format: use the gradient map
-      gradientValue = gradientMap[colorClassName];
-    } else if (colorClassName.startsWith('text-gradient-')) {
-      // Legacy format: apply the text-gradient class (uses background-clip: text from globals.css)
-      // Convert to simple gradient format
-      const gradientName = colorClassName.replace('text-gradient-', 'gradient-');
-      gradientValue = gradientMap[gradientName];
-    }
-
-    return (
-      <div
-        className={`inline-block ${responsiveClasses} ${className}`.trim()}
-        style={containerStyle}>
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            background: gradientValue,
-            WebkitMask: `url("data:image/svg+xml,${encodeURIComponent(iconDef.svgPath)}") center / contain no-repeat`,
-            mask: `url("data:image/svg+xml,${encodeURIComponent(iconDef.svgPath)}") center / contain no-repeat`,
-          }}
-        />
-      </div>
-    );
-  }
-
-  // For solid colors, use the normal SVG with currentColor
+  // Render SVG with currentColor (inherits from colorClassName)
   return (
     <div className={`inline-block ${responsiveClasses} ${className}`.trim()} style={containerStyle}>
       {iconDef.renderSvg(colorClassName)}

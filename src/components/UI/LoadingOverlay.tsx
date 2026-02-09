@@ -69,13 +69,12 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ isLoading = false }) =>
                 animation: 'spin-reverse 1s linear infinite',
               }}
             />
-            {/* Center dot - gradient */}
+            {/* Center dot */}
             <div className='absolute inset-0 flex items-center justify-center'>
               <div
                 className='w-3 h-3 rounded-full'
                 style={{
-                  background:
-                    'linear-gradient(135deg, var(--color-brand-primary) 0%, var(--color-brand-secondary) 100%)',
+                  backgroundColor: 'var(--color-brand-primary)',
                   animation: 'pulse 1.5s ease-in-out infinite',
                 }}
               />
