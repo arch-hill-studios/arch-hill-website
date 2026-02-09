@@ -62,7 +62,7 @@
 
 /* Blockquote style */
 [data-slate-editor] [data-testid='text-style__blockquote'] {
-  border-left: 4px solid #ff6600;
+  border-left: 4px solid #3b82f6;
   padding-left: 1rem;
   font-style: italic;
   font-size: 1.25rem;
@@ -95,10 +95,10 @@
 }
 
 [data-slate-editor] a {
-  color: #ff9d00;
+  color: #60a5fa;
   text-decoration: underline;
 }
 
 [data-slate-editor] a:hover {
-  color: #ff6600;
+  color: #3b82f6;
 }

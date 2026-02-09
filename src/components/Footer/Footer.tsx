@@ -9,11 +9,12 @@ import { cleanPlatform } from '@/utils/cleanPlatform';
 import { createSanityDataAttribute } from '@/utils/sectionHelpers';
 import { detectPlatformFromUrl } from '@/sanity/schemaTypes/shared/platformsConfig';
 import { usePageLoad } from '@/contexts/PageLoadContext';
+import { sitePaddingX } from '@/utils/spacingConstants';
 import type {
-  FOOTER_QUERYResult,
-  COMPANY_LINKS_QUERYResult,
-  LEGAL_PAGES_VISIBILITY_QUERYResult,
-  BUSINESS_CONTACT_INFO_QUERYResult,
+  FOOTER_QUERY_RESULT,
+  COMPANY_LINKS_QUERY_RESULT,
+  LEGAL_PAGES_VISIBILITY_QUERY_RESULT,
+  BUSINESS_CONTACT_INFO_QUERY_RESULT,
 } from '@/sanity/types';
 import {
   getOrganizationEmail,
@@ -36,11 +37,11 @@ interface FooterMessage {
 }
 
 interface FooterProps {
-  footerData: FOOTER_QUERYResult | null;
-  companyLinksData: COMPANY_LINKS_QUERYResult | null;
-  legalPagesVisibilityData: LEGAL_PAGES_VISIBILITY_QUERYResult | null;
+  footerData: FOOTER_QUERY_RESULT | null;
+  companyLinksData: COMPANY_LINKS_QUERY_RESULT | null;
+  legalPagesVisibilityData: LEGAL_PAGES_VISIBILITY_QUERY_RESULT | null;
   organizationName: string;
-  businessContactInfo: BUSINESS_CONTACT_INFO_QUERYResult | null;
+  businessContactInfo: BUSINESS_CONTACT_INFO_QUERY_RESULT | null;
 }
 
 const Footer = ({
@@ -122,7 +123,7 @@ const Footer = ({
 
   return (
     <footer
-      className={`bg-brand-gradient-charcoal-linear text-brand-white pt-16 pb-10 px-6 md:px-16 w-full transition-opacity duration-500 ease-in-out ${
+      className={`bg-brand-gradient-charcoal-linear text-brand-white pt-16 pb-10 ${sitePaddingX} w-full transition-opacity duration-500 ease-in-out ${
         isPageReady ? 'opacity-100' : 'opacity-0'
       }`}
       aria-label='Site Footer'>

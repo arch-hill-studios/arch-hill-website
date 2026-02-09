@@ -14,11 +14,11 @@ import {
 import BreadcrumbStructuredData from '@/components/StructuredData/BreadcrumbStructuredData';
 import Breadcrumb from '@/components/UI/Breadcrumb';
 import { getOrganizationName } from '@/lib/organizationInfo';
-import type { FAQ_PAGE_QUERYResult } from '@/sanity/types';
+import type { FAQ_PAGE_QUERY_RESULT } from '@/sanity/types';
 import type { PageBuilderData } from '@/actions';
 
 interface FaqPageContentProps {
-  faqData: FAQ_PAGE_QUERYResult;
+  faqData: FAQ_PAGE_QUERY_RESULT;
   pageBuilderData: PageBuilderData;
 }
 
@@ -133,7 +133,7 @@ const FaqPageContent = ({ faqData, pageBuilderData }: FaqPageContentProps) => {
         {/* Page Content */}
         {faqData.content && (
           <PageBuilder
-            content={faqData.content as NonNullable<import('@/sanity/types').PAGE_QUERYResult>['content']}
+            content={faqData.content as NonNullable<import('@/sanity/types').PAGE_QUERY_RESULT>['content']}
             documentId={faqData._id}
             documentType={faqData._type}
             pageBuilderData={pageBuilderData}

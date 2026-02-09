@@ -19,7 +19,7 @@ import CTAList from '@/components/UI/CTAList';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import styles from './VerticalNav.module.css';
 import { headerHeight } from '@/utils/spacingConstants';
-import type { BUSINESS_CONTACT_INFO_QUERYResult } from '@/sanity/types';
+import type { BUSINESS_CONTACT_INFO_QUERY_RESULT } from '@/sanity/types';
 import { getBrandTextImage, getLogo } from '@/lib/organizationInfo';
 
 interface VerticalNavProps {
@@ -28,7 +28,7 @@ interface VerticalNavProps {
   navLinks: VerticalNavData | null;
   navCtas: VerticalNavCTAData | null;
   organizationName: string;
-  businessContactInfo: BUSINESS_CONTACT_INFO_QUERYResult | null;
+  businessContactInfo: BUSINESS_CONTACT_INFO_QUERY_RESULT | null;
 }
 
 const VerticalNav = ({ isMenuOpen, onClose, navLinks, navCtas, organizationName, businessContactInfo }: VerticalNavProps) => {

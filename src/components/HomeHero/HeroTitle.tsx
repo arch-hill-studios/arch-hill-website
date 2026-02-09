@@ -1,13 +1,13 @@
 import React from 'react';
 import { stegaClean } from 'next-sanity';
-import type { HOME_PAGE_HERO_QUERYResult } from '@/sanity/types';
+import type { HOME_PAGE_HERO_QUERY_RESULT } from '@/sanity/types';
 import { createSanityDataAttribute } from '../../utils/sectionHelpers';
 import { parseColoredText } from '@/utils/textHelpers';
 
 interface HeroTitleProps {
-  h1Title: NonNullable<HOME_PAGE_HERO_QUERYResult>['h1Title'];
-  mainTitle: NonNullable<HOME_PAGE_HERO_QUERYResult>['mainTitle'];
-  subTitle: NonNullable<HOME_PAGE_HERO_QUERYResult>['subTitle'];
+  h1Title: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['h1Title'];
+  mainTitle: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['mainTitle'];
+  subTitle: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['subTitle'];
   documentId: string;
   documentType: string;
   textAlignment?: string;

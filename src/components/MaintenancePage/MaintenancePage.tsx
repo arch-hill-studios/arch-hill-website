@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import type { BUSINESS_CONTACT_INFO_QUERYResult } from '@/sanity/types';
+import type { BUSINESS_CONTACT_INFO_QUERY_RESULT } from '@/sanity/types';
 import {
   getOrganizationEmail,
   getOrganizationEmailLink,
@@ -10,7 +10,7 @@ import {
 
 interface MaintenancePageProps {
   organizationName: string;
-  businessContactInfo: BUSINESS_CONTACT_INFO_QUERYResult | null;
+  businessContactInfo: BUSINESS_CONTACT_INFO_QUERY_RESULT | null;
 }
 
 const MaintenancePage = ({ organizationName, businessContactInfo }: MaintenancePageProps) => {

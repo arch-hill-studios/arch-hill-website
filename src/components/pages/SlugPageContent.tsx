@@ -13,11 +13,11 @@ import BreadcrumbStructuredData from '@/components/StructuredData/BreadcrumbStru
 import { urlFor } from '@/sanity/lib/image';
 import Breadcrumb from '@/components/UI/Breadcrumb';
 import { getOrganizationName } from '@/lib/organizationInfo';
-import type { PAGE_QUERYResult } from '@/sanity/types';
+import type { PAGE_QUERY_RESULT } from '@/sanity/types';
 import type { PageBuilderData } from '@/actions';
 
 interface SlugPageContentProps {
-  page: PAGE_QUERYResult | null;
+  page: PAGE_QUERY_RESULT | null;
   pageBuilderData: PageBuilderData;
   slugPath: string;
   /** If slug has more than 1 segment, trigger 404 */

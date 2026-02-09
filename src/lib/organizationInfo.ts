@@ -13,7 +13,7 @@
  * to avoid breaking Sanity schema extraction which doesn't support React Server Components.
  */
 
-import type { BUSINESS_CONTACT_INFO_QUERYResult } from '@/sanity/types';
+import type { BUSINESS_CONTACT_INFO_QUERY_RESULT } from '@/sanity/types';
 
 // Default organization values - used as fallback when Sanity data is unavailable
 // Primary source is Sanity CMS: Site Management > Business & Contact Info
@@ -26,7 +26,7 @@ export const DEFAULT_ORGANIZATION_DESCRIPTION =
  * Use this when you already have the businessContactInfo data available.
  */
 export function getOrganizationName(
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null,
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null,
 ): string {
   return businessContactInfo?.organizationName || DEFAULT_ORGANIZATION_NAME;
 }
@@ -36,7 +36,7 @@ export function getOrganizationName(
  * Use this when you already have the businessContactInfo data available.
  */
 export function getOrganizationDescription(
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null,
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null,
 ): string {
   return businessContactInfo?.organizationDescription || DEFAULT_ORGANIZATION_DESCRIPTION;
 }
@@ -89,7 +89,7 @@ export async function fetchOrganizationInfo(): Promise<{
  * If null, no logo is rendered (valid scenario for text-only branding).
  */
 export function getLogo(
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null,
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null,
 ) {
   return businessContactInfo?.logo || null;
 }
@@ -106,7 +106,7 @@ export function getLogo(
  * If null, components should fall back to displaying organizationName as text.
  */
 export function getBrandTextImage(
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null,
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null,
 ) {
   return businessContactInfo?.brandTextImage || null;
 }
@@ -121,7 +121,7 @@ export function getBrandTextImage(
  * Returns empty string if not set.
  */
 export function getOrganizationEmail(
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null,
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null,
 ): string {
   return businessContactInfo?.organizationEmail || '';
 }
@@ -131,7 +131,7 @@ export function getOrganizationEmail(
  * Returns empty string if email not set.
  */
 export function getOrganizationEmailLink(
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null,
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null,
 ): string {
   const email = getOrganizationEmail(businessContactInfo);
   return email ? `mailto:${email}` : '';
@@ -142,7 +142,7 @@ export function getOrganizationEmailLink(
  * Returns empty string if not set.
  */
 export function getOrganizationPhone(
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null,
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null,
 ): string {
   return businessContactInfo?.organizationPhone || '';
 }
@@ -152,7 +152,7 @@ export function getOrganizationPhone(
  * Returns empty string if phone not set.
  */
 export function getOrganizationPhoneLink(
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null,
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null,
 ): string {
   const phone = getOrganizationPhone(businessContactInfo);
   return phone ? `tel:${phone.replace(/\s+/g, '')}` : '';
@@ -163,7 +163,7 @@ export function getOrganizationPhoneLink(
  * Returns empty string if not set.
  */
 export function getOrganizationAddress(
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null,
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null,
 ): string {
   return businessContactInfo?.organizationAddress || '';
 }
@@ -173,7 +173,7 @@ export function getOrganizationAddress(
  * Returns empty string if not set.
  */
 export function getOrganizationAddressLink(
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null,
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null,
 ): string {
   return businessContactInfo?.googleMapsLink || '';
 }
@@ -183,7 +183,7 @@ export function getOrganizationAddressLink(
  * Returns empty string if not set.
  */
 export function getGoogleMapsEmbedCode(
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null,
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null,
 ): string {
   return businessContactInfo?.googleMapsEmbedCode || '';
 }
@@ -209,7 +209,7 @@ export interface BusinessLocation {
  * Returns object with empty strings for all fields if not set.
  */
 export function getBusinessLocation(
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null,
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null,
 ): BusinessLocation {
   const location = businessContactInfo?.businessLocation;
   return {
@@ -229,7 +229,7 @@ export function getBusinessLocation(
  * Returns empty string if not set.
  */
 export function getBusinessHours(
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null,
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null,
 ): string {
   return businessContactInfo?.businessHours || '';
 }
@@ -239,7 +239,7 @@ export function getBusinessHours(
  * Returns empty string if not set.
  */
 export function getPriceRange(
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null,
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null,
 ): string {
   return businessContactInfo?.priceRange || '';
 }
@@ -254,7 +254,7 @@ export interface ServiceArea {
  * Returns empty array if not set.
  */
 export function getServiceAreas(
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null,
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null,
 ): ServiceArea[] {
   const areas = businessContactInfo?.serviceAreas;
   if (!areas || !Array.isArray(areas)) {

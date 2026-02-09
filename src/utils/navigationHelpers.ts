@@ -1,8 +1,8 @@
 
-import type { HEADER_QUERYResult } from '@/sanity/types';
+import type { HEADER_QUERY_RESULT } from '@/sanity/types';
 
 // Extract the types from the generated Sanity types
-type HeaderResult = Extract<HEADER_QUERYResult, { _type: 'header' }>;
+type HeaderResult = Extract<HEADER_QUERY_RESULT, { _type: 'header' }>;
 export type NavigationSection = Extract<NonNullable<HeaderResult['verticalNav']>[0], { _type: 'navSection' }>;
 export type NavigationLink = Extract<NonNullable<NavigationSection['links']>[0], { _type: 'verticalNavLink' }>;
 export type NavigationItem = NonNullable<HeaderResult['verticalNav']>[0];

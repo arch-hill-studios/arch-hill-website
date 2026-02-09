@@ -2,7 +2,7 @@
 
 import React from 'react';
 import type {
-  PAGE_QUERYResult,
+  PAGE_QUERY_RESULT,
 } from '@/sanity/types';
 import type { NestedBlock } from '@/types/blocks';
 import type { SanityImageSource } from '@sanity/image-url';
@@ -30,7 +30,7 @@ interface SharedPageBuilderProps {
 }
 
 type PageBuilderProps = SharedPageBuilderProps & {
-  content: NonNullable<PAGE_QUERYResult>['content'];
+  content: NonNullable<PAGE_QUERY_RESULT>['content'];
   pathPrefix?: string;
 };
 
@@ -316,7 +316,7 @@ const PageBuilder = ({
   pageBuilderData,
   alignment = 'center',
 }: PageBuilderProps) => {
-  const [sections] = useOptimistic<NonNullable<PAGE_QUERYResult>['content']>(content);
+  const [sections] = useOptimistic<NonNullable<PAGE_QUERY_RESULT>['content']>(content);
 
   if (!Array.isArray(sections)) {
     return null;

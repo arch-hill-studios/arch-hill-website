@@ -19,10 +19,10 @@ import {
   getOrganizationPhoneLink,
 } from '@/lib/organizationInfo';
 import PageSection from '@/components/Layout/PageSection';
-import type { PRIVACY_POLICY_QUERYResult, TERMS_AND_CONDITIONS_QUERYResult, PAGE_QUERYResult } from '@/sanity/types';
+import type { PRIVACY_POLICY_QUERY_RESULT, TERMS_AND_CONDITIONS_QUERY_RESULT, PAGE_QUERY_RESULT } from '@/sanity/types';
 import type { PageBuilderData } from '@/actions';
 
-type LegalData = NonNullable<PRIVACY_POLICY_QUERYResult> | NonNullable<TERMS_AND_CONDITIONS_QUERYResult>;
+type LegalData = NonNullable<PRIVACY_POLICY_QUERY_RESULT> | NonNullable<TERMS_AND_CONDITIONS_QUERY_RESULT>;
 
 interface LegalPageContentProps {
   legalData: LegalData | null;
@@ -98,7 +98,7 @@ const LegalPageContent = ({ legalData, pageBuilderData, defaultTitle, urlPath, c
         {legalData.topText && <p className='font-bold mb-8'>{legalData.topText}</p>}
         {legalData.content && (
           <PageBuilder
-            content={legalData.content as NonNullable<PAGE_QUERYResult>['content']}
+            content={legalData.content as NonNullable<PAGE_QUERY_RESULT>['content']}
             documentId={legalData._id}
             documentType={legalData._type}
             pageBuilderData={pageBuilderData}

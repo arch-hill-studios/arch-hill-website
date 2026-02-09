@@ -3,13 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import CTA from '@/components/UI/CTA';
-import type { CONTACT_FORM_SETTINGS_QUERYResult } from '@/sanity/types';
+import type { CONTACT_FORM_SETTINGS_QUERY_RESULT } from '@/sanity/types';
 import TextInput from '@/components/Forms/TextInput';
 import TextArea from '@/components/Forms/TextArea';
 
 interface ContactFormProps {
   className?: string;
-  settings?: CONTACT_FORM_SETTINGS_QUERYResult | null;
+  settings?: CONTACT_FORM_SETTINGS_QUERY_RESULT | null;
 }
 
 interface ContactFormData {

@@ -13,9 +13,9 @@ export { getFaqPage } from './faq';
 
 // Types
 export type {
-  HOME_PAGE_HERO_QUERYResult,
-  HOME_PAGE_SECTIONS_QUERYResult,
-  PAGE_QUERYResult,
+  HOME_PAGE_HERO_QUERY_RESULT,
+  HOME_PAGE_SECTIONS_QUERY_RESULT,
+  PAGE_QUERY_RESULT,
 } from './types';
 
 // Re-export FetchFn type for convenience

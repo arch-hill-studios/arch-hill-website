@@ -1,12 +1,12 @@
 import React from 'react';
 import Hero from '@/components/HomeHero/Hero';
 import PageBuilder from '@/components/PageBuilder';
-import type { PAGE_QUERYResult } from '@/sanity/types';
-import type { HOME_PAGE_HERO_QUERYResult, HOME_PAGE_SECTIONS_QUERYResult, PageBuilderData } from '@/actions';
+import type { PAGE_QUERY_RESULT } from '@/sanity/types';
+import type { HOME_PAGE_HERO_QUERY_RESULT, HOME_PAGE_SECTIONS_QUERY_RESULT, PageBuilderData } from '@/actions';
 
 interface HomePageContentProps {
-  hero: HOME_PAGE_HERO_QUERYResult | null;
-  sections: HOME_PAGE_SECTIONS_QUERYResult | null;
+  hero: HOME_PAGE_HERO_QUERY_RESULT | null;
+  sections: HOME_PAGE_SECTIONS_QUERY_RESULT | null;
   pageBuilderData: PageBuilderData;
 }
 
@@ -37,7 +37,7 @@ const HomePageContent = ({ hero, sections, pageBuilderData }: HomePageContentPro
       {/* Additional Page Builder Content */}
       {sections?.content && (
         <PageBuilder
-          content={sections.content as NonNullable<PAGE_QUERYResult>['content']}
+          content={sections.content as NonNullable<PAGE_QUERY_RESULT>['content']}
           documentId={sections._id}
           documentType={sections._type}
           pageBuilderData={pageBuilderData}

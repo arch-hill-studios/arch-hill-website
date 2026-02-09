@@ -5,8 +5,6 @@ import NavigationScroll from '@/components/NavigationScroll';
 import PageReadyTrigger from '@/components/PageReadyTrigger';
 import { PageLoadProvider } from '@/contexts/PageLoadContext';
 import { HeaderProvider } from '@/contexts/HeaderContext';
-import { ColorProvider } from '@/contexts/ColorContext'; // TEMPORARY_DEV: Color switching for testing
-import { HeroStyleProvider } from '@/contexts/HeroStyleContext'; // TEMPORARY_DEV: Hero style switching for testing
 import {
   generateOrganizationSchema,
   generateWebSiteSchema,
@@ -18,16 +16,16 @@ import {
 } from '@/lib/structuredData';
 import { SITE_CONFIG } from '@/lib/constants';
 import { getOrganizationName } from '@/lib/organizationInfo';
-import type { HEADER_QUERYResult, FOOTER_QUERYResult, SEO_META_DATA_QUERYResult, BUSINESS_CONTACT_INFO_QUERYResult, COMPANY_LINKS_QUERYResult, LEGAL_PAGES_VISIBILITY_QUERYResult } from '@/sanity/types';
+import type { HEADER_QUERY_RESULT, FOOTER_QUERY_RESULT, SEO_META_DATA_QUERY_RESULT, BUSINESS_CONTACT_INFO_QUERY_RESULT, COMPANY_LINKS_QUERY_RESULT, LEGAL_PAGES_VISIBILITY_QUERY_RESULT } from '@/sanity/types';
 
 interface BaseLayoutProps {
   children: React.ReactNode;
-  headerData: HEADER_QUERYResult | null;
-  footerData: FOOTER_QUERYResult | null;
-  seoMetaDataResult: SEO_META_DATA_QUERYResult | null;
-  businessContactInfoData: BUSINESS_CONTACT_INFO_QUERYResult | null;
-  companyLinksData: COMPANY_LINKS_QUERYResult | null;
-  legalPagesVisibilityData: LEGAL_PAGES_VISIBILITY_QUERYResult | null;
+  headerData: HEADER_QUERY_RESULT | null;
+  footerData: FOOTER_QUERY_RESULT | null;
+  seoMetaDataResult: SEO_META_DATA_QUERY_RESULT | null;
+  businessContactInfoData: BUSINESS_CONTACT_INFO_QUERY_RESULT | null;
+  companyLinksData: COMPANY_LINKS_QUERY_RESULT | null;
+  legalPagesVisibilityData: LEGAL_PAGES_VISIBILITY_QUERY_RESULT | null;
   /** Optional slot for draft mode components (SanityLive, VisualEditing, DisableDraftMode) */
   draftModeSlot?: React.ReactNode;
 }
@@ -73,8 +71,6 @@ const BaseLayout = ({
   }
 
   return (
-    <ColorProvider>
-      <HeroStyleProvider>
         <PageLoadProvider>
           <HeaderProvider>
             <NavigationScroll />
@@ -116,8 +112,6 @@ const BaseLayout = ({
             </div>
           </HeaderProvider>
         </PageLoadProvider>
-      </HeroStyleProvider>
-    </ColorProvider>
   );
 };
 

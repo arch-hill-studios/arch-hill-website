@@ -13,6 +13,13 @@ export const breadcrumbBottomSpacing = 'mb-8 md:mb-14';
 export const pageTitleBottomSpacing = 'mb-12 md:mb-18';
 
 /**
+ * Site-wide horizontal padding (edge-of-screen to content)
+ * Used by Header, Footer, SectionContainer, Container, and PageHero.
+ * Change this single value to update horizontal padding across the entire site.
+ */
+export const sitePaddingX = 'px-6 sm:px-20';
+
+/**
  * SECTION CONTAINER PADDING SYSTEM
  * These padding values create internal spacing within sections while allowing backgrounds to extend edge-to-edge.
  * Applied via ContentContainer component inside PageSection/ContentWrapper.
@@ -31,9 +38,9 @@ export const sectionContainerPaddingYCompact = 'py-8 md:py-10';
 
 /**
  * Horizontal padding for section containers (left and right)
- * Matches the Container component padding to keep content aligned
+ * References sitePaddingX to keep content aligned site-wide
  */
-export const sectionContainerPaddingX = 'px-6 sm:px-20';
+export const sectionContainerPaddingX = sitePaddingX;
 
 /**
  * Combined container padding (all sides) - standard spacing

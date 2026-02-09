@@ -1,10 +1,10 @@
 import React from 'react';
-import type { HOME_PAGE_HERO_QUERYResult } from '@/sanity/types';
+import type { HOME_PAGE_HERO_QUERY_RESULT } from '@/sanity/types';
 import CTAList from '../UI/CTAList';
 import { createSanityDataAttribute } from '../../utils/sectionHelpers';
 
 interface HeroCTAProps {
-  heroCallToActionList: NonNullable<HOME_PAGE_HERO_QUERYResult>['heroCallToActionList'];
+  heroCallToActionList: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroCallToActionList'];
   documentId: string;
   documentType: string;
 }

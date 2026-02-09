@@ -20,12 +20,12 @@ import CardLight from '@/components/UI/CardLight';
 import ExpandingContentWrapper from '@/components/UI/ExpandingContentWrapper';
 import { maxCardWidth } from '@/utils/spacingConstants';
 import CardGradient from '@/components/UI/CardGradient';
-import type { CONTACT_GENERAL_CONTENT_QUERYResult, CONTACT_FORM_SETTINGS_QUERYResult } from '@/sanity/types';
+import type { CONTACT_GENERAL_CONTENT_QUERY_RESULT, CONTACT_FORM_SETTINGS_QUERY_RESULT } from '@/sanity/types';
 import type { PageBuilderData } from '@/actions';
 
 interface ContactPageContentProps {
-  contactPageData: CONTACT_GENERAL_CONTENT_QUERYResult;
-  contactFormSettings: CONTACT_FORM_SETTINGS_QUERYResult;
+  contactPageData: CONTACT_GENERAL_CONTENT_QUERY_RESULT;
+  contactFormSettings: CONTACT_FORM_SETTINGS_QUERY_RESULT;
   pageBuilderData: PageBuilderData;
 }
 

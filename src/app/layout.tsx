@@ -73,8 +73,8 @@ const RootLayout = async ({
 
             /* Essential brand colors for immediate render */
             :root {
-              --color-brand-primary: #ff6600;
-              --color-brand-secondary: #ff9d00;
+              --color-brand-primary: #3b82f6;
+              --color-brand-secondary: #60a5fa;
             }
           `,
           }}

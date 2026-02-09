@@ -1,5 +1,5 @@
 import { urlFor } from '@/sanity/lib/image';
-import type { SEO_META_DATA_QUERYResult, COMPANY_LINKS_QUERYResult, BUSINESS_CONTACT_INFO_QUERYResult } from '@/sanity/types';
+import type { SEO_META_DATA_QUERY_RESULT, COMPANY_LINKS_QUERY_RESULT, BUSINESS_CONTACT_INFO_QUERY_RESULT } from '@/sanity/types';
 import type { ImageObjectData } from '@/lib/imageUtils';
 import {
   getOrganizationName,
@@ -269,10 +269,10 @@ export function generateFAQPageSchema(items: FAQItem[]) {
  * Optionally includes social media profiles from company links for the sameAs field.
  */
 export function getOrganizationDataFromSeoMetaData(
-  seoMetaData: SEO_META_DATA_QUERYResult,
+  seoMetaData: SEO_META_DATA_QUERY_RESULT,
   baseUrl: string,
-  companyLinks?: COMPANY_LINKS_QUERYResult | null,
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null
+  companyLinks?: COMPANY_LINKS_QUERY_RESULT | null,
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null
 ): OrganizationData {
   const socialMediaUrls = getSocialMediaUrlsFromCompanyLinks(companyLinks ?? null);
 
@@ -295,9 +295,9 @@ export function getOrganizationDataFromSeoMetaData(
 }
 
 export function getWebSiteDataFromSeoMetaData(
-  seoMetaData: SEO_META_DATA_QUERYResult,
+  seoMetaData: SEO_META_DATA_QUERY_RESULT,
   baseUrl: string,
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null
 ): WebSiteData {
   return {
     name: seoMetaData?.siteTitle || getOrganizationName(businessContactInfo),
@@ -311,7 +311,7 @@ export function getWebSiteDataFromSeoMetaData(
  * Used for the sameAs property in structured data schemas.
  */
 export function getSocialMediaUrlsFromCompanyLinks(
-  companyLinks: COMPANY_LINKS_QUERYResult | null
+  companyLinks: COMPANY_LINKS_QUERY_RESULT | null
 ): string[] {
   if (!companyLinks || companyLinks._type !== 'companyLinks') {
     return [];
@@ -336,10 +336,10 @@ export function getSocialMediaUrlsFromCompanyLinks(
  * Social media profiles are pulled from Sanity Company Links.
  */
 export function getLocalBusinessDataFromSeoMetaData(
-  seoMetaData: SEO_META_DATA_QUERYResult,
+  seoMetaData: SEO_META_DATA_QUERY_RESULT,
   baseUrl: string,
-  companyLinks?: COMPANY_LINKS_QUERYResult | null,
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null
+  companyLinks?: COMPANY_LINKS_QUERY_RESULT | null,
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null
 ): LocalBusinessData {
   const socialMediaUrls = getSocialMediaUrlsFromCompanyLinks(companyLinks ?? null);
 

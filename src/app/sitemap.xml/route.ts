@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getAllPages, getTermsAndConditions, getPrivacyPolicy, getFaqPage, getContactGeneralContent } from '@/actions';
 import { SITE_CONFIG } from '@/lib/constants';
-import type { ALL_PAGES_QUERYResult } from '@/sanity/types';
+import type { ALL_PAGES_QUERY_RESULT } from '@/sanity/types';
 
 // ISR: Cache for 1 hour, but allow immediate updates via webhook
 export const revalidate = 3600;
@@ -55,8 +55,8 @@ export async function GET() {
   const dynamicUrls: SitemapUrl[] = [
     // Dynamic pages (exclude dev-test routes)
     ...(pages || [])
-      .filter((page: ALL_PAGES_QUERYResult[number]) => !page.slug?.current?.startsWith('dev-test'))
-      .map((page: ALL_PAGES_QUERYResult[number]) => ({
+      .filter((page: ALL_PAGES_QUERY_RESULT[number]) => !page.slug?.current?.startsWith('dev-test'))
+      .map((page: ALL_PAGES_QUERY_RESULT[number]) => ({
         url: `/${page.slug?.current}`,
         lastmod: page._updatedAt,
         changefreq: 'monthly',

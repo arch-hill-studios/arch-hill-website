@@ -3,20 +3,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import UnifiedImage from '@/components/UI/UnifiedImage';
-import type { HEADER_QUERYResult, BUSINESS_CONTACT_INFO_QUERYResult } from '@/sanity/types';
+import type { HEADER_QUERY_RESULT, BUSINESS_CONTACT_INFO_QUERY_RESULT } from '@/sanity/types';
 import { getBrandTextImage, getLogo } from '@/lib/organizationInfo';
 import HorizontalNav from './HorizontalNav';
 import MenuButton from './MenuButton';
 import VerticalNav from './VerticalNav/VerticalNav';
 import SkipLink from '@/components/UI/SkipLink';
 import { useHeader } from '@/contexts/HeaderContext';
-import { headerHeight } from '@/utils/spacingConstants';
-import ColorSwitchModal from '@/components/UI/ColorSwitchModal'; // TEMPORARY_DEV
+import { headerHeight, sitePaddingX } from '@/utils/spacingConstants';
 
 interface HeaderProps {
-  headerData: HEADER_QUERYResult | null;
+  headerData: HEADER_QUERY_RESULT | null;
   organizationName: string;
-  businessContactInfo: BUSINESS_CONTACT_INFO_QUERYResult | null;
+  businessContactInfo: BUSINESS_CONTACT_INFO_QUERY_RESULT | null;
 }
 
 const Header = ({ headerData, organizationName, businessContactInfo }: HeaderProps) => {
@@ -26,7 +25,6 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // Always start transparent - useEffect will set correct value
   const [headerOpacity, setHeaderOpacity] = useState(0);
-  const [isColorModalOpen, setIsColorModalOpen] = useState(false); // TEMPORARY_DEV
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -107,7 +105,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
     <>
       <SkipLink href='#main-content'>Skip to main content</SkipLink>
       <header
-        className={`fixed top-0 left-0 right-0 w-full px-4 md:px-8 ${headerHeight} flex items-center justify-between gap-8 z-50 transition-all duration-300`}
+        className={`fixed top-0 left-0 right-0 w-full ${sitePaddingX} ${headerHeight} flex items-center justify-between gap-8 z-50 transition-all duration-300`}
         style={{
           background: `linear-gradient(90deg, rgba(var(--color-charcoal-gradient-start), ${headerOpacity}) 0%, rgba(var(--color-charcoal-gradient-end), ${headerOpacity}) 100%)`,
         }}>
@@ -160,15 +158,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
           </div>
         </Link>
 
-        {/* TEMPORARY_DEV - Button to open modal of options  */}
-        <button
-          onClick={() => setIsColorModalOpen(true)}
-          className='cursor-pointer hover:font-bold text-body-sm'
-          aria-label='Open options menu'>
-          OPTS
-        </button>
-
-        {/* Desktop Navigation */}
+{/* Desktop Navigation */}
         <div className='grow flex justify-end'>
           <HorizontalNav
             navLinks={headerData?.horizontalNav || null}
@@ -196,8 +186,6 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
         businessContactInfo={businessContactInfo}
       />
 
-      {/* TEMPORARY_DEV - Color Switch Modal */}
-      <ColorSwitchModal isOpen={isColorModalOpen} onClose={() => setIsColorModalOpen(false)} />
     </>
   );
 };

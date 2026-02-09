@@ -1,7 +1,7 @@
 import React from 'react';
 import Heading from '../Typography/Heading';
 import { createSanityDataAttribute } from '@/utils/sectionHelpers';
-import { headerHeight } from '@/utils/spacingConstants';
+import { headerHeight, sitePaddingX } from '@/utils/spacingConstants';
 
 interface PageHeroProps {
   title?: string | null;
@@ -15,7 +15,7 @@ const PageHero = ({ title = null, subtTitle = null, documentId, documentType }: 
     <div {...createSanityDataAttribute(documentId, documentType, 'heroImage')}>
       <section
         data-hero
-        className='bg-brand-gradient-charcoal-linear text-center overflow-hidden px-5 pb-12 mb-8 md:mb-12'>
+        className={`bg-brand-gradient-charcoal-linear text-center overflow-hidden ${sitePaddingX} pb-12 mb-8 md:mb-12`}>
         {/* Header spacer */}
         <div className={`${headerHeight}`}></div>
         {title && (

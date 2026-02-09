@@ -6,25 +6,24 @@ import HeroVideo from './HeroVideo';
 import DefaultHeroLayout from './DefaultHeroLayout';
 import BackgroundHeroLayout from './BackgroundHeroLayout';
 import ScrollIndicator from './ScrollIndicator';
-import type { HOME_PAGE_HERO_QUERYResult } from '@/sanity/types';
+import type { HOME_PAGE_HERO_QUERY_RESULT } from '@/sanity/types';
 import { urlFor } from '@/sanity/lib/image';
 import { createSanityDataAttribute } from '../../utils/sectionHelpers';
 import { stegaClean } from 'next-sanity';
 import { useHeader } from '@/contexts/HeaderContext';
-import { useHeroStyle } from '@/contexts/HeroStyleContext';
 
 interface HeroProps {
-  heroStyle: NonNullable<HOME_PAGE_HERO_QUERYResult>['heroStyle'];
-  heroImages: NonNullable<HOME_PAGE_HERO_QUERYResult>['heroImages'];
-  heroVideo: NonNullable<HOME_PAGE_HERO_QUERYResult>['heroVideo'];
-  heroImageTransitionDuration: NonNullable<HOME_PAGE_HERO_QUERYResult>['heroImageTransitionDuration'];
-  h1Title: NonNullable<HOME_PAGE_HERO_QUERYResult>['h1Title'];
-  mainTitle: NonNullable<HOME_PAGE_HERO_QUERYResult>['mainTitle'];
-  subTitle: NonNullable<HOME_PAGE_HERO_QUERYResult>['subTitle'];
-  heroCallToActionList: NonNullable<HOME_PAGE_HERO_QUERYResult>['heroCallToActionList'];
-  hideScrollIndicator: NonNullable<HOME_PAGE_HERO_QUERYResult>['hideScrollIndicator'];
-  heroDefaultContentPosition: NonNullable<HOME_PAGE_HERO_QUERYResult>['heroDefaultContentPosition'];
-  heroContentPosition: NonNullable<HOME_PAGE_HERO_QUERYResult>['heroContentPosition'];
+  heroStyle: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroStyle'];
+  heroImages: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroImages'];
+  heroVideo: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroVideo'];
+  heroImageTransitionDuration: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroImageTransitionDuration'];
+  h1Title: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['h1Title'];
+  mainTitle: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['mainTitle'];
+  subTitle: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['subTitle'];
+  heroCallToActionList: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroCallToActionList'];
+  hideScrollIndicator: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['hideScrollIndicator'];
+  heroDefaultContentPosition: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroDefaultContentPosition'];
+  heroContentPosition: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroContentPosition'];
   documentId: string;
   documentType: string;
 }
@@ -45,7 +44,6 @@ const Hero = ({
   documentType,
 }: HeroProps) => {
   const { setEnableOpacityFade } = useHeader();
-  const { currentStyle: overrideStyle, isOverrideActive } = useHeroStyle();
   const [firstImageLoaded, setFirstImageLoaded] = useState(false);
   const [shouldUseGradientTransition, setShouldUseGradientTransition] = useState(true);
 
@@ -93,7 +91,7 @@ const Hero = ({
 
   // Determine hero style - use override if active, otherwise use CMS value
   // Default to 'default' if not provided, clean any stega characters
-  const currentHeroStyle = isOverrideActive ? overrideStyle : (stegaClean(heroStyle) || 'default');
+  const currentHeroStyle = stegaClean(heroStyle) || 'default';
 
   // For Default style, allow height to exceed viewport on mobile only
   // For background-images and video, always constrain to viewport height

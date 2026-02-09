@@ -1,16 +1,16 @@
 import { stegaClean } from 'next-sanity';
-import type { HOME_PAGE_HERO_QUERYResult } from '@/sanity/types';
+import type { HOME_PAGE_HERO_QUERY_RESULT } from '@/sanity/types';
 import { createSanityDataAttribute } from '../../utils/sectionHelpers';
 import HeroTitle from './HeroTitle';
 import HeroCTA from './HeroCTA';
 import AnimateIn from '@/components/UI/AnimateIn';
 
 interface VideoImageBackgroundHeroLayoutProps {
-  h1Title: NonNullable<HOME_PAGE_HERO_QUERYResult>['h1Title'];
-  mainTitle: NonNullable<HOME_PAGE_HERO_QUERYResult>['mainTitle'];
-  subTitle: NonNullable<HOME_PAGE_HERO_QUERYResult>['subTitle'];
-  heroCallToActionList: NonNullable<HOME_PAGE_HERO_QUERYResult>['heroCallToActionList'];
-  heroContentPosition: NonNullable<HOME_PAGE_HERO_QUERYResult>['heroContentPosition'];
+  h1Title: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['h1Title'];
+  mainTitle: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['mainTitle'];
+  subTitle: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['subTitle'];
+  heroCallToActionList: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroCallToActionList'];
+  heroContentPosition: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroContentPosition'];
   documentId: string;
   documentType: string;
   showLogoBackColor?: boolean;

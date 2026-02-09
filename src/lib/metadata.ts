@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { urlFor } from '@/sanity/lib/image';
-import type { SEO_META_DATA_QUERYResult, BUSINESS_CONTACT_INFO_QUERYResult } from '@/sanity/types';
+import type { SEO_META_DATA_QUERY_RESULT, BUSINESS_CONTACT_INFO_QUERY_RESULT } from '@/sanity/types';
 import { SITE_CONFIG } from '@/lib/constants';
 import { getOrganizationName, getBusinessLocation } from '@/lib/organizationInfo';
 
@@ -36,8 +36,8 @@ export interface MetadataConfig {
     alt?: string | null;
   } | null;
   canonicalUrl?: string;
-  seoMetaData: SEO_META_DATA_QUERYResult;
-  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERYResult | null;
+  seoMetaData: SEO_META_DATA_QUERY_RESULT;
+  businessContactInfo?: BUSINESS_CONTACT_INFO_QUERY_RESULT | null;
   publishedTime?: string;
   modifiedTime?: string;
 }
