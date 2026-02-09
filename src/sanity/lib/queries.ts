@@ -345,6 +345,9 @@ export const BUSINESS_CONTACT_INFO_QUERY = defineQuery(`*[_id == "businessContac
     hotspot,
     crop
   },
+  favicon{
+    asset
+  },
   organizationEmail,
   organizationPhone,
   organizationAddress,

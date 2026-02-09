@@ -15,16 +15,16 @@ export const businessContactInfoType = defineType({
       name: 'organizationName',
       title: 'Organisation Name',
       type: 'string',
-      description: 'The official name of your business or organisation',
-      validation: (Rule) => Rule.required().max(100),
+      description: 'The official name of your business or organisation. If not set, a placeholder name is used.',
+      validation: (Rule) => Rule.max(100),
     }),
     defineField({
       name: 'organizationDescription',
       title: 'Organisation Description',
       type: 'text',
       rows: 3,
-      description: 'A brief description of your business or organisation',
-      validation: (Rule) => Rule.required().max(500),
+      description: 'A brief description of your business or organisation. If not set, a placeholder description is used.',
+      validation: (Rule) => Rule.max(500),
     }),
     defineField({
       name: 'logo',
@@ -63,6 +63,16 @@ export const businessContactInfoType = defineType({
             'Describe the brand image for accessibility (e.g., "Company Name Logo Text")',
         }),
       ],
+    }),
+    defineField({
+      name: 'favicon',
+      title: 'Favicon',
+      type: 'image',
+      description:
+        'Custom favicon (browser tab icon). For best results, upload a square PNG image at least 512x512 pixels with a transparent background. SVG files also work well. If not set, the default fallback favicon is used.',
+      options: {
+        accept: 'image/png,image/svg+xml,image/x-icon',
+      },
     }),
     defineField({
       name: 'organizationEmail',
