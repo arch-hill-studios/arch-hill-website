@@ -73,8 +73,8 @@ const RootLayout = async ({
 
             /* Essential brand colors for immediate render */
             :root {
-              --color-brand-primary: #3b82f6;
-              --color-brand-secondary: #60a5fa;
+              --color-brand-primary: #6b1c1c;
+              --color-brand-secondary: #1c2d6b;
             }
           `,
           }}
@@ -88,7 +88,7 @@ const RootLayout = async ({
         />
       </head>
       <body
-        className={`${sairaCondensed.className} text-body-base text-brand-white bg-brand-charcoal overflow-x-hidden`}>
+        className={`${sairaCondensed.className} text-body-base text-brand-white bg-brand-dark overflow-x-hidden`}>
         {children}
       </body>
     </html>

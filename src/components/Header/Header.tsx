@@ -107,7 +107,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
       <header
         className={`fixed top-0 left-0 right-0 w-full ${sitePaddingX} ${headerHeight} flex items-center justify-between gap-8 z-50 transition-all duration-300`}
         style={{
-          background: `linear-gradient(90deg, rgba(var(--color-charcoal-gradient-start), ${headerOpacity}) 0%, rgba(var(--color-charcoal-gradient-end), ${headerOpacity}) 100%)`,
+          background: `linear-gradient(90deg, rgba(var(--color-dark-gradient-start), ${headerOpacity}) 0%, rgba(var(--color-dark-gradient-end), ${headerOpacity}) 100%)`,
         }}>
         {/* Logo */}
         <Link

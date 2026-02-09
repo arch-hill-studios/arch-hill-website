@@ -19,8 +19,8 @@ export interface CustomIconProps {
   mobileWidth?: number;
   /**
    * Controls the icon color - supports:
-   * - Solid colors: 'text-brand-primary', 'text-brand-secondary', 'text-brand-charcoal', 'text-brand-white'
-   * - Gradients: 'gradient-primary', 'gradient-charcoal-linear', 'gradient-charcoal-diag', 'gradient-charcoal-radial', 'gradient-metal', 'gradient-firey'
+   * - Solid colors: 'text-brand-primary', 'text-brand-secondary', 'text-brand-dark', 'text-brand-white'
+   * - Gradients: 'gradient-primary', 'gradient-dark-linear', 'gradient-dark-diag', 'gradient-dark-radial', 'gradient-metal', 'gradient-firey'
    * - Legacy text-gradient classes also supported: 'text-gradient-primary', etc.
    */
   colorClassName?: string;
@@ -90,9 +90,9 @@ const CustomIcon = ({
   // Map gradient names to CSS custom properties
   const gradientMap: Record<string, string> = {
     'gradient-primary': 'var(--background-image-brand-gradient-primary)',
-    'gradient-charcoal-linear': 'var(--background-image-brand-gradient-charcoal-linear)',
-    'gradient-charcoal-diag': 'var(--background-image-brand-gradient-charcoal-diag)',
-    'gradient-charcoal-radial': 'var(--background-image-brand-gradient-charcoal-radial)',
+    'gradient-dark-linear': 'var(--background-image-brand-gradient-dark-linear)',
+    'gradient-dark-diag': 'var(--background-image-brand-gradient-dark-diag)',
+    'gradient-dark-radial': 'var(--background-image-brand-gradient-dark-radial)',
     'gradient-metal': 'var(--background-image-brand-gradient-metal)',
     'gradient-firey': 'var(--background-image-brand-gradient-firey)',
   };

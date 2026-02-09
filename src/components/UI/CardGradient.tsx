@@ -12,7 +12,7 @@ interface CardGradientProps {
 const CardGradient = ({ title, body, ctaText, ctaHref, className = '' }: CardGradientProps) => {
   return (
     <div
-      className={`bg-brand-gradient-charcoal-linear rounded-xl p-8 md:p-12 max-w-3xl mx-auto ${maxCardWidth} ${className}`}>
+      className={`bg-brand-gradient-dark-linear rounded-xl p-8 md:p-12 max-w-3xl mx-auto ${maxCardWidth} ${className}`}>
       <p className='text-h4 font-semibold text-gradient-primary mb-4'>{title}</p>
       <p className='text-body-lg text-brand-white mb-6'>{body}</p>
       <CTA href={ctaHref} variant='filled'>

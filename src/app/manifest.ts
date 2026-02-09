@@ -16,13 +16,13 @@ import type { SEO_META_DATA_QUERY_RESULT } from '@/sanity/types';
  * ⚠️ IMPORTANT: Theme colors must match brand colors in globals.css
  * When changing brand colors in globals.css, update these values too:
  *   - THEME_COLOR: should match --color-brand-primary
- *   - BACKGROUND_COLOR: should match --color-brand-charcoal
+ *   - BACKGROUND_COLOR: should match --color-brand-dark
  */
 
 // Theme colors - MUST be kept in sync with globals.css brand colors
 // See: src/app/globals.css @theme section
-const THEME_COLOR = '#3b82f6'; // --color-brand-primary
-const BACKGROUND_COLOR = '#1e293b'; // --color-brand-charcoal
+const THEME_COLOR = '#6b1c1c'; // --color-brand-primary
+const BACKGROUND_COLOR = '#0a0a0a'; // --color-brand-dark
 
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
   // Fetch site title and description from Sanity

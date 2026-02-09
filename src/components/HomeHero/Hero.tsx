@@ -147,12 +147,12 @@ const Hero = ({
         </>
       )}
 
-      {/* Default Hero Style - Charcoal Radial Gradient Background */}
+      {/* Default Hero Style - Dark Radial Gradient Background */}
       {currentHeroStyle === 'default' && (
         <>
           <div
             className='absolute inset-0 z-10'
-            style={{ background: 'var(--background-image-brand-gradient-charcoal-radial)' }}
+            style={{ background: 'var(--background-image-brand-gradient-dark-radial)' }}
           />
           <div className='shrink-0 h-16 md:h-24 lg:h-32' />
         </>

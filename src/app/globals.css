@@ -16,38 +16,38 @@
 
 /* Brand Colors and Typography System - Tailwind v4 */
 @theme {
-  --color-brand-primary: #3b82f6;
-  --color-brand-secondary: #60a5fa;
-  --color-brand-charcoal: #1e293b;
-  --color-brand-charcoal-light: #334155;
-  --color-brand-white: #ffffff;
-  --color-brand-offwhite: #f1f5f9;
+  --color-brand-primary: #6b1c1c;
+  --color-brand-secondary: #1c2d6b;
+  --color-brand-dark: #0a0a0a;
+  --color-brand-dark-light: #111111;
+  --color-brand-white: #fff7db;
+  --color-brand-offwhite: #151515;
 
-  /* Charcoal gradient color stops (for use with opacity) */
-  --color-charcoal-gradient-start: 71, 85, 105; /* #475569 in RGB */
-  --color-charcoal-gradient-end: 15, 23, 42; /* #0f172a in RGB */
+  /* Dark gradient color stops (for use with opacity) */
+  --color-dark-gradient-start: 42, 42, 42; /* #2a2a2a in RGB */
+  --color-dark-gradient-end: 10, 10, 10; /* #0a0a0a in RGB */
 
-  --background-image-brand-gradient-charcoal-linear: linear-gradient(
+  --background-image-brand-gradient-dark-linear: linear-gradient(
     90deg,
-    #475569 0%,
-    #0f172a 100%
+    #2a2a2a 0%,
+    #0a0a0a 100%
   );
-  --background-image-brand-gradient-charcoal-diag: linear-gradient(
+  --background-image-brand-gradient-dark-diag: linear-gradient(
     135deg,
-    #475569 0%,
-    #0f172a 100%
+    #2a2a2a 0%,
+    #0a0a0a 100%
   );
-  --background-image-brand-gradient-charcoal-radial: radial-gradient(
+  --background-image-brand-gradient-dark-radial: radial-gradient(
     circle,
-    #475569 0%,
-    #0f172a 100%
+    #2a2a2a 0%,
+    #0a0a0a 100%
   );
   --background-image-brand-gradient-primary: linear-gradient(
     135deg,
     var(--color-brand-primary) 0%,
     var(--color-brand-secondary) 100%
   );
-  --background-image-brand-gradient-metal: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+  --background-image-brand-gradient-metal: linear-gradient(135deg, #fff7db 0%, #999999 100%);
   --background-image-brand-gradient-firey: linear-gradient(
     135deg,
     color-mix(in srgb, var(--color-brand-primary) 100%, white 20%) 0%,
@@ -107,25 +107,25 @@ html {
   -webkit-text-fill-color: transparent;
 }
 
-.text-gradient-charcoal-linear {
+.text-gradient-dark-linear {
   display: inline-block;
-  background: var(--background-image-brand-gradient-charcoal-linear);
+  background: var(--background-image-brand-gradient-dark-linear);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.text-gradient-charcoal-diag {
+.text-gradient-dark-diag {
   display: inline-block;
-  background: var(--background-image-brand-gradient-charcoal-diag);
+  background: var(--background-image-brand-gradient-dark-diag);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.text-gradient-charcoal-radial {
+.text-gradient-dark-radial {
   display: inline-block;
-  background: var(--background-image-brand-gradient-charcoal-radial);
+  background: var(--background-image-brand-gradient-dark-radial);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

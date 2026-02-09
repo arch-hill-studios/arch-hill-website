@@ -74,7 +74,7 @@ const getBackgroundStyles = (backgroundStyle?: string): React.CSSProperties => {
   // Radial gradient (no image)
   if (backgroundStyle === 'radial-gradient') {
     return {
-      background: 'var(--background-image-brand-gradient-charcoal-radial)',
+      background: 'var(--background-image-brand-gradient-dark-radial)',
     };
   }
   return {};

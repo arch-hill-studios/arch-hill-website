@@ -123,7 +123,7 @@ const Footer = ({
 
   return (
     <footer
-      className={`bg-brand-gradient-charcoal-linear text-brand-white pt-16 pb-10 ${sitePaddingX} w-full transition-opacity duration-500 ease-in-out ${
+      className={`bg-brand-gradient-dark-linear text-brand-white pt-16 pb-10 ${sitePaddingX} w-full transition-opacity duration-500 ease-in-out ${
         isPageReady ? 'opacity-100' : 'opacity-0'
       }`}
       aria-label='Site Footer'>
