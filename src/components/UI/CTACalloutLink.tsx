@@ -64,7 +64,7 @@ const CTACalloutLink = ({
       <div className='flex flex-row justify-center items-center gap-4 [@media(min-width:400px)]:gap-6 md:gap-8'>
         {/* Image */}
         {image && (
-          <div className='flex-shrink-0'>
+          <div className='shrink-0'>
             <div className='w-16 h-16 [@media(min-width:400px)]:w-24 [@media(min-width:400px)]:h-24 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center'>
               <Image
                 src={image.src}
@@ -79,7 +79,7 @@ const CTACalloutLink = ({
 
         {/* Content */}
         {(heading || text) && (
-          <div className='flex-grow text-left min-w-0'>
+          <div className='grow text-left min-w-0'>
             {heading && (
               <div className='font-semibold group-hover:underline text-body-base [@media(min-width:400px)]:text-body-lg mb-1 leading-tight'>
                 {heading}
@@ -94,7 +94,7 @@ const CTACalloutLink = ({
         )}
 
         {/* Link Icon - Consistent style with hover circle */}
-        <div className='flex-shrink-0 flex items-center justify-center'>
+        <div className='shrink-0 flex items-center justify-center'>
           <div className='group-hover:bg-brand-primary p-3 rounded-full transition-all duration-200 group-hover:shadow-sm'>
             <LinkIcon className='w-5 h-5 text-brand-secondary group-hover:text-brand-white transition-colors duration-200' />
           </div>
