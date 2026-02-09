@@ -24,25 +24,19 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const navigationLinks = [
-  {
-    href: '/contact',
-    title: 'Contact Me',
-    description: 'Get in touch with me for general enquiries or to start your coaching journey',
-  },
-];
-
-interface NavigationLinkProps {
+interface NavigationLink {
   href: string;
   icon?: string;
   title: string;
   description: string;
 }
 
-const NavigationLink = ({ href, icon, title, description }: NavigationLinkProps) => (
+const navigationLinks: NavigationLink[] = [];
+
+const NavigationLink = ({ href, icon, title, description }: NavigationLink) => (
   <Link
     href={href}
-    className='group bg-brand-charcoal-light shadow-sm rounded-lg p-4 hover:bg-brand-primary/10 hover:shadow-md transition-all duration-200'>
+    className='group bg-brand-dark shadow-sm rounded-lg p-4 hover:bg-brand-primary/10 hover:shadow-md transition-all duration-200'>
     <div className='text-body-xl font-medium mb-2 text-brand-secondary'>
       {icon} {title}
     </div>
