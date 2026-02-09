@@ -2,7 +2,11 @@ import React from 'react';
 import Hero from '@/components/HomeHero/Hero';
 import PageBuilder from '@/components/PageBuilder';
 import type { PAGE_QUERY_RESULT } from '@/sanity/types';
-import type { HOME_PAGE_HERO_QUERY_RESULT, HOME_PAGE_SECTIONS_QUERY_RESULT, PageBuilderData } from '@/actions';
+import type {
+  HOME_PAGE_HERO_QUERY_RESULT,
+  HOME_PAGE_SECTIONS_QUERY_RESULT,
+  PageBuilderData,
+} from '@/actions';
 
 interface HomePageContentProps {
   hero: HOME_PAGE_HERO_QUERY_RESULT | null;
@@ -12,7 +16,7 @@ interface HomePageContentProps {
 
 const HomePageContent = ({ hero, sections, pageBuilderData }: HomePageContentProps) => {
   if (!hero) {
-    return <div>Page not found</div>;
+    return null;
   }
 
   return (
