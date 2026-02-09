@@ -73,10 +73,11 @@ html {
 
 /* Heading Utilities */
 @utility text-h1 {
+  font-family: var(--font-heading);
   font-size: calc(var(--font-scale-base) * 3);
   line-height: 1.1;
   letter-spacing: calc(var(--font-scale-base) * -0.025);
-  font-weight: 700;
+  font-weight: 400;
 
   @media (min-width: 768px) {
     font-size: calc(var(--font-scale-base) * 6);
@@ -84,10 +85,11 @@ html {
 }
 
 @utility text-h2 {
+  font-family: var(--font-heading);
   font-size: calc(var(--font-scale-base) * 2.75);
   line-height: 1.1;
   letter-spacing: calc(var(--font-scale-base) * -0.025);
-  font-weight: 700;
+  font-weight: 400;
 
   @media (min-width: 768px) {
     font-size: calc(var(--font-scale-base) * 4.5);
@@ -95,10 +97,11 @@ html {
 }
 
 @utility text-h3 {
+  font-family: var(--font-heading);
   font-size: calc(var(--font-scale-base) * 2);
   line-height: 1.2;
   letter-spacing: calc(var(--font-scale-base) * -0.02);
-  font-weight: 600;
+  font-weight: 400;
 
   @media (min-width: 768px) {
     font-size: calc(var(--font-scale-base) * 3.5);
@@ -106,10 +109,11 @@ html {
 }
 
 @utility text-h4 {
+  font-family: var(--font-heading);
   font-size: calc(var(--font-scale-base) * 1.625);
   line-height: 1.25;
   letter-spacing: calc(var(--font-scale-base) * -0.01);
-  font-weight: 600;
+  font-weight: 400;
 
   @media (min-width: 768px) {
     font-size: calc(var(--font-scale-base) * 2.5);
@@ -117,10 +121,11 @@ html {
 }
 
 @utility text-h5 {
+  font-family: var(--font-heading);
   font-size: calc(var(--font-scale-base) * 1.375);
   line-height: 1.3;
   letter-spacing: 0;
-  font-weight: 600;
+  font-weight: 400;
 
   @media (min-width: 768px) {
     font-size: calc(var(--font-scale-base) * 1.875);
@@ -128,10 +133,11 @@ html {
 }
 
 @utility text-h6 {
+  font-family: var(--font-heading);
   font-size: calc(var(--font-scale-base) * 1.125);
   line-height: 1.4;
   letter-spacing: 0;
-  font-weight: 600;
+  font-weight: 400;
 
   @media (min-width: 768px) {
     font-size: calc(var(--font-scale-base) * 1.5);

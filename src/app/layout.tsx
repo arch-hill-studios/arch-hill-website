@@ -1,12 +1,19 @@
 import React from 'react';
-import { Saira_Condensed } from 'next/font/google';
+import { Bebas_Neue, Inter } from 'next/font/google';
 import '@/app/globals.css';
 import { SITE_CONFIG } from '@/lib/constants';
 import { fetchOrganizationInfo } from '@/lib/organizationInfo';
 
-const sairaCondensed = Saira_Condensed({
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600'],
+  display: 'swap',
+});
+
+const bebasNeue = Bebas_Neue({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-heading',
   display: 'swap',
 });
 
@@ -88,7 +95,7 @@ const RootLayout = async ({
         />
       </head>
       <body
-        className={`${sairaCondensed.className} text-body-base text-brand-white bg-brand-dark overflow-x-hidden`}>
+        className={`${inter.className} ${bebasNeue.variable} text-body-base text-brand-white bg-brand-dark overflow-x-hidden`}>
         {children}
       </body>
     </html>
