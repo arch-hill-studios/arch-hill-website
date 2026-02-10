@@ -12,6 +12,7 @@ import { urlFor } from '@/sanity/lib/image';
 import { createSanityDataAttribute } from '../../utils/sectionHelpers';
 import { stegaClean } from 'next-sanity';
 import { useHeader } from '@/contexts/HeaderContext';
+import { headerHeight } from '@/utils/spacingConstants';
 
 export type BrandTextImage = ReturnType<typeof getBrandTextImage>;
 
@@ -102,9 +103,7 @@ const Hero = ({
   // For background-images and video, always constrain to viewport height
   // Use svh (small viewport height) to account for mobile browser toolbars
   const heightClass =
-    currentHeroStyle === 'default'
-      ? 'min-h-svh md:h-svh md:min-h-[600px]'
-      : 'h-svh min-h-[600px]';
+    currentHeroStyle === 'default' ? 'min-h-svh md:h-svh md:min-h-[600px]' : 'h-svh min-h-[600px]';
 
   // Hide scroll indicator for Default style on mobile
   const shouldShowScrollIndicator =
@@ -119,6 +118,7 @@ const Hero = ({
         currentHeroStyle === 'background-images' || currentHeroStyle === 'video' ? 'bg-black' : ''
       }`}>
       {/* Z-index hierarchy: Background (z-10) → Gradient (z-20) → Content (z-[25]) → Header (z-30) → Mobile menu (z-40) */}
+      <div className={`w-full ${headerHeight}`}></div>
 
       {/* Hero Style Click-to-Edit Wrapper */}
       <div
