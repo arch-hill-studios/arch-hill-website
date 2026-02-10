@@ -37,6 +37,7 @@ import { blockListWithStatsType } from './blocks/blockListWithStatsType';
 import { checkListType } from './blocks/checkListType';
 import { itemListType } from './blocks/itemListType';
 import { serviceCardType } from './blocks/serviceCardType';
+import { serviceListType } from './blocks/serviceListType';
 import { seoMetaDataType } from './seoMetaDataType';
 import { companyLinksType } from './companyLinksType';
 import { companyLinksArrayType } from './shared/socialLinksArrayType';
@@ -103,6 +104,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     checkListType,
     itemListType,
     serviceCardType,
+    serviceListType,
     faqBlockType,
     // Shared Components
     companyLinksArrayType,

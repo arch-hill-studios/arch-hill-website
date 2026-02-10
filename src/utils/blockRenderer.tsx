@@ -24,6 +24,7 @@ import type {
   ResponsiveWrapper as ResponsiveWrapperType,
   GridLayout as GridLayoutType,
   FaqBlock as FaqBlockType,
+  ServiceList as ServiceListType,
 } from '@/sanity/types';
 import type { PageBuilderData } from '@/actions';
 import { getGoogleMapsEmbedCode } from '@/lib/organizationInfo';
@@ -52,6 +53,7 @@ import Divider from '@/components/UI/Divider';
 import ResponsiveWrapper from '@/components/_blocks/ResponsiveWrapper';
 import GridLayout from '@/components/_blocks/GridLayout';
 import FAQBlock from '@/components/_blocks/FAQBlock';
+import ServiceList from '@/components/_blocks/ServiceList/ServiceList';
 
 interface RenderBlockConfig {
   projectId?: string;
@@ -95,7 +97,8 @@ type BlockType =
   | WithKey<DividerType>
   | WithKey<ResponsiveWrapperType>
   | WithKey<GridLayoutType>
-  | WithKey<FaqBlockType>;
+  | WithKey<FaqBlockType>
+  | WithKey<ServiceListType>;
 
 /**
  * Shared block rendering logic used by both PageBuilder and Card components.
@@ -415,6 +418,20 @@ export const renderBlock = (block: unknown, options: RenderBlockOptions): React.
         <BlockWrapper key={faqBlock._key}>
           <FAQBlock
             {...faqBlock}
+            documentId={documentId}
+            documentType={documentType}
+            fieldPathPrefix={blockPath}
+          />
+        </BlockWrapper>
+      );
+    }
+
+    case 'serviceList': {
+      const serviceListBlock = typedBlock as WithKey<ServiceListType>;
+      return (
+        <BlockWrapper key={serviceListBlock._key}>
+          <ServiceList
+            {...serviceListBlock}
             documentId={documentId}
             documentType={documentType}
             fieldPathPrefix={blockPath}

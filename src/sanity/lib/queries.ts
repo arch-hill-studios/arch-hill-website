@@ -64,6 +64,25 @@ const cardContentProjection = `
         crop
       }
     }
+  },
+  _type == "serviceList" => {
+    ...,
+    services[]{
+      _key,
+      title,
+      description,
+      price,
+      disclaimer,
+      images[]{
+        _key,
+        image{
+          asset,
+          alt,
+          hotspot,
+          crop
+        }
+      }
+    }
   }
 `;
 
@@ -105,6 +124,25 @@ const contentProjection = `
         alt,
         hotspot,
         crop
+      }
+    }
+  },
+  _type == "serviceList" => {
+    ...,
+    services[]{
+      _key,
+      title,
+      description,
+      price,
+      disclaimer,
+      images[]{
+        _key,
+        image{
+          asset,
+          alt,
+          hotspot,
+          crop
+        }
       }
     }
   },
@@ -157,6 +195,25 @@ const contentProjection = `
             crop
           }
         }
+      },
+      _type == "serviceList" => {
+        ...,
+        services[]{
+          _key,
+          title,
+          description,
+          price,
+          disclaimer,
+          images[]{
+            _key,
+            image{
+              asset,
+              alt,
+              hotspot,
+              crop
+            }
+          }
+        }
       }
     },
     rightColumn[]{
@@ -182,6 +239,25 @@ const contentProjection = `
             alt,
             hotspot,
             crop
+          }
+        }
+      },
+      _type == "serviceList" => {
+        ...,
+        services[]{
+          _key,
+          title,
+          description,
+          price,
+          disclaimer,
+          images[]{
+            _key,
+            image{
+              asset,
+              alt,
+              hotspot,
+              crop
+            }
           }
         }
       }
@@ -212,6 +288,25 @@ const contentProjection = `
             alt,
             hotspot,
             crop
+          }
+        }
+      },
+      _type == "serviceList" => {
+        ...,
+        services[]{
+          _key,
+          title,
+          description,
+          price,
+          disclaimer,
+          images[]{
+            _key,
+            image{
+              asset,
+              alt,
+              hotspot,
+              crop
+            }
           }
         }
       }
