@@ -165,10 +165,7 @@ const Footer = ({
                     className='h-8 md:h-10 w-auto'
                   />
                 ) : (
-                  <span
-                    className='text-h3 text-brand-primary'>
-                    {organizationName}
-                  </span>
+                  <span className='text-h3 text-brand-primary'>{organizationName}</span>
                 )}
               </div>
             </Link>

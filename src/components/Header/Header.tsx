@@ -130,9 +130,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
             href='/#home'
             onClick={closeMenu}
             className={`flex items-center gap-2 xl:absolute xl:left-5 transition-[opacity,transform] duration-400 ease-in-out ${
-              isScrolled
-                ? 'xl:opacity-100 xl:translate-x-0'
-                : 'xl:opacity-0 xl:-translate-x-5'
+              isScrolled ? 'xl:opacity-100 xl:translate-x-0' : 'xl:opacity-0 xl:-translate-x-5'
             }`}
             style={{
               filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))',
@@ -152,21 +150,21 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
               />
             )}
             {/* Brand Text - Image from CMS or fallback to organization name */}
-            <div className='hidden xxs:flex items-baseline gap-2'>
+            <div className='hidden xxs:flex items-center'>
               {brandTextImage?.asset ? (
                 <UnifiedImage
                   src={brandTextImage}
                   alt={brandTextImage.alt || organizationName}
                   mode='sized'
-                  width={150}
+                  width={300}
                   height={40}
+                  sizeContext='full'
                   objectFit='contain'
-                  className='h-8 md:h-10 w-auto'
+                  className='shrink-0 max-h-10 max-w-none'
+                  style={{ width: 'auto', height: 'auto' }}
                 />
               ) : (
-                <span className='text-h3 text-brand-primary'>
-                  {organizationName}
-                </span>
+                <span className='text-h3 text-brand-primary'>{organizationName}</span>
               )}
             </div>
           </Link>
@@ -174,9 +172,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
           {/* Desktop Navigation - absolute positioned, transitions from center to right */}
           <div
             className={`hidden xl:block absolute transition-[left,transform] duration-400 ease-in-out ${
-              isScrolled
-                ? 'left-[calc(100%-20px)] -translate-x-full'
-                : 'left-1/2 -translate-x-1/2'
+              isScrolled ? 'left-[calc(100%-20px)] -translate-x-full' : 'left-1/2 -translate-x-1/2'
             }`}>
             <HorizontalNav
               navLinks={headerData?.horizontalNav || null}
