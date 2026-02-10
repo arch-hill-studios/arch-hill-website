@@ -126,7 +126,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
           <Link
             href='/#home'
             onClick={closeMenu}
-            className={`flex items-center gap-2 xl:absolute xl:left-5 transition-[opacity,transform] duration-400 ease-in-out ${
+            className={`flex items-center gap-2 xl:absolute xl:left-5 transition-[opacity,translate] duration-400 ease-in-out ${
               isScrolled ? 'xl:opacity-100 xl:translate-x-0' : 'xl:opacity-0 xl:-translate-x-5'
             }`}
             style={{
@@ -168,7 +168,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
 
           {/* Desktop Navigation - absolute positioned, transitions from center to right */}
           <div
-            className={`hidden xl:block absolute transition-[left,transform] duration-400 ease-in-out ${
+            className={`hidden xl:block absolute transition-[left,translate] duration-400 ease-in-out ${
               isScrolled ? 'left-[calc(100%-20px)] -translate-x-full' : 'left-1/2 -translate-x-1/2'
             }`}>
             <HorizontalNav
