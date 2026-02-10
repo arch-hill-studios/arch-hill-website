@@ -123,16 +123,16 @@ const Footer = ({
 
   return (
     <footer
-      className={`bg-brand-dark text-brand-white pt-16 pb-10 ${sitePaddingX} w-full transition-opacity duration-500 ease-in-out ${
+      className={`bg-brand-dark text-brand-white pt-16 pb-8 ${sitePaddingX} w-full border-t border-[#2a2a2a] transition-opacity duration-500 ease-in-out ${
         isPageReady ? 'opacity-100' : 'opacity-0'
       }`}
       aria-label='Site Footer'>
       <div className='container mx-auto'>
-        {/* TOP ROW */}
-        <div className='flex flex-col lg:flex-row gap-x-10 gap-y-12 justify-between'>
-          {/* LOGO & MESSAGE */}
-          <div className='flex flex-col items-center lg:items-start text-center lg:text-left mx-auto lg:mx-0 lg:max-w-1/3'>
-            {/* Logo */}
+        {/* TOP ROW - 3-column grid */}
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_auto_auto] gap-x-16 gap-y-10 mb-10'>
+          {/* BRAND COLUMN */}
+          <div className='flex flex-col items-center md:items-start text-center md:text-left md:col-span-2 lg:col-span-1 gap-4'>
+            {/* Logo + Brand Text */}
             <Link
               href='/#home'
               className='flex items-center gap-2 transition-opacity duration-300'
@@ -145,24 +145,26 @@ const Footer = ({
                   alt={logo.alt || `${organizationName} Logo`}
                   mode='sized'
                   width={80}
-                  height={50}
+                  height={40}
                   sizeContext='logo'
                   objectFit='contain'
-                  className='w-14 md:w-20 h-auto'
-                  sizes='(max-width: 768px) 56px, 80px'
+                  className='h-10 w-auto'
+                  sizes='40px'
                 />
               )}
               {/* Brand Text - Image from CMS or fallback to organization name */}
-              <div className='hidden xxs:flex items-baseline gap-2'>
+              <div className='hidden xxs:flex items-center'>
                 {brandTextImage?.asset ? (
                   <UnifiedImage
                     src={brandTextImage}
                     alt={brandTextImage.alt || organizationName}
                     mode='sized'
-                    width={150}
+                    width={300}
                     height={40}
+                    sizeContext='full'
                     objectFit='contain'
-                    className='h-8 md:h-10 w-auto'
+                    className='shrink-0 max-h-10 max-w-none'
+                    style={{ width: 'auto', height: 'auto' }}
                   />
                 ) : (
                   <span className='text-h3 text-brand-primary'>{organizationName}</span>
@@ -170,149 +172,133 @@ const Footer = ({
               </div>
             </Link>
 
-            {/* Messages */}
+            {/* Footer Messages (tagline) */}
             {footerMessages && footerMessages.length > 0 && (
-              <div className='space-y-4 mt-8'>
+              <div className='space-y-3'>
                 {footerMessages.map((message) => (
-                  <div key={message._key} className='space-y-1'>
-                    {message.title && <div className='font-bold text-subtle'>{message.title}</div>}
+                  <div key={message._key}>
+                    {message.title && (
+                      <div className='font-bold text-body-sm text-gray-400'>{message.title}</div>
+                    )}
                     {message.message && (
-                      <div className='text-brand-white text-body-lg'>{message.message}</div>
+                      <div className='text-gray-400 text-body-sm'>{message.message}</div>
                     )}
                   </div>
                 ))}
               </div>
             )}
-          </div>
 
-          {/* LINKS */}
-          <div className='flex flex-col md:flex-row md:justify-between lg:justify-start gap-x-16 gap-y-16 text-center md:text-left'>
-            {/* Contact Details */}
-            <div className='md:order-last'>
-              <p className='text-h6 mb-6 text-brand-primary'>Contact</p>
-              <div className='flex flex-col items-center md:items-start gap-4'>
-                {contactDetails.map((detail, index) => (
-                  <a
-                    key={index}
-                    href={detail.link}
-                    className='flex items-center gap-4 hover:text-brand-primary transition-colors duration-200'
-                    target={detail.link.startsWith('http') ? '_blank' : undefined}
-                    rel={detail.link.startsWith('http') ? 'noopener noreferrer' : undefined}>
-                    <span className='text-brand-secondary'>{detail.icon}</span> {detail.value}
-                  </a>
+            {/* Social Icons */}
+            {transformedLinks.length > 0 && (
+              <div
+                className='flex gap-4 mt-1'
+                {...createSanityDataAttribute('companyLinks', 'companyLinks', 'companyLinks')}>
+                {transformedLinks.map((link) => (
+                  <Link
+                    key={link._key}
+                    href={link.url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    aria-label={link.label}
+                    title={link.label}
+                    className='text-brand-primary hover:text-brand-primary-hover transition-colors duration-200'
+                    {...createSanityDataAttribute(
+                      'companyLinks',
+                      'companyLinks',
+                      `companyLinks.socialLinksArray[_key=="${link._key}"]`,
+                    )}>
+                    <SocialIcon platform={link.platform} className='text-body-xl' />
+                  </Link>
                 ))}
               </div>
-            </div>
+            )}
+          </div>
 
-            <div className='flex flex-row justify-around md:justify-between lg:justify-start gap-x-8 md:gap-x-16'>
-              {/*  Quick Links */}
-              {quickLinks.length > 0 && (
-                <div>
-                  <p className='text-h6 mb-6 text-brand-primary'>Quick Links</p>
-                  <div
-                    className='flex flex-col items-center md:items-start gap-4'
-                    {...createSanityDataAttribute('footer', 'footer', 'quickLinks')}>
-                    {quickLinks.map((link) => {
-                      // Use computed href from GROQ query (includes section anchors)
-                      // or fallback to internalLink.href
-                      let href = '';
-
-                      if (link.computedHref) {
-                        href = stegaClean(link.computedHref);
-                      } else if (link.linkType === 'internal' && link.internalLink?.href) {
-                        href = link.internalLink.href;
-                        if (link.pageSectionId) {
-                          href = `${href}#${stegaClean(link.pageSectionId)}`;
-                        }
-                      } else if (link.linkType === 'external' && link.externalUrl) {
-                        href = stegaClean(link.externalUrl);
-                      }
-
-                      // Determine if this should open in a new tab
-                      const shouldOpenInNewTab =
-                        link.linkType === 'external' ||
-                        (link.linkType === 'internal' && link.openInNewTab);
-
-                      return (
-                        <Link
-                          key={link._key}
-                          href={href}
-                          target={shouldOpenInNewTab ? '_blank' : undefined}
-                          rel={shouldOpenInNewTab ? 'noopener noreferrer' : undefined}
-                          className='block text-brand-white hover:text-brand-primary transition-colors duration-200'
-                          {...createSanityDataAttribute(
-                            'footer',
-                            'footer',
-                            `quickLinks[_key=="${link._key}"]`,
-                          )}>
-                          {link.label}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-              {/* Company Links */}
-              {transformedLinks.length > 0 && (
-                <div className=''>
-                  <p className='text-h6 mb-6 text-brand-primary'>Connect</p>
-                  <div
-                    className='flex flex-col items-center md:items-start gap-4'
-                    {...createSanityDataAttribute('companyLinks', 'companyLinks', 'companyLinks')}>
-                    {transformedLinks.map((link) => (
-                      <Link
-                        key={link._key}
-                        href={link.url}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        aria-label={link.label}
-                        title={link.label} // Hover text
-                        className='transition-all duration-200 hover:text-brand-primary'
-                        {...createSanityDataAttribute(
-                          'companyLinks',
-                          'companyLinks',
-                          `companyLinks.socialLinksArray[_key=="${link._key}"]`,
-                        )}>
-                        <div className='rounded-full flex items-center justify-center gap-x-4 transition-transform duration-200'>
-                          <SocialIcon
-                            platform={link.platform}
-                            className='text-body-xl text-brand-secondary'
-                          />
-                          <p>{link.label}</p>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
+          {/* CONTACT COLUMN */}
+          <div className='text-center md:text-left'>
+            <h4 className='text-h6 mb-5 text-brand-white'>Contact</h4>
+            <div className='flex flex-col items-center md:items-start gap-3'>
+              {contactDetails.map((detail, index) => (
+                <a
+                  key={index}
+                  href={detail.link}
+                  className='flex items-center gap-3 text-gray-400 hover:text-brand-white transition-colors duration-200 text-body-sm'
+                  target={detail.link.startsWith('http') ? '_blank' : undefined}
+                  rel={detail.link.startsWith('http') ? 'noopener noreferrer' : undefined}>
+                  <span className='text-brand-primary'>{detail.icon}</span>
+                  {detail.value}
+                </a>
+              ))}
             </div>
           </div>
+
+          {/* QUICK LINKS COLUMN */}
+          {quickLinks.length > 0 && (
+            <div className='text-center md:text-left'>
+              <h4 className='text-h6 mb-5 text-brand-white'>Quick Links</h4>
+              <div
+                className='flex flex-col items-center md:items-start gap-3'
+                {...createSanityDataAttribute('footer', 'footer', 'quickLinks')}>
+                {quickLinks.map((link) => {
+                  let href = '';
+
+                  if (link.computedHref) {
+                    href = stegaClean(link.computedHref);
+                  } else if (link.linkType === 'internal' && link.internalLink?.href) {
+                    href = link.internalLink.href;
+                    if (link.pageSectionId) {
+                      href = `${href}#${stegaClean(link.pageSectionId)}`;
+                    }
+                  } else if (link.linkType === 'external' && link.externalUrl) {
+                    href = stegaClean(link.externalUrl);
+                  }
+
+                  const shouldOpenInNewTab =
+                    link.linkType === 'external' ||
+                    (link.linkType === 'internal' && link.openInNewTab);
+
+                  return (
+                    <Link
+                      key={link._key}
+                      href={href}
+                      target={shouldOpenInNewTab ? '_blank' : undefined}
+                      rel={shouldOpenInNewTab ? 'noopener noreferrer' : undefined}
+                      className='text-gray-400 hover:text-brand-white transition-colors duration-200 text-body-sm'
+                      {...createSanityDataAttribute(
+                        'footer',
+                        'footer',
+                        `quickLinks[_key=="${link._key}"]`,
+                      )}>
+                      {link.label}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* BOTTOM ROW */}
-        <div className='mt-12'>
-          {/* Separator Line */}
-          <div className='w-full h-px bg-brand-primary opacity-30 mb-6'></div>
-
-          <div className='flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0'>
+        <div className='border-t border-[#2a2a2a] pt-8'>
+          <div className='flex flex-col md:flex-row justify-between items-center gap-3'>
             {/* Copyright */}
             {footerData?._type === 'footer' && footerData.copyrightText && (
-              <div className='text-brand-white text-body-sm'>{footerData.copyrightText}</div>
+              <p className='text-gray-400 text-body-xs'>{footerData.copyrightText}</p>
             )}
 
             {/* Legal Links */}
-            <div className='flex flex-wrap justify-center gap-6'>
+            <div className='flex flex-wrap justify-center gap-5'>
               {!legalPagesVisibilityData?.termsAndConditions?.hide && (
                 <Link
                   href='/terms-and-conditions'
-                  className='text-brand-white hover:text-brand-primary transition-colors duration-200 text-body-sm'>
+                  className='text-gray-400 hover:text-brand-white transition-colors duration-200 text-body-xs'>
                   Terms & Conditions
                 </Link>
               )}
               {!legalPagesVisibilityData?.privacyPolicy?.hide && (
                 <Link
                   href='/privacy-policy'
-                  className='text-brand-white hover:text-brand-primary transition-colors duration-200 text-body-sm'>
+                  className='text-gray-400 hover:text-brand-white transition-colors duration-200 text-body-xs'>
                   Privacy Policy
                 </Link>
               )}
