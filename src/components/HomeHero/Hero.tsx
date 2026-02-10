@@ -7,10 +7,13 @@ import DefaultHeroLayout from './DefaultHeroLayout';
 import BackgroundHeroLayout from './BackgroundHeroLayout';
 import ScrollIndicator from './ScrollIndicator';
 import type { HOME_PAGE_HERO_QUERY_RESULT } from '@/sanity/types';
+import { getBrandTextImage } from '@/lib/organizationInfo';
 import { urlFor } from '@/sanity/lib/image';
 import { createSanityDataAttribute } from '../../utils/sectionHelpers';
 import { stegaClean } from 'next-sanity';
 import { useHeader } from '@/contexts/HeaderContext';
+
+export type BrandTextImage = ReturnType<typeof getBrandTextImage>;
 
 interface HeroProps {
   heroStyle: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroStyle'];
@@ -24,6 +27,7 @@ interface HeroProps {
   hideScrollIndicator: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['hideScrollIndicator'];
   heroDefaultContentPosition: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroDefaultContentPosition'];
   heroContentPosition: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroContentPosition'];
+  brandTextImage?: BrandTextImage;
   documentId: string;
   documentType: string;
 }
@@ -40,6 +44,7 @@ const Hero = ({
   hideScrollIndicator,
   heroDefaultContentPosition,
   heroContentPosition,
+  brandTextImage,
   documentId,
   documentType,
 }: HeroProps) => {
@@ -168,6 +173,7 @@ const Hero = ({
             subTitle={subTitle}
             heroCallToActionList={heroCallToActionList}
             heroContentPosition={heroDefaultContentPosition}
+            brandTextImage={brandTextImage}
             images={images}
             imageDuration={(heroImageTransitionDuration || 4) * 1000}
             documentId={documentId}
@@ -180,6 +186,7 @@ const Hero = ({
             subTitle={subTitle}
             heroCallToActionList={heroCallToActionList}
             heroContentPosition={heroContentPosition}
+            brandTextImage={brandTextImage}
             documentId={documentId}
             documentType={documentType}
           />

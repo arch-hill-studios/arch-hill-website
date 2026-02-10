@@ -1,5 +1,6 @@
 import { stegaClean } from 'next-sanity';
 import type { HOME_PAGE_HERO_QUERY_RESULT } from '@/sanity/types';
+import type { BrandTextImage } from './Hero';
 import { createSanityDataAttribute } from '../../utils/sectionHelpers';
 import HeroTitle from './HeroTitle';
 import HeroCTA from './HeroCTA';
@@ -12,6 +13,7 @@ interface DefaultHeroLayoutProps {
   subTitle: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['subTitle'];
   heroCallToActionList: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroCallToActionList'];
   heroContentPosition: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroContentPosition'];
+  brandTextImage?: BrandTextImage;
   images: Array<{ imageUrl: string; altText: string }>;
   imageDuration: number;
   documentId: string;
@@ -27,6 +29,7 @@ const DefaultHeroLayout = (props: DefaultHeroLayoutProps) => {
     mainTitle,
     subTitle,
     heroCallToActionList,
+    brandTextImage,
     images,
     imageDuration,
     documentId,
@@ -51,6 +54,7 @@ const DefaultHeroLayout = (props: DefaultHeroLayoutProps) => {
     h1Title,
     mainTitle,
     subTitle,
+    brandTextImage,
     documentId,
     documentType,
     showLogoBackColor,

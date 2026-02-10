@@ -7,6 +7,7 @@ import type {
   HOME_PAGE_SECTIONS_QUERY_RESULT,
   PageBuilderData,
 } from '@/actions';
+import { getBrandTextImage } from '@/lib/organizationInfo';
 
 interface HomePageContentProps {
   hero: HOME_PAGE_HERO_QUERY_RESULT | null;
@@ -18,6 +19,8 @@ const HomePageContent = ({ hero, sections, pageBuilderData }: HomePageContentPro
   if (!hero) {
     return null;
   }
+
+  const brandTextImage = getBrandTextImage(pageBuilderData.businessContactInfo);
 
   return (
     <>
@@ -34,6 +37,7 @@ const HomePageContent = ({ hero, sections, pageBuilderData }: HomePageContentPro
         hideScrollIndicator={hero.hideScrollIndicator}
         heroDefaultContentPosition={hero.heroDefaultContentPosition}
         heroContentPosition={hero.heroContentPosition}
+        brandTextImage={brandTextImage}
         documentId={hero._id}
         documentType={hero._type}
       />
