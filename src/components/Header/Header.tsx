@@ -117,10 +117,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
     <>
       <SkipLink href='#main-content'>Skip to main content</SkipLink>
       <header
-        className={`fixed top-0 left-0 right-0 w-full ${headerHeight} z-50 border-b border-[#2a2a2a] backdrop-blur-[10px] transition-[background-color] duration-300`}
-        style={{
-          backgroundColor: `rgba(10, 10, 10, ${Math.max(headerOpacity * 0.95, 0)})`,
-        }}>
+        className={`fixed top-0 left-0 right-0 w-full ${headerHeight} z-50 border-b bg-brand-dark border-[#2a2a2a]`}>
         {/* Inner container - relative for absolute positioning of logo and nav on desktop */}
         <div className='relative mx-auto max-w-300 h-full flex items-center justify-between xl:justify-center px-5'>
           {/* Logo + Brand Text */}
