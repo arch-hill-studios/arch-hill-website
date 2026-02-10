@@ -52,7 +52,7 @@ const getVariantStyles = (
 
   if (variant === 'outline-dark') {
     // Outline button on dark background - semi-transparent with backdrop blur
-    return `${baseStyles} bg-black/40 backdrop-blur-sm border border-brand-primary text-brand-white hover:bg-brand-primary hover:text-brand-white focus:ring-brand-primary ${disabledStyles}`.trim();
+    return `${baseStyles} bg-black/40 backdrop-blur-sm border border-brand-primary text-brand-white hover:bg-brand-white hover:text-brand-primary focus:ring-brand-primary ${disabledStyles}`.trim();
   }
 
   if (variant === 'secondary') {
@@ -61,7 +61,7 @@ const getVariantStyles = (
   }
 
   // Default to filled variant with brand primary
-  return `${baseStyles} bg-brand-primary text-brand-white hover:bg-brand-primary-hover hover:-translate-y-0.5 focus:ring-brand-primary ${disabledStyles}`.trim();
+  return `${baseStyles} bg-brand-primary text-brand-white hover:bg-brand-primary-hover focus:ring-brand-primary ${disabledStyles}`.trim();
 };
 
 const CTA = (props: CTAProps) => {
