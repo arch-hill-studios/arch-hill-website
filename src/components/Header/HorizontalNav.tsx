@@ -40,7 +40,7 @@ const HorizontalNav = ({ navLinks, navCtas }: HorizontalNavProps) => {
                 <li key={`${link.computedHref}-${index}`}>
                   <Link
                     {...linkProps}
-                    className='relative font-heading text-body-lg uppercase tracking-[2px] text-[#999] hover:text-brand-white transition-colors duration-300 after:absolute after:-bottom-1.25 after:left-0 after:w-0 after:h-0.5 after:bg-brand-primary after:transition-[width] after:duration-300 hover:after:w-full'>
+                    className='relative font-heading uppercase tracking-[2px] text-[#999] hover:text-brand-white transition-colors duration-300 after:absolute after:-bottom-1.25 after:left-0 after:w-0 after:h-0.5 after:bg-brand-primary after:transition-[width] after:duration-300 hover:after:w-full'>
                     {label}
                   </Link>
                 </li>
