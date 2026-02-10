@@ -40,7 +40,7 @@ const DefaultHeroLayout = (props: DefaultHeroLayoutProps) => {
   // Extract position components
   const cleanPosition = stegaClean(
     heroContentPosition?.trim().replace(/[\u200B-\u200F\u202A-\u202E\u2060-\u206F\uFEFF]/g, '') ||
-      'center-left'
+      'center-left',
   );
   const [, horizontal] = cleanPosition.split('-');
 

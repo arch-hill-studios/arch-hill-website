@@ -35,7 +35,7 @@ const VideoImageBackgroundHeroLayout = (props: VideoImageBackgroundHeroLayoutPro
   // Extract position components
   const cleanPosition = stegaClean(
     heroContentPosition?.trim().replace(/[\u200B-\u200F\u202A-\u202E\u2060-\u206F\uFEFF]/g, '') ||
-      'center-center'
+      'center-center',
   );
   const [vertical, horizontal] = cleanPosition.split('-');
 
@@ -105,9 +105,9 @@ const VideoImageBackgroundHeroLayout = (props: VideoImageBackgroundHeroLayoutPro
         trigger='mount'
         duration={1000}
         delay={300}
-        className={`flex flex-col ${horizontalConfig.content} ${horizontalConfig.text} gap-4 sm:gap-6 max-w-4xl w-full mt-6`}>
+        className={`flex flex-col ${horizontalConfig.content} ${horizontalConfig.text} gap-10 max-w-4xl w-full mt-6`}>
         {/* Title - priority content */}
-        <div className='shrink-0'>
+        <div className='shrink-0 w-full'>
           <HeroTitle {...componentProps} />
         </div>
 

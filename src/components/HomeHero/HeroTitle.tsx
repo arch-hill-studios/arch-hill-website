@@ -62,10 +62,10 @@ const HeroTitle = ({
 
       {/* Visual Hero Title Container */}
       <div
-        className={`w-full ${isDefault ? '' : 'md:w-[33vw]'} ${getContainerAlignmentClass(textAlignment)} ${getTextAlignmentClass(textAlignment)}`}>
+        className={`w-full ${getContainerAlignmentClass(textAlignment)} ${getTextAlignmentClass(textAlignment)}`}>
         {/* Brand Text Image - displayed if available from Business & Contact Info */}
         {hasBrandTextImage && (
-          <div className='mb-6 md:mb-8'>
+          <div className='mb-6'>
             <UnifiedImage
               src={brandTextImage}
               alt={brandTextImage?.alt || 'Brand logo'}
@@ -74,7 +74,7 @@ const HeroTitle = ({
               height={200}
               sizeContext='hero'
               objectFit='contain'
-              className='w-full h-auto max-w-93.75 md:max-w-112.5 lg:max-w-225 mx-auto drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]'
+              className='w-full h-auto mx-auto drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]'
             />
           </div>
         )}
@@ -91,7 +91,7 @@ const HeroTitle = ({
         {/* Sub Title */}
         {subTitle && (
           <p
-            className='font-light uppercase tracking-[3px] text-body-xl [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]'
+            className='font-light uppercase tracking-[3px] text-body-sm xxs:text-body-lg [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]'
             {...createSanityDataAttribute(documentId, documentType, 'subTitle')}>
             {parseColoredText(stegaClean(subTitle), 'white-orange')}
           </p>
