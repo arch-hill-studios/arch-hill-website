@@ -10217,6 +10217,13 @@
         },
         "optional": true
       },
+      "businessHoursDisclaimer": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "priceRange": {
         "type": "objectAttribute",
         "value": {

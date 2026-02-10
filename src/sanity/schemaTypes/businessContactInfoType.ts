@@ -185,6 +185,13 @@ export const businessContactInfoType = defineType({
       description: 'Business hours description (e.g., "By Appointment Only", "Mon-Fri 9am-5pm")',
     }),
     defineField({
+      name: 'businessHoursDisclaimer',
+      title: 'Business Hours Disclaimer',
+      type: 'text',
+      rows: 3,
+      description: 'Optional disclaimer or note about business hours (e.g., "Noise restrictions may apply weekdays 10am - 5pm").',
+    }),
+    defineField({
       name: 'priceRange',
       title: 'Price Range',
       type: 'string',

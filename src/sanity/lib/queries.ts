@@ -459,6 +459,7 @@ export const BUSINESS_CONTACT_INFO_QUERY = defineQuery(`*[_id == "businessContac
     regionCode
   },
   businessHours,
+  businessHoursDisclaimer,
   priceRange,
   serviceAreas[]{
     areaType,
