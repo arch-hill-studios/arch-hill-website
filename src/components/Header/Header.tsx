@@ -10,7 +10,7 @@ import MenuButton from './MenuButton';
 import VerticalNav from './VerticalNav/VerticalNav';
 import SkipLink from '@/components/UI/SkipLink';
 import { useHeader } from '@/contexts/HeaderContext';
-import { headerHeight, sitePaddingX } from '@/utils/spacingConstants';
+import { headerHeight } from '@/utils/spacingConstants';
 
 interface HeaderProps {
   headerData: HEADER_QUERY_RESULT | null;
@@ -25,6 +25,8 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // Always start transparent - useEffect will set correct value
   const [headerOpacity, setHeaderOpacity] = useState(0);
+  // Scrolled state: controls logo visibility and nav position on desktop
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -34,40 +36,50 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
     setIsMenuOpen(false);
   }, []);
 
-  // Set opacity based on enableOpacityFade state
+  // Set opacity and scrolled state when no hero is present
   useEffect(() => {
     if (!enableOpacityFade) {
-      // Delay setting opacity to allow Hero to mount and update context first
+      // No hero: header is always opaque and in "scrolled" state (logo visible, nav right)
       const timer = setTimeout(() => {
         setHeaderOpacity(1);
+        setIsScrolled(true);
       }, 50);
 
       return () => clearTimeout(timer);
     }
   }, [enableOpacityFade]);
 
-  // Handle scroll for header background opacity fade
+  // Handle scroll for header background opacity fade AND scrolled state
   useEffect(() => {
-    // Only add scroll listener if opacity fade is enabled
+    // Only add scroll listener if opacity fade is enabled (hero present)
     if (!enableOpacityFade) return;
 
     const handleScroll = () => {
-      // Don't update opacity when menu is open - prevents scroll lock from resetting opacity to 0
+      // Don't update when menu is open - prevents scroll lock from resetting
       if (isMenuOpen) return;
 
       const scrollY = window.scrollY;
-      // Fade in background over first xxpx of scroll
+
+      // Fade in background over first 30px of scroll
       const opacity = Math.min(scrollY / 30, 1);
       setHeaderOpacity(opacity);
+
+      // Scrolled state: triggers at 60% of hero height (logo appears, nav shifts right)
+      const heroElement = document.querySelector('[data-hero]');
+      if (heroElement) {
+        const heroHeight = heroElement.getBoundingClientRect().height;
+        const triggerPoint = heroHeight * 0.6;
+        setIsScrolled(scrollY > triggerPoint);
+      } else {
+        setIsScrolled(true);
+      }
     };
 
     // Set initial state
     handleScroll();
 
-    // Add scroll listener
     window.addEventListener('scroll', handleScroll, { passive: true });
 
-    // Cleanup
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -81,12 +93,10 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
       }
     };
 
-    // Add event listener when menu is open
     if (isMenuOpen) {
       document.addEventListener('keydown', handleKeyDown);
     }
 
-    // Cleanup event listener
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
@@ -94,10 +104,12 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
 
   /*
     HEADER HEIGHT DEFINITION:
-    -> Imported from spacingConstants.ts as headerHeight constant
+    -> Imported from spacingConstants.ts as headerHeight constant (70px)
 
-    ⚠️ IMPORTANT: If these heights are changed, update:
+    ⚠️ IMPORTANT: If height is changed, update:
     - src/utils/spacingConstants.ts (headerHeight and headerHeightCalc)
+    - src/app/globals.css (scroll-padding-top)
+    - src/app/layout.tsx (inline critical CSS scroll-padding-top)
     - src/components/HomeHero/styles.module.css
     - src/components/Header/VerticalNav/VerticalNav.tsx
   */
@@ -105,71 +117,84 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
     <>
       <SkipLink href='#main-content'>Skip to main content</SkipLink>
       <header
-        className={`fixed top-0 left-0 right-0 w-full ${sitePaddingX} ${headerHeight} flex items-center justify-between gap-8 z-50 transition-all duration-300`}
+        className={`fixed top-0 left-0 right-0 w-full ${headerHeight} z-50 border-b border-[#2a2a2a] backdrop-blur-[10px] transition-[background-color] duration-300`}
         style={{
-          backgroundColor: `rgba(10, 10, 10, ${headerOpacity})`,
+          backgroundColor: `rgba(10, 10, 10, ${Math.max(headerOpacity * 0.95, 0)})`,
         }}>
-        {/* Logo */}
-        <Link
-          href='/#home'
-          onClick={closeMenu}
-          className='flex items-center gap-2 transition-opacity duration-300'
-          style={{
-            filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))',
-          }}>
-          {logo?.asset && (
-            <UnifiedImage
-              src={logo}
-              alt={logo.alt || `${organizationName} Logo`}
-              mode='sized'
-              width={80}
-              height={50}
-              sizeContext='logo'
-              objectFit='contain'
-              className='w-14 md:w-20 h-auto'
-              sizes='(max-width: 768px) 56px, 80px'
-              priority
-            />
-          )}
-          {/* Brand Text - Image from CMS or fallback to organization name */}
-          <div className='hidden xxs:flex items-baseline gap-2'>
-            {brandTextImage?.asset ? (
+        {/* Inner container - relative for absolute positioning of logo and nav on desktop */}
+        <div className='relative mx-auto max-w-300 h-full flex items-center justify-between xl:justify-center px-5'>
+          {/* Logo + Brand Text */}
+          {/* Desktop (xl+): absolute left, hidden initially on hero pages, fades in on scroll */}
+          {/* Mobile/Tablet (< xl): always visible, flow-positioned left */}
+          <Link
+            href='/#home'
+            onClick={closeMenu}
+            className={`flex items-center gap-2 xl:absolute xl:left-5 transition-[opacity,transform] duration-400 ease-in-out ${
+              isScrolled
+                ? 'xl:opacity-100 xl:translate-x-0'
+                : 'xl:opacity-0 xl:-translate-x-5'
+            }`}
+            style={{
+              filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))',
+            }}>
+            {logo?.asset && (
               <UnifiedImage
-                src={brandTextImage}
-                alt={brandTextImage.alt || organizationName}
+                src={logo}
+                alt={logo.alt || `${organizationName} Logo`}
                 mode='sized'
-                width={150}
+                width={80}
                 height={40}
+                sizeContext='logo'
                 objectFit='contain'
-                className='h-8 md:h-10 w-auto'
+                className='h-10 w-auto'
+                sizes='40px'
+                priority
               />
-            ) : (
-              <span className='text-h3 text-brand-primary'>
-                {organizationName}
-              </span>
             )}
-          </div>
-        </Link>
+            {/* Brand Text - Image from CMS or fallback to organization name */}
+            <div className='hidden xxs:flex items-baseline gap-2'>
+              {brandTextImage?.asset ? (
+                <UnifiedImage
+                  src={brandTextImage}
+                  alt={brandTextImage.alt || organizationName}
+                  mode='sized'
+                  width={150}
+                  height={40}
+                  objectFit='contain'
+                  className='h-8 md:h-10 w-auto'
+                />
+              ) : (
+                <span className='text-h3 text-brand-primary'>
+                  {organizationName}
+                </span>
+              )}
+            </div>
+          </Link>
 
-{/* Desktop Navigation */}
-        <div className='grow flex justify-end'>
-          <HorizontalNav
-            navLinks={headerData?.horizontalNav || null}
-            navCtas={headerData?.horizontalNavCtas || null}
+          {/* Desktop Navigation - absolute positioned, transitions from center to right */}
+          <div
+            className={`hidden xl:block absolute transition-[left,transform] duration-400 ease-in-out ${
+              isScrolled
+                ? 'left-[calc(100%-20px)] -translate-x-full'
+                : 'left-1/2 -translate-x-1/2'
+            }`}>
+            <HorizontalNav
+              navLinks={headerData?.horizontalNav || null}
+              navCtas={headerData?.horizontalNavCtas || null}
+            />
+          </div>
+
+          {/* Hamburger / Close Menu Button */}
+          <MenuButton
+            isMenuOpen={isMenuOpen}
+            onClick={toggleMenu}
+            ariaControls='mobile-navigation-menu'
+            showOnDesktop={headerData?.showVerticalNavOnDesktop ?? true}
           />
         </div>
-
-        {/* Hamburger Menu Button */}
-        <MenuButton
-          variant='hamburger'
-          isMenuOpen={isMenuOpen}
-          onClick={toggleMenu}
-          ariaControls='mobile-navigation-menu'
-          showOnDesktop={headerData?.showVerticalNavOnDesktop ?? true}
-        />
       </header>
 
-      {/* Vertical Menu */}
+      {/* Vertical Menu (dropdown) */}
       <VerticalNav
         isMenuOpen={isMenuOpen}
         onClose={closeMenu}
@@ -178,7 +203,6 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
         organizationName={organizationName}
         businessContactInfo={businessContactInfo}
       />
-
     </>
   );
 };

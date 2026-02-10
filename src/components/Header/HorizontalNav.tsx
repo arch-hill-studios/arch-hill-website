@@ -28,11 +28,11 @@ const HorizontalNav = ({ navLinks, navCtas }: HorizontalNavProps) => {
   const visibleLinks = hasLinks ? navLinks.filter((link) => !link.hideLink) : [];
 
   return (
-    <nav className=''>
-      <div className='hidden xl:flex items-center gap-6'>
+    <nav>
+      <div className='flex items-center gap-6'>
         {/* Navigation Links */}
         {visibleLinks.length > 0 && (
-          <ul className='flex items-center gap-12'>
+          <ul className='flex items-center gap-10'>
             {visibleLinks.map((link, index) => {
               const linkProps = getHorizontalNavLinkProps(link);
               const label = getHorizontalNavLinkLabel(link);
@@ -40,10 +40,7 @@ const HorizontalNav = ({ navLinks, navCtas }: HorizontalNavProps) => {
                 <li key={`${link.computedHref}-${index}`}>
                   <Link
                     {...linkProps}
-                    className='text-brand-white hover:text-brand-primary transition-colors'
-                    style={{
-                      textShadow: '0 2px 4px rgba(0, 0, 0, 0.8)',
-                    }}>
+                    className='relative font-heading text-body-lg uppercase tracking-[2px] text-[#999] hover:text-brand-white transition-colors duration-300 after:absolute after:-bottom-1.25 after:left-0 after:w-0 after:h-0.5 after:bg-brand-primary after:transition-[width] after:duration-300 hover:after:w-full'>
                     {label}
                   </Link>
                 </li>

@@ -79,9 +79,9 @@ export const maxCardWidth = 'max-w-[650px]';
 
 /**
  * Header height (must match Header.tsx and VerticalNav.tsx)
- * Mobile: 72px (18 * 4), Desktop: 80px (20 * 4)
+ * Fixed 70px across all breakpoints (matches design reference)
  */
-export const headerHeight = 'h-18 md:h-24';
+export const headerHeight = 'h-[70px]';
 
 /**
  * Header height in CSS calc format for use in max-height calculations

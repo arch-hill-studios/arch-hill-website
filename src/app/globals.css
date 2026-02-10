@@ -35,18 +35,13 @@
 /* Base styles */
 /*
   ⚠️ HEADER HEIGHT SYNC: These values MUST match:
-  - src/components/Header/Header.tsx (h-18 md:h-24 = 72px/96px)
+  - src/components/Header/Header.tsx (h-[70px])
   - src/app/layout.tsx (inline critical CSS scroll-padding)
+  - src/utils/spacingConstants.ts (headerHeight)
   - src/components/HomeHero/styles.module.css (hero-height calc values)
 */
 html {
-  scroll-padding-top: 4.5rem; /* 72px - matches h-18 mobile header. Must match layout.tsx */
-}
-
-@media (min-width: 768px) {
-  html {
-    scroll-padding-top: 6rem; /* 96px - matches h-24 desktop header. Must match layout.tsx */
-  }
+  scroll-padding-top: 70px; /* matches h-[70px] header. Must match layout.tsx */
 }
 
 /* Font variant utilities */
