@@ -199,12 +199,14 @@ const BlockRenderer = ({
               <BlockWrapper key={block._key}>
                 <PageSection
                   title={block.title!} // Required field
+                  eyebrowTitle={(block as { eyebrowTitle?: string }).eyebrowTitle}
                   subtitle={block.subtitle}
                   topText={(block as { topText?: string }).topText}
                   anchorId={block.anchorId}
                   documentId={documentId}
                   documentType={documentType}
                   titlePath={`${blockPath}.title`}
+                  eyebrowTitlePath={`${blockPath}.eyebrowTitle`}
                   subtitlePath={`${blockPath}.subtitle`}
                   topTextPath={`${blockPath}.topText`}
                   inheritAlignment={alignment}

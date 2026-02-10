@@ -96,10 +96,26 @@ export function createSectionSchema(config: SectionFactoryConfig) {
     }),
   ];
 
-  // Add subtitle field for PageSection only - insert after anchor ID (position 3 now, since titleTranslation is at position 2)
+  // Add eyebrow title field for PageSection only - insert after title (position 2)
+  if (config.name === 'pageSection') {
+    fields.splice(
+      2,
+      0,
+      defineField({
+        name: 'eyebrowTitle',
+        title: 'Eyebrow Title',
+        type: 'string',
+        description:
+          'Optional small text displayed above the section title in the primary colour with decorative lines. Used for labelling sections (e.g., "What We Offer", "Welcome").',
+      }),
+    );
+  }
+
+  // Add subtitle field for PageSection only - insert after anchor ID
+  // Position shifted by +1 due to eyebrowTitle insertion for pageSection
   if (config.hasSubtitle) {
     fields.splice(
-      3,
+      4,
       0,
       defineField({
         name: 'subtitle',
@@ -111,8 +127,9 @@ export function createSectionSchema(config: SectionFactoryConfig) {
   }
 
   // Add topText field for PageSection only - insert after subtitle (or after anchor ID if no subtitle)
+  // Position shifted by +1 due to eyebrowTitle insertion
   if (config.name === 'pageSection') {
-    const insertPosition = config.hasSubtitle ? 4 : 3;
+    const insertPosition = config.hasSubtitle ? 5 : 4;
     fields.splice(
       insertPosition,
       0,
@@ -127,8 +144,9 @@ export function createSectionSchema(config: SectionFactoryConfig) {
   }
 
   // Add compact gap field for PageSection only - insert after topText or at appropriate position
+  // Position shifted by +1 due to eyebrowTitle insertion
   if (config.name === 'pageSection') {
-    const insertPosition = config.hasSubtitle ? 5 : 4;
+    const insertPosition = config.hasSubtitle ? 6 : 5;
     fields.splice(
       insertPosition,
       0,
@@ -144,15 +162,17 @@ export function createSectionSchema(config: SectionFactoryConfig) {
   }
 
   // Add background fields (style + image) for PageSection only - insert after useCompactGap
+  // Position shifted by +1 due to eyebrowTitle insertion
   if (config.name === 'pageSection') {
-    const insertPosition = config.hasSubtitle ? 6 : 5;
+    const insertPosition = config.hasSubtitle ? 7 : 6;
     const backgroundFields = createBackgroundFields('section');
     fields.splice(insertPosition, 0, ...backgroundFields);
   }
 
   // Add two-column layout toggle for PageSection only - insert after background fields
+  // Position shifted by +1 due to eyebrowTitle insertion
   if (config.name === 'pageSection') {
-    const insertPosition = config.hasSubtitle ? 8 : 7;
+    const insertPosition = config.hasSubtitle ? 9 : 8;
     fields.splice(
       insertPosition,
       0,

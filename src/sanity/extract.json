@@ -5455,6 +5455,13 @@
           },
           "optional": true
         },
+        "eyebrowTitle": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
         "anchorId": {
           "type": "objectAttribute",
           "value": {
