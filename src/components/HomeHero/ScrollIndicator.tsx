@@ -25,7 +25,7 @@ const ScrollIndicator = ({ className = '' }: ScrollIndicatorProps) => {
       className={`
         group flex flex-col items-center justify-center
         transition-all duration-300 ease-in-out
-        text-brand-primary hover:text-brand-white
+        text-brand-primary-hover hover:text-brand-white
         cursor-pointer
         ${className}
       `}
