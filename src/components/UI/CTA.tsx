@@ -43,16 +43,16 @@ const getVariantStyles = (
   const heightStyles = shortOnMobile ? 'py-1 md:py-3' : 'py-3 min-h-[56px]';
 
   // Note that the min-h-[56px] is so that regular buttons become the same height as the CTA Email Button, which needs more internal space because of the icon.
-  const baseStyles = `inline-flex uppercase items-center justify-center px-6 ${heightStyles} font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer`;
+  const baseStyles = `inline-flex uppercase items-center justify-center px-8 ${heightStyles} font-heading tracking-[2px] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer`;
 
   if (variant === 'outline-light') {
-    // Outline button on light background - dark border and text
-    return `${baseStyles} border-2 border-brand-primary text-brand-primary bg-transparent hover:bg-brand-primary hover:text-black focus:ring-brand-primary ${disabledStyles}`.trim();
+    // Outline button on light background - brand border and text, fills on hover
+    return `${baseStyles} border border-brand-primary text-brand-primary bg-transparent hover:bg-brand-primary hover:text-brand-white focus:ring-brand-primary ${disabledStyles}`.trim();
   }
 
   if (variant === 'outline-dark') {
-    // Outline button on dark background - light border and text
-    return `${baseStyles} border-2 border-brand-white text-brand-white bg-transparent hover:bg-brand-white hover:text-brand-primary focus:ring-brand-white ${disabledStyles}`.trim();
+    // Outline button on dark background - semi-transparent with backdrop blur
+    return `${baseStyles} bg-black/40 backdrop-blur-sm border border-brand-primary text-brand-white hover:bg-brand-primary hover:text-brand-white focus:ring-brand-primary ${disabledStyles}`.trim();
   }
 
   if (variant === 'secondary') {
@@ -61,7 +61,7 @@ const getVariantStyles = (
   }
 
   // Default to filled variant with brand primary
-  return `${baseStyles} bg-brand-primary text-black hover:text-brand-white focus:ring-brand-primary hover:shadow-md ${disabledStyles}`.trim();
+  return `${baseStyles} bg-brand-primary text-brand-white hover:bg-brand-primary-hover hover:-translate-y-0.5 focus:ring-brand-primary ${disabledStyles}`.trim();
 };
 
 const CTA = (props: CTAProps) => {
