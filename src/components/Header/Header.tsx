@@ -13,7 +13,7 @@ import { useHeader } from '@/contexts/HeaderContext';
 import { headerHeight } from '@/utils/spacingConstants';
 
 // Adjustable: fraction of hero height at which mobile header becomes fully opaque
-// 0.2 = 20% of hero height. Change this value to adjust the scroll threshold.
+// Change this value to adjust the scroll threshold.
 const MOBILE_HERO_SCROLL_THRESHOLD = 0.2;
 
 interface HeaderProps {
@@ -69,8 +69,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
       if (heroElement) {
         const heroHeight = heroElement.getBoundingClientRect().height;
         const mobileThreshold = heroHeight * MOBILE_HERO_SCROLL_THRESHOLD;
-        const opacity = Math.min(scrollY / mobileThreshold, 1);
-        setHeaderOpacity(opacity);
+        setHeaderOpacity(scrollY >= mobileThreshold ? 1 : 0);
 
         // Scrolled state: triggers at 60% of hero height (logo appears, nav shifts right on desktop)
         const triggerPoint = heroHeight * 0.6;
@@ -109,7 +108,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
   }, [isMenuOpen, closeMenu]);
 
   // Mobile header opacity: transparent when hero present and not scrolled, always opaque when menu open or no hero
-  const effectiveMobileOpacity = (!enableOpacityFade || isMenuOpen) ? 1 : headerOpacity;
+  const effectiveMobileOpacity = !enableOpacityFade || isMenuOpen ? 1 : headerOpacity;
 
   /*
     HEADER HEIGHT DEFINITION:
@@ -133,8 +132,6 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
         {/* Inner container - relative for absolute positioning of logo and nav on desktop */}
         <div className='relative mx-auto max-w-300 h-full flex items-center justify-between xl:justify-center px-5'>
           {/* Logo + Brand Text */}
-          {/* Desktop (xl+): absolute left, hidden initially on hero pages, fades in on scroll */}
-          {/* Mobile/Tablet (< xl): always visible, flow-positioned left */}
           <Link
             href='/#home'
             onClick={closeMenu}
