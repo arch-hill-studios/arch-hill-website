@@ -77,6 +77,8 @@ export const STANDARD_BLOCK_LIST = [
   defineArrayMember({ type: 'twoColumnLayout' }),
   defineArrayMember({ type: 'gridLayout' }),
   defineArrayMember({ type: 'responsiveWrapper' }),
+  // Composite Blocks - self-contained sections that pull from global data
+  defineArrayMember({ type: 'contactSection' }),
 ];
 
 /**

@@ -2,7 +2,7 @@
 // This type represents any block that can contain other blocks
 
 
-import type { Divider, RichText, Statement, Quote, TwoColumnLayout, ExpandingContent, ResponsiveWrapper, GridLayout, ImageBlock as SanityImageBlock, ImageGallery, GoogleMap, YouTubeVideo, PageSection, CtaButton, CtaCalloutLink, Card, EmbeddedCtaButton, SubSection, SubSubSection, ContentWrapper, CompanyLinksBlock, IconList, DetailedList, BlockListWithStats, CheckList, ItemList, ServiceCard, FaqBlock, ServiceList } from '@/sanity/types';
+import type { Divider, RichText, Statement, Quote, TwoColumnLayout, ExpandingContent, ResponsiveWrapper, GridLayout, ImageBlock as SanityImageBlock, ImageGallery, GoogleMap, YouTubeVideo, PageSection, CtaButton, CtaCalloutLink, Card, EmbeddedCtaButton, SubSection, SubSubSection, ContentWrapper, CompanyLinksBlock, IconList, DetailedList, BlockListWithStats, CheckList, ItemList, ServiceCard, FaqBlock, ServiceList, ContactSection } from '@/sanity/types';
 
 export interface BaseBlock {
   _key: string;
@@ -47,6 +47,7 @@ export type ItemListBlock = ItemList & { _key: string };
 export type ServiceCardBlock = ServiceCard & { _key: string };
 export type FAQBlockType = FaqBlock & { _key: string };
 export type ServiceListBlock = ServiceList & { _key: string };
+export type ContactSectionBlock = ContactSection & { _key: string };
 
 // Union of all possible block types (current and future)
 export type NestedBlock =
@@ -78,7 +79,8 @@ export type NestedBlock =
   | ItemListBlock
   | ServiceCardBlock
   | FAQBlockType
-  | ServiceListBlock;
+  | ServiceListBlock
+  | ContactSectionBlock;
 
 // Union of blocks that can contain nested content
 export type BlockWithContent = PageSectionBlock | SubSectionBlock | SubSubSectionBlock | ContentWrapperBlock | SectionBlock;
@@ -190,4 +192,8 @@ export const isFAQBlock = (block: NestedBlock): block is FAQBlockType => {
 
 export const isServiceListBlock = (block: NestedBlock): block is ServiceListBlock => {
   return block._type === 'serviceList';
+};
+
+export const isContactSectionBlock = (block: NestedBlock): block is ContactSectionBlock => {
+  return block._type === 'contactSection';
 };

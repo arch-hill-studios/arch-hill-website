@@ -66,7 +66,7 @@ export const structure: StructureResolver = (S) =>
           S.editor().id('faqPage').schemaType('faqPage').documentId('faqPage').title('FAQ Page'),
         ),
 
-      // === CONTACT PAGE ===
+      // === CONTACT ===
       S.listItem()
         .id('contact')
         .title('Contact')
@@ -75,19 +75,6 @@ export const structure: StructureResolver = (S) =>
           S.list()
             .title('Contact')
             .items([
-              // General Content
-              S.listItem()
-                .id('contactGeneralContent')
-                .schemaType('contactGeneralContent')
-                .title('General Content')
-                .icon(DocumentTextIcon)
-                .child(
-                  S.editor()
-                    .id('contactGeneralContent')
-                    .schemaType('contactGeneralContent')
-                    .documentId('contactGeneralContent')
-                    .title('General Content'),
-                ),
               // Contact Form
               S.listItem()
                 .id('contactFormSettings')

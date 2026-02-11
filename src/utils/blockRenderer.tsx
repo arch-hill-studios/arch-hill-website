@@ -25,6 +25,7 @@ import type {
   GridLayout as GridLayoutType,
   FaqBlock as FaqBlockType,
   ServiceList as ServiceListType,
+  ContactSection as ContactSectionType,
 } from '@/sanity/types';
 import type { PageBuilderData } from '@/actions';
 import { getGoogleMapsEmbedCode } from '@/lib/organizationInfo';
@@ -54,6 +55,7 @@ import ResponsiveWrapper from '@/components/_blocks/ResponsiveWrapper';
 import GridLayout from '@/components/_blocks/GridLayout';
 import FAQBlock from '@/components/_blocks/FAQBlock';
 import ServiceList from '@/components/_blocks/ServiceList/ServiceList';
+import ContactSection from '@/components/_blocks/ContactSection/ContactSection';
 
 interface RenderBlockConfig {
   projectId?: string;
@@ -98,7 +100,8 @@ type BlockType =
   | WithKey<ResponsiveWrapperType>
   | WithKey<GridLayoutType>
   | WithKey<FaqBlockType>
-  | WithKey<ServiceListType>;
+  | WithKey<ServiceListType>
+  | WithKey<ContactSectionType>;
 
 /**
  * Shared block rendering logic used by both PageBuilder and Card components.
@@ -435,6 +438,18 @@ export const renderBlock = (block: unknown, options: RenderBlockOptions): React.
             documentId={documentId}
             documentType={documentType}
             fieldPathPrefix={blockPath}
+          />
+        </BlockWrapper>
+      );
+    }
+
+    case 'contactSection': {
+      const contactSectionBlock = typedBlock as WithKey<ContactSectionType>;
+      return (
+        <BlockWrapper key={contactSectionBlock._key}>
+          <ContactSection
+            businessContactInfo={pageBuilderData.businessContactInfo}
+            contactFormSettings={contactFormSettings}
           />
         </BlockWrapper>
       );

@@ -8,7 +8,6 @@ const internalLinkProjection = `{
   "slug": select(
     _type == "homePage" => {"current": ""},
     _type == "faqPage" => {"current": "faq"},
-    _type == "contactGeneralContent" => {"current": "contact"},
     _type == "termsAndConditions" => {"current": "terms-and-conditions"},
     _type == "privacyPolicy" => {"current": "privacy-policy"},
     slug
@@ -17,7 +16,6 @@ const internalLinkProjection = `{
   "href": select(
     _type == "homePage" => "/",
     _type == "faqPage" => "/faq",
-    _type == "contactGeneralContent" => "/contact",
     _type == "termsAndConditions" => "/terms-and-conditions",
     _type == "privacyPolicy" => "/privacy-policy",
     "/" + slug.current
@@ -550,47 +548,6 @@ export const FAQ_PAGE_QUERY = defineQuery(`*[_id == "faqPage"][0]{
 export const LEGAL_PAGES_VISIBILITY_QUERY = defineQuery(`{
   "termsAndConditions": *[_id == "termsAndConditions"][0]{_id, hide},
   "privacyPolicy": *[_id == "privacyPolicy"][0]{_id, hide}
-}`);
-
-// Contact General Content query
-export const CONTACT_GENERAL_CONTENT_QUERY = defineQuery(`*[_id == "contactGeneralContent"][0]{
-  _id,
-  _type,
-  _createdAt,
-  _updatedAt,
-  title,
-  subtitle,
-  introduction,
-  emailTitle,
-  phoneTitle,
-  closingCardTitle,
-  closingCardBody,
-  closingCardCtaText,
-  linkType,
-  internalLink->{
-    _id,
-    _type,
-    title,
-    "slug": select(
-      _type == "homePage" => {"current": ""},
-      _type == "faqPage" => {"current": "faq"},
-      _type == "contactGeneralContent" => {"current": "contact"},
-      _type == "termsAndConditions" => {"current": "terms-and-conditions"},
-      _type == "privacyPolicy" => {"current": "privacy-policy"},
-      slug
-    ),
-    "href": select(
-      _type == "homePage" => "/",
-      _type == "faqPage" => "/faq",
-      _type == "contactGeneralContent" => "/contact",
-      _type == "termsAndConditions" => "/terms-and-conditions",
-      _type == "privacyPolicy" => "/privacy-policy",
-      "/" + slug.current
-    )
-  },
-  externalUrl,
-  pageSectionId,
-  openInNewTab
 }`);
 
 // Contact Confirmation Email query

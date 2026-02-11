@@ -5,15 +5,12 @@ import {
   getHomePageSections,
   getPageBuilderData,
   getFaqPage,
-  getContactGeneralContent,
-  getContactFormSettings,
   getPrivacyPolicy,
   getTermsAndConditions,
   getPageBySlug,
 } from '@/actions';
 import HomePageContent from '@/components/pages/HomePageContent';
 import FaqPageContent from '@/components/pages/FaqPageContent';
-import ContactPageContent from '@/components/pages/ContactPageContent';
 import LegalPageContent from '@/components/pages/LegalPageContent';
 import SlugPageContent from '@/components/pages/SlugPageContent';
 
@@ -41,21 +38,6 @@ export default async function DraftCatchAllPage({
         getPageBuilderData(liveSanityFetch),
       ]);
       return <FaqPageContent faqData={faqData} pageBuilderData={pageBuilderData} />;
-    }
-
-    case '/contact': {
-      const [contactPageData, contactFormSettings, pageBuilderData] = await Promise.all([
-        getContactGeneralContent(liveSanityFetch),
-        getContactFormSettings(liveSanityFetch),
-        getPageBuilderData(liveSanityFetch),
-      ]);
-      return (
-        <ContactPageContent
-          contactPageData={contactPageData}
-          contactFormSettings={contactFormSettings}
-          pageBuilderData={pageBuilderData}
-        />
-      );
     }
 
     case '/privacy-policy': {

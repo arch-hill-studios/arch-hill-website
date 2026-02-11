@@ -373,36 +373,6 @@
   },
   {
     "type": "type",
-    "name": "contactGeneralContent.reference",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_ref": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          }
-        },
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "reference"
-          }
-        },
-        "_weak": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
-          },
-          "optional": true
-        }
-      },
-      "dereferencesTo": "contactGeneralContent"
-    }
-  },
-  {
-    "type": "type",
     "name": "termsAndConditions.reference",
     "value": {
       "type": "object",
@@ -531,10 +501,6 @@
               },
               {
                 "type": "inline",
-                "name": "contactGeneralContent.reference"
-              },
-              {
-                "type": "inline",
                 "name": "termsAndConditions.reference"
               },
               {
@@ -629,10 +595,6 @@
               {
                 "type": "inline",
                 "name": "faqPage.reference"
-              },
-              {
-                "type": "inline",
-                "name": "contactGeneralContent.reference"
               },
               {
                 "type": "inline",
@@ -773,6 +735,36 @@
                 }
               }
             }
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "name": "contactSection",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "contactSection"
+          }
+        },
+        "addedInfo": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "editInfo": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
           },
           "optional": true
         }
@@ -1513,10 +1505,6 @@
               },
               {
                 "type": "inline",
-                "name": "contactGeneralContent.reference"
-              },
-              {
-                "type": "inline",
                 "name": "termsAndConditions.reference"
               },
               {
@@ -1632,10 +1620,6 @@
               },
               {
                 "type": "inline",
-                "name": "contactGeneralContent.reference"
-              },
-              {
-                "type": "inline",
                 "name": "termsAndConditions.reference"
               },
               {
@@ -1737,10 +1721,6 @@
               {
                 "type": "inline",
                 "name": "faqPage.reference"
-              },
-              {
-                "type": "inline",
-                "name": "contactGeneralContent.reference"
               },
               {
                 "type": "inline",
@@ -1892,10 +1872,6 @@
               {
                 "type": "inline",
                 "name": "faqPage.reference"
-              },
-              {
-                "type": "inline",
-                "name": "contactGeneralContent.reference"
               },
               {
                 "type": "inline",
@@ -2070,10 +2046,6 @@
               {
                 "type": "inline",
                 "name": "faqPage.reference"
-              },
-              {
-                "type": "inline",
-                "name": "contactGeneralContent.reference"
               },
               {
                 "type": "inline",
@@ -4874,6 +4846,21 @@
                     "type": "inline",
                     "name": "responsiveWrapper"
                   }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "contactSection"
+                  }
                 }
               ]
             }
@@ -5282,6 +5269,21 @@
                   "rest": {
                     "type": "inline",
                     "name": "responsiveWrapper"
+                  }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "contactSection"
                   }
                 }
               ]
@@ -5706,6 +5708,21 @@
                   "rest": {
                     "type": "inline",
                     "name": "responsiveWrapper"
+                  }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "contactSection"
                   }
                 }
               ]
@@ -6266,6 +6283,21 @@
                     "type": "inline",
                     "name": "responsiveWrapper"
                   }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "contactSection"
+                  }
                 }
               ]
             }
@@ -6653,6 +6685,21 @@
                     "type": "inline",
                     "name": "responsiveWrapper"
                   }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "contactSection"
+                  }
                 }
               ]
             }
@@ -6823,10 +6870,6 @@
                     {
                       "type": "inline",
                       "name": "faqPage.reference"
-                    },
-                    {
-                      "type": "inline",
-                      "name": "contactGeneralContent.reference"
                     },
                     {
                       "type": "inline",
@@ -7186,228 +7229,6 @@
             }
           }
         }
-      }
-    }
-  },
-  {
-    "name": "contactConfirmationEmail",
-    "type": "document",
-    "attributes": {
-      "_id": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_type": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string",
-          "value": "contactConfirmationEmail"
-        }
-      },
-      "_createdAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_updatedAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_rev": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "emailGreeting": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "emailIntroMessage": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "emailOutroMessage": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      }
-    }
-  },
-  {
-    "name": "contactGeneralContent",
-    "type": "document",
-    "attributes": {
-      "_id": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_type": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string",
-          "value": "contactGeneralContent"
-        }
-      },
-      "_createdAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_updatedAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_rev": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "title": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "subtitle": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "introduction": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "emailTitle": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "phoneTitle": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "closingCardTitle": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "closingCardBody": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "closingCardCtaText": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "linkType": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "union",
-          "of": [
-            {
-              "type": "string",
-              "value": "internal"
-            },
-            {
-              "type": "string",
-              "value": "external"
-            }
-          ]
-        },
-        "optional": true
-      },
-      "internalLink": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "union",
-          "of": [
-            {
-              "type": "inline",
-              "name": "page.reference"
-            },
-            {
-              "type": "inline",
-              "name": "homePage.reference"
-            },
-            {
-              "type": "inline",
-              "name": "faqPage.reference"
-            },
-            {
-              "type": "inline",
-              "name": "contactGeneralContent.reference"
-            },
-            {
-              "type": "inline",
-              "name": "termsAndConditions.reference"
-            },
-            {
-              "type": "inline",
-              "name": "privacyPolicy.reference"
-            }
-          ]
-        },
-        "optional": true
-      },
-      "externalUrl": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "pageSectionId": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "openInNewTab": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "boolean"
-        },
-        "optional": true
       }
     }
   },
@@ -7847,6 +7668,21 @@
                 "rest": {
                   "type": "inline",
                   "name": "responsiveWrapper"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "contactSection"
                 }
               }
             ]
@@ -8293,9 +8129,82 @@
                   "type": "inline",
                   "name": "responsiveWrapper"
                 }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "contactSection"
+                }
               }
             ]
           }
+        },
+        "optional": true
+      }
+    }
+  },
+  {
+    "name": "contactConfirmationEmail",
+    "type": "document",
+    "attributes": {
+      "_id": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_type": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string",
+          "value": "contactConfirmationEmail"
+        }
+      },
+      "_createdAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_updatedAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_rev": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "emailGreeting": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "emailIntroMessage": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "emailOutroMessage": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
         },
         "optional": true
       }
@@ -8730,6 +8639,21 @@
                 "rest": {
                   "type": "inline",
                   "name": "responsiveWrapper"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "contactSection"
                 }
               }
             ]
@@ -9176,6 +9100,21 @@
                 "rest": {
                   "type": "inline",
                   "name": "responsiveWrapper"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "contactSection"
                 }
               }
             ]

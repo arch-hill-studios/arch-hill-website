@@ -49,10 +49,10 @@ import { navSectionType } from './navigation/navSectionType';
 import { termsAndConditionsType } from './termsAndConditionsType';
 import { privacyPolicyType } from './privacyPolicyType';
 import { contactFormSettingsType } from './contactFormSettingsType';
-import { contactGeneralContentType } from './contactGeneralContentType';
 import { contactConfirmationEmailType } from './contactConfirmationEmailType';
 import { faqPageType } from './faqPageType';
 import { faqBlockType } from './blocks/faqBlockType';
+import { contactSectionType } from './blocks/contactSectionType';
 import { businessContactInfoType } from './businessContactInfoType';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -67,7 +67,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     homePageSectionsType,
     pageType,
     faqPageType,
-    contactGeneralContentType,
     contactConfirmationEmailType,
     termsAndConditionsType,
     privacyPolicyType,
@@ -106,6 +105,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     serviceCardType,
     serviceListType,
     faqBlockType,
+    contactSectionType,
     // Shared Components
     companyLinksArrayType,
     ctaListType,
