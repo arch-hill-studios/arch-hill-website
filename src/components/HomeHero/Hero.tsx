@@ -137,7 +137,7 @@ const Hero = ({
             />
           )}
           <div
-            className={`absolute inset-0 bg-black/70 z-20 ${
+            className={`absolute inset-0 bg-black/50 z-20 ${
               shouldUseGradientTransition ? 'transition-opacity duration-1000 ease-in-out' : ''
             } ${firstImageLoaded || images.length === 0 ? 'opacity-90' : 'opacity-0'}`}
           />
