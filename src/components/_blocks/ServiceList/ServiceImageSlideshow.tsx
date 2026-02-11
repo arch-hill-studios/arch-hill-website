@@ -93,7 +93,7 @@ const ServiceImageSlideshow = ({
           key={item._key}
           className={`absolute inset-0 transition-opacity duration-[1500ms] ease-in-out ${
             index === activeIndex ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          } ${index === 0 ? 'relative' : ''}`}>
+          }`}>
           <UnifiedImage
             src={item.image}
             alt={item.image?.alt || `${serviceTitle} image ${index + 1}`}
