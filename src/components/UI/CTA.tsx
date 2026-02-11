@@ -36,7 +36,7 @@ const getVariantStyles = (
 
   // Text link variant - no padding/borders, just text styling with chevron
   if (variant === 'text-link') {
-    return `inline-flex items-center gap-2 text-body-lg font-semibold hover:text-brand-primary transition-colors duration-200 cursor-pointer group ${disabledStyles}`.trim();
+    return `font-heading inline-flex items-center gap-2 text-lg tracking-[2px] hover:text-brand-white transition-colors duration-200 cursor-pointer group ${disabledStyles}`.trim();
   }
 
   // Height styles

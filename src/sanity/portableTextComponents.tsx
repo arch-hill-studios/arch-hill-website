@@ -249,7 +249,7 @@ export const createComponents = (alignment: string = 'left'): PortableTextCompon
     ),
 
     marks: {
-      strong: ({ children }) => <strong className='font-bold'>{children}</strong>,
+      strong: ({ children }) => <strong className='font-bold text-brand-white'>{children}</strong>,
       em: ({ children }) => <em className='italic'>{children}</em>,
 
       link: ({ value, children }) => {
