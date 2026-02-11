@@ -59,7 +59,11 @@ const PageSection = ({
   // Create data attributes for Sanity live editing
   const titleDataAttribute = createSanityDataAttribute(documentId, documentType, titlePath);
   const subtitleDataAttribute = createSanityDataAttribute(documentId, documentType, subtitlePath);
-  const eyebrowTitleDataAttribute = createSanityDataAttribute(documentId, documentType, eyebrowTitlePath);
+  const eyebrowTitleDataAttribute = createSanityDataAttribute(
+    documentId,
+    documentType,
+    eyebrowTitlePath,
+  );
   const topTextDataAttribute = createSanityDataAttribute(documentId, documentType, topTextPath);
 
   // Resolve alignment using shared utility (same as other components)
@@ -92,13 +96,9 @@ const PageSection = ({
       <section
         id={anchorId ? stegaClean(anchorId) : undefined}
         className={`${wrapperProps.className} ${className} ${anchorLinkScrollMarginTop}`.trim()}
-        style={wrapperProps.style}
-      >
+        style={wrapperProps.style}>
         {/* Background image layer */}
-        <BackgroundImage
-          backgroundStyle={backgroundStyle}
-          backgroundImage={backgroundImage}
-        />
+        <BackgroundImage backgroundStyle={backgroundStyle} backgroundImage={backgroundImage} />
 
         {/* SectionContainer provides internal padding while section element has background */}
         <SectionContainer useCompactPadding={useCompactGap}>
@@ -190,7 +190,7 @@ const PageSection = ({
                 {/* Section subtitle */}
                 {subtitle && (
                   <p
-                    className='text-body-base text-brand-white/60 max-w-[600px] mx-auto whitespace-pre-line mt-4'
+                    className='text-body-base text-brand-white/60 max-w-150 mx-auto whitespace-pre-line mt-4'
                     style={{ lineHeight: '1.8' }}
                     {...subtitleDataAttribute}>
                     {subtitle}
