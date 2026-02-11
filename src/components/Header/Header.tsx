@@ -130,7 +130,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
         {/* Background layer - fades on mobile when hero present, always solid on desktop */}
         <div className='absolute inset-0 bg-brand-dark border-b border-[#2a2a2a] opacity-(--mobile-header-opacity) xl:opacity-100 transition-opacity duration-300' />
         {/* Inner container - relative for absolute positioning of logo and nav on desktop */}
-        <div className='relative mx-auto max-w-300 h-full flex items-center justify-between xl:justify-center px-5'>
+        <div className='relative mx-auto max-w-300 h-full flex items-center justify-between gap-8 px-5'>
           {/* Logo + Brand Text */}
           <Link
             href='/#home'
@@ -156,7 +156,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
               />
             )}
             {/* Brand Text - Image from CMS or fallback to organization name */}
-            <div className='hidden xxs:flex items-center opacity-(--mobile-header-opacity) xl:opacity-100 transition-opacity duration-300'>
+            <div className='flex items-center opacity-(--mobile-header-opacity) xl:opacity-100 transition-opacity duration-300'>
               {brandTextImage?.asset ? (
                 <UnifiedImage
                   src={brandTextImage}
@@ -166,7 +166,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
                   height={40}
                   sizeContext='full'
                   objectFit='contain'
-                  className='max-h-10 max-w-75 xl:shrink-0 xl:max-w-none'
+                  className='min-h-8 min-[420px]:max-w-75'
                   style={{ width: 'auto', height: 'auto' }}
                 />
               ) : (
