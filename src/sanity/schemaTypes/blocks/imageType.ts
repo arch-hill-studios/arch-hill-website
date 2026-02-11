@@ -37,6 +37,22 @@ export const imageType = defineType({
       description: 'On mobile, all images will be full width regardless of this setting',
     }),
     defineField({
+      name: 'frameStyle',
+      title: 'Frame Style',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'No Frame', value: 'none' },
+          { title: 'Blue Frame', value: 'blue' },
+          { title: 'Red Frame', value: 'red' },
+          { title: 'Double Frame', value: 'double' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'none',
+      description: 'Adds a decorative coloured border frame behind the image',
+    }),
+    defineField({
       name: 'caption',
       title: 'Caption',
       type: 'text',
@@ -47,13 +63,21 @@ export const imageType = defineType({
     select: {
       image: 'image',
       size: 'size',
+      frameStyle: 'frameStyle',
       caption: 'caption',
       alt: 'image.alt',
     },
-    prepare({ image, size, caption, alt }) {
+    prepare({ image, size, frameStyle, caption, alt }) {
       const title = alt || 'Image';
+      const frameLabels: Record<string, string> = {
+        none: 'No Frame',
+        blue: 'Blue Frame',
+        red: 'Red Frame',
+        double: 'Double Frame',
+      };
       const subtitle = [
         size === 'small' ? 'Small' : 'Full Width',
+        frameStyle && frameStyle !== 'none' ? frameLabels[frameStyle] || '' : '',
         caption ? `Caption: ${caption.slice(0, 30)}${caption.length > 30 ? '...' : ''}` : '',
       ]
         .filter(Boolean)
