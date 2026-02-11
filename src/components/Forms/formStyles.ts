@@ -13,13 +13,13 @@ const sharedStyles = {
 
   // State-based border and background styles
   normalState:
-    'border-gray-300 bg-brand-offwhite focus:ring-2 focus:ring-brand-primary focus:border-brand-primary',
+    'border-gray-300 bg-brand-white focus:ring-2 focus:ring-brand-primary focus:border-brand-primary',
   errorState: 'border-red-500 bg-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500',
   disabledState: 'bg-gray-100 cursor-not-allowed opacity-60',
 
   // Interactive option container (radio/checkbox)
   optionContainer:
-    'flex items-center gap-3 p-3 rounded-lg border border-brand-offwhite/30 hover:border-brand-primary hover:bg-brand-primary/5 cursor-pointer transition-all group',
+    'flex items-center gap-3 p-3 rounded-lg border border-brand-white/30 hover:border-brand-primary hover:bg-brand-primary/5 cursor-pointer transition-all group',
   optionLabel: 'text-body-base group-hover:text-gray-900 flex-1',
 
   // Input controls

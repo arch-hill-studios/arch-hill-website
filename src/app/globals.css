@@ -22,7 +22,6 @@
   --color-brand-dark: #0a0a0a;
   --color-brand-dark-light: #111111;
   --color-brand-white: #fff7db;
-  --color-brand-offwhite: #151515;
 
   /* Typography Scale System */
   --font-scale-base: 1rem; /* WARNING: if changing this please change the same in BodyTextPreview.tsx */

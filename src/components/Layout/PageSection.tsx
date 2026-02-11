@@ -190,7 +190,7 @@ const PageSection = ({
                 {/* Section subtitle */}
                 {subtitle && (
                   <p
-                    className='text-body-base text-brand-white/60 max-w-150 mx-auto whitespace-pre-line mt-4'
+                    className='text-body-lg text-brand-white/60 max-w-150 mx-auto whitespace-pre-line mt-4'
                     style={{ lineHeight: '1.8' }}
                     {...subtitleDataAttribute}>
                     {subtitle}

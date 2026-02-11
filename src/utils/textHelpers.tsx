@@ -1,6 +1,6 @@
 import React from 'react';
 
-type ColorScheme = 'orange-white' | 'white-orange';
+type ColorScheme = 'default';
 
 /**
  * Parses a string with color markers {text} and returns JSX elements.
@@ -24,7 +24,7 @@ type ColorScheme = 'orange-white' | 'white-orange';
  */
 export const parseColoredText = (
   text: string,
-  colorScheme: ColorScheme = 'orange-white',
+  colorScheme: ColorScheme = 'default',
 ): React.ReactNode[] => {
   if (!text) return [];
 
@@ -32,9 +32,8 @@ export const parseColoredText = (
   const parts = text.split(/(\{[^}]+\})/g);
 
   // Determine colors based on scheme
-  const defaultColor =
-    colorScheme === 'orange-white' ? 'text-brand-primary' : 'text-brand-white';
-  const taggedColor = colorScheme === 'orange-white' ? 'text-brand-white' : 'text-brand-primary';
+  const defaultColor = colorScheme === 'default' ? 'text-brand-white' : 'text-brand-white';
+  const taggedColor = colorScheme === 'default' ? 'text-brand-primary' : 'text-brand-primary';
 
   return parts.map((part, i) => {
     // Skip empty strings but keep them in the array to maintain proper spacing
