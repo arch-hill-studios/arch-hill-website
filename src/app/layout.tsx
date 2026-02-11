@@ -89,7 +89,7 @@ const RootLayout = async ({
         />
       </head>
       <body
-        className={`${inter.className} ${bebasNeue.variable} text-body-base text-brand-white bg-brand-dark overflow-x-hidden`}>
+        className={`${inter.className} ${bebasNeue.variable} text-body-base text-brand-white overflow-x-hidden bg-brand-dark bg-[linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('/body-background.png')] bg-center bg-cover bg-no-repeat bg-fixed`}>
         {children}
       </body>
     </html>
