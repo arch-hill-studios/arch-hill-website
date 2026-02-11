@@ -12,6 +12,10 @@ import SkipLink from '@/components/UI/SkipLink';
 import { useHeader } from '@/contexts/HeaderContext';
 import { headerHeight } from '@/utils/spacingConstants';
 
+// Adjustable: fraction of hero height at which mobile header becomes fully opaque
+// 0.2 = 20% of hero height. Change this value to adjust the scroll threshold.
+const MOBILE_HERO_SCROLL_THRESHOLD = 0.2;
+
 interface HeaderProps {
   headerData: HEADER_QUERY_RESULT | null;
   organizationName: string;
@@ -60,17 +64,19 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
 
       const scrollY = window.scrollY;
 
-      // Fade in background over first 30px of scroll
-      const opacity = Math.min(scrollY / 30, 1);
-      setHeaderOpacity(opacity);
-
-      // Scrolled state: triggers at 60% of hero height (logo appears, nav shifts right)
+      // Fade in mobile header background over configurable % of hero height
       const heroElement = document.querySelector('[data-hero]');
       if (heroElement) {
         const heroHeight = heroElement.getBoundingClientRect().height;
+        const mobileThreshold = heroHeight * MOBILE_HERO_SCROLL_THRESHOLD;
+        const opacity = Math.min(scrollY / mobileThreshold, 1);
+        setHeaderOpacity(opacity);
+
+        // Scrolled state: triggers at 60% of hero height (logo appears, nav shifts right on desktop)
         const triggerPoint = heroHeight * 0.6;
         setIsScrolled(scrollY > triggerPoint);
       } else {
+        setHeaderOpacity(1);
         setIsScrolled(true);
       }
     };
@@ -102,6 +108,9 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
     };
   }, [isMenuOpen, closeMenu]);
 
+  // Mobile header opacity: transparent when hero present and not scrolled, always opaque when menu open or no hero
+  const effectiveMobileOpacity = (!enableOpacityFade || isMenuOpen) ? 1 : headerOpacity;
+
   /*
     HEADER HEIGHT DEFINITION:
     -> Imported from spacingConstants.ts as headerHeight constant (70px)
@@ -117,7 +126,10 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
     <>
       <SkipLink href='#main-content'>Skip to main content</SkipLink>
       <header
-        className={`fixed top-0 left-0 right-0 w-full ${headerHeight} z-50 border-b bg-brand-dark border-[#2a2a2a]`}>
+        className={`fixed top-0 left-0 right-0 w-full ${headerHeight} z-50`}
+        style={{ '--mobile-header-opacity': effectiveMobileOpacity } as React.CSSProperties}>
+        {/* Background layer - fades on mobile when hero present, always solid on desktop */}
+        <div className='absolute inset-0 bg-brand-dark border-b border-[#2a2a2a] opacity-(--mobile-header-opacity) xl:opacity-100 transition-opacity duration-300' />
         {/* Inner container - relative for absolute positioning of logo and nav on desktop */}
         <div className='relative mx-auto max-w-300 h-full flex items-center justify-between xl:justify-center px-5'>
           {/* Logo + Brand Text */}
@@ -147,7 +159,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
               />
             )}
             {/* Brand Text - Image from CMS or fallback to organization name */}
-            <div className='hidden xxs:flex items-center'>
+            <div className='hidden xxs:flex items-center opacity-(--mobile-header-opacity) xl:opacity-100 transition-opacity duration-300'>
               {brandTextImage?.asset ? (
                 <UnifiedImage
                   src={brandTextImage}
@@ -157,7 +169,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
                   height={40}
                   sizeContext='full'
                   objectFit='contain'
-                  className='shrink-0 max-h-10 max-w-none'
+                  className='max-h-10 max-w-75 xl:shrink-0 xl:max-w-none'
                   style={{ width: 'auto', height: 'auto' }}
                 />
               ) : (
