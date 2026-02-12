@@ -8,12 +8,11 @@
 // Base shared styles that are reused across components
 const sharedStyles = {
   // Common base styles for all input-like elements
-  baseInput:
-    'w-full px-4 py-3 border rounded-lg transition-colors text-body-base text-black focus:outline-none',
+  baseInput: 'w-full px-4 py-3 border transition-colors text-body-sm text-white focus:outline-none',
 
   // State-based border and background styles
   normalState:
-    'border-gray-300 bg-brand-white focus:ring-2 focus:ring-brand-primary focus:border-brand-primary',
+    'border-white/10 bg-brand-dark focus:ring-1 focus:ring-brand-primary focus:border-brand-primary',
   errorState: 'border-red-500 bg-red-100 focus:ring-2 focus:ring-red-500 focus:border-red-500',
   disabledState: 'bg-gray-100 cursor-not-allowed opacity-60',
 
@@ -30,8 +29,8 @@ const sharedStyles = {
 export const formStyles = {
   // Label styles
   label: {
-    base: 'block text-body-base font-medium text-brand-primary mb-2',
-    required: 'text-red-500',
+    base: 'block text-body-sm text-brand-white mb-2',
+    required: 'text-brand-primary-hover',
     optional: 'text-gray-400 text-body-sm',
   },
 

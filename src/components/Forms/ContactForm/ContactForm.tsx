@@ -21,7 +21,6 @@ interface ContactFormData {
 }
 
 const ContactForm = ({ className = '', settings }: ContactFormProps) => {
-
   const {
     register,
     handleSubmit,
@@ -78,13 +77,13 @@ const ContactForm = ({ className = '', settings }: ContactFormProps) => {
         setStatus('error');
         setErrorMessage(
           responseData.error ||
-            'I encountered an issue sending your message. Please try contacting me directly via email or phone.'
+            'I encountered an issue sending your message. Please try contacting me directly via email or phone.',
         );
       }
     } catch (error) {
       setStatus('error');
       setErrorMessage(
-        'I encountered an issue sending your message. Please try contacting me directly via email or phone.'
+        'I encountered an issue sending your message. Please try contacting me directly via email or phone.',
       );
       console.error('Contact form submission error:', error);
     }
@@ -158,7 +157,7 @@ const ContactForm = ({ className = '', settings }: ContactFormProps) => {
           <TextArea
             id='message'
             label='Message'
-            placeholder='Tell me how I can help you...'
+            placeholder='Tell us how we can help you...'
             required
             disabled={fieldDisabled}
             error={errors.message}
