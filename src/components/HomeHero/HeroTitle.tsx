@@ -84,7 +84,7 @@ const HeroTitle = ({
           <p
             className='text-h2 mb-4'
             {...createSanityDataAttribute(documentId, documentType, 'mainTitle')}>
-            {parseColoredText(stegaClean(mainTitle), 'orange-white')}
+            {parseColoredText(stegaClean(mainTitle), 'default')}
           </p>
         )}
 
@@ -93,7 +93,7 @@ const HeroTitle = ({
           <p
             className='font-light uppercase tracking-[3px] text-body-sm xxs:text-body-lg [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]'
             {...createSanityDataAttribute(documentId, documentType, 'subTitle')}>
-            {parseColoredText(stegaClean(subTitle), 'white-orange')}
+            {parseColoredText(stegaClean(subTitle), 'default')}
           </p>
         )}
       </div>
