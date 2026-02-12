@@ -17,7 +17,7 @@ export const pageTitleBottomSpacing = 'mb-12 md:mb-18';
  * Used by Header, Footer, SectionContainer, Container, and PageHero.
  * Change this single value to update horizontal padding across the entire site.
  */
-export const sitePaddingX = 'px-6 sm:px-32';
+export const sitePaddingX = 'max-w-400 px-6 sm:px-32';
 
 /**
  * SECTION CONTAINER PADDING SYSTEM

@@ -29,11 +29,7 @@ const SectionContainer = ({
 }: SectionContainerProps) => {
   const paddingClass = useCompactPadding ? sectionContainerPaddingCompact : sectionContainerPadding;
 
-  return (
-    <div className={`container max-w-360 mx-auto ${paddingClass} ${className}`.trim()}>
-      {children}
-    </div>
-  );
+  return <div className={`mx-auto ${paddingClass} ${className}`.trim()}>{children}</div>;
 };
 
 export default SectionContainer;
