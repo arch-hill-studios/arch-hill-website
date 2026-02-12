@@ -129,7 +129,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
         style={{ '--mobile-header-opacity': effectiveMobileOpacity } as React.CSSProperties}>
         {/* Background layer - fades on mobile when hero present, always solid on desktop */}
         <div className='absolute inset-0 bg-brand-dark border-b border-[#2a2a2a] opacity-(--mobile-header-opacity) xl:opacity-100 transition-opacity duration-300' />
-        {/* Inner container - padding wrapper + relative positioning context for absolute children */}
+        {/* Inner container - padding wrapper + relative positioning context for absolute children. */}
         <div className={`mx-auto ${sitePaddingX} h-full`}>
           <div className='relative h-full flex items-center justify-between gap-8'>
             {/* Logo + Brand Text */}
