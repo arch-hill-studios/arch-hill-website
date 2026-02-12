@@ -8,7 +8,7 @@
 // Base shared styles that are reused across components
 const sharedStyles = {
   // Common base styles for all input-like elements
-  baseInput: 'w-full px-4 py-3 border transition-colors text-body-sm focus:outline-none',
+  baseInput: 'w-full px-4 py-3 border transition-colors text-body-base focus:outline-none',
 
   // State-based border and background styles
   normalState:
