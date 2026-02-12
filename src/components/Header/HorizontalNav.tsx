@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
   HorizontalNavData,
   HorizontalNavCTAData,
@@ -16,6 +17,7 @@ interface HorizontalNavProps {
 }
 
 const HorizontalNav = ({ navLinks, navCtas }: HorizontalNavProps) => {
+  const pathname = usePathname();
   const hasLinks = navLinks && navLinks.length > 0;
   const hasCtas = navCtas && navCtas.length > 0;
 
@@ -36,11 +38,17 @@ const HorizontalNav = ({ navLinks, navCtas }: HorizontalNavProps) => {
             {visibleLinks.map((link, index) => {
               const linkProps = getHorizontalNavLinkProps(link);
               const label = getHorizontalNavLinkLabel(link);
+              const href = link.computedHref || '/';
+              const isActive = pathname === href || (href !== '/' && pathname.startsWith(href + '/'));
               return (
                 <li key={`${link.computedHref}-${index}`}>
                   <Link
                     {...linkProps}
-                    className='relative font-heading uppercase tracking-[2px] text-[#999] hover:text-brand-white transition-colors duration-300 after:absolute after:-bottom-1.25 after:left-0 after:w-0 after:h-0.5 after:bg-brand-primary after:transition-[width] after:duration-300 hover:after:w-full'>
+                    className={`relative font-heading uppercase tracking-[2px] transition-colors duration-300 after:absolute after:-bottom-1.25 after:left-0 after:h-0.5 after:bg-brand-primary after:transition-[width] after:duration-300 ${
+                      isActive
+                        ? 'text-brand-white after:w-full'
+                        : 'text-[#999] hover:text-brand-white after:w-0 hover:after:w-full'
+                    }`}>
                     {label}
                   </Link>
                 </li>

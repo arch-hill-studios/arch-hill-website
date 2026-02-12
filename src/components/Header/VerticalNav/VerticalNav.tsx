@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useBodyScrollLock } from '@/hooks/useBodyScrollLock';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
 import Divider from '@/components/UI/Divider';
@@ -27,6 +28,7 @@ interface VerticalNavProps {
 }
 
 const VerticalNav = ({ isMenuOpen, onClose, navLinks, navCtas }: VerticalNavProps) => {
+  const pathname = usePathname();
   useBodyScrollLock(isMenuOpen);
   const focusTrapRef = useFocusTrap(isMenuOpen);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -109,6 +111,9 @@ const VerticalNav = ({ isMenuOpen, onClose, navLinks, navCtas }: VerticalNavProp
                             const isExternal = link.linkType === 'external' || link.openInNewTab;
                             const linkVisibilityClass = link.hideOnDesktop ? 'lg:hidden' : '';
 
+                            const href = link.computedHref || '/';
+                            const isActive = pathname === href || (href !== '/' && pathname.startsWith(href + '/'));
+
                             return (
                               <div
                                 key={`nav-link-${sectionIndex}-${linkIndex}`}
@@ -116,7 +121,9 @@ const VerticalNav = ({ isMenuOpen, onClose, navLinks, navCtas }: VerticalNavProp
                                 <Link
                                   {...linkProps}
                                   onClick={onClose}
-                                  className='block w-full text-center py-3.5 px-5 font-heading text-body-lg uppercase tracking-[2px] text-[#999] hover:text-brand-white transition-colors duration-300'>
+                                  className={`block w-full text-center py-3.5 px-5 font-heading text-body-lg uppercase tracking-[2px] transition-colors duration-300 ${
+                                    isActive ? 'text-brand-white' : 'text-[#999] hover:text-brand-white'
+                                  }`}>
                                   <span>{label}</span>
                                   {isExternal && (
                                     <FaExternalLinkAlt className='inline-block text-body-xs text-current ml-2' />
