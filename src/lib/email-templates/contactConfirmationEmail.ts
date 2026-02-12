@@ -156,7 +156,7 @@ export function generateConfirmationEmail(data: ConfirmationEmailData): string {
                     <tr>
                       <td align="center">
                         <!-- Business Name -->
-                        <span >$${
+                        <span style="padding: 0px 5px;" >$${
                           logoUrl
                             ? `
                               <!-- Logo -->
