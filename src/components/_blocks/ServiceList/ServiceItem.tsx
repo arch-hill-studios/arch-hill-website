@@ -78,7 +78,7 @@ const ServiceItem = ({
         }`}>
         {/* Carpet background overlay */}
         <div
-          className={`absolute inset-0 opacity-70 ${
+          className={`absolute inset-0 ${
             isRed
               ? 'rounded-bl-[75px] max-lg:rounded-bl-[40px] max-lg:rounded-br-[40px] max-lg:rounded-tl-none'
               : 'rounded-br-[75px] max-lg:rounded-bl-[40px] max-lg:rounded-br-[40px] max-lg:rounded-tl-none'
