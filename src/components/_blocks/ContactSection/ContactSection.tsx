@@ -11,7 +11,10 @@ import {
   getGoogleMapsEmbedCode,
   getBusinessHours,
 } from '@/lib/organizationInfo';
-import type { BUSINESS_CONTACT_INFO_QUERY_RESULT, CONTACT_FORM_SETTINGS_QUERY_RESULT } from '@/sanity/types';
+import type {
+  BUSINESS_CONTACT_INFO_QUERY_RESULT,
+  CONTACT_FORM_SETTINGS_QUERY_RESULT,
+} from '@/sanity/types';
 
 interface ContactSectionProps {
   businessContactInfo: BUSINESS_CONTACT_INFO_QUERY_RESULT | null;
@@ -41,9 +44,7 @@ const ContactSection = ({ businessContactInfo, contactFormSettings }: ContactSec
         <h3 className='font-heading text-body-xl tracking-[2px] uppercase mb-4 text-brand-white'>
           {formTitle}
         </h3>
-        {formSubtitle && (
-          <p className='text-body-base text-neutral-400 mb-6'>{formSubtitle}</p>
-        )}
+        {formSubtitle && <p className='text-body-sm text-neutral-400 mb-6'>{formSubtitle}</p>}
         <ContactForm settings={contactFormSettings} />
       </div>
 
