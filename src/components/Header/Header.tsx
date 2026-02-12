@@ -10,7 +10,7 @@ import MenuButton from './MenuButton';
 import VerticalNav from './VerticalNav/VerticalNav';
 import SkipLink from '@/components/UI/SkipLink';
 import { useHeader } from '@/contexts/HeaderContext';
-import { headerHeight } from '@/utils/spacingConstants';
+import { headerHeight, sitePaddingX } from '@/utils/spacingConstants';
 
 // Adjustable: fraction of hero height at which mobile header becomes fully opaque
 // Change this value to adjust the scroll threshold.
@@ -129,70 +129,72 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
         style={{ '--mobile-header-opacity': effectiveMobileOpacity } as React.CSSProperties}>
         {/* Background layer - fades on mobile when hero present, always solid on desktop */}
         <div className='absolute inset-0 bg-brand-dark border-b border-[#2a2a2a] opacity-(--mobile-header-opacity) xl:opacity-100 transition-opacity duration-300' />
-        {/* Inner container - relative for absolute positioning of logo and nav on desktop */}
-        <div className='relative mx-auto max-w-300 h-full flex items-center justify-between gap-8 px-5'>
-          {/* Logo + Brand Text */}
-          <Link
-            href='/#home'
-            onClick={closeMenu}
-            className={`flex items-center gap-2 xl:absolute xl:left-5 transition-[opacity,translate] duration-400 ease-in-out ${
-              isScrolled ? 'xl:opacity-100 xl:translate-x-0' : 'xl:opacity-0 xl:-translate-x-5'
-            }`}
-            style={{
-              filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))',
-            }}>
-            {logo?.asset && (
-              <UnifiedImage
-                src={logo}
-                alt={logo.alt || `${organizationName} Logo`}
-                mode='sized'
-                width={80}
-                height={40}
-                sizeContext='logo'
-                objectFit='contain'
-                className='h-10 w-auto'
-                sizes='40px'
-                priority
-              />
-            )}
-            {/* Brand Text - Image from CMS or fallback to organization name */}
-            <div className='flex items-center opacity-(--mobile-header-opacity) xl:opacity-100 transition-opacity duration-300'>
-              {brandTextImage?.asset ? (
+        {/* Inner container - padding wrapper + relative positioning context for absolute children */}
+        <div className={`mx-auto ${sitePaddingX} h-full`}>
+          <div className='relative h-full flex items-center justify-between gap-8'>
+            {/* Logo + Brand Text */}
+            <Link
+              href='/#home'
+              onClick={closeMenu}
+              className={`flex items-center gap-2 xl:absolute  transition-[opacity,translate] duration-400 ease-in-out ${
+                isScrolled ? 'xl:opacity-100 xl:translate-x-0' : 'xl:opacity-0 xl:-translate-x-5'
+              }`}
+              style={{
+                filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))',
+              }}>
+              {logo?.asset && (
                 <UnifiedImage
-                  src={brandTextImage}
-                  alt={brandTextImage.alt || organizationName}
+                  src={logo}
+                  alt={logo.alt || `${organizationName} Logo`}
                   mode='sized'
-                  width={300}
+                  width={80}
                   height={40}
-                  sizeContext='full'
+                  sizeContext='logo'
                   objectFit='contain'
-                  className='min-h-8 min-[420px]:max-w-75'
-                  style={{ width: 'auto', height: 'auto' }}
+                  className='h-10 w-auto'
+                  sizes='40px'
+                  priority
                 />
-              ) : (
-                <span className='text-h3 text-brand-primary'>{organizationName}</span>
               )}
-            </div>
-          </Link>
+              {/* Brand Text - Image from CMS or fallback to organization name */}
+              <div className='flex items-center opacity-(--mobile-header-opacity) xl:opacity-100 transition-opacity duration-300'>
+                {brandTextImage?.asset ? (
+                  <UnifiedImage
+                    src={brandTextImage}
+                    alt={brandTextImage.alt || organizationName}
+                    mode='sized'
+                    width={300}
+                    height={40}
+                    sizeContext='full'
+                    objectFit='contain'
+                    className='min-h-8 min-[420px]:max-w-75'
+                    style={{ width: 'auto', height: 'auto' }}
+                  />
+                ) : (
+                  <span className='text-h3 text-brand-primary'>{organizationName}</span>
+                )}
+              </div>
+            </Link>
 
-          {/* Desktop Navigation - absolute positioned, transitions from center to right */}
-          <div
-            className={`hidden xl:block absolute transition-[left,translate] duration-400 ease-in-out ${
-              isScrolled ? 'left-[calc(100%-20px)] -translate-x-full' : 'left-1/2 -translate-x-1/2'
-            }`}>
-            <HorizontalNav
-              navLinks={headerData?.horizontalNav || null}
-              navCtas={headerData?.horizontalNavCtas || null}
+            {/* Desktop Navigation - absolute positioned, transitions from center to right */}
+            <div
+              className={`hidden xl:block absolute transition-[left,translate] duration-400 ease-in-out ${
+                isScrolled ? 'left-[calc(100%)] -translate-x-full' : 'left-1/2 -translate-x-1/2'
+              }`}>
+              <HorizontalNav
+                navLinks={headerData?.horizontalNav || null}
+                navCtas={headerData?.horizontalNavCtas || null}
+              />
+            </div>
+
+            {/* Hamburger / Close Menu Button */}
+            <MenuButton
+              isMenuOpen={isMenuOpen}
+              onClick={toggleMenu}
+              ariaControls='mobile-navigation-menu'
+              showOnDesktop={headerData?.showVerticalNavOnDesktop ?? true}
             />
           </div>
-
-          {/* Hamburger / Close Menu Button */}
-          <MenuButton
-            isMenuOpen={isMenuOpen}
-            onClick={toggleMenu}
-            ariaControls='mobile-navigation-menu'
-            showOnDesktop={headerData?.showVerticalNavOnDesktop ?? true}
-          />
         </div>
       </header>
 
