@@ -41,7 +41,7 @@ const ServiceItem = ({
   const components = createComponents('left');
 
   return (
-    <div className='relative min-h-[500px] max-lg:min-h-0 max-lg:flex max-lg:flex-col'>
+    <div className='relative min-h-125 max-lg:min-h-0 max-lg:flex max-lg:flex-col'>
       {/* Service Title */}
       <h3
         className={`font-heading text-body-4xl tracking-[4px] uppercase text-brand-white relative z-5 mb-5 max-lg:order-1 ${
@@ -79,7 +79,9 @@ const ServiceItem = ({
         {/* Carpet background overlay */}
         <div
           className={`absolute inset-0 opacity-70 ${
-            isRed ? 'rounded-bl-[75px] max-lg:rounded-bl-[40px] max-lg:rounded-br-[40px] max-lg:rounded-tl-none' : 'rounded-br-[75px] max-lg:rounded-bl-[40px] max-lg:rounded-br-[40px] max-lg:rounded-tl-none'
+            isRed
+              ? 'rounded-bl-[75px] max-lg:rounded-bl-[40px] max-lg:rounded-br-[40px] max-lg:rounded-tl-none'
+              : 'rounded-br-[75px] max-lg:rounded-bl-[40px] max-lg:rounded-br-[40px] max-lg:rounded-tl-none'
           }`}
           style={{
             background: `linear-gradient(rgba(10,10,10,0.5), rgba(10,10,10,0.5)), url('/images/carpets/${isRed ? 'carpet-red' : 'carpet-blue'}.jpg') center center / cover no-repeat`,
@@ -101,7 +103,7 @@ const ServiceItem = ({
                 ? createSanityDataAttribute(
                     documentId,
                     documentType,
-                    `${fieldPathPrefix}.description`
+                    `${fieldPathPrefix}.description`,
                   )
                 : {})}>
               <PortableTextWrapper value={description} components={components} />
@@ -114,11 +116,7 @@ const ServiceItem = ({
               <span
                 className='block font-heading text-body-2xl tracking-[2px] text-brand-white mb-2.5'
                 {...(documentId && documentType
-                  ? createSanityDataAttribute(
-                      documentId,
-                      documentType,
-                      `${fieldPathPrefix}.price`
-                    )
+                  ? createSanityDataAttribute(documentId, documentType, `${fieldPathPrefix}.price`)
                   : {})}>
                 {price}
               </span>
@@ -129,7 +127,7 @@ const ServiceItem = ({
                     ? createSanityDataAttribute(
                         documentId,
                         documentType,
-                        `${fieldPathPrefix}.disclaimer`
+                        `${fieldPathPrefix}.disclaimer`,
                       )
                     : {})}>
                   {disclaimer}
