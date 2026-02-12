@@ -193,7 +193,7 @@ const ContactForm = ({ className = '', settings }: ContactFormProps) => {
 
       {status === 'success' && (
         <div className='bg-black rounded-lg shadow-sm p-6 mt-4 text-center'>
-          <p className='text-h4 mb-2 text-brand-secondary'>{successHeading}</p>
+          <p className='text-h4 mb-2 text-brand-white'>{successHeading}</p>
           <p className='text-body-base mb-4'>{successMessage}</p>
         </div>
       )}
