@@ -38,6 +38,8 @@ const HomePageContent = ({ hero, sections, pageBuilderData }: HomePageContentPro
         heroDefaultContentPosition={hero.heroDefaultContentPosition}
         heroContentPosition={hero.heroContentPosition}
         brandTextImage={brandTextImage}
+        brandTextImageDocumentId={pageBuilderData.businessContactInfo?._id}
+        brandTextImageDocumentType={pageBuilderData.businessContactInfo?._type}
         documentId={hero._id}
         documentType={hero._type}
       />

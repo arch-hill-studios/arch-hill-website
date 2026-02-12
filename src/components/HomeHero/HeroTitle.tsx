@@ -11,6 +11,8 @@ interface HeroTitleProps {
   mainTitle: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['mainTitle'];
   subTitle: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['subTitle'];
   brandTextImage?: BrandTextImage;
+  brandTextImageDocumentId?: string;
+  brandTextImageDocumentType?: string;
   documentId: string;
   documentType: string;
   textAlignment?: string;
@@ -22,6 +24,8 @@ const HeroTitle = ({
   mainTitle,
   subTitle,
   brandTextImage,
+  brandTextImageDocumentId,
+  brandTextImageDocumentType,
   documentId,
   documentType,
   textAlignment = 'center',
@@ -65,7 +69,9 @@ const HeroTitle = ({
         className={`w-full ${getContainerAlignmentClass(textAlignment)} ${getTextAlignmentClass(textAlignment)}`}>
         {/* Brand Text Image - displayed if available from Business & Contact Info */}
         {hasBrandTextImage && (
-          <div className='mb-6'>
+          <div
+            className='mb-6'
+            {...createSanityDataAttribute(brandTextImageDocumentId, brandTextImageDocumentType, 'brandTextImage')}>
             <UnifiedImage
               src={brandTextImage}
               alt={brandTextImage?.alt || 'Brand logo'}

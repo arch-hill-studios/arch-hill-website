@@ -13,6 +13,8 @@ interface VideoImageBackgroundHeroLayoutProps {
   heroCallToActionList: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroCallToActionList'];
   heroContentPosition: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroContentPosition'];
   brandTextImage?: BrandTextImage;
+  brandTextImageDocumentId?: string;
+  brandTextImageDocumentType?: string;
   documentId: string;
   documentType: string;
   showLogoBackColor?: boolean;
@@ -27,6 +29,8 @@ const VideoImageBackgroundHeroLayout = (props: VideoImageBackgroundHeroLayoutPro
     subTitle,
     heroCallToActionList,
     brandTextImage,
+    brandTextImageDocumentId,
+    brandTextImageDocumentType,
     documentId,
     documentType,
     showLogoBackColor,
@@ -86,6 +90,8 @@ const VideoImageBackgroundHeroLayout = (props: VideoImageBackgroundHeroLayoutPro
     subTitle,
     heroCallToActionList,
     brandTextImage,
+    brandTextImageDocumentId,
+    brandTextImageDocumentType,
     documentId,
     documentType,
     showLogoBackColor,

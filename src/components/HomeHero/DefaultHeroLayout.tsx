@@ -14,6 +14,8 @@ interface DefaultHeroLayoutProps {
   heroCallToActionList: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroCallToActionList'];
   heroContentPosition: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroContentPosition'];
   brandTextImage?: BrandTextImage;
+  brandTextImageDocumentId?: string;
+  brandTextImageDocumentType?: string;
   images: Array<{ imageUrl: string; altText: string }>;
   imageDuration: number;
   documentId: string;
@@ -30,6 +32,8 @@ const DefaultHeroLayout = (props: DefaultHeroLayoutProps) => {
     subTitle,
     heroCallToActionList,
     brandTextImage,
+    brandTextImageDocumentId,
+    brandTextImageDocumentType,
     images,
     imageDuration,
     documentId,
@@ -55,6 +59,8 @@ const DefaultHeroLayout = (props: DefaultHeroLayoutProps) => {
     mainTitle,
     subTitle,
     brandTextImage,
+    brandTextImageDocumentId,
+    brandTextImageDocumentType,
     documentId,
     documentType,
     showLogoBackColor,

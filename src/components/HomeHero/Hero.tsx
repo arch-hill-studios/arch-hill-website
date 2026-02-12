@@ -29,6 +29,8 @@ interface HeroProps {
   heroDefaultContentPosition: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroDefaultContentPosition'];
   heroContentPosition: NonNullable<HOME_PAGE_HERO_QUERY_RESULT>['heroContentPosition'];
   brandTextImage?: BrandTextImage;
+  brandTextImageDocumentId?: string;
+  brandTextImageDocumentType?: string;
   documentId: string;
   documentType: string;
 }
@@ -46,6 +48,8 @@ const Hero = ({
   heroDefaultContentPosition,
   heroContentPosition,
   brandTextImage,
+  brandTextImageDocumentId,
+  brandTextImageDocumentType,
   documentId,
   documentType,
 }: HeroProps) => {
@@ -174,6 +178,8 @@ const Hero = ({
             heroCallToActionList={heroCallToActionList}
             heroContentPosition={heroDefaultContentPosition}
             brandTextImage={brandTextImage}
+            brandTextImageDocumentId={brandTextImageDocumentId}
+            brandTextImageDocumentType={brandTextImageDocumentType}
             images={images}
             imageDuration={(heroImageTransitionDuration || 4) * 1000}
             documentId={documentId}
@@ -187,6 +193,8 @@ const Hero = ({
             heroCallToActionList={heroCallToActionList}
             heroContentPosition={heroContentPosition}
             brandTextImage={brandTextImage}
+            brandTextImageDocumentId={brandTextImageDocumentId}
+            brandTextImageDocumentType={brandTextImageDocumentType}
             documentId={documentId}
             documentType={documentType}
           />
