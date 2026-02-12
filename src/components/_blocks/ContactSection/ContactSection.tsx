@@ -40,7 +40,7 @@ const ContactSection = ({ businessContactInfo, contactFormSettings }: ContactSec
       {/* Left Column - Contact Form */}
       <div
         id='contact-form'
-        className='self-start bg-[#2f0909] p-8 lg:p-10 border border-neutral-800'>
+        className='self-start bg-[#2f0909] p-6 lg:p-8 border border-neutral-800'>
         <h3 className='font-heading text-body-xl tracking-[2px] uppercase mb-4 text-brand-white'>
           {formTitle}
         </h3>
