@@ -153,7 +153,7 @@ const Footer = ({
                 />
               )}
               {/* Brand Text - Image from CMS or fallback to organization name */}
-              <div className='hidden xxs:flex items-center'>
+              <div className='flex items-center'>
                 {brandTextImage?.asset ? (
                   <UnifiedImage
                     src={brandTextImage}
@@ -163,7 +163,7 @@ const Footer = ({
                     height={40}
                     sizeContext='full'
                     objectFit='contain'
-                    className='shrink-0 max-h-10 max-w-none'
+                    className='max-h-10 max-w-full sm:max-w-100'
                     style={{ width: 'auto', height: 'auto' }}
                   />
                 ) : (

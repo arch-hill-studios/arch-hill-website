@@ -40,6 +40,12 @@ export const SectionDropdown = (props: SectionDropdownProps) => {
 
       setIsLoading(true);
       try {
+        // For homePage, sections live in the separate homePageSections document
+        const docType = await client.fetch('*[_id == $pageId][0]._type', {
+          pageId: internalPageRef,
+        });
+        const contentDocId = docType === 'homePage' ? 'homePageSections' : internalPageRef;
+
         // GROQ query to get all sections with anchor IDs from the selected page
         const query = `*[_id == $pageId][0]{
           content[]{
@@ -98,7 +104,7 @@ export const SectionDropdown = (props: SectionDropdownProps) => {
           }[]
         }`;
 
-        const result = await client.fetch(query, { pageId: internalPageRef });
+        const result = await client.fetch(query, { pageId: contentDocId });
 
         // Flatten and filter sections that have anchor IDs
         const flattenSections = (content: unknown[]): SectionOption[] => {
