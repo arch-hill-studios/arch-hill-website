@@ -89,7 +89,21 @@ const RootLayout = async ({
         />
       </head>
       <body
-        className={`${inter.className} ${bebasNeue.variable} text-body-base text-brand-muted overflow-x-hidden bg-brand-dark bg-[linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('/body-background.png')] bg-center bg-cover bg-no-repeat bg-fixed`}>
+        className={`${inter.className} ${bebasNeue.variable} text-body-base text-brand-muted overflow-x-hidden bg-brand-dark`}>
+        {/* Fixed background image - contained to screen width with bottom fade */}
+        <div className='fixed inset-0 z-[-1] overflow-hidden' aria-hidden='true'>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src='/body-background.png'
+            alt=''
+            className='block w-full h-auto'
+            style={{
+              filter: 'brightness(0.7)',
+              maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+            }}
+          />
+        </div>
         {children}
       </body>
     </html>
