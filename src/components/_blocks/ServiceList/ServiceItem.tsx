@@ -44,10 +44,10 @@ const ServiceItem = ({
     <div className='relative min-h-125 max-lg:min-h-0 max-lg:flex max-lg:flex-col'>
       {/* Service Title */}
       <h3
-        className={`font-heading text-body-4xl tracking-[4px] uppercase text-brand-white relative z-5 mb-5 max-lg:order-1 ${
+        className={`font-heading text-body-3xl tracking-[4px] uppercase text-brand-white relative z-5 mb-5 max-lg:order-1 ${
           isRed
-            ? 'w-1/2 pr-10 max-lg:w-full max-lg:pr-0 max-lg:text-left'
-            : 'w-1/2 ml-auto text-right pl-10 max-lg:w-full max-lg:ml-0 max-lg:text-left max-lg:pl-0'
+            ? 'w-1/2 pr-10 max-lg:w-full max-lg:pr-0 max-lg:text-center'
+            : 'w-1/2 ml-auto text-right pl-10 max-lg:w-full max-lg:ml-0 max-lg:text-center max-lg:pl-0'
         }`}
         {...(documentId && documentType
           ? createSanityDataAttribute(documentId, documentType, `${fieldPathPrefix}.title`)
