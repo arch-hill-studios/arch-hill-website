@@ -10,6 +10,7 @@ import {
   getOrganizationAddress,
   getOrganizationAddressLink,
   getLogo,
+  getBrandTextImage,
 } from '@/lib/organizationInfo';
 import { urlFor } from '@/sanity/lib/image';
 import { getContactConfirmationEmail, getBusinessContactInfo } from '@/actions';
@@ -166,8 +167,8 @@ export async function POST(request: Request) {
     }
 
     // Construct logo URL from Sanity CMS
-    const logo = getLogo(businessContactInfo);
-    const logoUrl = logo?.asset ? urlFor(logo).width(160).url() : '';
+    const logo = getBrandTextImage(businessContactInfo);
+    const logoUrl = logo?.asset ? urlFor(logo).width(500).url() : '';
 
     // Fetch confirmation email settings from Sanity for customizable email content
     const confirmationEmailSettings = await getContactConfirmationEmail();

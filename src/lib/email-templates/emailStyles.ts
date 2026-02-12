@@ -6,37 +6,36 @@
 
 export const EMAIL_COLORS = {
   // Background colors
-  outerBackground: '#f5f5f5',        // Light gray outer background (visible in desktop clients)
-  containerBackground: '#1a1a1a',    // Very dark gray - main email container
-  headerBackground: '#2a2a2a',       // Medium dark gray - header section
-  footerBackground: '#2a2a2a',       // Medium dark gray - footer section
-  infoBoxBackground: '#2a2a2a',      // Medium dark gray - info/detail boxes
+  outerBackground: '#f5f5f5', // Light gray outer background (visible in desktop clients)
+  containerBackground: '#1a1a1a', // Very dark gray - main email container
+  headerBackground: '#2a2a2a', // Medium dark gray - header section
+  footerBackground: '#2a2a2a', // Medium dark gray - footer section
+  infoBoxBackground: '#2a2a2a', // Medium dark gray - info/detail boxes
   sectionHeaderBackground: '#3a3a3a', // Slightly lighter dark gray - section headers (application forms)
-  messageBoxBackground: '#2a2a2a',   // Medium dark gray - message boxes
+  messageBoxBackground: '#2a2a2a', // Medium dark gray - message boxes
 
   // Text colors
-  textPrimary: '#e0e0e0',            // Light gray - primary text
-  textSecondary: '#b0b0b0',          // Medium gray - secondary text
-  textWhite: '#ffffff',              // White - labels and emphasized text
-  textInBox: '#c0c0c0',              // Light gray - text inside info boxes
-  textSubQuestion: '#b0b0b0',        // Medium gray - sub-question text (application forms)
+  textPrimary: '#e0e0e0', // Light gray - primary text
+  textSecondary: '#b0b0b0', // Medium gray - secondary text
+  textWhite: '#ffffff', // White - labels and emphasized text
+  textInBox: '#c0c0c0', // Light gray - text inside info boxes
+  textSubQuestion: '#b0b0b0', // Medium gray - sub-question text (application forms)
 
   // Brand colors
-  brandGold: '#3b82f6',              // Primary brand colour
-  brandOrange: '#60a5fa',            // Secondary brand colour (links, accents)
-  brandLightGray: '#cccccc',         // Light gray for "Training" text
+  brandPrimary: '#6b1c1c', // Primary brand colour
+  brandSecondary: '#8a2424', // Secondary brand colour (links, accents)
+  brandWhite: '#fff7db', // Off-white - used for highlights and accents
 
   // Border and divider colors
-  border: '#333333',                 // Border for main container
-  infoBoxBorder: '#3b82f6',          // Primary brand border for info boxes (left border)
-  sectionDivider: '#404040',         // Dark gray divider between items
+  border: '#333333', // Border for main container
+  sectionDivider: '#404040', // Dark gray divider between items
   footerDivider: 'rgba(59, 130, 246, 0.3)', // Semi-transparent primary brand divider
 
   // Link colors
-  linkColor: '#60a5fa',              // Secondary brand for clickable links
+  linkColor: '#60a5fa', // Secondary brand for clickable links
 
   // Special colors
-  notAnswered: '#999999',            // Gray for "Not answered" text (application forms)
+  notAnswered: '#999999', // Gray for "Not answered" text (application forms)
 } as const;
 
 /**
@@ -56,17 +55,13 @@ export const EMAIL_STYLES = {
 
   footer: `background-color: ${EMAIL_COLORS.footerBackground}; padding: 30px; border-radius: 0 0 8px 8px;`,
 
-  brandNameGold: `font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 32px; font-weight: 600; color: ${EMAIL_COLORS.brandGold}; display: inline; line-height: 1.2; margin-right: 8px;`,
-
-  brandNameTraining: `font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 22px; font-weight: 500; color: ${EMAIL_COLORS.brandLightGray}; display: inline; line-height: 1.2;`,
-
   textPrimary: `color: ${EMAIL_COLORS.textPrimary}; font-size: 16px; line-height: 1.6;`,
 
   textSecondary: `color: ${EMAIL_COLORS.textSecondary}; font-size: 16px; line-height: 1.6;`,
 
-  infoBox: `background-color: ${EMAIL_COLORS.infoBoxBackground}; border-left: 4px solid ${EMAIL_COLORS.infoBoxBorder}; border-radius: 4px; margin-bottom: 30px;`,
+  infoBox: `background-color: ${EMAIL_COLORS.infoBoxBackground}; border-left: 4px solid ${EMAIL_COLORS.brandPrimary}; border-radius: 4px; margin-bottom: 30px;`,
 
-  infoBoxHeading: `margin: 0 0 15px 0; color: ${EMAIL_COLORS.brandGold}; font-size: 18px; font-weight: 600;`,
+  infoBoxHeading: `margin: 0 0 15px 0; color: ${EMAIL_COLORS.brandWhite}; font-size: 18px; font-weight: 600;`,
 
   infoBoxText: `padding: 8px 0; color: ${EMAIL_COLORS.textInBox}; font-size: 14px;`,
 

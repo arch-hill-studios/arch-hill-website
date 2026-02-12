@@ -33,8 +33,8 @@ export function generateConfirmationEmail(data: ConfirmationEmailData): string {
     logoUrl,
     organizationName,
     emailGreeting = 'Hi',
-    emailIntroMessage = 'I have successfully received your message and will aim to get back to you as soon as possible.',
-    emailOutroMessage = 'If you have any urgent questions, feel free to reach out to me directly.',
+    emailIntroMessage = 'We have successfully received your message and will aim to get back to you as soon as possible.',
+    emailOutroMessage = 'If you have any urgent questions, feel free to reach out to us directly.',
     organizationEmail,
     organizationPhone,
     organizationAddress,
@@ -69,20 +69,20 @@ export function generateConfirmationEmail(data: ConfirmationEmailData): string {
                       <td align="center">
                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="display: inline-block;">
                           <tr>
-                            ${logoUrl ? `<td align="center" valign="middle" style="padding-right: 12px;">
+                            ${
+                              logoUrl
+                                ? `<td align="center" valign="middle" style="padding-right: 12px;">
                               <!-- Logo -->
                               <img
                                 src="${logoUrl}"
                                 alt="${organizationName} Logo"
-                                width="80"
+                                width="350"
                                 height="auto"
                                 style="display: block; margin: 0; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));"
                               />
-                            </td>` : ''}
-                            <td align="left" valign="middle" style="white-space: nowrap;">
-                              <!-- Business Name -->
-                              <span style="${EMAIL_STYLES.brandNameGold}">${organizationName}</span>
-                            </td>
+                            </td>`
+                                : ''
+                            }
                           </tr>
                         </table>
                       </td>
@@ -156,37 +156,66 @@ export function generateConfirmationEmail(data: ConfirmationEmailData): string {
                     <tr>
                       <td align="center">
                         <!-- Business Name -->
-                        <span style="${EMAIL_STYLES.brandNameGold}">${organizationName}</span>
+                        <span >$${
+                          logoUrl
+                            ? `
+                              <!-- Logo -->
+                              <img
+                                src="${logoUrl}"
+                                alt="${organizationName} Logo"
+                                width="350"
+                                height="auto"
+                                style="display: block; margin: 0; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));"
+                              />
+                            `
+                            : ''
+                        }</span>
                         <!-- Contact Info -->
                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                          ${organizationEmail ? `<tr>
+                          ${
+                            organizationEmail
+                              ? `<tr>
                             <td align="center" style="padding: 5px 0;">
                               <a href="${emailLink}" style="${EMAIL_STYLES.contactInfoLink}">
                                 ${organizationEmail}
                               </a>
                             </td>
-                          </tr>` : ''}
-                          ${organizationPhone ? `<tr>
+                          </tr>`
+                              : ''
+                          }
+                          ${
+                            organizationPhone
+                              ? `<tr>
                             <td align="center" style="padding: 5px 0;">
                               <a href="${phoneLink}" style="${EMAIL_STYLES.contactInfoLink}">
                                 ${organizationPhone}
                               </a>
                             </td>
-                          </tr>` : ''}
-                          ${organizationAddress ? `<tr>
+                          </tr>`
+                              : ''
+                          }
+                          ${
+                            organizationAddress
+                              ? `<tr>
                             <td align="center" style="padding: 5px 0; color: ${EMAIL_COLORS.textWhite}; font-size: 14px;">
                               <a href="${organizationAddressLink || '#'}" style="${EMAIL_STYLES.contactInfoLink}">
                                 ${organizationAddress}
                               </a>
                             </td>
-                          </tr>` : ''}
-                          ${productionDomain ? `<tr>
+                          </tr>`
+                              : ''
+                          }
+                          ${
+                            productionDomain
+                              ? `<tr>
                             <td align="center" style="padding: 5px 0; color: ${EMAIL_COLORS.textWhite}; font-size: 14px;">
                               <a href="${productionDomain}" style="${EMAIL_STYLES.contactInfoLink}">
                                 ${productionDomain}
                               </a>
                             </td>
-                          </tr>` : ''}
+                          </tr>`
+                              : ''
+                          }
                         </table>
 
                         <!-- Divider -->
