@@ -23,32 +23,32 @@ const getAlignmentClasses = (alignment: string = 'left') => {
     case 'right':
       return {
         bulletClass:
-          'list-disc space-y-2 [&>li::marker]:text-brand-secondary m-6 text-center md:text-right [&>li]:list-inside',
+          'list-disc space-y-2 [&>li::marker]:text-brand-white m-6 text-center md:text-right [&>li]:list-inside',
         numberClass:
-          'list-decimal space-y-2 [&>li::marker]:text-brand-secondary m-6 text-center md:text-right [&>li]:list-inside',
+          'list-decimal space-y-2 [&>li::marker]:text-brand-white m-6 text-center md:text-right [&>li]:list-inside',
         listItemClass: 'leading-relaxed',
         standoutClass:
-          'border-l-4 md:border-l-0 md:border-r-4 border-brand-primary bg-gray-50 pl-4 md:pl-0 md:pr-4 py-3 my-4 rounded-r-lg md:rounded-r-none md:rounded-l-lg italic text-center md:text-right',
+          'border-l-4 md:border-l-0 md:border-r-4 border-brand-white bg-gray-50 pl-4 md:pl-0 md:pr-4 py-3 my-4 rounded-r-lg md:rounded-r-none md:rounded-l-lg italic text-center md:text-right',
       };
     case 'center':
       return {
         bulletClass:
-          'list-disc list-inside space-y-2 [&>li::marker]:text-brand-secondary m-6 text-center',
+          'list-disc list-inside space-y-2 [&>li::marker]:text-brand-white m-6 text-center',
         numberClass:
-          'list-decimal list-inside space-y-2 [&>li::marker]:text-brand-secondary m-6 text-center',
+          'list-decimal list-inside space-y-2 [&>li::marker]:text-brand-white m-6 text-center',
         listItemClass: 'leading-relaxed text-center',
         standoutClass:
-          'border-l-4 border-brand-primary bg-gray-50 pl-4 py-3 my-4 rounded-r-lg italic text-center',
+          'border-l-4 border-brand-white bg-gray-50 pl-4 py-3 my-4 rounded-r-lg italic text-center',
       };
     default: // 'left' or 'inherit'
       return {
         bulletClass:
-          'list-disc pl-6 space-y-2 [&>li::marker]:text-brand-secondary m-6 text-center md:text-left',
+          'list-disc pl-6 space-y-2 [&>li::marker]:text-brand-white m-6 text-center md:text-left',
         numberClass:
-          'list-decimal pl-6 space-y-2 [&>li::marker]:text-brand-secondary m-6 text-center md:text-left',
+          'list-decimal pl-6 space-y-2 [&>li::marker]:text-brand-white m-6 text-center md:text-left',
         listItemClass: 'leading-relaxed',
         standoutClass:
-          'border-l-4 border-brand-primary bg-gray-50 pl-4 py-3 my-4 rounded-r-lg italic text-center md:text-left',
+          'border-l-4 border-brand-white bg-gray-50 pl-4 py-3 my-4 rounded-r-lg italic text-center md:text-left',
       };
   }
 };
@@ -116,7 +116,7 @@ const scaleTextClass = (baseClass: string): string => {
 
 // Create components factory for Hero Rich Text with scale factor
 export const createHeroRichTextComponents = (
-  alignment: string = 'left'
+  alignment: string = 'left',
 ): PortableTextComponents => {
   const alignmentClasses = getAlignmentClasses(alignment);
 

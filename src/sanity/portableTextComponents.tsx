@@ -5,10 +5,10 @@ import { urlFor } from '@/sanity/lib/image';
 
 const getAlignmentClasses = (alignment: string = 'left') => {
   const baseClasses = {
-    bulletClass: 'list-disc space-y-2 [&>li::marker]:text-brand-secondary',
-    numberClass: 'list-decimal space-y-2 [&>li::marker]:text-brand-secondary',
+    bulletClass: 'list-disc space-y-2 [&>li::marker]:text-brand-white',
+    numberClass: 'list-decimal space-y-2 [&>li::marker]:text-brand-white',
     listItemClass: 'leading-relaxed',
-    standoutClass: 'text-brand-primary text-body-4xl',
+    standoutClass: 'text-brand-white text-body-4xl',
   };
 
   const alignmentModifiers = {
