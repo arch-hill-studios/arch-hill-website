@@ -32,12 +32,7 @@ const TextInput = ({
   return (
     <div>
       <label htmlFor={id} className={formStyles.label.base}>
-        {label}{' '}
-        {required ? (
-          <span className={formStyles.label.required}>*</span>
-        ) : (
-          showOptionalLabel && <span className={formStyles.label.optional}>(optional)</span>
-        )}
+        {label}
       </label>
       {helperText && <p className={formStyles.helper.text}>{helperText}</p>}
       <input
