@@ -77,8 +77,9 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
               trigger='scroll'
               duration={800}
               delay={idx * 100}
-              threshold={0.2}>
-              <figure className={gridClasses}>
+              threshold={0.2}
+              className={gridClasses}>
+              <figure>
                 <button
                   onClick={() => {
                     if (hasImage) {
