@@ -28,9 +28,9 @@ export default function ErrorPage({ error }: ErrorPageProps) {
 
           {/* Message */}
           <div className='max-w-2xl mb-8 md:mb-12'>
-            <p className='text-body-lg md:text-body-xl leading-relaxed mb-6'>
+            <p className='text-body-lg leading-relaxed mb-6'>
               An unexpected error occurred while processing your request. This could be a temporary
-              issue with my services. Please try again, or contact me if the problem persists.
+              issue with our services. Please try again, or contact us if the problem persists.
             </p>
 
             {/* Error details for development (hidden in production) */}
