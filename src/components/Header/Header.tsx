@@ -25,12 +25,15 @@ interface HeaderProps {
 const Header = ({ headerData, organizationName, businessContactInfo }: HeaderProps) => {
   const logo = getLogo(businessContactInfo);
   const brandTextImage = getBrandTextImage(businessContactInfo);
-  const { enableOpacityFade } = useHeader();
+  const { enableOpacityFade, setEnableOpacityFade } = useHeader();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // Always start transparent - useEffect will set correct value
+  // Always start transparent - effects will set correct value once state is determined
   const [headerOpacity, setHeaderOpacity] = useState(0);
   // Scrolled state: controls logo visibility and nav position on desktop
   const [isScrolled, setIsScrolled] = useState(false);
+  // Suppress CSS transitions until the initial state is determined (null → true/false)
+  // to prevent visible flashes during hydration
+  const [transitionsReady, setTransitionsReady] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -40,22 +43,44 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
     setIsMenuOpen(false);
   }, []);
 
-  // Set opacity and scrolled state when no hero is present
+  // Fallback: if no component (e.g., Hero) sets enableOpacityFade within timeout,
+  // assume no hero is present and set to false.
+  // This handles non-hero pages where nothing will ever set it to true.
   useEffect(() => {
-    if (!enableOpacityFade) {
-      // No hero: header is always opaque and in "scrolled" state (logo visible, nav right)
-      const timer = setTimeout(() => {
-        setHeaderOpacity(1);
-        setIsScrolled(true);
-      }, 50);
+    if (enableOpacityFade !== null) return;
 
-      return () => clearTimeout(timer);
-    }
+    const timer = setTimeout(() => {
+      setEnableOpacityFade(false);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [enableOpacityFade, setEnableOpacityFade]);
+
+  // Enable CSS transitions after the initial state has been determined and painted.
+  // While enableOpacityFade is null (undetermined), transitions stay off so that
+  // any state corrections happen instantly without visible animation.
+  useEffect(() => {
+    if (enableOpacityFade === null || transitionsReady) return;
+
+    const frameId = requestAnimationFrame(() => {
+      setTransitionsReady(true);
+    });
+
+    return () => cancelAnimationFrame(frameId);
+  }, [enableOpacityFade, transitionsReady]);
+
+  // Set opacity and scrolled state when no hero is present (enableOpacityFade === false)
+  useEffect(() => {
+    if (enableOpacityFade !== false) return;
+
+    setHeaderOpacity(1);
+    setIsScrolled(true);
   }, [enableOpacityFade]);
 
   // Handle scroll for header background opacity fade AND scrolled state
   useEffect(() => {
     // Only add scroll listener if opacity fade is enabled (hero present)
+    // !enableOpacityFade is true for both null and false, skipping both
     if (!enableOpacityFade) return;
 
     const handleScroll = () => {
@@ -107,8 +132,12 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
     };
   }, [isMenuOpen, closeMenu]);
 
-  // Mobile header opacity: transparent when hero present and not scrolled, always opaque when menu open or no hero
-  const effectiveMobileOpacity = !enableOpacityFade || isMenuOpen ? 1 : headerOpacity;
+  // Mobile header opacity:
+  // - null (undetermined): use headerOpacity (0 = transparent, matches home page start state)
+  // - true (hero): use headerOpacity (scroll-dependent)
+  // - false (no hero): always opaque
+  // - menu open: always opaque
+  const effectiveMobileOpacity = enableOpacityFade === false || isMenuOpen ? 1 : headerOpacity;
 
   /*
     HEADER HEIGHT DEFINITION:
@@ -128,7 +157,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
         className={`fixed top-0 left-0 right-0 w-full ${headerHeight} z-50`}
         style={{ '--mobile-header-opacity': effectiveMobileOpacity } as React.CSSProperties}>
         {/* Background layer - fades on mobile when hero present, always solid on desktop */}
-        <div className='absolute inset-0 bg-brand-dark border-b border-[#2a2a2a] opacity-(--mobile-header-opacity) xl:opacity-100 transition-opacity duration-300' />
+        <div className={`absolute inset-0 bg-brand-dark border-b border-[#2a2a2a] opacity-(--mobile-header-opacity) xl:opacity-100 ${transitionsReady ? 'transition-opacity duration-300' : ''}`} />
         {/* Inner container - padding wrapper + relative positioning context for absolute children. */}
         <div className={`mx-auto ${sitePaddingX} h-full`}>
           <div className='relative h-full flex items-center justify-between gap-8'>
@@ -136,9 +165,9 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
             <Link
               href='/#home'
               onClick={closeMenu}
-              className={`flex items-center gap-2 xl:absolute  transition-[opacity,translate] duration-400 ease-in-out ${
-                isScrolled ? 'xl:opacity-100 xl:translate-x-0' : 'xl:opacity-0 xl:-translate-x-5'
-              }`}
+              className={`flex items-center gap-2 xl:absolute ${
+                transitionsReady ? 'transition-[opacity,translate] duration-400 ease-in-out' : ''
+              } ${isScrolled ? 'xl:opacity-100 xl:translate-x-0' : 'xl:opacity-0 xl:-translate-x-5'}`}
               style={{
                 filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))',
               }}>
@@ -157,7 +186,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
                 />
               )}
               {/* Brand Text - Image from CMS or fallback to organization name. */}
-              <div className='flex items-center opacity-(--mobile-header-opacity) xl:opacity-100 transition-opacity duration-300'>
+              <div className={`flex items-center opacity-(--mobile-header-opacity) xl:opacity-100 ${transitionsReady ? 'transition-opacity duration-300' : ''}`}>
                 {brandTextImage?.asset ? (
                   <UnifiedImage
                     src={brandTextImage}
@@ -178,9 +207,9 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
 
             {/* Desktop Navigation - absolute positioned, transitions from center to right */}
             <div
-              className={`hidden xl:block absolute transition-[left,translate] duration-400 ease-in-out ${
-                isScrolled ? 'left-[calc(100%)] -translate-x-full' : 'left-1/2 -translate-x-1/2'
-              }`}>
+              className={`hidden xl:block absolute ${
+                transitionsReady ? 'transition-[left,translate] duration-400 ease-in-out' : ''
+              } ${isScrolled ? 'left-[calc(100%)] -translate-x-full' : 'left-1/2 -translate-x-1/2'}`}>
               <HorizontalNav
                 navLinks={headerData?.horizontalNav || null}
                 navCtas={headerData?.horizontalNavCtas || null}

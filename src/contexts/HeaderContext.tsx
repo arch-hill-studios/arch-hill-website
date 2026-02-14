@@ -7,37 +7,34 @@
  * the header's visual behavior based on their presence and styling needs.
  *
  * HOW IT WORKS:
- * 1. HeaderProvider wraps the app layout and maintains `enableOpacityFade` state (default: false)
+ * 1. HeaderProvider wraps the app layout and maintains `enableOpacityFade` state (default: null)
  * 2. Hero component sets `enableOpacityFade(true)` on mount, `false` on unmount
  * 3. Header component consumes this state to determine whether to apply scroll-based opacity
  *
- * KEY USE CASE - HERO SECTION INTEGRATION:
- * When a Hero section is present (typically on homepage):
- * - Hero has full-screen background images
- * - Header should start transparent to blend with Hero
- * - As user scrolls down, header background gradually fades in for readability
- * - This creates a seamless visual transition from Hero to page content
+ * STATE VALUES:
+ * - null: Undetermined (initial). Header keeps start state and waits for Hero to mount.
+ *   If no Hero mounts within a timeout, Header falls back to false.
+ * - true: Hero present. Header starts transparent and fades in on scroll.
+ * - false: No Hero. Header shows with full opacity immediately.
  *
- * KEY CONSUMERS:
- * - Header.tsx: Reads `enableOpacityFade` to decide whether to apply scroll-based opacity
- *   - If true: Header starts transparent, fades in background on scroll (0-30px scroll range)
- *   - If false: Header maintains full opacity at all times
- *
- * KEY PROVIDERS:
- * - Hero.tsx: Sets `enableOpacityFade(true)` when mounted (has Hero background)
- *   - Automatically disables on unmount (cleanup when navigating away)
+ * WHY NULL INITIAL STATE:
+ * On page refresh, Header hydrates before Hero (it's higher in the component tree).
+ * If the initial state were `false`, Header would immediately assume "no hero" and
+ * flash to end state before Hero can set it to `true`. Using `null` prevents this
+ * race condition — Header waits in start state until the state is determined.
  *
  * TYPICAL FLOW:
  * Homepage with Hero:
- * 1. Hero mounts → setEnableOpacityFade(true)
- * 2. Header starts transparent, blends with Hero background
- * 3. User scrolls → Header background opacity increases (0 → 1 over 30px)
- * 4. User navigates away → Hero unmounts → setEnableOpacityFade(false)
+ * 1. Page loads → enableOpacityFade = null (Header waits in start state)
+ * 2. Hero mounts → setEnableOpacityFade(true)
+ * 3. Header starts transparent, blends with Hero background
+ * 4. User scrolls → Header background opacity increases
+ * 5. User navigates away → Hero unmounts → setEnableOpacityFade(false)
  *
  * Other pages without Hero:
- * 1. No Hero component → enableOpacityFade stays false
- * 2. Header shows with full opacity immediately
- * 3. No scroll-based opacity changes occur
+ * 1. Page loads → enableOpacityFade = null (Header waits in start state)
+ * 2. No Hero mounts → Header's fallback timeout sets enableOpacityFade to false
+ * 3. Header shows with full opacity
  *
  * WHY THIS PATTERN:
  * - Avoids prop drilling through layout components
@@ -51,14 +48,14 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface HeaderContextType {
-  enableOpacityFade: boolean;
+  enableOpacityFade: boolean | null;
   setEnableOpacityFade: (enable: boolean) => void;
 }
 
 const HeaderContext = createContext<HeaderContextType | undefined>(undefined);
 
 export const HeaderProvider = ({ children }: { children: ReactNode }) => {
-  const [enableOpacityFade, setEnableOpacityFade] = useState(false);
+  const [enableOpacityFade, setEnableOpacityFade] = useState<boolean | null>(null);
 
   return (
     <HeaderContext.Provider value={{ enableOpacityFade, setEnableOpacityFade }}>
