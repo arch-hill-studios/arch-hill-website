@@ -10,6 +10,7 @@ import MenuButton from './MenuButton';
 import VerticalNav from './VerticalNav/VerticalNav';
 import SkipLink from '@/components/UI/SkipLink';
 import { useHeader } from '@/contexts/HeaderContext';
+import { useScrollLockStatus } from '@/hooks/useBodyScrollLock';
 import { headerHeight, sitePaddingX } from '@/utils/spacingConstants';
 
 // Adjustable: fraction of hero height at which mobile header becomes fully opaque
@@ -26,6 +27,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
   const logo = getLogo(businessContactInfo);
   const brandTextImage = getBrandTextImage(businessContactInfo);
   const { enableOpacityFade, setEnableOpacityFade } = useHeader();
+  const { isAnyScrollLocked } = useScrollLockStatus();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // Always start transparent - effects will set correct value once state is determined
   const [headerOpacity, setHeaderOpacity] = useState(0);
@@ -84,8 +86,9 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
     if (!enableOpacityFade) return;
 
     const handleScroll = () => {
-      // Don't update when menu is open - prevents scroll lock from resetting
-      if (isMenuOpen) return;
+      // Don't update when any scroll lock is active (menu, modal, loading overlay)
+      // Scroll lock sets position:fixed on body, which fires artificial scroll events
+      if (isAnyScrollLocked()) return;
 
       const scrollY = window.scrollY;
 
@@ -113,7 +116,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [enableOpacityFade, isMenuOpen]);
+  }, [enableOpacityFade, isAnyScrollLocked]);
 
   // Close menu on Escape key press
   useEffect(() => {
