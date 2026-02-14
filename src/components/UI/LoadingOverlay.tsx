@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { useBodyScrollLock } from '@/hooks/useBodyScrollLock';
-import UnifiedImage from '@/components/UI/UnifiedImage';
 
 interface LoadingOverlayProps {
   isLoading?: boolean;
@@ -48,68 +47,37 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ isLoading = false }) =>
         {/* Black overlay with reduced opacity */}
         <div className='absolute inset-0 bg-black/70' />
 
-        {/* Spinner loader in center */}
+        {/* Soundwave bars in center */}
         <div className='absolute inset-0 flex items-center justify-center'>
-          <div className='relative w-20 h-20 sm:w-40 sm:h-40'>
-            {/* Outer ring - brand primary */}
-            <div
-              className='absolute inset-0 rounded-full border-4 sm:border-8 border-transparent'
-              style={{
-                borderTopColor: 'var(--color-brand-primary)',
-                borderRightColor: 'var(--color-brand-primary)',
-                animation: 'spin 1.5s linear infinite',
-              }}
-            />
-            {/* Inner ring - brand secondary */}
-            <div
-              className='absolute inset-4 rounded-full border-4 sm:border-8 border-transparent'
-              style={{
-                borderBottomColor: 'var(--color-brand-secondary)',
-                borderLeftColor: 'var(--color-brand-secondary)',
-                animation: 'spin-reverse 1s linear infinite',
-              }}
-            />
-            {/* Center dot */}
-            <div className='absolute inset-0 flex items-center justify-center'>
+          <div className='flex items-end gap-1.25 sm:gap-1.75 h-16 sm:h-24'>
+            {[0, 1, 2, 3, 4].map((i) => (
               <div
-                className='w-3 h-3 rounded-full'
+                key={i}
+                className='w-1.5 sm:w-2.5 rounded-full'
                 style={{
                   backgroundColor: 'var(--color-brand-primary)',
-                  animation: 'pulse 1.5s ease-in-out infinite',
+                  animation: `soundbar 1.2s ease-in-out ${i * 0.15}s infinite`,
+                  height: '20%',
                 }}
               />
-            </div>
+            ))}
           </div>
         </div>
 
         {/* CSS Animations */}
         <style jsx>{`
-          @keyframes spin {
-            from {
-              transform: rotate(0deg);
-            }
-            to {
-              transform: rotate(360deg);
-            }
-          }
-
-          @keyframes spin-reverse {
-            from {
-              transform: rotate(360deg);
-            }
-            to {
-              transform: rotate(0deg);
-            }
-          }
-
-          @keyframes pulse {
+          @keyframes soundbar {
             0%, 100% {
-              transform: scale(1);
-              opacity: 1;
+              height: 20%;
+            }
+            25% {
+              height: 80%;
             }
             50% {
-              transform: scale(1.2);
-              opacity: 0.7;
+              height: 40%;
+            }
+            75% {
+              height: 100%;
             }
           }
         `}</style>
