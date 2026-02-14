@@ -167,7 +167,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
                     height={40}
                     sizeContext='full'
                     objectFit='contain'
-                    className='min-h-8 min-[420px]:max-w-75'
+                    className='min-h-8 max-w-60 min-[420px]:max-w-75'
                     style={{ width: 'auto', height: 'auto' }}
                   />
                 ) : (
