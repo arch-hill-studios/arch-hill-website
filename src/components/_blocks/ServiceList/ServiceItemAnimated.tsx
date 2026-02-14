@@ -78,6 +78,16 @@ const ServiceItemAnimated = ({ variant, children }: ServiceItemAnimatedProps) =>
     return <>{children(noOp, containerRef)}</>;
   }
 
+  // --- Image animation ---
+  // Appears first to establish the visual anchor.
+  // Desktop: slides in from opposite side of card + blur clears
+  // Mobile: scale up + fade
+  const imageClasses = isVisible
+    ? 'opacity-100 translate-x-0 lg:translate-x-0 scale-100 lg:scale-100 blur-none'
+    : isRed
+      ? 'opacity-0 scale-[0.97] lg:scale-100 lg:translate-x-8 blur-sm'
+      : 'opacity-0 scale-[0.97] lg:scale-100 lg:-translate-x-8 blur-sm';
+
   // --- Title animation ---
   // Both desktop and mobile: fade in + slide down slightly
   const titleClasses = isVisible
@@ -85,22 +95,17 @@ const ServiceItemAnimated = ({ variant, children }: ServiceItemAnimatedProps) =>
     : 'opacity-0 -translate-y-2.5';
 
   // --- Card animation ---
-  // Desktop: slide from its side (red=left, blue=right) + scale
-  // Mobile: slide up + scale
+  // Desktop: clip-path wipe reveals the card from the image's side, creating
+  //   the illusion of sliding out from behind the image.
+  //   Red (card left, image right) → wipe reveals right-to-left (from image edge).
+  //   Blue (card right, image left) → wipe reveals left-to-right (from image edge).
+  //   A small translateX adds subtle physical motion alongside the wipe.
+  // Mobile: simple slide up + fade (no clip-path, stacked layout has no overlap)
   const cardClasses = isVisible
-    ? 'opacity-100 translate-y-0 lg:translate-y-0 translate-x-0 lg:translate-x-0 scale-100'
+    ? 'opacity-100 translate-y-0 translate-x-0 lg:translate-x-0 lg:[clip-path:inset(0_0_0_0)]'
     : isRed
-      ? 'opacity-0 translate-y-5 lg:translate-y-0 lg:-translate-x-8 scale-[0.97]'
-      : 'opacity-0 translate-y-5 lg:translate-y-0 lg:translate-x-8 scale-[0.97]';
-
-  // --- Image animation ---
-  // Desktop: slide from opposite side of card + blur
-  // Mobile: scale up + fade (no horizontal slide)
-  const imageClasses = isVisible
-    ? 'opacity-100 translate-x-0 lg:translate-x-0 scale-100 lg:scale-100 blur-none'
-    : isRed
-      ? 'opacity-0 scale-[0.97] lg:scale-100 lg:translate-x-8 blur-sm'
-      : 'opacity-0 scale-[0.97] lg:scale-100 lg:-translate-x-8 blur-sm';
+      ? 'opacity-0 translate-y-5 lg:translate-y-0 lg:translate-x-6 lg:[clip-path:inset(0_0_0_100%)]'
+      : 'opacity-0 translate-y-5 lg:translate-y-0 lg:-translate-x-6 lg:[clip-path:inset(0_100%_0_0)]';
 
   // --- Description animation ---
   const descriptionClasses = isVisible
@@ -113,35 +118,35 @@ const ServiceItemAnimated = ({ variant, children }: ServiceItemAnimatedProps) =>
     : 'opacity-0 translate-y-2.5';
 
   const animation: AnimationClasses = {
-    title: `transition-[opacity,transform] ${titleClasses}`,
-    titleStyle: {
-      transitionDuration: '600ms',
-      transitionTimingFunction: EASING,
-      transitionDelay: '100ms',
-    },
     image: `transition-[opacity,transform,filter] ${imageClasses}`,
     imageStyle: {
       transitionDuration: '700ms',
       transitionTimingFunction: EASING,
-      transitionDelay: '150ms',
-    },
-    card: `transition-[opacity,transform] ${cardClasses}`,
-    cardStyle: {
-      transitionDuration: '700ms',
-      transitionTimingFunction: EASING,
       transitionDelay: '0ms',
+    },
+    title: `transition-[opacity,transform] ${titleClasses}`,
+    titleStyle: {
+      transitionDuration: '600ms',
+      transitionTimingFunction: EASING,
+      transitionDelay: '50ms',
+    },
+    card: `transition-[opacity,transform,clip-path] ${cardClasses}`,
+    cardStyle: {
+      transitionDuration: '200ms, 800ms, 800ms',
+      transitionTimingFunction: EASING,
+      transitionDelay: '200ms',
     },
     description: `transition-[opacity,transform] ${descriptionClasses}`,
     descriptionStyle: {
       transitionDuration: '500ms',
       transitionTimingFunction: EASING,
-      transitionDelay: '400ms',
+      transitionDelay: '550ms',
     },
     pricing: `transition-[opacity,transform] ${pricingClasses}`,
     pricingStyle: {
       transitionDuration: '500ms',
       transitionTimingFunction: EASING,
-      transitionDelay: '550ms',
+      transitionDelay: '700ms',
     },
   };
 

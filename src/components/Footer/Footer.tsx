@@ -123,11 +123,11 @@ const Footer = ({
 
   return (
     <footer
-      className={`bg-brand-dark text-brand-white pt-16 pb-8 ${sitePaddingX} w-full border-t border-[#2a2a2a] transition-opacity duration-500 ease-in-out ${
+      className={`bg-brand-dark text-brand-white pt-16 pb-8 w-full border-t border-[#2a2a2a] transition-opacity duration-500 ease-in-out ${
         isPageReady ? 'opacity-100' : 'opacity-0'
       }`}
       aria-label='Site Footer'>
-      <div className='container mx-auto'>
+      <div className={`${sitePaddingX} mx-auto`}>
         {/* TOP ROW - 3-column grid */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_auto_auto] gap-x-16 gap-y-10 mb-10'>
           {/* BRAND COLUMN */}
