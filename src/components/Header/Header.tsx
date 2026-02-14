@@ -156,7 +156,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
                   priority
                 />
               )}
-              {/* Brand Text - Image from CMS or fallback to organization name */}
+              {/* Brand Text - Image from CMS or fallback to organization name. */}
               <div className='flex items-center opacity-(--mobile-header-opacity) xl:opacity-100 transition-opacity duration-300'>
                 {brandTextImage?.asset ? (
                   <UnifiedImage
