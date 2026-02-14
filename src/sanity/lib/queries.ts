@@ -84,17 +84,8 @@ const cardContentProjection = `
   }
 `;
 
-// Closing card projection that properly expands card content including CTAs
-const closingCardProjection = `{
-  ...,
-  image{
-    asset,
-    alt,
-    hotspot,
-    crop
-  },
-  content[]{${cardContentProjection}}
-}`;
+// Closing CTA projection - dereferences internal links and computes href
+const closingCtaProjection = `{${fullLinkProjection}}`;
 
 // Single content block projection for top-level content
 //
@@ -338,8 +329,8 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && slug.current == $slu
     hotspot,
     crop
   },
-  hasClosingCard,
-  closingCard${closingCardProjection}
+  hasClosingCta,
+  closingCta${closingCtaProjection}
 }`);
 
 // Home Page Hero Query - fetches the hero section data

@@ -5,6 +5,7 @@
 import { DocumentIcon } from '@sanity/icons';
 import { defineField, defineType } from 'sanity';
 import { PAGE_CONTENT_BLOCK_LIST } from './shared/blockLists';
+import { createLinkFieldSet } from './shared/linkSystem';
 
 export const pageType = defineType({
   name: 'page',
@@ -19,6 +20,10 @@ export const pageType = defineType({
     {
       name: 'content',
       title: 'Page Content',
+    },
+    {
+      name: 'closingCta',
+      title: 'Closing CTA',
     },
     {
       name: 'settings',
@@ -73,6 +78,46 @@ export const pageType = defineType({
         modal: { type: 'dialog' },
       },
       group: 'content',
+    }),
+    defineField({
+      name: 'hasClosingCta',
+      title: 'Add Closing CTA',
+      type: 'boolean',
+      description: 'Enable a call-to-action section at the bottom of the page',
+      initialValue: false,
+      group: 'closingCta',
+    }),
+    defineField({
+      name: 'closingCta',
+      title: 'Closing CTA',
+      type: 'object',
+      group: 'closingCta',
+      hidden: ({ parent }) => !parent?.hasClosingCta,
+      fields: [
+        defineField({
+          name: 'title',
+          title: 'Title',
+          type: 'string',
+          description: 'The heading for the closing CTA section',
+          validation: (Rule) => Rule.required().max(100),
+        }),
+        defineField({
+          name: 'message',
+          title: 'Message',
+          type: 'text',
+          description: 'The message text displayed below the title',
+          rows: 3,
+          validation: (Rule) => Rule.required().max(500),
+        }),
+        defineField({
+          name: 'ctaText',
+          title: 'CTA Button Text',
+          type: 'string',
+          description: 'Text displayed on the call-to-action button',
+          validation: (Rule) => Rule.required().max(50),
+        }),
+        ...createLinkFieldSet(),
+      ],
     }),
   ],
   preview: {

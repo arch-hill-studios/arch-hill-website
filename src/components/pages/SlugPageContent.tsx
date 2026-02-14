@@ -13,6 +13,7 @@ import BreadcrumbStructuredData from '@/components/StructuredData/BreadcrumbStru
 import { urlFor } from '@/sanity/lib/image';
 import Breadcrumb from '@/components/UI/Breadcrumb';
 import { getOrganizationName } from '@/lib/organizationInfo';
+import ClosingCta from '@/components/ClosingCta';
 import type { PAGE_QUERY_RESULT } from '@/sanity/types';
 import type { PageBuilderData } from '@/actions';
 
@@ -100,6 +101,19 @@ const SlugPageContent = ({
             documentId={page._id}
             documentType={page._type}
             pageBuilderData={pageBuilderData}
+          />
+        )}
+        {page.hasClosingCta && page.closingCta && (
+          <ClosingCta
+            title={page.closingCta.title}
+            message={page.closingCta.message}
+            ctaText={page.closingCta.ctaText}
+            linkType={page.closingCta.linkType}
+            internalLink={page.closingCta.internalLink}
+            externalUrl={page.closingCta.externalUrl}
+            openInNewTab={page.closingCta.openInNewTab}
+            computedHref={page.closingCta.computedHref ?? undefined}
+            pageSectionId={page.closingCta.pageSectionId}
           />
         )}
       </Container>
