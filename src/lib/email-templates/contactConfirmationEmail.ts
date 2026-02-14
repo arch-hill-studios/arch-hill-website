@@ -64,30 +64,16 @@ export function generateConfirmationEmail(data: ConfirmationEmailData): string {
               <!-- Header with Logo and Brand -->
               <tr>
                 <td style="${EMAIL_STYLES.header}">
-                  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                    <tr>
-                      <td align="center">
-                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="display: inline-block;">
-                          <tr>
-                            ${
-                              logoUrl
-                                ? `<td align="center" valign="middle" style="padding-right: 12px;">
-                              <!-- Logo -->
-                              <img
-                                src="${logoUrl}"
-                                alt="${organizationName} Logo"
-                                width="350"
-                                height="auto"
-                                style="display: block; margin: 0; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));"
-                              />
-                            </td>`
-                                : ''
-                            }
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                  </table>
+                  ${
+                    logoUrl
+                      ? `<img
+                          src="${logoUrl}"
+                          alt="${organizationName} Logo"
+                          width="350"
+                          style="display: block; margin: 0 auto; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));"
+                        />`
+                      : ''
+                  }
                 </td>
               </tr>
 
