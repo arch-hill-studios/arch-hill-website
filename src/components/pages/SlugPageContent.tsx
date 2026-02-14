@@ -24,7 +24,12 @@ interface SlugPageContentProps {
   isNestedPath: boolean;
 }
 
-const SlugPageContent = ({ page, pageBuilderData, slugPath, isNestedPath }: SlugPageContentProps) => {
+const SlugPageContent = ({
+  page,
+  pageBuilderData,
+  slugPath,
+  isNestedPath,
+}: SlugPageContentProps) => {
   // For nested paths (e.g., /about/team), or if page not found, trigger 404
   if (!page || isNestedPath) {
     notFound();
@@ -43,7 +48,12 @@ const SlugPageContent = ({ page, pageBuilderData, slugPath, isNestedPath }: Slug
   // Generate Article structured data
   let articleSchema;
   if (seoMetaData && page._createdAt && page._updatedAt) {
-    const organizationData = getOrganizationDataFromSeoMetaData(seoMetaData, baseUrl, null, businessContactInfo);
+    const organizationData = getOrganizationDataFromSeoMetaData(
+      seoMetaData,
+      baseUrl,
+      null,
+      businessContactInfo,
+    );
 
     articleSchema = generateArticleSchema({
       headline: page.title || 'Page',
@@ -82,8 +92,8 @@ const SlugPageContent = ({ page, pageBuilderData, slugPath, isNestedPath }: Slug
       {/* Breadcrumb */}
       <Breadcrumb pageTitle={page.title || 'Untitled Page'} />
 
+      {/* Page Content */}
       <Container>
-        {/* Page Content */}
         {page.content && (
           <PageBuilder
             content={page.content}

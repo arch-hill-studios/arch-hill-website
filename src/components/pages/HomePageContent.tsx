@@ -8,6 +8,7 @@ import type {
   PageBuilderData,
 } from '@/actions';
 import { getBrandTextImage } from '@/lib/organizationInfo';
+import Container from '../Layout/Container';
 
 interface HomePageContentProps {
   hero: HOME_PAGE_HERO_QUERY_RESULT | null;
@@ -45,15 +46,17 @@ const HomePageContent = ({ hero, sections, pageBuilderData }: HomePageContentPro
       />
 
       {/* Additional Page Builder Content */}
-      {sections?.content && (
-        <PageBuilder
-          content={sections.content as NonNullable<PAGE_QUERY_RESULT>['content']}
-          documentId={sections._id}
-          documentType={sections._type}
-          pageBuilderData={pageBuilderData}
-          alignment='center'
-        />
-      )}
+      <Container>
+        {sections?.content && (
+          <PageBuilder
+            content={sections.content as NonNullable<PAGE_QUERY_RESULT>['content']}
+            documentId={sections._id}
+            documentType={sections._type}
+            pageBuilderData={pageBuilderData}
+            alignment='center'
+          />
+        )}
+      </Container>
     </>
   );
 };

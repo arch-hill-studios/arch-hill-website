@@ -1,5 +1,4 @@
 import React from 'react';
-import { sitePaddingX } from '@/utils/spacingConstants';
 
 interface ContainerProps {
   children: React.ReactNode;
@@ -8,10 +7,7 @@ interface ContainerProps {
 
 const Container = ({ children, textAlign = 'center' }: ContainerProps) => {
   return (
-    <div
-      className={`container max-w-360 mx-auto ${sitePaddingX} mb-20 md:mb-32 text-${textAlign} overflow-visible`}>
-      {children}
-    </div>
+    <div className={`mx-auto mb-28 md:mb-36 text-${textAlign} overflow-visible`}>{children}</div>
   );
 };
 

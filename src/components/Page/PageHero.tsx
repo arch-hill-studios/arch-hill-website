@@ -15,19 +15,21 @@ const PageHero = ({ title = null, subtTitle = null, documentId, documentType }: 
     <div {...createSanityDataAttribute(documentId, documentType, 'heroImage')}>
       <section
         data-hero
-        className={`bg-brand-dark text-center overflow-hidden ${sitePaddingX} pb-12 mb-8 md:mb-12`}>
+        className={`bg-brand-dark text-center overflow-hidden ${sitePaddingX} pb-12`}>
         {/* Header spacer */}
         <div className={`${headerHeight}`}></div>
         {title && (
           <Heading
             showMargin={!subtTitle}
             level='h1'
-            className='text-h1 font-bold text-brand-primary mt-6'>
+            className='text-h1 font-bold text-brand-white mt-6'>
             {title}
           </Heading>
         )}
         {subtTitle && (
-          <p className='text-body-2xl text-brand-white mt-4 max-w-4xl mx-auto'>{subtTitle}</p>
+          <p className='text-body-lg uppercase text-brand-primary-hover mt-4 max-w-4xl mx-auto'>
+            {subtTitle}
+          </p>
         )}
       </section>
     </div>

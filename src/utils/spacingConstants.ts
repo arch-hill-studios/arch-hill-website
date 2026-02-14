@@ -29,7 +29,7 @@ export const sitePaddingX = 'max-w-400 px-6 sm:px-32';
  * Vertical padding for section containers (top and bottom)
  * Creates breathing room for content while keeping sections flush with each other
  */
-export const sectionContainerPaddingY = 'py-20 md:py-32';
+export const sectionContainerPaddingY = 'pt-20 md:pt-32';
 
 /**
  * Compact vertical padding for sections when useCompactGap is enabled
