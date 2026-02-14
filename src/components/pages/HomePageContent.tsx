@@ -46,7 +46,7 @@ const HomePageContent = ({ hero, sections, pageBuilderData }: HomePageContentPro
       />
 
       {/* Additional Page Builder Content */}
-      <Container>
+      <Container textAlign='left'>
         {sections?.content && (
           <PageBuilder
             content={sections.content as NonNullable<PAGE_QUERY_RESULT>['content']}
