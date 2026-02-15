@@ -1,3 +1,4 @@
+import { sitePaddingX } from '@/utils/spacingConstants';
 import React from 'react';
 
 interface ContainerProps {

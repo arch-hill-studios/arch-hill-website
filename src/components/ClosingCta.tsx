@@ -2,7 +2,7 @@ import React from 'react';
 import { stegaClean } from 'next-sanity';
 import CTA from './UI/CTA';
 import { FaExternalLinkAlt } from 'react-icons/fa';
-import { closingCardSpacing } from '@/utils/spacingConstants';
+import { closingCardSpacing, sitePaddingX } from '@/utils/spacingConstants';
 import type { InternalLinkType } from '@/types/shared';
 
 interface ClosingCtaProps {
@@ -69,7 +69,7 @@ const ClosingCta = ({
   const shouldOpenInNewTab = linkType === 'external' || (linkType === 'internal' && openInNewTab);
 
   return (
-    <section className={`${closingCardSpacing} text-center`}>
+    <section className={`${closingCardSpacing} ${sitePaddingX} text-center`}>
       <h2 className='font-heading text-body-5xl uppercase tracking-[4px] text-brand-white mb-4'>
         {title}
       </h2>
