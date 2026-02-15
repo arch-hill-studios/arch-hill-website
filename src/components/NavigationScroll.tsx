@@ -13,21 +13,39 @@ export default function NavigationScroll() {
   const currentHashRef = useRef('');
   const pendingScrollRef = useRef<string>('');
 
-  // Prevent browser's native scroll restoration from interfering with
-  // our custom scroll management. Without this, Chrome mobile restores
-  // the previous scroll position asynchronously, overriding our scrollTo(0, 0)
-  // calls and causing pages to start at the wrong position (e.g. at the footer).
-  useEffect(() => {
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-  }, []);
-
   useEffect(() => {
     // Update current hash and pending scroll whenever pathname changes
     currentHashRef.current = window.location.hash;
     pendingScrollRef.current = window.location.hash;
     hasScrolledRef.current = false;
+  }, [pathname]);
+
+  // Handle same-page link clicks (e.g., clicking "About" while on /about).
+  // Next.js doesn't trigger a pathname change for these, so NavigationScroll's
+  // main effect never fires. This global handler detects such clicks and scrolls to top.
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      const link = (e.target as HTMLElement).closest('a');
+      if (!link || link.target === '_blank') return;
+
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+
+      try {
+        const url = new URL(href, window.location.origin);
+        if (url.origin !== window.location.origin) return;
+
+        // Same pathname, no hash → scroll to top
+        if (url.pathname === pathname && !url.hash) {
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+      } catch {
+        // Invalid URL, ignore
+      }
+    };
+
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
   }, [pathname]);
 
   useEffect(() => {

@@ -35,7 +35,8 @@
 
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 
 interface PageLoadContextType {
   isPageReady: boolean;
@@ -57,11 +58,22 @@ interface PageLoadProviderProps {
 }
 
 export const PageLoadProvider: React.FC<PageLoadProviderProps> = ({ children }) => {
+  const pathname = usePathname();
   const [isPageReady, setIsPageReady] = useState(false);
+  const prevPathnameRef = useRef(pathname);
 
   const setPageReady = useCallback(() => {
     setIsPageReady(true);
   }, []);
+
+  // Reset isPageReady when navigating to a different page so that
+  // NavigationScroll waits for new content before attempting scroll
+  useEffect(() => {
+    if (prevPathnameRef.current !== pathname) {
+      prevPathnameRef.current = pathname;
+      setIsPageReady(false);
+    }
+  }, [pathname]);
 
   // Fallback timeout to ensure footer shows even if setPageReady isn't called
   useEffect(() => {

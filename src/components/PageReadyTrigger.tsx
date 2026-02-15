@@ -1,9 +1,11 @@
 'use client';
 
 import { useEffect, useCallback } from 'react';
+import { usePathname } from 'next/navigation';
 import { usePageLoad } from '@/contexts/PageLoadContext';
 
 const PageReadyTrigger = () => {
+  const pathname = usePathname();
   const { setPageReady } = usePageLoad();
 
   const checkContentReady = useCallback(() => {
@@ -77,7 +79,7 @@ const PageReadyTrigger = () => {
       clearTimeout(fallbackTimeout);
       window.removeEventListener('load', handleLoad);
     };
-  }, [setPageReady, checkContentReady]);
+  }, [setPageReady, checkContentReady, pathname]);
 
   return null; // This component doesn't render anything
 };
