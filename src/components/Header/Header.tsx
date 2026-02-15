@@ -160,7 +160,9 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
         className={`fixed top-0 left-0 right-0 w-full ${headerHeight} z-50`}
         style={{ '--mobile-header-opacity': effectiveMobileOpacity } as React.CSSProperties}>
         {/* Background layer - fades on mobile when hero present, always solid on desktop */}
-        <div className={`absolute inset-0 bg-brand-dark border-b border-[#2a2a2a] opacity-(--mobile-header-opacity) xl:opacity-100 ${transitionsReady ? 'transition-opacity duration-300' : ''}`} />
+        <div
+          className={`absolute inset-0 bg-brand-dark border-b border-[#2a2a2a] opacity-(--mobile-header-opacity) xl:opacity-100 ${transitionsReady ? 'transition-opacity duration-300' : ''}`}
+        />
         {/* Inner container - padding wrapper + relative positioning context for absolute children. */}
         <div className={`mx-auto ${sitePaddingX} h-full`}>
           <div className='relative h-full flex items-center justify-between gap-8'>
@@ -189,18 +191,18 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
                 />
               )}
               {/* Brand Text - Image from CMS or fallback to organization name. */}
-              <div className={`flex items-center opacity-(--mobile-header-opacity) xl:opacity-100 ${transitionsReady ? 'transition-opacity duration-300' : ''}`}>
+              <div
+                className={`flex items-center opacity-(--mobile-header-opacity) xl:opacity-100 ${transitionsReady ? 'transition-opacity duration-300' : ''}`}>
                 {brandTextImage?.asset ? (
                   <UnifiedImage
                     src={brandTextImage}
                     alt={brandTextImage.alt || organizationName}
                     mode='sized'
-                    width={300}
+                    width={600}
                     height={40}
                     sizeContext='full'
                     objectFit='contain'
-                    className='min-h-8 max-w-60 min-[420px]:max-w-75'
-                    style={{ width: 'auto', height: 'auto' }}
+                    className='w-auto h-auto max-w-60 min-[420px]:max-w-75'
                   />
                 ) : (
                   <span className='text-h3 text-brand-primary'>{organizationName}</span>
