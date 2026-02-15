@@ -96,9 +96,8 @@ const RootLayout = async ({
           <img
             src='/body-background.png'
             alt=''
-            className='block w-full h-auto'
+            className='block w-full h-auto brightness-90 md:brightness-70'
             style={{
-              filter: 'brightness(0.7)',
               maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
               WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
             }}
