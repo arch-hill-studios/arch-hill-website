@@ -9,20 +9,22 @@ export default function NavigationScroll() {
   const pathname = usePathname();
   const { isPageReady } = usePageLoad();
   const scrollLockStatus = useScrollLockStatus();
+  const isInitialMountRef = useRef(true);
   const hasScrolledRef = useRef(false);
-  const currentHashRef = useRef('');
-  const pendingScrollRef = useRef<string>('');
+  const pendingHashRef = useRef<string>('');
 
+  // Prevent browser's native scroll restoration from interfering with
+  // our scroll management. Chrome mobile in particular restores scroll
+  // position asynchronously, overriding our scrollTo(0, 0) calls.
   useEffect(() => {
-    // Update current hash and pending scroll whenever pathname changes
-    currentHashRef.current = window.location.hash;
-    pendingScrollRef.current = window.location.hash;
-    hasScrolledRef.current = false;
-  }, [pathname]);
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+  }, []);
 
   // Handle same-page link clicks (e.g., clicking "About" while on /about).
-  // Next.js doesn't trigger a pathname change for these, so NavigationScroll's
-  // main effect never fires. This global handler detects such clicks and scrolls to top.
+  // Next.js doesn't trigger a pathname change for these, so the scroll
+  // effects below never fire. This global handler detects such clicks.
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       const link = (e.target as HTMLElement).closest('a');
@@ -48,31 +50,60 @@ export default function NavigationScroll() {
     return () => document.removeEventListener('click', handleClick);
   }, [pathname]);
 
+  // Handle scroll-to-top on pathname change (no hash).
+  // This runs IMMEDIATELY — no need to wait for isPageReady since
+  // scrolling to position 0 doesn't require any content in the DOM.
   useEffect(() => {
-    // If we've already scrolled for this hash, don't scroll again
-    if (hasScrolledRef.current && currentHashRef.current === window.location.hash) {
+    // Skip initial mount — browser handles initial scroll position on
+    // page load/refresh. Without this, the scroll-to-top fires after
+    // PageReadyTrigger detects content, snapping the user back to top
+    // even if they've already started scrolling.
+    if (isInitialMountRef.current) {
+      isInitialMountRef.current = false;
+      const hash = window.location.hash;
+      if (hash) {
+        // Direct visit with hash (e.g., /about#team) — set up for anchor scrolling
+        pendingHashRef.current = hash;
+        hasScrolledRef.current = false;
+      } else {
+        // Direct visit without hash — already at top, nothing to do
+        hasScrolledRef.current = true;
+      }
       return;
     }
 
-    const attemptScroll = () => {
-      const hash = pendingScrollRef.current || window.location.hash;
+    const hash = window.location.hash;
 
-      // If there's no hash, scroll to top
-      if (!hash) {
-        window.scrollTo(0, 0);
-        hasScrolledRef.current = true;
-        pendingScrollRef.current = '';
-        return true;
-      }
+    if (!hash) {
+      // No hash: scroll to top immediately
+      window.scrollTo(0, 0);
+      hasScrolledRef.current = true;
+      pendingHashRef.current = '';
+    } else {
+      // Has hash: defer to the anchor scroll effect below
+      pendingHashRef.current = hash;
+      hasScrolledRef.current = false;
+    }
+  }, [pathname]);
 
-      const targetId = hash.substring(1); // Remove the # symbol
+  // Handle anchor/hash scrolling — waits for isPageReady because
+  // the target element must exist in the DOM before we can scroll to it.
+  useEffect(() => {
+    if (hasScrolledRef.current || !pendingHashRef.current) return;
+    if (!isPageReady) return;
+
+    const attemptAnchorScroll = () => {
+      const hash = pendingHashRef.current;
+      if (!hash) return true;
+
+      const targetId = hash.substring(1);
       const element = document.getElementById(targetId);
 
       if (element) {
         requestAnimationFrame(() => {
           element.scrollIntoView({ behavior: 'instant', block: 'start' });
           hasScrolledRef.current = true;
-          pendingScrollRef.current = '';
+          pendingHashRef.current = '';
         });
         return true;
       }
@@ -80,53 +111,39 @@ export default function NavigationScroll() {
     };
 
     const waitForScrollUnlockAndScroll = () => {
-      // Check if any scroll locks are active
       if (scrollLockStatus.isAnyScrollLocked()) {
-        // Wait for scroll locks to be released
         const cleanup = scrollLockStatus.onScrollUnlocked(() => {
-          // Add small delay to ensure scroll restoration is complete
-          setTimeout(attemptScroll, 50);
+          setTimeout(attemptAnchorScroll, 50);
         });
         return cleanup;
       } else {
-        // No scroll locks active, attempt immediately
-        attemptScroll();
+        attemptAnchorScroll();
         return () => {};
       }
     };
 
-    // Only proceed if page is ready
-    if (!isPageReady) {
-      return;
-    }
-
-    // Try to scroll, waiting for scroll locks if needed
     let cleanup = waitForScrollUnlockAndScroll();
 
-    // If initial attempt failed (element not found), set up observers
-    if (pendingScrollRef.current && hasScrolledRef.current === false) {
-      const hash = pendingScrollRef.current;
+    // If target element not found yet, watch for it with MutationObserver
+    if (pendingHashRef.current && !hasScrolledRef.current) {
+      const hash = pendingHashRef.current;
       const targetId = hash.substring(1);
 
-      // Helper function to safely check for element within parent
       const containsTargetElement = (parentElement: Element) => {
         const targetElement = parentElement.ownerDocument.getElementById(targetId);
         return targetElement && parentElement.contains(targetElement);
       };
 
-      // Use MutationObserver to watch for the element being added to the DOM
       const observer = new MutationObserver((mutations) => {
         for (const mutation of mutations) {
           if (mutation.type === 'childList') {
-            const addedNodes = Array.from(mutation.addedNodes);
-            for (const node of addedNodes) {
+            for (const node of Array.from(mutation.addedNodes)) {
               if (node.nodeType === Node.ELEMENT_NODE) {
                 const element = node as Element;
-                // Check if the added element is our target or contains our target
                 if (element.id === targetId || containsTargetElement(element)) {
-                  cleanup(); // Clean up previous scroll unlock listener
+                  cleanup();
                   cleanup = waitForScrollUnlockAndScroll();
-                  if (!pendingScrollRef.current) {
+                  if (!pendingHashRef.current) {
                     observer.disconnect();
                     return;
                   }
@@ -137,16 +154,11 @@ export default function NavigationScroll() {
         }
       });
 
-      // Start observing DOM changes
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-      });
+      observer.observe(document.body, { childList: true, subtree: true });
 
-      // Also listen for window load as a fallback
       const handleLoad = () => {
-        if (pendingScrollRef.current) {
-          cleanup(); // Clean up previous scroll unlock listener
+        if (pendingHashRef.current) {
+          cleanup();
           cleanup = waitForScrollUnlockAndScroll();
         }
       };
@@ -155,12 +167,11 @@ export default function NavigationScroll() {
         window.addEventListener('load', handleLoad);
       }
 
-      // Cleanup timeout - stop trying after 10 seconds
       const timeout = setTimeout(() => {
         observer.disconnect();
         window.removeEventListener('load', handleLoad);
         cleanup();
-        pendingScrollRef.current = '';
+        pendingHashRef.current = '';
       }, 10000);
 
       return () => {
