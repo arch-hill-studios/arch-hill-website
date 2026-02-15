@@ -203,6 +203,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
                     sizeContext='full'
                     objectFit='contain'
                     className='w-auto h-auto max-w-60 min-[420px]:max-w-75'
+                    priority
                   />
                 ) : (
                   <span className='text-h3 text-brand-primary'>{organizationName}</span>

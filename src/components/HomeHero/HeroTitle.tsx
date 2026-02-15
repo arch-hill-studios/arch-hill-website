@@ -81,6 +81,7 @@ const HeroTitle = ({
               sizeContext='hero'
               objectFit='contain'
               className='w-full h-auto mx-auto drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)]'
+              priority
             />
           </div>
         )}
