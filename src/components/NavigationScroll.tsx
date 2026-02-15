@@ -13,6 +13,16 @@ export default function NavigationScroll() {
   const currentHashRef = useRef('');
   const pendingScrollRef = useRef<string>('');
 
+  // Prevent browser's native scroll restoration from interfering with
+  // our custom scroll management. Without this, Chrome mobile restores
+  // the previous scroll position asynchronously, overriding our scrollTo(0, 0)
+  // calls and causing pages to start at the wrong position (e.g. at the footer).
+  useEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+  }, []);
+
   useEffect(() => {
     // Update current hash and pending scroll whenever pathname changes
     currentHashRef.current = window.location.hash;
