@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 let lockCount = 0;
 let originalScrollY = 0;
 let isCurrentlyLocked = false;
+// Track the pathname when lock was first applied so we can detect navigation
+let lockedPathname = '';
 
 // Custom event to notify when all scroll locks are released
 const SCROLL_UNLOCK_EVENT = 'bodyScrollUnlocked';
@@ -11,6 +13,17 @@ const SCROLL_UNLOCK_EVENT = 'bodyScrollUnlocked';
 /**
  * Custom hook to lock/unlock body scroll with reference counting
  * Prevents page jumping when multiple components use scroll lock simultaneously
+ *
+ * Navigation-aware: when the pathname changes between lock and unlock (e.g. the
+ * user clicked a link in VerticalNav), the old scroll position is NOT restored
+ * because it's meaningless on the new page. NavigationScroll handles scrolling
+ * to the correct position instead.
+ *
+ * NOTE: This check only works for components that lock BEFORE navigation starts
+ * (e.g. VerticalNav, which locks when the menu opens). Components that lock
+ * DURING navigation (e.g. LoadingOverlay via loading.tsx) should NOT use this
+ * hook — see LoadingOverlay.tsx for the alternative approach.
+ *
  * @param isLocked - Whether to lock the body scroll
  */
 export const useBodyScrollLock = (isLocked: boolean) => {
@@ -20,8 +33,9 @@ export const useBodyScrollLock = (isLocked: boolean) => {
 
       // Only apply lock styles on first lock
       if (lockCount === 1 && !isCurrentlyLocked) {
-        // Store original scroll position only once
+        // Store original scroll position and pathname only once
         originalScrollY = window.scrollY;
+        lockedPathname = window.location.pathname;
         isCurrentlyLocked = true;
 
         // Calculate scrollbar width to prevent layout shift
@@ -42,21 +56,23 @@ export const useBodyScrollLock = (isLocked: boolean) => {
         if (lockCount === 0 && isCurrentlyLocked) {
           isCurrentlyLocked = false;
 
-          // Restore scroll position and styles
+          // Restore styles
           document.body.style.overflow = '';
           document.body.style.position = '';
           document.body.style.top = '';
           document.body.style.width = '';
           document.body.style.paddingRight = '';
 
-          // Use requestAnimationFrame to ensure DOM is ready for scroll restoration
-          requestAnimationFrame(() => {
+          // Only restore scroll position if we're still on the same page.
+          // If the user navigated (pathname changed), the old position is
+          // meaningless — NavigationScroll handles the new position.
+          const navigated = window.location.pathname !== lockedPathname;
+          if (!navigated) {
             window.scrollTo(0, originalScrollY);
+          }
 
-            // Dispatch custom event to notify that all scroll locks are released
-            // This allows other components (like NavigationScroll) to wait for full release
-            window.dispatchEvent(new CustomEvent(SCROLL_UNLOCK_EVENT));
-          });
+          // Notify listeners that all scroll locks are released
+          window.dispatchEvent(new CustomEvent(SCROLL_UNLOCK_EVENT));
         }
       };
     }

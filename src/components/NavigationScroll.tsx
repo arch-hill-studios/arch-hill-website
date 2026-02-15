@@ -5,6 +5,36 @@ import { usePathname } from 'next/navigation';
 import { usePageLoad } from '@/contexts/PageLoadContext';
 import { useScrollLockStatus } from '@/hooks/useBodyScrollLock';
 
+/**
+ * Scrolls to the top of the page and briefly guards against anything that
+ * might override the position shortly after — e.g. momentum/inertia scroll
+ * events that continue arriving after a fast flick, or browser scroll
+ * restoration on Chrome mobile.
+ */
+function scrollToTopWithGuard() {
+  window.scrollTo(0, 0);
+
+  let guardActive = true;
+
+  const correct = () => {
+    if (guardActive && window.scrollY !== 0) {
+      window.scrollTo(0, 0);
+    }
+  };
+
+  // rAF catches synchronous overrides before the browser paints
+  requestAnimationFrame(correct);
+
+  // Scroll listener catches async overrides (momentum scrolling)
+  window.addEventListener('scroll', correct, { passive: true });
+
+  // Auto-cleanup after a brief window
+  setTimeout(() => {
+    guardActive = false;
+    window.removeEventListener('scroll', correct);
+  }, 200);
+}
+
 export default function NavigationScroll() {
   const pathname = usePathname();
   const { isPageReady } = usePageLoad();
@@ -39,7 +69,7 @@ export default function NavigationScroll() {
 
         // Same pathname, no hash → scroll to top
         if (url.pathname === pathname && !url.hash) {
-          window.scrollTo({ top: 0, behavior: 'instant' });
+          scrollToTopWithGuard();
         }
       } catch {
         // Invalid URL, ignore
@@ -75,8 +105,8 @@ export default function NavigationScroll() {
     const hash = window.location.hash;
 
     if (!hash) {
-      // No hash: scroll to top immediately
-      window.scrollTo(0, 0);
+      // No hash: scroll to top immediately with guard against momentum
+      scrollToTopWithGuard();
       hasScrolledRef.current = true;
       pendingHashRef.current = '';
     } else {

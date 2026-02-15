@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useBodyScrollLock } from '@/hooks/useBodyScrollLock';
 
 interface LoadingOverlayProps {
   isLoading?: boolean;
@@ -11,7 +10,21 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ isLoading = false }) =>
   const [isVisible, setIsVisible] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
 
-  useBodyScrollLock(isLoading);
+  // Prevent scrolling during loading by setting overflow:hidden on <html>.
+  // We intentionally do NOT use useBodyScrollLock here because it captures
+  // the scroll position of the OLD page and restores it on the NEW page
+  // (the loading overlay mounts during navigation, after the URL has already
+  // changed, so the captured position is from the previous page and meaningless).
+  // Using <html> instead of <body> avoids conflicting with useBodyScrollLock's
+  // body-based scroll prevention used by VerticalNav and Modal.
+  useEffect(() => {
+    if (isLoading) {
+      document.documentElement.style.overflow = 'hidden';
+    }
+    return () => {
+      document.documentElement.style.overflow = '';
+    };
+  }, [isLoading]);
 
   useEffect(() => {
     if (isLoading) {
