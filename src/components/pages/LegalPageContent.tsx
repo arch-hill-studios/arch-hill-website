@@ -19,10 +19,17 @@ import {
   getOrganizationPhoneLink,
 } from '@/lib/organizationInfo';
 import PageSection from '@/components/Layout/PageSection';
-import type { PRIVACY_POLICY_QUERY_RESULT, TERMS_AND_CONDITIONS_QUERY_RESULT, PAGE_QUERY_RESULT } from '@/sanity/types';
+import type {
+  PRIVACY_POLICY_QUERY_RESULT,
+  TERMS_AND_CONDITIONS_QUERY_RESULT,
+  PAGE_QUERY_RESULT,
+} from '@/sanity/types';
 import type { PageBuilderData } from '@/actions';
+import { sitePaddingX } from '@/utils/spacingConstants';
 
-type LegalData = NonNullable<PRIVACY_POLICY_QUERY_RESULT> | NonNullable<TERMS_AND_CONDITIONS_QUERY_RESULT>;
+type LegalData =
+  | NonNullable<PRIVACY_POLICY_QUERY_RESULT>
+  | NonNullable<TERMS_AND_CONDITIONS_QUERY_RESULT>;
 
 interface LegalPageContentProps {
   legalData: LegalData | null;
@@ -32,7 +39,13 @@ interface LegalPageContentProps {
   contactQuestionText: string;
 }
 
-const LegalPageContent = ({ legalData, pageBuilderData, defaultTitle, urlPath, contactQuestionText }: LegalPageContentProps) => {
+const LegalPageContent = ({
+  legalData,
+  pageBuilderData,
+  defaultTitle,
+  urlPath,
+  contactQuestionText,
+}: LegalPageContentProps) => {
   const { seoMetaData, businessContactInfo } = pageBuilderData;
   const orgName = getOrganizationName(businessContactInfo);
   const email = getOrganizationEmail(businessContactInfo);
@@ -56,7 +69,12 @@ const LegalPageContent = ({ legalData, pageBuilderData, defaultTitle, urlPath, c
   // Generate Article structured data
   let articleSchema;
   if (seoMetaData && legalData._updatedAt) {
-    const organizationData = getOrganizationDataFromSeoMetaData(seoMetaData, baseUrl, null, businessContactInfo);
+    const organizationData = getOrganizationDataFromSeoMetaData(
+      seoMetaData,
+      baseUrl,
+      null,
+      businessContactInfo,
+    );
 
     articleSchema = generateArticleSchema({
       headline: legalData.title || defaultTitle,
@@ -95,7 +113,9 @@ const LegalPageContent = ({ legalData, pageBuilderData, defaultTitle, urlPath, c
 
       <Container textAlign='left'>
         {/* Page Content */}
-        {legalData.topText && <p className='font-bold mb-8'>{legalData.topText}</p>}
+        {legalData.topText && (
+          <p className={`font-bold my-8 ${sitePaddingX}`}>{legalData.topText}</p>
+        )}
         {legalData.content && (
           <PageBuilder
             content={legalData.content as NonNullable<PAGE_QUERY_RESULT>['content']}
