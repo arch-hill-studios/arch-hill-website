@@ -134,7 +134,7 @@ const Footer = ({
           <div className='flex flex-col items-center md:items-start text-center md:text-left md:col-span-2 lg:col-span-1 gap-4'>
             {/* Logo + Brand Text */}
             <Link
-              href='/#home'
+              href='/'
               className='flex items-center gap-2 transition-opacity duration-300'
               style={{
                 filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))',
