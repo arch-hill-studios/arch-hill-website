@@ -158,11 +158,11 @@
 
 - [x] :red_circle: **Rate limiting DISABLED on contact form** -- `src/app/api/contact/route.ts:28` has `ENABLE_RATE_LIMITING = false`. This allows unlimited form submissions, enabling spam, abuse, and potential cost escalation from Resend email API calls. **Enable before production.**
 - [x] :orange_circle: **Error response leaks internal details** -- `src/app/api/contact/route.ts:286-293` returns `details: errorMessage` which could expose internal error messages to attackers. Remove the `details` field from error responses in production.
-- [ ] :orange_circle: **In-memory rate limiting not suitable for serverless** -- Even when enabled, the Map-based rate limiter (`route.ts:34`) resets on each serverless function cold start. Consider Upstash Redis or Vercel KV for persistent rate limiting.
+- [x] ~~:orange_circle: **In-memory rate limiting not suitable for serverless** -- Even when enabled, the Map-based rate limiter (`route.ts:34`) resets on each serverless function cold start. Consider Upstash Redis or Vercel KV for persistent rate limiting.~~
 - [x] :green_circle: **Webhook signature verification** -- `src/app/api/revalidate/route.ts` uses `parseBody` with `SANITY_WEBHOOK_SECRET` for proper signature validation.
 - [x] :green_circle: **Input validation on contact form** -- Email regex validation, required field checks, honeypot bot detection all present.
 - [x] :green_circle: **Input sanitization** -- `sanitizeInput()` strips `<>` characters. Basic but functional for email content.
-- [ ] :yellow_circle: **Sanitization could be stronger** -- Current sanitization only strips `<>`. Consider a library like `DOMPurify` for more thorough sanitization, or at minimum strip common injection patterns.
+- [x] :yellow_circle: **Sanitization could be stronger** -- Current sanitization only strips `<>`. Consider a library like `DOMPurify` for more thorough sanitization, or at minimum strip common injection patterns.
 
 ### 2.4 Authentication & Draft Mode
 
