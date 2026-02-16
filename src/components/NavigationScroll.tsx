@@ -67,9 +67,17 @@ export default function NavigationScroll() {
         const url = new URL(href, window.location.origin);
         if (url.origin !== window.location.origin) return;
 
-        // Same pathname, no hash → scroll to top
         if (url.pathname === pathname && !url.hash) {
+          // Same pathname, no hash → scroll to top
           scrollToTopWithGuard();
+        } else if (url.pathname === pathname && url.hash && url.hash === window.location.hash) {
+          // Same pathname AND same hash already in URL → browser won't navigate,
+          // so manually scroll to the target element
+          const targetId = url.hash.substring(1);
+          const element = document.getElementById(targetId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         }
       } catch {
         // Invalid URL, ignore
