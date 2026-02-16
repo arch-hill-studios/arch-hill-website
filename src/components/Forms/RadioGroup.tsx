@@ -30,10 +30,15 @@ const RadioGroup = ({
 }: RadioGroupProps) => {
   return (
     <div>
-      <label htmlFor={id} className={formStyles.label.base}>
+      <label id={`${id}-label`} htmlFor={id} className={formStyles.label.base}>
         {label} {required && <span className={formStyles.label.required}>*</span>}
       </label>
-      <div className={formStyles.group.container}>
+      <div
+        role='group'
+        aria-labelledby={`${id}-label`}
+        aria-describedby={error ? `${id}-error` : undefined}
+        className={formStyles.group.container}
+      >
         {options.map((option) => (
           <label key={option.value} className={formStyles.option.container}>
             <input
@@ -47,7 +52,11 @@ const RadioGroup = ({
         ))}
       </div>
       {helperText && <p className={formStyles.helper.text}>{helperText}</p>}
-      {error && <p className={formStyles.error.text}>{error.message as string}</p>}
+      {error && (
+        <p id={`${id}-error`} className={formStyles.error.text}>
+          {error.message as string}
+        </p>
+      )}
     </div>
   );
 };

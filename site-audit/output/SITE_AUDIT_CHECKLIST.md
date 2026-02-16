@@ -158,7 +158,7 @@
 
 - [x] :red_circle: **Rate limiting DISABLED on contact form** -- `src/app/api/contact/route.ts:28` has `ENABLE_RATE_LIMITING = false`. This allows unlimited form submissions, enabling spam, abuse, and potential cost escalation from Resend email API calls. **Enable before production.**
 - [x] :orange_circle: **Error response leaks internal details** -- `src/app/api/contact/route.ts:286-293` returns `details: errorMessage` which could expose internal error messages to attackers. Remove the `details` field from error responses in production.
-- [x] ~~:orange_circle: **In-memory rate limiting not suitable for serverless** -- Even when enabled, the Map-based rate limiter (`route.ts:34`) resets on each serverless function cold start. Consider Upstash Redis or Vercel KV for persistent rate limiting.~~
+- [ ] ~~:orange_circle: **In-memory rate limiting not suitable for serverless** -- Even when enabled, the Map-based rate limiter (`route.ts:34`) resets on each serverless function cold start. Consider Upstash Redis or Vercel KV for persistent rate limiting.~~
 - [x] :green_circle: **Webhook signature verification** -- `src/app/api/revalidate/route.ts` uses `parseBody` with `SANITY_WEBHOOK_SECRET` for proper signature validation.
 - [x] :green_circle: **Input validation on contact form** -- Email regex validation, required field checks, honeypot bot detection all present.
 - [x] :green_circle: **Input sanitization** -- `sanitizeInput()` strips `<>` characters. Basic but functional for email content.
@@ -290,7 +290,7 @@
 
 ### 4.4 Form Accessibility
 
-- [ ] :red_circle: **Form error messages not linked to inputs** -- TextInput, TextArea, and other form components display error messages but do not connect them via `aria-describedby`. Error `<p>` elements need an `id`, and inputs need `aria-describedby={errorId}`. **WCAG 3.3.1 failure.**
+- [x] :red_circle: **Form error messages not linked to inputs** -- TextInput, TextArea, and other form components display error messages but do not connect them via `aria-describedby`. Error `<p>` elements need an `id`, and inputs need `aria-describedby={errorId}`. **WCAG 3.3.1 failure.**
 - [ ] :red_circle: **Form success/error alerts not announced** -- `src/components/Forms/ContactForm/ContactForm.tsx:176-180` and `194-199` show success/error messages in regular `<div>` elements without `role='alert'` or `aria-live`. Screen readers will not announce these status changes. **WCAG 4.1.3 failure.**
 - [ ] :red_circle: **Radio/Checkbox groups use invalid structure** -- `RadioGroup.tsx` and `CheckboxGroup.tsx` use `<label htmlFor={id}>` with the same `id` for multiple inputs, creating invalid HTML. Should use `<fieldset>` + `<legend>` pattern. **WCAG 1.3.1 failure.**
 - [x] :green_circle: **Labels present on all inputs** -- `htmlFor` paired with input `id` on text inputs.

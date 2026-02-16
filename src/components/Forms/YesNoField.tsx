@@ -23,11 +23,16 @@ const YesNoField = ({
 }: YesNoFieldProps) => {
   return (
     <div>
-      <label htmlFor={id} className={formStyles.label.base}>
+      <label id={`${id}-label`} htmlFor={id} className={formStyles.label.base}>
         {label} {required && <span className={formStyles.label.required}>*</span>}
       </label>
       {helperText && <p className={formStyles.helper.text}>{helperText}</p>}
-      <div className={formStyles.yesNo.container}>
+      <div
+        role='group'
+        aria-labelledby={`${id}-label`}
+        aria-describedby={error ? `${id}-error` : undefined}
+        className={formStyles.yesNo.container}
+      >
         <label className={formStyles.yesNo.option}>
           <input
             type='radio'
@@ -47,7 +52,11 @@ const YesNoField = ({
           <span className={formStyles.yesNo.label}>No</span>
         </label>
       </div>
-      {error && <p className={formStyles.error.text}>{error.message as string}</p>}
+      {error && (
+        <p id={`${id}-error`} className={formStyles.error.text}>
+          {error.message as string}
+        </p>
+      )}
     </div>
   );
 };
