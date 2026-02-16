@@ -46,7 +46,9 @@ const sharedSecurityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Remove X-Powered-By header to avoid exposing framework information
+  poweredByHeader: false,
+
   images: {
     remotePatterns: [
       {

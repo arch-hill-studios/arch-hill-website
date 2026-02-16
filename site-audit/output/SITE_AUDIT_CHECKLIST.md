@@ -142,10 +142,10 @@
 ### 2.1 Security Headers
 
 - [x] :red_circle: **No Content-Security-Policy (CSP) header** -- No CSP configured in `next.config.ts`, middleware, or response headers. This is the most impactful missing security header. Implement a baseline CSP allowing `'self'`, Sanity CDN, YouTube, and Google Maps.
-- [ ] :red_circle: **No X-Content-Type-Options header** -- Missing `nosniff` header. Prevents MIME-type sniffing attacks. Add `X-Content-Type-Options: nosniff`.
-- [ ] :red_circle: **No X-Frame-Options header** -- Site can be embedded in iframes by any domain, enabling clickjacking attacks. Add `X-Frame-Options: SAMEORIGIN` or use CSP `frame-ancestors`.
-- [ ] :red_circle: **No Referrer-Policy header** -- No control over what referrer information is sent. Add `Referrer-Policy: strict-origin-when-cross-origin`.
-- [ ] :red_circle: **No Permissions-Policy header** -- No restriction on browser feature access (camera, microphone, geolocation). Add `Permissions-Policy: camera=(), microphone=(), geolocation=()`.
+- [x] :red_circle: **No X-Content-Type-Options header** -- Missing `nosniff` header. Prevents MIME-type sniffing attacks. Add `X-Content-Type-Options: nosniff`.
+- [x] :red_circle: **No X-Frame-Options header** -- Site can be embedded in iframes by any domain, enabling clickjacking attacks. Add `X-Frame-Options: SAMEORIGIN` or use CSP `frame-ancestors`.
+- [x] :red_circle: **No Referrer-Policy header** -- No control over what referrer information is sent. Add `Referrer-Policy: strict-origin-when-cross-origin`.
+- [x] :red_circle: **No Permissions-Policy header** -- No restriction on browser feature access (camera, microphone, geolocation). Add `Permissions-Policy: camera=(), microphone=(), geolocation=()`.
 - [x] :green_circle: **HSTS present** -- `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload` (provided by Vercel).
 - [ ] :orange_circle: **`X-Powered-By: Next.js` exposed on Studio** -- The `/studio` route returns `X-Powered-By: Next.js` header, leaking framework information. Set `poweredByHeader: false` in `next.config.ts`.
 - [ ] :yellow_circle: **Missing Cross-Origin headers** -- Consider adding `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Resource-Policy: same-origin` for enhanced isolation.
