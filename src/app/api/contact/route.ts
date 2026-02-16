@@ -280,14 +280,16 @@ export async function POST(request: Request) {
     });
     console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
-    const errorMessage =
-      error instanceof Error ? error.message : 'Failed to send message. Please try again later.';
-
     return NextResponse.json(
       {
         error:
           'I encountered an issue sending your message. Please try contacting me directly via email or phone.',
-        details: errorMessage,
+        ...(process.env.NEXT_PUBLIC_ENV !== 'production' && {
+          details:
+            error instanceof Error
+              ? error.message
+              : 'Failed to send message. Please try again later.',
+        }),
       },
       { status: 500 },
     );
