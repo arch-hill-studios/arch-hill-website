@@ -114,7 +114,7 @@ const LegalPageContent = ({
       <Container textAlign='left'>
         {/* Page Content */}
         {legalData.topText && (
-          <p className={`font-bold my-8 ${sitePaddingX}`}>{legalData.topText}</p>
+          <p className={`mx-auto font-bold my-8 ${sitePaddingX}`}>{legalData.topText}</p>
         )}
         {legalData.content && (
           <PageBuilder
