@@ -55,9 +55,20 @@ function validateEmail(email: string): boolean {
   return emailRegex.test(email);
 }
 
-// Sanitize input to prevent injection attacks
+// Sanitize input to prevent injection attacks (HTML email context)
 function sanitizeInput(input: string): string {
-  return input.replace(/[<>]/g, '').trim();
+  return (
+    input
+      // Strip HTML tags (including malformed)
+      .replace(/<[^>]*>?/g, '')
+      // Remove javascript: / data: URI schemes (case-insensitive, ignores whitespace tricks)
+      .replace(/\b(javascript|data)\s*:/gi, '')
+      // Encode ampersands to prevent HTML entity abuse (e.g. &lt;script&gt;)
+      .replace(/&/g, '&amp;')
+      // Remove null bytes
+      .replace(/\0/g, '')
+      .trim()
+  );
 }
 
 // Check rate limit for IP address
