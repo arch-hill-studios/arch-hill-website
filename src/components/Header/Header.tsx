@@ -168,7 +168,7 @@ const Header = ({ headerData, organizationName, businessContactInfo }: HeaderPro
           <div className='relative h-full flex items-center justify-between gap-8'>
             {/* Logo + Brand Text */}
             <Link
-              href='/#home'
+              href='/'
               onClick={closeMenu}
               className={`flex items-center gap-2 xl:absolute ${
                 transitionsReady ? 'transition-[opacity,translate] duration-400 ease-in-out' : ''
