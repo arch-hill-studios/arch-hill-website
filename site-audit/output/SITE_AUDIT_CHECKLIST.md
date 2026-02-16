@@ -148,7 +148,7 @@
 - [x] :red_circle: **No Permissions-Policy header** -- No restriction on browser feature access (camera, microphone, geolocation). Add `Permissions-Policy: camera=(), microphone=(), geolocation=()`.
 - [x] :green_circle: **HSTS present** -- `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload` (provided by Vercel).
 - [x] :orange_circle: **`X-Powered-By: Next.js` exposed on Studio** -- The `/studio` route returns `X-Powered-By: Next.js` header, leaking framework information. Set `poweredByHeader: false` in `next.config.ts`.
-- [ ] :yellow_circle: **Missing Cross-Origin headers** -- Consider adding `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Resource-Policy: same-origin` for enhanced isolation.
+- [x] :yellow_circle: **Missing Cross-Origin headers** -- Consider adding `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Resource-Policy: same-origin` for enhanced isolation.
 
 ### 2.2 CORS
 
