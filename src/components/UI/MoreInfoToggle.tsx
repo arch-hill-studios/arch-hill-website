@@ -18,9 +18,10 @@ const MoreInfoToggle = ({
   alwaysCentered = false,
 }: MoreInfoToggleProps) => {
   return (
-    <div
+    <button
+      type='button'
       onClick={() => setIsExpanded(!isExpanded)}
-      className={`${showOnDesktop ? 'flex' : 'lg:hidden flex'} justify-center ${alwaysCentered ? '' : ' md:justify-start'} items-center gap-2 hover:font-semibold mt-2 cursor-pointer`}
+      className={`${showOnDesktop ? 'flex' : 'lg:hidden flex'} justify-center ${alwaysCentered ? '' : ' md:justify-start'} items-center gap-2 hover:font-semibold mt-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded`}
       aria-expanded={isExpanded}
       aria-label={isExpanded ? 'Show less information' : 'Show more information'}>
       <span className='inline-block text-brand-primary'>
@@ -39,7 +40,7 @@ const MoreInfoToggle = ({
           />
         </svg>
       </span>
-    </div>
+    </button>
   );
 };
 

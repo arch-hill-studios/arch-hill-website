@@ -22,7 +22,7 @@ const MenuButton = ({
   return (
     <button
       onClick={onClick}
-      className={`flex ${desktopHiddenClass} flex-col justify-center items-center w-8 h-8 cursor-pointer focus:outline-none group ${className}`}
+      className={`flex ${desktopHiddenClass} flex-col justify-center items-center w-8 h-8 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded group ${className}`}
       aria-label={`${isMenuOpen ? 'Close' : 'Open'} navigation menu`}
       aria-expanded={isMenuOpen}
       aria-controls={ariaControls}>

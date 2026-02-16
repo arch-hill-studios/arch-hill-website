@@ -291,7 +291,7 @@
 ### 4.4 Form Accessibility
 
 - [x] :red_circle: **Form error messages not linked to inputs** -- TextInput, TextArea, and other form components display error messages but do not connect them via `aria-describedby`. Error `<p>` elements need an `id`, and inputs need `aria-describedby={errorId}`. **WCAG 3.3.1 failure.**
-- [ \x] :red_circle: **Form success/error alerts not announced** -- `src/components/Forms/ContactForm/ContactForm.tsx:176-180` and `194-199` show success/error messages in regular `<div>` elements without `role='alert'` or `aria-live`. Screen readers will not announce these status changes. **WCAG 4.1.3 failure.**
+- [x] :red_circle: **Form success/error alerts not announced** -- `src/components/Forms/ContactForm/ContactForm.tsx:176-180` and `194-199` show success/error messages in regular `<div>` elements without `role='alert'` or `aria-live`. Screen readers will not announce these status changes. **WCAG 4.1.3 failure.**
 - [ ] :red_circle: **Radio/Checkbox groups use invalid structure** -- `RadioGroup.tsx` and `CheckboxGroup.tsx` use `<label htmlFor={id}>` with the same `id` for multiple inputs, creating invalid HTML. Should use `<fieldset>` + `<legend>` pattern. **WCAG 1.3.1 failure.**
 - [x] :green_circle: **Labels present on all inputs** -- `htmlFor` paired with input `id` on text inputs.
 - [x] :green_circle: **`aria-invalid` on error state** -- Form inputs correctly set `aria-invalid='true'` when validation fails.
@@ -300,13 +300,13 @@
 
 ### 4.5 Keyboard Navigation
 
-- [ ] :red_circle: **MoreInfoToggle not keyboard accessible** -- `src/components/UI/MoreInfoToggle.tsx:22-25` uses `<div onClick={...}>` without keyboard support. Missing `role='button'`, `tabIndex={0}`, and `onKeyDown` handler for Enter/Space. **WCAG 2.1.1 failure.**
-- [ ] :orange_circle: **Menu button has no visible focus indicator** -- `src/components/Header/MenuButton.tsx:25` uses `focus:outline-none` with no replacement focus ring. Add `focus:ring-2 focus:ring-brand-primary`. **WCAG 2.4.7 failure.**
+- [x] :red_circle: **MoreInfoToggle not keyboard accessible** -- `src/components/UI/MoreInfoToggle.tsx:22-25` uses `<div onClick={...}>` without keyboard support. Missing `role='button'`, `tabIndex={0}`, and `onKeyDown` handler for Enter/Space. **WCAG 2.1.1 failure.**
+- [x] :orange_circle: **Menu button has no visible focus indicator** -- `src/components/Header/MenuButton.tsx:25` uses `focus:outline-none` with no replacement focus ring. Add `focus:ring-2 focus:ring-brand-primary`. **WCAG 2.4.7 failure.**
 - [x] :green_circle: **Focus trapping in modals** -- `useFocusTrap` hook properly cycles Tab/Shift+Tab within modals and navigation.
 - [x] :green_circle: **Escape key closes overlays** -- Menu, modal, and navigation all respond to Escape key.
 - [x] :green_circle: **Focus restoration** -- Focus returns to trigger element when overlays close.
 - [x] :green_circle: **Body scroll lock with reference counting** -- Prevents conflicts between multiple overlays.
-- [ ] :yellow_circle: **Image gallery modal missing arrow key navigation** -- Previous/Next buttons are keyboard accessible via Tab, but arrow keys would improve the experience.
+- [x] :yellow_circle: **Image gallery modal missing arrow key navigation** -- Previous/Next buttons are keyboard accessible via Tab, but arrow keys would improve the experience.
 
 ### 4.6 Color Contrast
 
