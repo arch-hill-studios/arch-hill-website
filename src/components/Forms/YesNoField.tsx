@@ -22,17 +22,12 @@ const YesNoField = ({
   validation = {},
 }: YesNoFieldProps) => {
   return (
-    <div>
-      <label id={`${id}-label`} htmlFor={id} className={formStyles.label.base}>
+    <fieldset className='border-0 m-0 p-0' aria-describedby={error ? `${id}-error` : undefined}>
+      <legend className={formStyles.label.base}>
         {label} {required && <span className={formStyles.label.required}>*</span>}
-      </label>
+      </legend>
       {helperText && <p className={formStyles.helper.text}>{helperText}</p>}
-      <div
-        role='group'
-        aria-labelledby={`${id}-label`}
-        aria-describedby={error ? `${id}-error` : undefined}
-        className={formStyles.yesNo.container}
-      >
+      <div className={formStyles.yesNo.container}>
         <label className={formStyles.yesNo.option}>
           <input
             type='radio'
@@ -57,7 +52,7 @@ const YesNoField = ({
           {error.message as string}
         </p>
       )}
-    </div>
+    </fieldset>
   );
 };
 

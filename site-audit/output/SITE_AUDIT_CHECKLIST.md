@@ -291,7 +291,7 @@
 ### 4.4 Form Accessibility
 
 - [x] :red_circle: **Form error messages not linked to inputs** -- TextInput, TextArea, and other form components display error messages but do not connect them via `aria-describedby`. Error `<p>` elements need an `id`, and inputs need `aria-describedby={errorId}`. **WCAG 3.3.1 failure.**
-- [ ] :red_circle: **Form success/error alerts not announced** -- `src/components/Forms/ContactForm/ContactForm.tsx:176-180` and `194-199` show success/error messages in regular `<div>` elements without `role='alert'` or `aria-live`. Screen readers will not announce these status changes. **WCAG 4.1.3 failure.**
+- [ \x] :red_circle: **Form success/error alerts not announced** -- `src/components/Forms/ContactForm/ContactForm.tsx:176-180` and `194-199` show success/error messages in regular `<div>` elements without `role='alert'` or `aria-live`. Screen readers will not announce these status changes. **WCAG 4.1.3 failure.**
 - [ ] :red_circle: **Radio/Checkbox groups use invalid structure** -- `RadioGroup.tsx` and `CheckboxGroup.tsx` use `<label htmlFor={id}>` with the same `id` for multiple inputs, creating invalid HTML. Should use `<fieldset>` + `<legend>` pattern. **WCAG 1.3.1 failure.**
 - [x] :green_circle: **Labels present on all inputs** -- `htmlFor` paired with input `id` on text inputs.
 - [x] :green_circle: **`aria-invalid` on error state** -- Form inputs correctly set `aria-invalid='true'` when validation fails.

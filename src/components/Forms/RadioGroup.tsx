@@ -29,16 +29,11 @@ const RadioGroup = ({
   validation = {},
 }: RadioGroupProps) => {
   return (
-    <div>
-      <label id={`${id}-label`} htmlFor={id} className={formStyles.label.base}>
+    <fieldset className='border-0 m-0 p-0' aria-describedby={error ? `${id}-error` : undefined}>
+      <legend className={formStyles.label.base}>
         {label} {required && <span className={formStyles.label.required}>*</span>}
-      </label>
-      <div
-        role='group'
-        aria-labelledby={`${id}-label`}
-        aria-describedby={error ? `${id}-error` : undefined}
-        className={formStyles.group.container}
-      >
+      </legend>
+      <div className={formStyles.group.container}>
         {options.map((option) => (
           <label key={option.value} className={formStyles.option.container}>
             <input
@@ -57,7 +52,7 @@ const RadioGroup = ({
           {error.message as string}
         </p>
       )}
-    </div>
+    </fieldset>
   );
 };
 
