@@ -9,13 +9,13 @@
 
 ## Severity Legend
 
-| Symbol | Meaning |
-|--------|---------|
-| :red_circle: | **CRITICAL** -- Must fix before production launch |
+| Symbol          | Meaning                                                |
+| --------------- | ------------------------------------------------------ |
+| :red_circle:    | **CRITICAL** -- Must fix before production launch      |
 | :orange_circle: | **HIGH** -- Fix soon after launch / significant impact |
-| :yellow_circle: | **MEDIUM** -- Should fix within first month |
-| :white_circle: | **LOW** -- Best practice / nice-to-have |
-| :green_circle: | **PASS** -- No action needed |
+| :yellow_circle: | **MEDIUM** -- Should fix within first month            |
+| :white_circle:  | **LOW** -- Best practice / nice-to-have                |
+| :green_circle:  | **PASS** -- No action needed                           |
 
 ---
 
@@ -141,7 +141,7 @@
 
 ### 2.1 Security Headers
 
-- [ ] :red_circle: **No Content-Security-Policy (CSP) header** -- No CSP configured in `next.config.ts`, middleware, or response headers. This is the most impactful missing security header. Implement a baseline CSP allowing `'self'`, Sanity CDN, YouTube, and Google Maps.
+- [x] :red_circle: **No Content-Security-Policy (CSP) header** -- No CSP configured in `next.config.ts`, middleware, or response headers. This is the most impactful missing security header. Implement a baseline CSP allowing `'self'`, Sanity CDN, YouTube, and Google Maps.
 - [ ] :red_circle: **No X-Content-Type-Options header** -- Missing `nosniff` header. Prevents MIME-type sniffing attacks. Add `X-Content-Type-Options: nosniff`.
 - [ ] :red_circle: **No X-Frame-Options header** -- Site can be embedded in iframes by any domain, enabling clickjacking attacks. Add `X-Frame-Options: SAMEORIGIN` or use CSP `frame-ancestors`.
 - [ ] :red_circle: **No Referrer-Policy header** -- No control over what referrer information is sent. Add `Referrer-Policy: strict-origin-when-cross-origin`.
@@ -174,8 +174,8 @@
 
 - [x] :green_circle: **No hardcoded secrets in codebase** -- All sensitive values use environment variables.
 - [x] :green_circle: **`.env` files not committed** -- `.gitignore` properly excludes env files.
-- [x] :green_circle: **NEXT_PUBLIC_ variables appropriately used** -- Only non-sensitive values (base URL, Sanity project ID/dataset, environment name) are prefixed with `NEXT_PUBLIC_`.
-- [ ] :yellow_circle: **`NEXT_PUBLIC_CONTACT_EMAIL` could be server-only** -- Contact email is used in `src/app/api/contact/route.ts` (server-side only) but uses `NEXT_PUBLIC_` prefix, exposing it to the client bundle unnecessarily.
+- [x] :green*circle: \*\*NEXT_PUBLIC* variables appropriately used\*\* -- Only non-sensitive values (base URL, Sanity project ID/dataset, environment name) are prefixed with `NEXT_PUBLIC_`.
+- [ ] :yellow*circle: **`NEXT_PUBLIC_CONTACT_EMAIL` could be server-only** -- Contact email is used in `src/app/api/contact/route.ts` (server-side only) but uses `NEXT_PUBLIC*` prefix, exposing it to the client bundle unnecessarily.
 
 ### 2.6 XSS Prevention
 
@@ -362,77 +362,77 @@
 
 ### :red_circle: CRITICAL -- Fix Before Production Launch
 
-| # | Issue | Category | Location |
-|---|-------|----------|----------|
-| 1 | Verify `NEXT_PUBLIC_ENV=production` in production Vercel env | SEO | Vercel Dashboard |
-| 2 | Replace production domain placeholder or set `NEXT_PUBLIC_BASE_URL` | SEO | `src/lib/constants.ts:12` / Vercel env |
-| 3 | Add security headers (CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy) | Security | `next.config.ts` headers config |
-| 4 | Enable rate limiting on contact form | Security | `src/app/api/contact/route.ts:28` |
-| 5 | Fix form `aria-describedby` for error messages | Accessibility | All form components |
-| 6 | Add `role='alert'` to form success/error messages | Accessibility | `ContactForm.tsx:176,194` |
-| 7 | Fix MoreInfoToggle keyboard accessibility | Accessibility | `MoreInfoToggle.tsx:21-26` |
-| 8 | Fix Radio/Checkbox group HTML structure | Accessibility | `RadioGroup.tsx`, `CheckboxGroup.tsx` |
-| 9 | Fix muted text color contrast | Accessibility | `globals.css` / component styles |
+| #   | Issue                                                                                                    | Category      | Location                               |
+| --- | -------------------------------------------------------------------------------------------------------- | ------------- | -------------------------------------- |
+| 1   | Verify `NEXT_PUBLIC_ENV=production` in production Vercel env                                             | SEO           | Vercel Dashboard                       |
+| 2   | Replace production domain placeholder or set `NEXT_PUBLIC_BASE_URL`                                      | SEO           | `src/lib/constants.ts:12` / Vercel env |
+| 3   | Add security headers (CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy) | Security      | `next.config.ts` headers config        |
+| 4   | Enable rate limiting on contact form                                                                     | Security      | `src/app/api/contact/route.ts:28`      |
+| 5   | Fix form `aria-describedby` for error messages                                                           | Accessibility | All form components                    |
+| 6   | Add `role='alert'` to form success/error messages                                                        | Accessibility | `ContactForm.tsx:176,194`              |
+| 7   | Fix MoreInfoToggle keyboard accessibility                                                                | Accessibility | `MoreInfoToggle.tsx:21-26`             |
+| 8   | Fix Radio/Checkbox group HTML structure                                                                  | Accessibility | `RadioGroup.tsx`, `CheckboxGroup.tsx`  |
+| 9   | Fix muted text color contrast                                                                            | Accessibility | `globals.css` / component styles       |
 
 ### :orange_circle: HIGH -- Fix Within First Week
 
-| # | Issue | Category | Location |
-|---|-------|----------|----------|
-| 10 | Fix Image block alt text (use CMS alt field) | SEO | `src/components/_blocks/Image.tsx:99` |
-| 11 | Re-enable visual breadcrumb navigation | SEO | `src/components/UI/Breadcrumb.tsx:16` |
-| 12 | Set up analytics (GA4, GSC, CWV monitoring) | SEO | Frontend code / external services |
-| 13 | Remove error details from contact API response | Security | `src/app/api/contact/route.ts:291` |
-| 14 | Run `npm audit` and fix vulnerabilities | Security | Terminal |
-| 15 | Optimize background image in root layout | Performance | `src/app/layout.tsx:96` |
-| 16 | Add bundle analyzer | Performance | `next.config.ts` / dev dependencies |
-| 17 | Consolidate react-icons imports | Performance | Multiple component files |
-| 18 | Add focus ring to menu button | Accessibility | `MenuButton.tsx:25` |
-| 19 | Verify footer icon links have accessible names | Accessibility | `Footer.tsx` |
-| 20 | Fix YouTube video title | Accessibility | `YouTubeVideo.tsx:41` |
-| 21 | Disable `poweredByHeader` in next.config | Security | `next.config.ts` |
-| 22 | Fix secondary color contrast on light backgrounds | Accessibility | Component styles |
+| #   | Issue                                             | Category      | Location                              |
+| --- | ------------------------------------------------- | ------------- | ------------------------------------- |
+| 10  | Fix Image block alt text (use CMS alt field)      | SEO           | `src/components/_blocks/Image.tsx:99` |
+| 11  | Re-enable visual breadcrumb navigation            | SEO           | `src/components/UI/Breadcrumb.tsx:16` |
+| 12  | Set up analytics (GA4, GSC, CWV monitoring)       | SEO           | Frontend code / external services     |
+| 13  | Remove error details from contact API response    | Security      | `src/app/api/contact/route.ts:291`    |
+| 14  | Run `npm audit` and fix vulnerabilities           | Security      | Terminal                              |
+| 15  | Optimize background image in root layout          | Performance   | `src/app/layout.tsx:96`               |
+| 16  | Add bundle analyzer                               | Performance   | `next.config.ts` / dev dependencies   |
+| 17  | Consolidate react-icons imports                   | Performance   | Multiple component files              |
+| 18  | Add focus ring to menu button                     | Accessibility | `MenuButton.tsx:25`                   |
+| 19  | Verify footer icon links have accessible names    | Accessibility | `Footer.tsx`                          |
+| 20  | Fix YouTube video title                           | Accessibility | `YouTubeVideo.tsx:41`                 |
+| 21  | Disable `poweredByHeader` in next.config          | Security      | `next.config.ts`                      |
+| 22  | Fix secondary color contrast on light backgrounds | Accessibility | Component styles                      |
 
 ### :yellow_circle: MEDIUM -- Fix Within First Month
 
-| # | Issue | Category | Location |
-|---|-------|----------|----------|
-| 23 | Add `lastmod` to homepage and FAQ in sitemap | SEO | `sitemap.xml/route.ts:28-29` |
-| 24 | Write unique meta descriptions for legal pages | SEO | CMS / metadata generation |
-| 25 | Add MusicVenue/Service structured data schemas | SEO | `src/lib/structuredData.ts` |
-| 26 | Implement persistent rate limiting (Upstash/Redis) | Security | `src/app/api/contact/route.ts` |
-| 27 | Add CSRF protection to contact form | Security | `ContactForm.tsx` / API route |
-| 28 | Enable AVIF image format | Performance | `next.config.ts` |
-| 29 | Pause off-screen carousels/slideshows | Performance | `HeroImages.tsx`, `ServiceImageSlideshow.tsx` |
-| 30 | Add skeleton screens for page loads | Performance | Loading components |
-| 31 | Add preconnect hints for YouTube/Maps | Performance | `src/app/layout.tsx` |
-| 32 | Increase form input focus ring to `ring-2` | Accessibility | `formStyles.ts` |
-| 33 | Add hero video accessibility attributes | Accessibility | `HeroVideo.tsx` |
-| 34 | Increase menu button touch target size | Accessibility | `MenuButton.tsx` |
-| 35 | Rename `NEXT_PUBLIC_CONTACT_EMAIL` to server-only | Security | Env vars / contact route |
-| 36 | Fix hero video preload strategy | Performance | `HeroVideo.tsx:64` |
-| 37 | Unify CSS constants (header height, brand colors) | Performance | Multiple files |
-| 38 | Add image gallery arrow key navigation | Accessibility | `ImageGalleryModal.tsx` |
-| 39 | Check placeholder text contrast ratios | Accessibility | Form components |
+| #   | Issue                                              | Category      | Location                                      |
+| --- | -------------------------------------------------- | ------------- | --------------------------------------------- |
+| 23  | Add `lastmod` to homepage and FAQ in sitemap       | SEO           | `sitemap.xml/route.ts:28-29`                  |
+| 24  | Write unique meta descriptions for legal pages     | SEO           | CMS / metadata generation                     |
+| 25  | Add MusicVenue/Service structured data schemas     | SEO           | `src/lib/structuredData.ts`                   |
+| 26  | Implement persistent rate limiting (Upstash/Redis) | Security      | `src/app/api/contact/route.ts`                |
+| 27  | Add CSRF protection to contact form                | Security      | `ContactForm.tsx` / API route                 |
+| 28  | Enable AVIF image format                           | Performance   | `next.config.ts`                              |
+| 29  | Pause off-screen carousels/slideshows              | Performance   | `HeroImages.tsx`, `ServiceImageSlideshow.tsx` |
+| 30  | Add skeleton screens for page loads                | Performance   | Loading components                            |
+| 31  | Add preconnect hints for YouTube/Maps              | Performance   | `src/app/layout.tsx`                          |
+| 32  | Increase form input focus ring to `ring-2`         | Accessibility | `formStyles.ts`                               |
+| 33  | Add hero video accessibility attributes            | Accessibility | `HeroVideo.tsx`                               |
+| 34  | Increase menu button touch target size             | Accessibility | `MenuButton.tsx`                              |
+| 35  | Rename `NEXT_PUBLIC_CONTACT_EMAIL` to server-only  | Security      | Env vars / contact route                      |
+| 36  | Fix hero video preload strategy                    | Performance   | `HeroVideo.tsx:64`                            |
+| 37  | Unify CSS constants (header height, brand colors)  | Performance   | Multiple files                                |
+| 38  | Add image gallery arrow key navigation             | Accessibility | `ImageGalleryModal.tsx`                       |
+| 39  | Check placeholder text contrast ratios             | Accessibility | Form components                               |
 
 ### :white_circle: LOW -- Best Practice / Refinement
 
-| # | Issue | Category | Location |
-|---|-------|----------|----------|
-| 40 | Add blog post content type | SEO | Schema, actions, sitemap |
-| 41 | Create "Areas We Serve" page | SEO | New page |
-| 42 | Add ProfilePage schema to About page | SEO | `structuredData.ts` |
-| 43 | Build content freshness strategy / calendar | SEO | Process |
-| 44 | Implement AI Overview optimizations | SEO | Content structure |
-| 45 | Add Speculation Rules API for prefetching | Performance | Root layout |
-| 46 | Implement View Transitions API | Performance | Root layout / CSS |
-| 47 | Implement shared IntersectionObserver for animations | Performance | `AnimateIn.tsx` |
-| 48 | Wrap UnifiedImage with React.memo() | Performance | `UnifiedImage.tsx` |
-| 49 | Convert ContentWrapper/ResponsiveWrapper to server components | Performance | Component files |
-| 50 | Add Crawl-delay to robots.txt | SEO | `robots.txt/route.ts` |
-| 51 | Image sitemap for gallery content | SEO | `sitemap.xml/route.ts` |
-| 52 | Cross-Origin Isolation headers | Security | `next.config.ts` |
-| 53 | Add SRI for any external CDN resources | Security | Layout / external scripts |
-| 54 | Validate all structured data with Rich Results Test | SEO | External tool |
+| #   | Issue                                                         | Category    | Location                  |
+| --- | ------------------------------------------------------------- | ----------- | ------------------------- |
+| 40  | Add blog post content type                                    | SEO         | Schema, actions, sitemap  |
+| 41  | Create "Areas We Serve" page                                  | SEO         | New page                  |
+| 42  | Add ProfilePage schema to About page                          | SEO         | `structuredData.ts`       |
+| 43  | Build content freshness strategy / calendar                   | SEO         | Process                   |
+| 44  | Implement AI Overview optimizations                           | SEO         | Content structure         |
+| 45  | Add Speculation Rules API for prefetching                     | Performance | Root layout               |
+| 46  | Implement View Transitions API                                | Performance | Root layout / CSS         |
+| 47  | Implement shared IntersectionObserver for animations          | Performance | `AnimateIn.tsx`           |
+| 48  | Wrap UnifiedImage with React.memo()                           | Performance | `UnifiedImage.tsx`        |
+| 49  | Convert ContentWrapper/ResponsiveWrapper to server components | Performance | Component files           |
+| 50  | Add Crawl-delay to robots.txt                                 | SEO         | `robots.txt/route.ts`     |
+| 51  | Image sitemap for gallery content                             | SEO         | `sitemap.xml/route.ts`    |
+| 52  | Cross-Origin Isolation headers                                | Security    | `next.config.ts`          |
+| 53  | Add SRI for any external CDN resources                        | Security    | Layout / external scripts |
+| 54  | Validate all structured data with Rich Results Test           | SEO         | External tool             |
 
 ---
 
@@ -441,6 +441,7 @@
 The following aspects of the site are well-implemented and should be maintained:
 
 **SEO:**
+
 - Comprehensive structured data (Organization, LocalBusiness, WebSite, Article, BreadcrumbList, FAQPage, ImageObject)
 - Environment-aware noindex/nofollow gating
 - Smart canonical URL generation with trailing slash consistency
@@ -449,6 +450,7 @@ The following aspects of the site are well-implemented and should be maintained:
 - Proper font loading with `next/font/google` and `display: swap`
 
 **Security:**
+
 - Sanity webhook signature verification
 - Server-only Sanity tokens
 - No hardcoded secrets
@@ -457,6 +459,7 @@ The following aspects of the site are well-implemented and should be maintained:
 - Draft mode properly gated
 
 **Performance:**
+
 - Server-first architecture (server components by default)
 - Tag-based ISR revalidation with webhook support
 - Critical CSS inlining for LCP optimization
@@ -468,6 +471,7 @@ The following aspects of the site are well-implemented and should be maintained:
 - DNS prefetch and preconnect for Sanity CDN
 
 **Accessibility:**
+
 - Skip-to-content link with visible focus state
 - Semantic HTML structure (header, main, footer, nav)
 - Focus trapping in modals with focus restoration
