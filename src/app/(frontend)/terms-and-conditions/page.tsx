@@ -1,8 +1,5 @@
 import { getTermsAndConditions, getPageBuilderData } from '@/actions';
-import {
-  generateMetadata as generatePageMetadata,
-  generateCanonicalUrl,
-} from '@/lib/metadata';
+import { generateMetadata as generatePageMetadata, generateCanonicalUrl } from '@/lib/metadata';
 import { getOrganizationName } from '@/lib/organizationInfo';
 import LegalPageContent from '@/components/pages/LegalPageContent';
 
@@ -18,7 +15,7 @@ export async function generateMetadata() {
   if (!seoMetaData) {
     return {
       title: `Terms & Conditions | ${orgName}`,
-      description: 'Terms and conditions for using my website and services',
+      description: 'Terms and conditions for using our website and services',
     };
   }
 
@@ -27,7 +24,7 @@ export async function generateMetadata() {
   return generatePageMetadata({
     title,
     description:
-      seoMetaData.siteDescription || 'Terms and conditions for using my website and services',
+      seoMetaData.siteDescription || 'Terms and conditions for using our website and services',
     seoMetaData,
     businessContactInfo,
     canonicalUrl: generateCanonicalUrl('/terms-and-conditions'),

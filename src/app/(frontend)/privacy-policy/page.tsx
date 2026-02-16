@@ -1,8 +1,5 @@
 import { getPrivacyPolicy, getPageBuilderData } from '@/actions';
-import {
-  generateMetadata as generatePageMetadata,
-  generateCanonicalUrl,
-} from '@/lib/metadata';
+import { generateMetadata as generatePageMetadata, generateCanonicalUrl } from '@/lib/metadata';
 import { getOrganizationName } from '@/lib/organizationInfo';
 import LegalPageContent from '@/components/pages/LegalPageContent';
 
@@ -18,7 +15,7 @@ export async function generateMetadata() {
   if (!seoMetaData) {
     return {
       title: `Privacy Policy | ${orgName}`,
-      description: 'Privacy policy for my website and how I handle your data',
+      description: 'Privacy policy for our website and how I handle your data',
     };
   }
 
@@ -27,7 +24,7 @@ export async function generateMetadata() {
   return generatePageMetadata({
     title,
     description:
-      seoMetaData.siteDescription || 'Privacy policy for my website and how I handle your data',
+      seoMetaData.siteDescription || 'Privacy policy for our website and how I handle your data',
     seoMetaData,
     businessContactInfo,
     canonicalUrl: generateCanonicalUrl('/privacy-policy'),

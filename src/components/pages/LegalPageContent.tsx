@@ -129,7 +129,7 @@ const LegalPageContent = ({
         {(email || phone) && (
           <PageSection title='Contact Information'>
             <div className='space-y-4'>
-              <p>If you have questions about {contactQuestionText}, please contact me:</p>
+              <p>If you have questions about {contactQuestionText}, please contact us:</p>
               {email && (
                 <p>
                   <strong>Email:</strong>{' '}
