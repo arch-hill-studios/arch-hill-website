@@ -310,9 +310,11 @@
 
 ### 4.6 Color Contrast
 
-- [ ] :red_circle: **Muted text on light backgrounds fails WCAG AA** -- `#999999` (text-brand-muted) on `#fff7db` (text-brand-white) = ~2.5:1 contrast ratio. Minimum for normal text is 4.5:1. **WCAG 1.4.3 failure.**
-- [ ] :orange_circle: **Secondary color on light backgrounds may fail** -- `#1c2d6b` (text-brand-secondary) on `#fff7db` = ~1.8:1 ratio. Fails WCAG AA for text.
-- [ ] :yellow_circle: **Placeholder text opacity** -- Form inputs use `placeholder:text-white/50` which may have insufficient contrast. Verify ratio meets 4.5:1.
+### 4.6 Color Contrast
+
+- [x] ~~:red_circle: **Muted text on light backgrounds fails WCAG AA** -- `#999999` (text-brand-muted) on `#fff7db` (text-brand-white) = ~2.5:1 contrast ratio. Minimum for normal text is 4.5:1. **WCAG 1.4.3 failure.**~~
+- [x] ~~:orange_circle: **Secondary color on light backgrounds may fail** -- `#1c2d6b` (text-brand-secondary) on `#fff7db` = ~1.8:1 ratio. Fails WCAG AA for text.~~
+- [x] ~~:yellow_circle: **Placeholder text opacity** -- Form inputs use `placeholder:text-white/50` which may have insufficient contrast. Verify ratio meets 4.5:1.~~
 - [x] :green_circle: **Primary colors on dark backgrounds** -- `#fff7db` on `#6b1c1c` = 11.2:1 (excellent). `#fff7db` on `#1c2d6b` = 12.4:1 (excellent).
 
 ### 4.7 Images & Media
