@@ -29,7 +29,7 @@ const RootLayout = async ({
   // Only show robots meta tag if:
   // 1. NOT in production (always hide), OR
   // 2. In production AND maintenance mode is OFF
-  const shouldHideFromRobots = !isProd || SITE_CONFIG.MAINTENANCE_MODE_ENABLED;
+  const shouldHideFromRobots = !isProd || process.env.MAINTENANCE_MODE_ENABLED === 'true';
 
   // Fetch organization info from Sanity (with fallback to defaults)
   const { name: orgName, description: orgDescription } = await fetchOrganizationInfo();

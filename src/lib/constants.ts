@@ -11,11 +11,6 @@ export const SITE_CONFIG = {
   // IMPORTANT: Always use HTTPS (not HTTP) and no trailing slash for SEO consistency
   PRODUCTION_DOMAIN: process.env.NEXT_PUBLIC_BASE_URL || 'https://your-domain.com',
 
-  // Maintenance Mode - Enable to show placeholder page instead of full site
-  // When true: All routes redirect to maintenance page (except /studio)
-  // When false: Site operates normally
-  MAINTENANCE_MODE_ENABLED: true,
-
   // NOTE: Contact information (email, phone, address) and business details are now managed in Sanity CMS
   // Go to: Site Management → Business & Contact Info
   // This includes: Business Location, Business Hours, Price Range, Service Areas
