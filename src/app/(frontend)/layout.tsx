@@ -1,5 +1,4 @@
 import React from 'react';
-import '../globals.css';
 import { draftMode } from 'next/headers';
 import { SanityLive } from '@/sanity/lib/live';
 import BaseLayout from '@/components/Layout/BaseLayout';

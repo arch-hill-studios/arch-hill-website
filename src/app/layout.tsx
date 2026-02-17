@@ -98,8 +98,8 @@ const RootLayout = async ({
             alt=''
             className='block w-full h-auto brightness-100 md:brightness-70'
             style={{
-              maskImage: 'linear-gradient(to bottom, black 90%, transparent 100%)',
-              WebkitMaskImage: 'linear-gradient(to bottom, black 90%, transparent 100%)',
+              maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
             }}
           />
         </div>
