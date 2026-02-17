@@ -90,7 +90,7 @@ const RootLayout = async ({
       </head>
       <body
         className={`${inter.className} ${bebasNeue.variable} text-body-base text-brand-muted overflow-x-hidden bg-brand-dark`}>
-        {/* Fixed background image - contained to screen width with bottom fade */}
+        {/* Fixed background image - contained to screen width with bottom fade. */}
         <div className='fixed inset-0 z-[-1] overflow-hidden' aria-hidden='true'>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
