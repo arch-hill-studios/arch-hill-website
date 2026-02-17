@@ -15,7 +15,7 @@ const PageHero = ({ title = null, subtTitle = null, documentId, documentType }: 
     <div
       className='-mb-6 md:-mb-12'
       {...createSanityDataAttribute(documentId, documentType, 'heroImage')}>
-      <section data-hero className={`bg-brand-dark text-center overflow-hidden pb-12`}>
+      <section data-hero className={`bg-brand-dark text-center overflow-hidden py-8 md:py-12`}>
         {/* Header spacer */}
         <div className={`${headerHeight}`}></div>
         <div className={`${sitePaddingX} mx-auto`}>
