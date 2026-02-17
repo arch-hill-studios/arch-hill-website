@@ -14,7 +14,7 @@ export const SITE_CONFIG = {
   // Maintenance Mode - Enable to show placeholder page instead of full site
   // When true: All routes redirect to maintenance page (except /studio)
   // When false: Site operates normally
-  MAINTENANCE_MODE_ENABLED: false,
+  MAINTENANCE_MODE_ENABLED: true,
 
   // NOTE: Contact information (email, phone, address) and business details are now managed in Sanity CMS
   // Go to: Site Management → Business & Contact Info
