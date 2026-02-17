@@ -12,7 +12,9 @@ interface PageHeroProps {
 
 const PageHero = ({ title = null, subtTitle = null, documentId, documentType }: PageHeroProps) => {
   return (
-    <div {...createSanityDataAttribute(documentId, documentType, 'heroImage')}>
+    <div
+      className='-mb-6 md:-mb-12'
+      {...createSanityDataAttribute(documentId, documentType, 'heroImage')}>
       <section data-hero className={`bg-brand-dark text-center overflow-hidden pb-12`}>
         {/* Header spacer */}
         <div className={`${headerHeight}`}></div>
