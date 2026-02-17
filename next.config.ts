@@ -1,5 +1,7 @@
 import type { NextConfig } from 'next';
 
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
@@ -19,10 +21,11 @@ const nextConfig: NextConfig = {
   // Modern JavaScript - reduce polyfills for better performance
   transpilePackages: [],
 
-  // CSS and JavaScript optimization
+  // CSS and JavaScript optimization (production only — strict chunking can cause
+  // CSS propagation issues with the dev server's on-demand processing)
   experimental: {
-    optimizeCss: true,
-    cssChunking: 'strict',
+    optimizeCss: isProd,
+    cssChunking: isProd ? 'strict' : undefined,
   },
 
   // Turbopack configuration (required for Next.js 16+)
