@@ -129,7 +129,7 @@ export function generateOrganizationSchema(data: OrganizationData) {
 export function generateLocalBusinessSchema(data: LocalBusinessData) {
   return {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    '@type': ['MusicVenue', 'LocalBusiness'],
     name: data.name,
     description: data.description,
     url: data.url,
