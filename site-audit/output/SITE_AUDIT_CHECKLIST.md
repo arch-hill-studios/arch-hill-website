@@ -319,21 +319,21 @@
 
 ### 4.7 Images & Media
 
-- [ ] :orange_circle: **YouTube video has generic title** -- `src/components/_blocks/YouTubeVideo.tsx:41` uses `title='YouTube Video'` for all embeds. Should use the actual video title from CMS data. **WCAG 1.2.1 concern.**
-- [ ] :yellow_circle: **Hero video missing accessibility attributes** -- `src/components/HomeHero/HeroVideo.tsx:50-65` has no `title`, `aria-label`, or caption track. If purely decorative, add `aria-hidden='true'`. If content-bearing, add description.
+- [ ] :orange_circle: ~**YouTube video has generic title** -- `src/components/_blocks/YouTubeVideo.tsx:41` uses `title='YouTube Video'` for all embeds. Should use the actual video title from CMS data. **WCAG 1.2.1 concern.**~
+- [ ] :yellow_circle: ~**Hero video missing accessibility attributes** -- `src/components/HomeHero/HeroVideo.tsx:50-65` has no `title`, `aria-label`, or caption track. If purely decorative, add `aria-hidden='true'`. If content-bearing, add description.~
 - [x] :green_circle: **Decorative background image properly handled** -- `src/app/layout.tsx:94-105` uses `alt=''` and `aria-hidden='true'`.
 - [x] :green_circle: **UnifiedImage handles alt text** -- Cleans with `stegaClean()`, provides fallback.
 
 ### 4.8 Interactive Elements
 
-- [ ] :red_circle: **MoreInfoToggle uses div instead of button** -- `src/components/UI/MoreInfoToggle.tsx:21-26` has `onClick` on a `<div>`. Must be converted to `<button>` element for proper semantics, keyboard support, and screen reader announcement. **WCAG 4.1.2 failure.**
+- [ ] :red_circle: ~**MoreInfoToggle uses div instead of button** -- `src/components/UI/MoreInfoToggle.tsx:21-26` has `onClick` on a `<div>`. Must be converted to `<button>` element for proper semantics, keyboard support, and screen reader announcement. **WCAG 4.1.2 failure.**~
 - [x] :green_circle: **CTA component uses correct semantics** -- Intelligently switches between `<button>` and `<a>` based on props.
 - [x] :green_circle: **Modal close button** -- Proper `<button>` with `aria-label='Close modal'`.
 - [x] :green_circle: **Disabled states accessible** -- Uses native `disabled` attribute with visual indicators.
 
 ### 4.9 Focus Indicators
 
-- [ ] :orange_circle: **Menu button focus ring missing** -- `focus:outline-none` with no replacement. See 4.5 above.
+- [x] :orange_circle: **Menu button focus ring missing** -- `focus:outline-none` with no replacement. See 4.5 above.
 - [ ] :yellow_circle: **Form input focus ring too thin** -- Uses `focus:ring-1` (1px). WCAG 2.2 recommends at least 2px. Increase to `focus:ring-2`.
 - [x] :green_circle: **CTA focus indicators** -- `focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary` provides clear visible focus.
 - [x] :green_circle: **Skip link focus indicator** -- Clear focus ring with brand secondary color.
