@@ -175,28 +175,28 @@
 - [x] :green_circle: **No hardcoded secrets in codebase** -- All sensitive values use environment variables.
 - [x] :green_circle: **`.env` files not committed** -- `.gitignore` properly excludes env files.
 - [x] :green*circle: \*\*NEXT_PUBLIC* variables appropriately used\*\* -- Only non-sensitive values (base URL, Sanity project ID/dataset, environment name) are prefixed with `NEXT_PUBLIC_`.
-- [ ] :yellow*circle: **`NEXT_PUBLIC_CONTACT_EMAIL` could be server-only** -- Contact email is used in `src/app/api/contact/route.ts` (server-side only) but uses `NEXT_PUBLIC*` prefix, exposing it to the client bundle unnecessarily.
+- [x] :yellow*circle: **`NEXT_PUBLIC_CONTACT_EMAIL` could be server-only** -- Contact email is used in `src/app/api/contact/route.ts` (server-side only) but uses `NEXT_PUBLIC*` prefix, exposing it to the client bundle unnecessarily.
 
 ### 2.6 XSS Prevention
 
 - [x] :green_circle: **No `dangerouslySetInnerHTML` with user input** -- Only used for trusted content: inline critical CSS and JSON-LD structured data scripts.
 - [x] :green_circle: **React's default escaping** -- JSX automatically escapes interpolated values.
 - [x] :green_circle: **Form inputs sanitized before email rendering** -- Contact form strips `<>` characters.
-- [ ] :yellow_circle: **Portable Text rendering** -- Sanity's PortableText component handles content from CMS editors. Ensure no custom serializers allow raw HTML injection.
+- [x] :green_circle: **Portable Text rendering** -- Sanity's PortableText component handles content from CMS editors. Ensure no custom serializers allow raw HTML injection.
 
 ### 2.7 Dependency Security
 
-- [ ] :orange_circle: **Run `npm audit` and fix vulnerabilities** -- No evidence of regular dependency auditing. Run `npm audit` and address critical/high severity issues.
-- [ ] :yellow_circle: **`styled-components` is a dependency** -- Only used by Sanity Studio. Verify it's not adding unnecessary client-side weight or exposing vulnerabilities.
+- [ ] :orange_circle: ~**Run `npm audit` and fix vulnerabilities** -- No evidence of regular dependency auditing. Run `npm audit` and address critical/high severity issues.~
+- [ ] :yellow_circle: ~**`styled-components` is a dependency** -- Only used by Sanity Studio. Verify it's not adding unnecessary client-side weight or exposing vulnerabilities.~
 
 ### 2.8 CSRF Protection
 
-- [ ] :yellow_circle: **No CSRF token on contact form** -- The contact form POST endpoint has no CSRF protection. While the honeypot helps against basic bots, a determined attacker could forge submissions. Consider adding a CSRF token or using SameSite cookie-based protection.
+- [ ] :yellow_circle: ~**No CSRF token on contact form** -- The contact form POST endpoint has no CSRF protection. While the honeypot helps against basic bots, a determined attacker could forge submissions. Consider adding a CSRF token or using SameSite cookie-based protection.~
 
 ### 2.9 Information Disclosure
 
-- [ ] :yellow_circle: **Revalidation endpoint leaks document info** -- `src/app/api/revalidate/route.ts:39-43` returns `type` and `id` of revalidated documents in the response. While authenticated via webhook secret, consider returning minimal information.
-- [ ] :yellow_circle: **Error handler logs environment details** -- `src/app/api/contact/route.ts:274-280` logs env var presence to server console. While not returned to client, ensure Vercel logs are access-restricted.
+- [ ] :yellow_circle: ~**Revalidation endpoint leaks document info** -- `src/app/api/revalidate/route.ts:39-43` returns `type` and `id` of revalidated documents in the response. While authenticated via webhook secret, consider returning minimal information.~
+- [ ] :yellow_circle: ~**Error handler logs environment details** -- `src/app/api/contact/route.ts:274-280` logs env var presence to server console. While not returned to client, ensure Vercel logs are access-restricted.~
 
 ---
 
