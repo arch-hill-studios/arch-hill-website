@@ -221,9 +221,9 @@
 - [x] :green_circle: **UnifiedImage component well-implemented** -- Auto-sizing, DPI multipliers, blur placeholders (LQIP), responsive sizes, schema markup.
 - [x] :green_circle: **Hero images use `priority` loading** -- `HeroImages.tsx:91` marks first image with `priority={index === 0}`.
 - [x] :green_circle: **All content images use Next.js Image** -- No unoptimized content images detected.
-- [ ] :orange_circle: **Background image not optimized** -- `src/app/layout.tsx:96-104` uses raw `<img>` tag for body background. Should use Next.js Image component with `fill` mode or convert to CSS background with optimized source.
-- [ ] :yellow_circle: **AVIF not enabled** -- `next.config.ts` does not include `images.formats: ['image/avif', 'image/webp']`. Enabling AVIF gives 30-50% smaller images than WebP.
-- [ ] :yellow_circle: **Hero video preload** -- `src/components/HomeHero/HeroVideo.tsx:64` uses `preload='auto'` which downloads the full video eagerly. Consider `preload='metadata'` with a poster image for better LCP.
+- [x] :orange_circle: **Background image not optimized** -- `src/app/layout.tsx:96-104` uses raw `<img>` tag for body background. Should use Next.js Image component with `fill` mode or convert to CSS background with optimized source.
+- [x] :yellow_circle: **AVIF not enabled** -- `next.config.ts` does not include `images.formats: ['image/avif', 'image/webp']`. Enabling AVIF gives 30-50% smaller images than WebP.
+- [ ] :yellow_circle: ~**Hero video preload** -- `src/components/HomeHero/HeroVideo.tsx:64` uses `preload='auto'` which downloads the full video eagerly. Consider `preload='metadata'` with a poster image for better LCP.~
 
 ### 3.4 Caching Strategy
 
