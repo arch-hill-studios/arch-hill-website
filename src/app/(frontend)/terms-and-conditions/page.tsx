@@ -12,10 +12,12 @@ export async function generateMetadata() {
   const { seoMetaData, businessContactInfo } = pageBuilderData;
   const orgName = getOrganizationName(businessContactInfo);
 
+  const pageDescription = 'Terms and conditions for using our website and services';
+
   if (!seoMetaData) {
     return {
       title: `Terms & Conditions | ${orgName}`,
-      description: 'Terms and conditions for using our website and services',
+      description: pageDescription,
     };
   }
 
@@ -23,8 +25,7 @@ export async function generateMetadata() {
 
   return generatePageMetadata({
     title,
-    description:
-      seoMetaData.siteDescription || 'Terms and conditions for using our website and services',
+    description: pageDescription,
     seoMetaData,
     businessContactInfo,
     canonicalUrl: generateCanonicalUrl('/terms-and-conditions'),

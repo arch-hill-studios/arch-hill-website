@@ -12,10 +12,12 @@ export async function generateMetadata() {
   const { seoMetaData, businessContactInfo } = pageBuilderData;
   const orgName = getOrganizationName(businessContactInfo);
 
+  const pageDescription = 'Privacy policy for our website and how we handle your data';
+
   if (!seoMetaData) {
     return {
       title: `Privacy Policy | ${orgName}`,
-      description: 'Privacy policy for our website and how I handle your data',
+      description: pageDescription,
     };
   }
 
@@ -23,8 +25,7 @@ export async function generateMetadata() {
 
   return generatePageMetadata({
     title,
-    description:
-      seoMetaData.siteDescription || 'Privacy policy for our website and how I handle your data',
+    description: pageDescription,
     seoMetaData,
     businessContactInfo,
     canonicalUrl: generateCanonicalUrl('/privacy-policy'),
