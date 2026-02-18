@@ -222,6 +222,7 @@ const Footer = ({
                 <a
                   key={index}
                   href={detail.link}
+                  aria-label={detail.value}
                   className='flex items-center gap-3 text-gray-400 hover:text-brand-white transition-colors duration-200 text-body-sm'
                   target={detail.link.startsWith('http') ? '_blank' : undefined}
                   rel={detail.link.startsWith('http') ? 'noopener noreferrer' : undefined}>

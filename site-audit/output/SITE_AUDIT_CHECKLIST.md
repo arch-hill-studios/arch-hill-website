@@ -334,7 +334,7 @@
 ### 4.9 Focus Indicators
 
 - [x] :orange_circle: **Menu button focus ring missing** -- `focus:outline-none` with no replacement. See 4.5 above.
-- [ ] :yellow_circle: **Form input focus ring too thin** -- Uses `focus:ring-1` (1px). WCAG 2.2 recommends at least 2px. Increase to `focus:ring-2`.
+- [x] :yellow_circle: **Form input focus ring too thin** -- Uses `focus:ring-1` (1px). WCAG 2.2 recommends at least 2px. Increase to `focus:ring-2`.
 - [x] :green_circle: **CTA focus indicators** -- `focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary` provides clear visible focus.
 - [x] :green_circle: **Skip link focus indicator** -- Clear focus ring with brand secondary color.
 
