@@ -340,14 +340,14 @@
 
 ### 4.10 Screen Reader Support
 
-- [ ] :orange_circle: **Footer icon-only links may lack accessible names** -- Phone, email, and social media links in footer use icons (FaPhoneAlt, MdEmail, etc.). Verify all have `aria-label` or visible text providing accessible names.
+- [x] :orange_circle: **Footer icon-only links may lack accessible names** -- Phone, email, and social media links in footer use icons (FaPhoneAlt, MdEmail, etc.). Verify all have `aria-label` or visible text providing accessible names.
 - [x] :green_circle: **Loading overlay announced** -- `role='dialog'`, `aria-modal='true'`, `aria-label='Page loading'`.
 - [x] :green_circle: **SR-only text used appropriately** -- Hero H1 uses `sr-only` class for screen reader access.
 - [x] :green_circle: **Modal titles and descriptions** -- Proper ARIA attributes for dialog semantics.
 
 ### 4.11 Touch Targets
 
-- [ ] :yellow_circle: **Menu button below recommended size** -- `src/components/Header/MenuButton.tsx:25` is `w-8 h-8` (32x32px). WCAG 2.2 AA requires minimum 24x24px (passes) but 44x44px is recommended. Increase to at least `w-10 h-10` (40px) or `w-11 h-11` (44px).
+- [ ] :yellow_circle: ~**Menu button below recommended size** -- `src/components/Header/MenuButton.tsx:25` is `w-8 h-8` (32x32px). WCAG 2.2 AA requires minimum 24x24px (passes) but 44x44px is recommended. Increase to at least `w-10 h-10` (40px) or `w-11 h-11` (44px).~
 - [x] :green_circle: **CTA buttons meet guidelines** -- `min-h-[56px]` exceeds 44px recommendation.
 - [x] :green_circle: **Form inputs adequate** -- `py-3` padding provides sufficient touch target height.
 - [x] :green_circle: **Navigation links adequate** -- `py-3.5 px-5` on vertical nav links provides 56px+ height.
@@ -355,7 +355,7 @@
 ### 4.12 WCAG 2.2 New Criteria
 
 - [x] :green_circle: **Focus Not Obscured (2.4.11)** -- `scroll-padding-top: 70px` ensures focused elements below the sticky header are not obscured.
-- [ ] :yellow_circle: **Target Size Minimum (2.5.8)** -- Menu button at 32px passes the 24px minimum but is borderline. All other interactive elements appear to meet this criterion.
+- [ ] :yellow_circle: ~**Target Size Minimum (2.5.8)** -- Menu button at 32px passes the 24px minimum but is borderline. All other interactive elements appear to meet this criterion.~
 - [x] :green_circle: **Consistent Help (3.2.6)** -- Contact information appears in footer consistently across all pages.
 
 ---
