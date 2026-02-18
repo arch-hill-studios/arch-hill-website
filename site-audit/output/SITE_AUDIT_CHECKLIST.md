@@ -40,9 +40,9 @@
 - [x] :green_circle: **`/sitemap.xml` returns valid XML** -- Includes homepage, FAQ, legal pages, and dynamic pages.
 - [x] :green_circle: **Dev-test pages excluded** -- `src/app/sitemap.xml/route.ts:56` filters pages starting with `dev-test`.
 - [x] :green_circle: **ISR cache strategy** -- `revalidate = 3600` (1 hour).
-- [ ] :yellow_circle: **Homepage and FAQ missing `<lastmod>`** -- Static pages at `route.ts:28-29` have no `lastmod` value. Homepage should use the most recent content update date.
-- [ ] :yellow_circle: **No blog posts in sitemap** -- If blog content is planned, the sitemap generation needs updating.
-- [ ] :white_circle: **No image sitemap** -- Image-heavy pages (galleries) could benefit from image sitemap entries.
+- [x] :yellow_circle: **Homepage and FAQ missing `<lastmod>`** -- Static pages at `route.ts:28-29` have no `lastmod` value. Homepage should use the most recent content update date.
+- [ ] ~:yellow_circle: **No blog posts in sitemap** -- If blog content is planned, the sitemap generation needs updating.~
+- [ ] ~:white_circle: **No image sitemap** -- Image-heavy pages (galleries) could benefit from image sitemap entries.~
 
 ### 1.4 Canonical Tags
 
