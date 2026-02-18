@@ -91,17 +91,17 @@
 
 ### 1.10 Image SEO
 
-- [ ] :orange_circle: **Image block uses hardcoded alt text** -- `src/components/_blocks/Image.tsx:99` uses `alt="Content image"` instead of the actual alt text from the CMS schema field. Should be `alt={stegaClean(image.alt) || 'Content image'}`.
-- [ ] :orange_circle: **Multiple images on About page have null alt text** -- 10+ content and gallery images observed with missing alt text on the deployed site.
+- [x] :orange_circle: **Image block uses hardcoded alt text** -- `src/components/_blocks/Image.tsx:99` uses `alt="Content image"` instead of the actual alt text from the CMS schema field. Should be `alt={stegaClean(image.alt) || 'Content image'}`.
+- [ ] :orange_circle: ~**Multiple images on About page have null alt text** -- 10+ content and gallery images observed with missing alt text on the deployed site.~
 - [x] :green_circle: **CMS schema supports alt text** -- `imageType.ts` includes alt field with helpful description for editors.
 - [x] :green_circle: **UnifiedImage handles alt properly** -- Cleans with `stegaClean()`, provides fallback.
-- [ ] :yellow_circle: **Consider making alt text required in CMS schema** -- Add validation to encourage editors to always provide alt text.
+- [ ] :yellow_circle: ~**Consider making alt text required in CMS schema** -- Add validation to encourage editors to always provide alt text.~
 
 ### 1.11 Breadcrumbs
 
-- [ ] :orange_circle: **Visual breadcrumb navigation disabled** -- `src/components/UI/Breadcrumb.tsx:16` returns `null`. Visual breadcrumbs are commented out (lines 17-43). Only structured data breadcrumbs are active.
+- [ ] :orange_circle: ~**Visual breadcrumb navigation disabled** -- `src/components/UI/Breadcrumb.tsx:16` returns `null`. Visual breadcrumbs are commented out (lines 17-43). Only structured data breadcrumbs are active.~
 - [x] :green_circle: **Breadcrumb structured data working** -- BreadcrumbStructuredData component generates correct JSON-LD.
-- [ ] :orange_circle: **Re-enable visual breadcrumbs** -- Content pages should show visual breadcrumb navigation for UX and SEO.
+- [ ] :orange_circle: ~**Re-enable visual breadcrumbs** -- Content pages should show visual breadcrumb navigation for UX and SEO.~
 
 ### 1.12 Font Loading
 
@@ -111,17 +111,17 @@
 
 ### 1.13 Content & E-E-A-T
 
-- [ ] :yellow_circle: **No blog/article content** -- No blog post document type found. Regular content publishing builds topical authority and supports SEO.
-- [ ] :yellow_circle: **Limited internal linking** -- No "related content" or contextual cross-linking between pages observed.
-- [ ] :white_circle: **Content freshness strategy** -- Establish a content calendar with at least 1 post per month.
-- [ ] :white_circle: **Author bio/credentials** -- Founder page exists but could be enhanced with Person schema and more explicit experience signals.
+- [ ] :yellow_circle: ~**No blog/article content** -- No blog post document type found. Regular content publishing builds topical authority and supports SEO.~
+- [ ] :yellow_circle: ~**Limited internal linking** -- No "related content" or contextual cross-linking between pages observed.~
+- [ ] :white_circle: ~**Content freshness strategy** -- Establish a content calendar with at least 1 post per month.~
+- [ ] :white_circle: ~**Author bio/credentials** -- Founder page exists but could be enhanced with Person schema and more explicit experience signals.~
 
 ### 1.14 Emerging SEO (2025-2026)
 
-- [ ] :white_circle: **AI Overviews optimization** -- Structure content with clear, direct answers in first paragraphs for potential AI Overview citations.
-- [ ] :white_circle: **Helpful Content alignment** -- Ensure all content demonstrates first-hand expertise and leaves readers satisfied.
-- [ ] :white_circle: **AVIF image format** -- Enable in `next.config.ts` with `images.formats: ['image/avif', 'image/webp']` for 30-50% smaller images.
-- [ ] :white_circle: **Speculation Rules API** -- Consider adding as progressive enhancement for faster perceived navigation.
+- [ ] :white_circle: ~**AI Overviews optimization** -- Structure content with clear, direct answers in first paragraphs for potential AI Overview citations.~
+- [ ] :white_circle: ~**Helpful Content alignment** -- Ensure all content demonstrates first-hand expertise and leaves readers satisfied.~
+- [ ] :white_circle: ~**AVIF image format** -- Enable in `next.config.ts` with `images.formats: ['image/avif', 'image/webp']` for 30-50% smaller images.~
+- [ ] :white_circle: ~**Speculation Rules API** -- Consider adding as progressive enhancement for faster perceived navigation.~
 
 ### 1.15 Favicon & Icons
 
@@ -131,9 +131,9 @@
 
 ### 1.16 Analytics & Monitoring
 
-- [ ] :orange_circle: **No analytics implementation detected** -- No Google Analytics, GA4, Microsoft Clarity, or Vercel Analytics found in the frontend code.
-- [ ] :orange_circle: **No Google Search Console verification** -- Verify GSC is set up and sitemap submitted.
-- [ ] :yellow_circle: **No Core Web Vitals monitoring** -- Consider Vercel Analytics or web-vitals library for ongoing CWV tracking.
+- [ ] :orange_circle: ~**No analytics implementation detected** -- No Google Analytics, GA4, Microsoft Clarity, or Vercel Analytics found in the frontend code.~
+- [ ] :orange_circle: ~**No Google Search Console verification** -- Verify GSC is set up and sitemap submitted.~
+- [ ] :yellow_circle: ~**No Core Web Vitals monitoring** -- Consider Vercel Analytics or web-vitals library for ongoing CWV tracking.~
 
 ---
 
