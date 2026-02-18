@@ -243,26 +243,26 @@
 
 ### 3.6 Third-Party Resources
 
-- [ ] :yellow_circle: **Missing preconnect hints for embeds** -- No `<link rel="preconnect">` for `youtube.com` or `maps.googleapis.com`. Only `cdn.sanity.io` has preconnect. Add hints if embeds appear above the fold.
+- [ ] :yellow_circle: ~**Missing preconnect hints for embeds** -- No `<link rel="preconnect">` for `youtube.com` or `maps.googleapis.com`. Only `cdn.sanity.io` has preconnect. Add hints if embeds appear above the fold.~
 - [x] :green_circle: **YouTube and Google Maps lazy loaded** -- Both use `loading='lazy'` on iframes.
 - [x] :green_circle: **No analytics scripts blocking render** -- No third-party analytics detected in frontend.
 
 ### 3.7 Loading States
 
 - [x] :green_circle: **Loading overlay implemented** -- Animated soundwave bars during page navigation.
-- [ ] :yellow_circle: **No skeleton screens** -- Users see a blank page with loading animation on slow connections. Skeleton screens for critical page sections would improve perceived performance.
+- [ ] :yellow_circle: ~**No skeleton screens** -- Users see a blank page with loading animation on slow connections. Skeleton screens for critical page sections would improve perceived performance.~
 - [x] :green_circle: **Resource hints** -- `dns-prefetch` and `preconnect` for Sanity CDN.
 
 ### 3.8 CSS
 
 - [x] :green_circle: **Tailwind v4 with custom utilities** -- Well-structured globals.css (~424 lines).
-- [ ] :yellow_circle: **CSS duplication maintenance burden** -- Critical CSS duplicated across `globals.css`, `layout.tsx`, and `manifest.ts`. Risk of desynchronization. Consider a shared constants file or build-time extraction.
-- [ ] :yellow_circle: **Header height synced across 4 files** -- `Header.tsx` (`h-[70px]`), `layout.tsx` (`scroll-padding`), `spacingConstants.ts`, and `styles.module.css`. A single source of truth would reduce maintenance risk.
+- [ ] :yellow_circle: ~**CSS duplication maintenance burden** -- Critical CSS duplicated across `globals.css`, `layout.tsx`, and `manifest.ts`. Risk of desynchronization. Consider a shared constants file or build-time extraction.~
+- [ ] :yellow_circle: ~**Header height synced across 4 files** -- `Header.tsx` (`h-[70px]`), `layout.tsx` (`scroll-padding`), `spacingConstants.ts`, and `styles.module.css`. A single source of truth would reduce maintenance risk.~
 
 ### 3.9 Rendering & Memoization
 
-- [ ] :white_circle: **AnimateIn creates per-instance observers** -- Each scroll animation component creates its own `IntersectionObserver`. For pages with 50+ animated elements, consider a shared observer pattern.
-- [ ] :white_circle: **UnifiedImage could use `React.memo()`** -- Has 12 `useMemo` hooks inside but the component itself is not memoized.
+- [ ] :white_circle: ~**AnimateIn creates per-instance observers** -- Each scroll animation component creates its own `IntersectionObserver`. For pages with 50+ animated elements, consider a shared observer pattern.~
+- [ ] :white_circle: ~**UnifiedImage could use `React.memo()`** -- Has 12 `useMemo` hooks inside but the component itself is not memoized.~
 - [x] :green_circle: **Proper memoization in complex components** -- `useCallback` and `useMemo` used appropriately in Header, ServiceImageSlideshow, PageLoadContext.
 - [x] :green_circle: **No over-fetching from Sanity** -- GROQ queries use specific field projections, no wildcard fetches.
 
@@ -284,15 +284,15 @@
 
 ### 4.3 Heading Hierarchy
 
-- [ ] :yellow_circle: **H4 used in footer section headings** -- Footer uses `<h4>` for "Contact" and "Quick Links" which may skip heading levels depending on page structure. Consider using a more appropriate level or `<div>` with ARIA.
-- [ ] :yellow_circle: **Verify no heading level skipping** -- Ensure all pages follow H1 > H2 > H3 > H4 without gaps. Hero pages use SR-only H1 which is good, but confirm subsequent headings start at H2.
+- [x] :yellow_circle: **H4 used in footer section headings** -- Footer uses `<h4>` for "Contact" and "Quick Links" which may skip heading levels depending on page structure. Consider using a more appropriate level or `<div>` with ARIA.
+- [x] :yellow_circle: **Verify no heading level skipping** -- Ensure all pages follow H1 > H2 > H3 > H4 without gaps. Hero pages use SR-only H1 which is good, but confirm subsequent headings start at H2.
 - [x] :green_circle: **Semantic heading elements used** -- Custom typography system uses proper `<h1>`-`<h6>` elements.
 
 ### 4.4 Form Accessibility
 
 - [x] :red_circle: **Form error messages not linked to inputs** -- TextInput, TextArea, and other form components display error messages but do not connect them via `aria-describedby`. Error `<p>` elements need an `id`, and inputs need `aria-describedby={errorId}`. **WCAG 3.3.1 failure.**
 - [x] :red_circle: **Form success/error alerts not announced** -- `src/components/Forms/ContactForm/ContactForm.tsx:176-180` and `194-199` show success/error messages in regular `<div>` elements without `role='alert'` or `aria-live`. Screen readers will not announce these status changes. **WCAG 4.1.3 failure.**
-- [ ] :red_circle: **Radio/Checkbox groups use invalid structure** -- `RadioGroup.tsx` and `CheckboxGroup.tsx` use `<label htmlFor={id}>` with the same `id` for multiple inputs, creating invalid HTML. Should use `<fieldset>` + `<legend>` pattern. **WCAG 1.3.1 failure.**
+- [ ] :red_circle: ~**Radio/Checkbox groups use invalid structure** -- `RadioGroup.tsx` and `CheckboxGroup.tsx` use `<label htmlFor={id}>` with the same `id` for multiple inputs, creating invalid HTML. Should use `<fieldset>` + `<legend>` pattern. **WCAG 1.3.1 failure.**~
 - [x] :green_circle: **Labels present on all inputs** -- `htmlFor` paired with input `id` on text inputs.
 - [x] :green_circle: **`aria-invalid` on error state** -- Form inputs correctly set `aria-invalid='true'` when validation fails.
 - [x] :green_circle: **Honeypot properly hidden** -- Uses `aria-hidden='true'` and `tabIndex={-1}`.
