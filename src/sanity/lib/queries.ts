@@ -371,6 +371,9 @@ export const HOME_PAGE_SECTIONS_QUERY = defineQuery(`*[_id == "homePageSections"
   ${recursiveContent}
 }`);
 
+// Home Page Last Modified - returns _updatedAt for both homepage documents
+export const HOME_PAGE_LAST_MODIFIED_QUERY = defineQuery(`*[_id in ["homePageHero", "homePageSections"]]{ _id, _updatedAt }`);
+
 export const HEADER_QUERY = defineQuery(`*[_id == "header"][0]{
   _id,
   _type,

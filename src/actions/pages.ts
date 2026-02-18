@@ -1,6 +1,6 @@
 import { staticSanityFetch, type FetchFn } from '@/sanity/lib/fetch';
-import { HOME_PAGE_HERO_QUERY, HOME_PAGE_SECTIONS_QUERY, PAGE_QUERY, ALL_PAGES_QUERY } from '@/sanity/lib/queries';
-import type { HOME_PAGE_HERO_QUERY_RESULT, HOME_PAGE_SECTIONS_QUERY_RESULT, PAGE_QUERY_RESULT, ALL_PAGES_QUERY_RESULT } from '@/sanity/types';
+import { HOME_PAGE_HERO_QUERY, HOME_PAGE_SECTIONS_QUERY, HOME_PAGE_LAST_MODIFIED_QUERY, PAGE_QUERY, ALL_PAGES_QUERY } from '@/sanity/lib/queries';
+import type { HOME_PAGE_HERO_QUERY_RESULT, HOME_PAGE_SECTIONS_QUERY_RESULT, HOME_PAGE_LAST_MODIFIED_QUERY_RESULT, PAGE_QUERY_RESULT, ALL_PAGES_QUERY_RESULT } from '@/sanity/types';
 
 export async function getHomePageHero(fetchFn: FetchFn = staticSanityFetch): Promise<HOME_PAGE_HERO_QUERY_RESULT | null> {
   const { data: hero } = await fetchFn({
@@ -18,6 +18,19 @@ export async function getHomePageSections(fetchFn: FetchFn = staticSanityFetch):
   });
 
   return sections as HOME_PAGE_SECTIONS_QUERY_RESULT | null;
+}
+
+export async function getHomePageLastModified(fetchFn: FetchFn = staticSanityFetch): Promise<string | null> {
+  const { data: docs } = await fetchFn({
+    query: HOME_PAGE_LAST_MODIFIED_QUERY,
+    tags: ['sanity', 'homePageHero', 'homePageSections'],
+  });
+
+  const results = docs as HOME_PAGE_LAST_MODIFIED_QUERY_RESULT;
+  if (!results || results.length === 0) return null;
+
+  const dates = results.map(d => d._updatedAt).filter(Boolean);
+  return dates.sort().reverse()[0] || null;
 }
 
 export async function getPageBySlug(slug: string, fetchFn: FetchFn = staticSanityFetch): Promise<PAGE_QUERY_RESULT | null> {

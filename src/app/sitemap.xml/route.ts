@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getAllPages, getTermsAndConditions, getPrivacyPolicy, getFaqPage } from '@/actions';
+import { getAllPages, getHomePageLastModified, getTermsAndConditions, getPrivacyPolicy, getFaqPage } from '@/actions';
 import { SITE_CONFIG } from '@/lib/constants';
 import type { ALL_PAGES_QUERY_RESULT } from '@/sanity/types';
 
@@ -17,15 +17,16 @@ export async function GET() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || SITE_CONFIG.PRODUCTION_DOMAIN;
 
   // Fetch all content from Sanity
-  const [pages, termsAndConditions, privacyPolicy, faqPage] = await Promise.all([
+  const [pages, homePageLastModified, termsAndConditions, privacyPolicy, faqPage] = await Promise.all([
     getAllPages(),
+    getHomePageLastModified(),
     getTermsAndConditions(),
     getPrivacyPolicy(),
     getFaqPage(),
   ]);
 
   const staticPages: SitemapUrl[] = [
-    { url: '', changefreq: 'weekly', priority: '1.0' },
+    { url: '', lastmod: homePageLastModified || undefined, changefreq: 'weekly', priority: '1.0' },
     ...(faqPage ? [{ url: '/faq', lastmod: faqPage._updatedAt, changefreq: 'monthly', priority: '0.7' }] : []),
   ];
 

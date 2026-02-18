@@ -33,7 +33,7 @@
 - [x] :green_circle: **`/robots.txt` returns valid content** -- User-agent, Allow, Disallow rules, and Sitemap reference all present.
 - [x] :green_circle: **Admin/private paths disallowed** -- `/admin/`, `/api/`, `/draft/`, `/studio/`, `/dev-test/` all blocked.
 - [x] :green_circle: **Sitemap URL referenced** -- Points to `${baseUrl}/sitemap.xml`.
-- [ ] :yellow_circle: ~**No `Crawl-delay` directive** -- Consider adding for polite crawling if traffic becomes significant.~
+- [x] :yellow_circle: ~**No `Crawl-delay` directive** -- Consider adding for polite crawling if traffic becomes significant.~
 
 ### 1.3 XML Sitemap
 
