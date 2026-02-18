@@ -24,7 +24,7 @@
 ### 1.1 Search Engine Indexing
 
 - [ ] :red_circle: **`noindex, nofollow` on all pages in development deployment** -- Root layout (`src/app/layout.tsx:50`) conditionally adds `<meta name='robots' content='noindex, nofollow' />` when `NEXT_PUBLIC_ENV !== 'production'`. Confirmed present on all pages of the dev deployment. **Verify** that `NEXT_PUBLIC_ENV=production` is set in the production Vercel environment so this tag is removed on the live site.
-      ~- [ ] :red_circle: **Production domain placeholder not replaced** -- `src/lib/constants.ts:12` has `PRODUCTION_DOMAIN` defaulting to `'https://your-domain.com'`. If `NEXT_PUBLIC_BASE_URL` is not set in production, all canonical URLs, sitemap URLs, OG URLs, and robots.txt will point to a non-existent domain.~
+- [ ] :red_circle: ~**Production domain placeholder not replaced** -- `src/lib/constants.ts:12` has `PRODUCTION_DOMAIN` defaulting to `'https://your-domain.com'`. If `NEXT_PUBLIC_BASE_URL` is not set in production, all canonical URLs, sitemap URLs, OG URLs, and robots.txt will point to a non-existent domain.~
 - [x] :green_circle: **Robots logic is environment-aware** -- `shouldHideFromRobots = !isProd || SITE_CONFIG.MAINTENANCE_MODE_ENABLED` correctly gates indexing.
 - [x] :green_circle: **404 page correctly noindexed** -- `src/app/(frontend)/not-found.tsx:18` sets `robots: 'noindex, nofollow'`.
 
