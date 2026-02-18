@@ -236,8 +236,8 @@
 
 - [ ] :yellow_circle: ~**Potential CLS from header transitions** -- Header transitions from transparent to opaque during scroll. Ensure transitions use `transform`/`opacity` only (GPU-accelerated) to avoid layout shifts.~
 - [ ] :yellow_circle: ~**Hero video may hurt LCP** -- If hero displays video instead of image, LCP could suffer. Ensure a poster/fallback image loads first.~
-- [ ] :yellow_circle: **Service slideshow auto-play runs off-screen** -- `src/components/_blocks/ServiceList/ServiceImageSlideshow.tsx` runs `setInterval` even when the component is scrolled off-viewport. Add `IntersectionObserver` to pause when not visible.
-- [ ] :yellow_circle: **Hero image carousel runs off-screen** -- `src/components/HomeHero/HeroImages.tsx:36-47` has a 4-second interval that continues even when hero is scrolled off. Pause with `IntersectionObserver`.
+- [x] :yellow_circle: **Service slideshow auto-play runs off-screen** -- `src/components/_blocks/ServiceList/ServiceImageSlideshow.tsx` runs `setInterval` even when the component is scrolled off-viewport. Add `IntersectionObserver` to pause when not visible.
+- [x] :yellow_circle: **Hero image carousel runs off-screen** -- `src/components/HomeHero/HeroImages.tsx:36-47` has a 4-second interval that continues even when hero is scrolled off. Pause with `IntersectionObserver`.
 - [x] :green_circle: **Fonts use `display: swap`** -- No FOIT, minimizes CLS from font loading.
 - [x] :green_circle: **Critical CSS inlined** -- `src/app/layout.tsx:65-82` inlines essential styles to prevent FOUC and improve LCP.
 

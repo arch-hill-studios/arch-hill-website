@@ -72,9 +72,6 @@ const HeroImages = ({ images, duration = 4000, onFirstImageLoaded }: HeroImagesP
         // Show image if it's current (only fade in first image after load, others show immediately when current)
         const shouldShow = isCurrentImage && (index === 0 ? isImageLoaded : true);
 
-        // Keep zoom active for both current image AND previous image (which is fading out)
-        const shouldHaveZoom = hasMultipleImages && (isCurrentImage || isPreviousImage);
-
         return (
           <div
             key={index}
@@ -82,15 +79,19 @@ const HeroImages = ({ images, duration = 4000, onFirstImageLoaded }: HeroImagesP
               shouldUseTransition ? 'transition-opacity duration-1000 ease-in-out' : ''
             } ${shouldShow ? 'opacity-100' : 'opacity-0'}`}
             style={
-              shouldHaveZoom
+              isCurrentImage && hasMultipleImages
                 ? {
                     animation: `heroZoom ${duration}ms linear forwards`,
                   }
-                : hasMultipleImages
+                : isPreviousImage && hasMultipleImages
                   ? {
-                      transform: 'scale(1)', // Reset for next cycle
+                      transform: 'scale(1.1)', // Hold zoomed state during fade-out
                     }
-                  : undefined
+                  : hasMultipleImages
+                    ? {
+                        transform: 'scale(1)', // Reset for next cycle
+                      }
+                    : undefined
             }>
             <Image
               priority={index === 0}
