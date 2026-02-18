@@ -26,7 +26,7 @@ export async function GET() {
 
   const staticPages: SitemapUrl[] = [
     { url: '', changefreq: 'weekly', priority: '1.0' },
-    { url: '/faq', lastmod: faqPage?._updatedAt, changefreq: 'monthly', priority: '0.7' },
+    ...(faqPage ? [{ url: '/faq', lastmod: faqPage._updatedAt, changefreq: 'monthly', priority: '0.7' }] : []),
   ];
 
   // Add legal pages if they exist and are not hidden
