@@ -22,7 +22,7 @@
   --color-brand-dark: #0a0a0a;
   --color-brand-dark-light: #111111;
   --color-brand-white: #fff7db;
-  --color-brand-muted: #999999;
+  --color-brand-muted: #adadad;
 
   /* Typography Scale System */
   --font-scale-base: 1rem; /* WARNING: if changing this please change the same in BodyTextPreview.tsx */

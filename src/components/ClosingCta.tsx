@@ -3,6 +3,7 @@ import { stegaClean } from 'next-sanity';
 import CTA from './UI/CTA';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import { closingCardSpacing, sitePaddingX } from '@/utils/spacingConstants';
+import { createSanityDataAttribute } from '@/utils/sectionHelpers';
 import type { InternalLinkType } from '@/types/shared';
 
 interface ClosingCtaProps {
@@ -15,6 +16,9 @@ interface ClosingCtaProps {
   openInNewTab?: boolean;
   computedHref?: string;
   pageSectionId?: string;
+  documentId?: string;
+  documentType?: string;
+  basePath?: string;
 }
 
 const ClosingCta = ({
@@ -27,6 +31,9 @@ const ClosingCta = ({
   openInNewTab = false,
   computedHref,
   pageSectionId,
+  documentId,
+  documentType,
+  basePath,
 }: ClosingCtaProps) => {
   const cleanTitle = stegaClean(title);
   const cleanMessage = stegaClean(message);
@@ -69,11 +76,25 @@ const ClosingCta = ({
   const shouldOpenInNewTab = linkType === 'external' || (linkType === 'internal' && openInNewTab);
 
   return (
-    <section className={`${closingCardSpacing} ${sitePaddingX} text-center`}>
-      <h2 className='font-heading text-body-5xl uppercase tracking-[4px] text-brand-white mb-4'>
+    <section
+      className={`${closingCardSpacing} ${sitePaddingX} mx-auto text-center`}
+      {...createSanityDataAttribute(documentId, documentType, basePath)}>
+      <h2
+        className='font-heading text-body-5xl uppercase tracking-[4px] text-brand-white mb-4'
+        {...createSanityDataAttribute(
+          documentId,
+          documentType,
+          basePath ? `${basePath}.title` : undefined,
+        )}>
         {title}
       </h2>
-      <p className='text-brand-muted max-w-150 mx-auto mb-8 text-body-base leading-relaxed'>
+      <p
+        className='text-brand-muted max-w-150 mx-auto mb-8 text-body-base leading-relaxed'
+        {...createSanityDataAttribute(
+          documentId,
+          documentType,
+          basePath ? `${basePath}.message` : undefined,
+        )}>
         {message}
       </p>
       <CTA
@@ -81,7 +102,14 @@ const ClosingCta = ({
         variant='filled'
         target={shouldOpenInNewTab ? '_blank' : undefined}
         rel={shouldOpenInNewTab ? 'noopener noreferrer' : undefined}>
-        {ctaText}
+        <span
+          {...createSanityDataAttribute(
+            documentId,
+            documentType,
+            basePath ? `${basePath}.ctaText` : undefined,
+          )}>
+          {ctaText}
+        </span>
         {shouldOpenInNewTab && <FaExternalLinkAlt className='ml-4' />}
       </CTA>
     </section>

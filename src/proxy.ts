@@ -15,7 +15,7 @@ export function proxy(request: NextRequest) {
   }
 
   // If maintenance mode is disabled, allow normal site operation
-  if (!SITE_CONFIG.MAINTENANCE_MODE_ENABLED) {
+  if (process.env.MAINTENANCE_MODE_ENABLED !== 'true') {
     return NextResponse.next();
   }
 

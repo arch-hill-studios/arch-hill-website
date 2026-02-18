@@ -114,6 +114,9 @@ const SlugPageContent = ({
             openInNewTab={page.closingCta.openInNewTab}
             computedHref={page.closingCta.computedHref ?? undefined}
             pageSectionId={page.closingCta.pageSectionId}
+            documentId={page._id}
+            documentType={page._type}
+            basePath='closingCta'
           />
         )}
       </Container>

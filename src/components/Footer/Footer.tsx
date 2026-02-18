@@ -216,7 +216,7 @@ const Footer = ({
 
           {/* CONTACT COLUMN */}
           <div className='text-center md:text-left'>
-            <h4 className='text-h6 mb-5 text-brand-white'>Contact</h4>
+            <p className='text-h6 mb-5 text-brand-white'>Contact</p>
             <div className='flex flex-col items-center md:items-start gap-3'>
               {contactDetails.map((detail, index) => (
                 <a
@@ -235,7 +235,7 @@ const Footer = ({
           {/* QUICK LINKS COLUMN */}
           {quickLinks.length > 0 && (
             <div className='text-center md:text-left'>
-              <h4 className='text-h6 mb-5 text-brand-white'>Quick Links</h4>
+              <p className='text-h6 mb-5 text-brand-white'>Quick Links</p>
               <div
                 className='flex flex-col items-center md:items-start gap-3'
                 {...createSanityDataAttribute('footer', 'footer', 'quickLinks')}>

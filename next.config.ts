@@ -1,5 +1,7 @@
 import type { NextConfig } from 'next';
 
+const isProd = process.env.NODE_ENV === 'production';
+
 // ---------------------------------------------------------------------------
 // Security Headers
 // ---------------------------------------------------------------------------
@@ -24,7 +26,7 @@ const cspDirectives = [
   "img-src 'self' https://cdn.sanity.io data:",
   "font-src 'self'",
   "connect-src 'self' https://*.sanity.io wss://*.sanity.io",
-  "frame-src https://www.youtube.com https://www.google.com",
+  'frame-src https://www.youtube.com https://www.google.com',
   "media-src 'self' https://cdn.sanity.io",
   "object-src 'none'",
   "base-uri 'self'",
@@ -67,10 +69,11 @@ const nextConfig: NextConfig = {
   // Modern JavaScript - reduce polyfills for better performance
   transpilePackages: [],
 
-  // CSS and JavaScript optimization
+  // CSS and JavaScript optimization (production only — strict chunking can cause
+  // CSS propagation issues with the dev server's on-demand processing)
   experimental: {
-    optimizeCss: true,
-    cssChunking: 'strict',
+    optimizeCss: isProd,
+    cssChunking: isProd ? 'strict' : undefined,
   },
 
   // Turbopack configuration (required for Next.js 16+)

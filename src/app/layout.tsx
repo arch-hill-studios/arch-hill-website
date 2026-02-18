@@ -29,7 +29,7 @@ const RootLayout = async ({
   // Only show robots meta tag if:
   // 1. NOT in production (always hide), OR
   // 2. In production AND maintenance mode is OFF
-  const shouldHideFromRobots = !isProd || SITE_CONFIG.MAINTENANCE_MODE_ENABLED;
+  const shouldHideFromRobots = !isProd || process.env.MAINTENANCE_MODE_ENABLED === 'true';
 
   // Fetch organization info from Sanity (with fallback to defaults)
   const { name: orgName, description: orgDescription } = await fetchOrganizationInfo();
@@ -90,13 +90,13 @@ const RootLayout = async ({
       </head>
       <body
         className={`${inter.className} ${bebasNeue.variable} text-body-base text-brand-muted overflow-x-hidden bg-brand-dark`}>
-        {/* Fixed background image - contained to screen width with bottom fade */}
+        {/* Fixed background image - contained to screen width with bottom fade. */}
         <div className='fixed inset-0 z-[-1] overflow-hidden' aria-hidden='true'>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src='/body-background.png'
             alt=''
-            className='block w-full h-auto brightness-90 md:brightness-70'
+            className='block w-full h-auto brightness-100 md:brightness-70'
             style={{
               maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
               WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
