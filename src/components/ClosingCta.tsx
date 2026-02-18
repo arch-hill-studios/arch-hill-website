@@ -77,16 +77,24 @@ const ClosingCta = ({
 
   return (
     <section
-      className={`${closingCardSpacing} ${sitePaddingX} text-center`}
+      className={`${closingCardSpacing} ${sitePaddingX} mx-auto text-center`}
       {...createSanityDataAttribute(documentId, documentType, basePath)}>
       <h2
         className='font-heading text-body-5xl uppercase tracking-[4px] text-brand-white mb-4'
-        {...createSanityDataAttribute(documentId, documentType, basePath ? `${basePath}.title` : undefined)}>
+        {...createSanityDataAttribute(
+          documentId,
+          documentType,
+          basePath ? `${basePath}.title` : undefined,
+        )}>
         {title}
       </h2>
       <p
         className='text-brand-muted max-w-150 mx-auto mb-8 text-body-base leading-relaxed'
-        {...createSanityDataAttribute(documentId, documentType, basePath ? `${basePath}.message` : undefined)}>
+        {...createSanityDataAttribute(
+          documentId,
+          documentType,
+          basePath ? `${basePath}.message` : undefined,
+        )}>
         {message}
       </p>
       <CTA
@@ -94,7 +102,12 @@ const ClosingCta = ({
         variant='filled'
         target={shouldOpenInNewTab ? '_blank' : undefined}
         rel={shouldOpenInNewTab ? 'noopener noreferrer' : undefined}>
-        <span {...createSanityDataAttribute(documentId, documentType, basePath ? `${basePath}.ctaText` : undefined)}>
+        <span
+          {...createSanityDataAttribute(
+            documentId,
+            documentType,
+            basePath ? `${basePath}.ctaText` : undefined,
+          )}>
           {ctaText}
         </span>
         {shouldOpenInNewTab && <FaExternalLinkAlt className='ml-4' />}
