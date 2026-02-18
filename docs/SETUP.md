@@ -121,7 +121,7 @@ In Sanity Studio:
 | `SANITY_API_READ_TOKEN` | Sanity API token with Viewer permissions |
 | `NEXT_PUBLIC_BASE_URL` | Your site URL (e.g., `http://localhost:3000` for dev) |
 | `RESEND_API_KEY` | Your Resend API key |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | Email for form submissions |
+| `RESEND_CONTACT_EMAIL` | Email for form submissions |
 | `RESEND_FROM_EMAIL` | Sender email for automated messages |
 
 ### Optional Variables
@@ -205,7 +205,7 @@ RESEND_API_KEY="re_your_api_key"
 
 ```bash
 # Where form submissions are sent
-NEXT_PUBLIC_CONTACT_EMAIL="contact@yoursite.com"
+RESEND_CONTACT_EMAIL="contact@yoursite.com"
 
 # Sender address for automated emails
 # Development: Use Resend's test domain

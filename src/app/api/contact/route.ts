@@ -18,7 +18,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 // IMPORTANT: Add these environment variables to your .env.local file:
 // RESEND_API_KEY=your_resend_api_key_here
-// NEXT_PUBLIC_CONTACT_EMAIL=your_contact_email@example.com
+// RESEND_CONTACT_EMAIL=your_contact_email@example.com
 // RESEND_FROM_EMAIL=noreply@yourdomain.com (must be verified in Resend)
 
 // ========================================
@@ -159,11 +159,11 @@ export async function POST(request: Request) {
     const productionDomain = SITE_CONFIG.PRODUCTION_DOMAIN;
 
     // Get contact email from environment variable
-    const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
+    const contactEmail = process.env.RESEND_CONTACT_EMAIL;
     const fromEmail = `${organizationName} <${process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'}>`;
 
     if (!contactEmail) {
-      console.error('NEXT_PUBLIC_CONTACT_EMAIL environment variable is not set');
+      console.error('RESEND_CONTACT_EMAIL environment variable is not set');
       return NextResponse.json(
         {
           error:
@@ -286,7 +286,7 @@ export async function POST(request: Request) {
       NEXT_PUBLIC_ENV: process.env.NEXT_PUBLIC_ENV,
       VERCEL_ENV: process.env.VERCEL_ENV,
       hasResendKey: !!process.env.RESEND_API_KEY,
-      hasContactEmail: !!process.env.NEXT_PUBLIC_CONTACT_EMAIL,
+      hasContactEmail: !!process.env.RESEND_CONTACT_EMAIL,
       hasFromEmail: !!process.env.RESEND_FROM_EMAIL,
     });
     console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');

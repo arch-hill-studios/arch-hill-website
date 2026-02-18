@@ -152,7 +152,7 @@
 
 ### 2.2 CORS
 
-- [ ] :orange_circle: **`Access-Control-Allow-Origin: *` on all responses** -- Vercel's default adds this to all responses. For API routes handling sensitive data (contact form), this is too permissive. Configure specific CORS headers for API routes.
+- [ ] :orange_circle: ~**`Access-Control-Allow-Origin: *` on all responses** -- Vercel's default adds this to all responses. For API routes handling sensitive data (contact form), this is too permissive. Configure specific CORS headers for API routes.~
 
 ### 2.3 API Route Security
 
@@ -168,7 +168,7 @@
 
 - [x] :green_circle: **Draft mode properly gated** -- Uses `defineEnableDraftMode` from `next-sanity/draft-mode` with token authentication.
 - [x] :green_circle: **Sanity tokens not exposed client-side** -- Token is server-side only (`src/sanity/lib/token.ts`).
-- [ ] :yellow_circle: **Sanity Studio publicly accessible** -- `/studio` returns HTTP 200 for unauthenticated users (Sanity handles its own auth, but consider additional IP restriction or auth layer for production).
+- [ ] :yellow_circle: ~**Sanity Studio publicly accessible** -- `/studio` returns HTTP 200 for unauthenticated users (Sanity handles its own auth, but consider additional IP restriction or auth layer for production).~
 
 ### 2.5 Environment Variables & Secrets
 
