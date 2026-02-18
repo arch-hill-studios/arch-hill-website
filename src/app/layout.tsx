@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Bebas_Neue, Inter } from 'next/font/google';
 import '@/app/globals.css';
 import { SITE_CONFIG } from '@/lib/constants';
@@ -92,15 +93,17 @@ const RootLayout = async ({
         className={`${inter.className} ${bebasNeue.variable} text-body-base text-brand-muted overflow-x-hidden bg-brand-dark`}>
         {/* Fixed background image - contained to screen width with bottom fade. */}
         <div className='fixed inset-0 z-[-1] overflow-hidden' aria-hidden='true'>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src='/body-background.png'
             alt=''
+            width={1440}
+            height={1444}
             className='block w-full h-auto brightness-100 md:brightness-70'
             style={{
               maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
               WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
             }}
+            priority
           />
         </div>
         {children}

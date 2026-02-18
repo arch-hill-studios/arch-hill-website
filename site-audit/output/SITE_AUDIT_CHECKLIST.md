@@ -206,13 +206,13 @@
 
 - [x] :green_circle: **Server-first architecture** -- All pages and layouts are server components by default.
 - [x] :green_circle: **Sanity Studio dynamically imported** -- `src/app/studio/[[...tool]]/page.tsx` uses `dynamic()` with `ssr: false`.
-- [ ] :yellow_circle: **24 client components identified** -- While most are justified (Header, Modal, forms, animations), review `ContentWrapper.tsx` and `ResponsiveWrapper.tsx` which appear to be pure presentation and could be server components.
-- [ ] :yellow_circle: **Header component overly complex** -- `src/components/Header/Header.tsx` manages scroll state, opacity, transitions, and menu state simultaneously. Consider extracting scroll logic into a `useHeaderScroll()` hook.
+- [ ] :yellow_circle: ~**24 client components identified** -- While most are justified (Header, Modal, forms, animations), review `ContentWrapper.tsx` and `ResponsiveWrapper.tsx` which appear to be pure presentation and could be server components.~
+- [ ] :yellow_circle: ~**Header component overly complex** -- `src/components/Header/Header.tsx` manages scroll state, opacity, transitions, and menu state simultaneously. Consider extracting scroll logic into a `useHeaderScroll()` hook.~
 
 ### 3.2 Bundle Size
 
-- [ ] :orange_circle: **No bundle analyzer configured** -- No `@next/bundle-analyzer` or similar tool. Add to dev dependencies and integrate into build process for visibility.
-- [ ] :orange_circle: **16 separate react-icons imports across codebase** -- Each imports from different icon sets (Fa, Fi, Md, Go), adding an estimated 15-25 KB gzipped. Consider consolidating to a single icon set or migrating to custom SVG icons (~2-3 KB).
+- [ ] :orange_circle: ~**No bundle analyzer configured** -- No `@next/bundle-analyzer` or similar tool. Add to dev dependencies and integrate into build process for visibility.~
+- [ ] :orange_circle: ~**16 separate react-icons imports across codebase** -- Each imports from different icon sets (Fa, Fi, Md, Go), adding an estimated 15-25 KB gzipped. Consider consolidating to a single icon set or migrating to custom SVG icons (~2-3 KB).~
 - [x] :green_circle: **Console statements removed in production** -- `next.config.ts:16` has `removeConsole` for production builds.
 - [x] :green_circle: **CSS optimization enabled** -- `optimizeCss: true` and `cssChunking: 'strict'` in next.config.ts.
 
