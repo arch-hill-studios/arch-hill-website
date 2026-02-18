@@ -53,13 +53,13 @@
 ### 1.5 Meta Descriptions
 
 - [x] :green_circle: **Dynamic meta descriptions** -- Generated per page from CMS content with fallback to site description.
-- [ ] :yellow_circle: **Legal pages share same generic description** -- Terms & Conditions and Privacy Policy pages use the site-wide default description rather than page-specific ones. Each should have a unique, relevant description.
-- [ ] :yellow_circle: **Verify all page descriptions are 120-155 characters** -- Audit each page's meta description length for optimal SERP display.
+- [x] :yellow_circle: **Legal pages share same generic description** -- Terms & Conditions and Privacy Policy pages use the site-wide default description rather than page-specific ones. Each should have a unique, relevant description.
+- [ ] ~:yellow_circle: ~**Verify all page descriptions are 120-155 characters** -- Audit each page's meta description length for optimal SERP display.~
 
 ### 1.6 Title Tags
 
 - [x] :green_circle: **Unique titles per page** -- Format: `{Site Title} | {Page Title}`.
-- [ ] :yellow_circle: **Check title length** -- Ensure all titles are under 60 characters. Current homepage title "Arch Hill Studios | Auckland Rehearsal & Recording Space" is 56 characters (good), but verify all dynamic page titles.
+- [ ] :yellow_circle: ~**Check title length** -- Ensure all titles are under 60 characters. Current homepage title "Arch Hill Studios | Auckland Rehearsal & Recording Space" is 56 characters (good), but verify all dynamic page titles.~
 
 ### 1.7 Structured Data / Schema Markup
 
