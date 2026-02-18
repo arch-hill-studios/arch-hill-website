@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import UnifiedImage from '@/components/UI/UnifiedImage';
+import useIsVisible from '@/hooks/useIsVisible';
 import type { ServiceImageImage } from '@/sanity/types';
 
 interface ServiceImageItem {
@@ -61,9 +62,15 @@ const ServiceImageSlideshow = ({
     [stopAutoPlay, startAutoPlay, validImages.length]
   );
 
+  // Pause autoplay when scrolled off-screen
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isVisible = useIsVisible(containerRef);
+
   useEffect(() => {
-    if (hasMultiple) {
+    if (hasMultiple && isVisible) {
       startAutoPlay();
+    } else {
+      stopAutoPlay();
     }
     return () => {
       stopAutoPlay();
@@ -71,7 +78,7 @@ const ServiceImageSlideshow = ({
         clearTimeout(resumeTimerRef.current);
       }
     };
-  }, [hasMultiple, startAutoPlay, stopAutoPlay]);
+  }, [hasMultiple, isVisible, startAutoPlay, stopAutoPlay]);
 
   if (validImages.length === 0) return null;
 
@@ -87,6 +94,7 @@ const ServiceImageSlideshow = ({
 
   return (
     <div
+      ref={containerRef}
       className={`relative w-full h-[300px] lg:h-[480px] overflow-hidden ${borderClass} ${mobileBorderClass}`}>
       {validImages.map((item, index) => (
         <div

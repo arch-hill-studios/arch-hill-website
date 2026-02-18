@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
+import useIsVisible from '@/hooks/useIsVisible';
 
 interface HeroImage {
   imageUrl: string;
@@ -32,9 +33,13 @@ const HeroImages = ({ images, duration = 4000, onFirstImageLoaded }: HeroImagesP
     [onFirstImageLoaded]
   );
 
+  // Pause slideshow when scrolled off-screen
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isVisible = useIsVisible(containerRef, true);
+
   // Transition to next image
   useEffect(() => {
-    if (images.length <= 1) return; // Don't rotate if only one image
+    if (images.length <= 1 || !isVisible) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => {
@@ -44,7 +49,7 @@ const HeroImages = ({ images, duration = 4000, onFirstImageLoaded }: HeroImagesP
     }, duration);
 
     return () => clearInterval(interval);
-  }, [duration, images.length]);
+  }, [duration, images.length, isVisible]);
 
   // Don't render anything if no images
   if (images.length === 0) {
@@ -55,7 +60,7 @@ const HeroImages = ({ images, duration = 4000, onFirstImageLoaded }: HeroImagesP
   const hasMultipleImages = images.length > 1;
 
   return (
-    <div className='absolute top-0 left-0 w-full h-full z-10 overflow-hidden'>
+    <div ref={containerRef} className='absolute top-0 left-0 w-full h-full z-10 overflow-hidden'>
       {images.map((image, index) => {
         const isCurrentImage = index === currentIndex;
         const isPreviousImage = index === previousIndex;
