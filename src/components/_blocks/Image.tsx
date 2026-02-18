@@ -8,8 +8,7 @@ import UnifiedImage from '../UI/UnifiedImage';
 import AnimateIn from '../UI/AnimateIn';
 
 interface ImageProps
-  extends ImageBlock,
-    Omit<SanityLiveEditingProps, 'titlePath' | 'subtitlePath'> {
+  extends ImageBlock, Omit<SanityLiveEditingProps, 'titlePath' | 'subtitlePath'> {
   className?: string;
   pathPrefix?: string;
 }
@@ -22,7 +21,7 @@ const getFrameElements = (frameStyle: FrameStyle) => {
       // Single red/primary frame offset bottom-right
       return (
         <div
-          className="absolute border-2 border-brand-primary"
+          className='absolute border-2 border-brand-primary'
           style={{ top: 15, left: 15, right: -15, bottom: -15 }}
         />
       );
@@ -30,7 +29,7 @@ const getFrameElements = (frameStyle: FrameStyle) => {
       // Single blue/secondary frame offset bottom-left
       return (
         <div
-          className="absolute border-2 border-brand-secondary"
+          className='absolute border-2 border-brand-secondary'
           style={{ top: 15, left: -15, right: 15, bottom: -15 }}
         />
       );
@@ -39,11 +38,11 @@ const getFrameElements = (frameStyle: FrameStyle) => {
       return (
         <>
           <div
-            className="absolute border-2 border-brand-primary"
+            className='absolute border-2 border-brand-primary'
             style={{ top: -15, right: -15, bottom: 15, left: 15 }}
           />
           <div
-            className="absolute border-2 border-brand-secondary"
+            className='absolute border-2 border-brand-secondary'
             style={{ top: 15, right: 15, bottom: -15, left: -15 }}
           />
         </>
@@ -86,26 +85,22 @@ const Image: React.FC<ImageProps> = ({
     : {};
 
   return (
-    <AnimateIn
-      animation='slideUp'
-      trigger='scroll'
-      duration={800}
-      threshold={0.2}>
+    <AnimateIn animation='slideUp' trigger='scroll' duration={800} threshold={0.2}>
       <figure className={`${sizeClasses} ${className}`}>
         <div className={`relative ${hasFrame ? 'm-3.75' : ''}`}>
           {getFrameElements(cleanFrameStyle)}
           <UnifiedImage
             src={image}
-            alt="Content image"
-            mode="sized"
+            alt={image?.alt || 'Image'}
+            mode='sized'
             width={1200}
             height={800}
-            sizeContext="full"
-            objectFit="cover"
+            sizeContext='full'
+            objectFit='cover'
             enableModal
             modalCaption={cleanCaption}
             generateSchema
-            schemaContext="article"
+            schemaContext='article'
             className={`w-full h-auto rounded-lg ${hasFrame ? 'relative z-10' : ''}`}
             documentId={documentId}
             documentType={documentType}
