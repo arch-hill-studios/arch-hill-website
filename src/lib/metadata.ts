@@ -70,11 +70,11 @@ export function generateMetadata({
   if (image?.asset?._ref) {
     // Use provided image
     ogImageUrl = urlFor(image).width(1200).height(630).url();
-    ogImageAlt = image.alt || `${siteTitle} - ${title || siteTagline}`;
+    ogImageAlt = image.alt || `${siteTitle} - ${title || siteTagline.replace(' | ', '')}`;
   } else if (seoMetaData?.defaultOgImage?.asset?._ref) {
     // Fall back to site default image from Sanity
     ogImageUrl = urlFor(seoMetaData.defaultOgImage).width(1200).height(630).url();
-    ogImageAlt = seoMetaData.defaultOgImage.alt || `${siteTitle} - ${title || siteTagline}`;
+    ogImageAlt = seoMetaData.defaultOgImage.alt || `${siteTitle} - ${title || siteTagline.replace(' | ', '')}`;
   } else {
     // Final fallback to static OG image in public directory
     ogImageUrl = `${getBaseUrl()}/images/og-image.png`;
