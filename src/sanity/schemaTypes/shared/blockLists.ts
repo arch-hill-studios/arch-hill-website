@@ -46,6 +46,7 @@ export const CONTENT_ONLY_BLOCKS = [
   defineArrayMember({ type: 'expandingContent' }),
   defineArrayMember({ type: 'faqBlock' }),
   defineArrayMember({ type: 'serviceList' }),
+  defineArrayMember({ type: 'gearList' }),
 ];
 
 /**

@@ -25,6 +25,7 @@ import type {
   GridLayout as GridLayoutType,
   FaqBlock as FaqBlockType,
   ServiceList as ServiceListType,
+  GearList as GearListType,
   ContactSection as ContactSectionType,
 } from '@/sanity/types';
 import type { PageBuilderData } from '@/actions';
@@ -55,6 +56,7 @@ import ResponsiveWrapper from '@/components/_blocks/ResponsiveWrapper';
 import GridLayout from '@/components/_blocks/GridLayout';
 import FAQBlock from '@/components/_blocks/FAQBlock';
 import ServiceList from '@/components/_blocks/ServiceList/ServiceList';
+import GearList from '@/components/_blocks/GearList/GearList';
 import ContactSection from '@/components/_blocks/ContactSection/ContactSection';
 
 interface RenderBlockConfig {
@@ -101,7 +103,22 @@ type BlockType =
   | WithKey<GridLayoutType>
   | WithKey<FaqBlockType>
   | WithKey<ServiceListType>
+  | WithKey<GearListType>
   | WithKey<ContactSectionType>;
+
+/**
+ * Derives the appropriate heading level for blocks that contain category/section headings,
+ * based on how deeply nested they are within the page section hierarchy.
+ * Counts .content[ occurrences in the blockPath to determine section depth.
+ */
+const getHeadingLevelFromPath = (blockPath: string): 'h2' | 'h3' | 'h4' | 'h5' | 'h6' => {
+  const depth = (blockPath.match(/\.content\[/g) || []).length;
+  if (depth <= 0) return 'h2';
+  if (depth === 1) return 'h3';
+  if (depth === 2) return 'h4';
+  if (depth === 3) return 'h5';
+  return 'h6';
+};
 
 /**
  * Shared block rendering logic used by both PageBuilder and Card components.
@@ -435,6 +452,22 @@ export const renderBlock = (block: unknown, options: RenderBlockOptions): React.
         <BlockWrapper key={serviceListBlock._key}>
           <ServiceList
             {...serviceListBlock}
+            documentId={documentId}
+            documentType={documentType}
+            fieldPathPrefix={blockPath}
+          />
+        </BlockWrapper>
+      );
+    }
+
+    case 'gearList': {
+      const gearListBlock = typedBlock as WithKey<GearListType>;
+      const headingLevel = getHeadingLevelFromPath(blockPath);
+      return (
+        <BlockWrapper key={gearListBlock._key}>
+          <GearList
+            {...gearListBlock}
+            headingLevel={headingLevel}
             documentId={documentId}
             documentType={documentType}
             fieldPathPrefix={blockPath}
