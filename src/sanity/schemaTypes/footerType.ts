@@ -129,14 +129,6 @@ export const footerType = defineType({
         sortable: true,
       },
     }),
-    defineField({
-      name: 'copyrightText',
-      type: 'string',
-      title: 'Copyright Text',
-      description: 'Copyright notice that appears at the bottom of the footer',
-      initialValue: '© Your Organization Name 2025',
-      validation: (Rule) => Rule.required().error('Copyright text is required'),
-    }),
   ],
   preview: {
     prepare() {

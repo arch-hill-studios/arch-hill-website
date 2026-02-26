@@ -500,8 +500,7 @@ export const FOOTER_QUERY = defineQuery(`*[_type == "footer" && _id == "footer"]
     _key,
     label,
     ${fullLinkProjection}
-  },
-  copyrightText
+  }
 }`);
 
 // Sitemap queries

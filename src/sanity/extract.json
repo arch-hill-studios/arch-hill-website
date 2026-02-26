@@ -1039,6 +1039,14 @@
                   },
                   "optional": true
                 },
+                "cta": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "inline",
+                    "name": "cta"
+                  },
+                  "optional": true
+                },
                 "price": {
                   "type": "objectAttribute",
                   "value": {
@@ -1050,14 +1058,6 @@
                   "type": "objectAttribute",
                   "value": {
                     "type": "string"
-                  },
-                  "optional": true
-                },
-                "cta": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "inline",
-                    "name": "cta"
                   },
                   "optional": true
                 },
@@ -7273,13 +7273,6 @@
               }
             }
           }
-        },
-        "optional": true
-      },
-      "copyrightText": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
         },
         "optional": true
       }

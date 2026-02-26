@@ -283,8 +283,10 @@ const Footer = ({
         <div className='border-t border-[#2a2a2a] pt-8'>
           <div className='flex flex-col md:flex-row justify-between items-center gap-3'>
             {/* Copyright */}
-            {footerData?._type === 'footer' && footerData.copyrightText && (
-              <p className='text-gray-400 text-body-xs'>{footerData.copyrightText}</p>
+            {organizationName && (
+              <p className='text-gray-400 text-body-xs'>
+                &copy; {organizationName} {new Date().getFullYear()}
+              </p>
             )}
 
             {/* Legal Links */}
