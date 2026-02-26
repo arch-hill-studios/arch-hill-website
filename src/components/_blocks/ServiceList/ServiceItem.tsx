@@ -61,13 +61,19 @@ const ServiceItem = ({
   if (cta && ctaText) {
     if (cta.computedHref) {
       ctaHref = stegaClean(cta.computedHref);
-    } else if (cta.linkType === 'internal' && cta.internalLink && 'href' in cta.internalLink && cta.internalLink.href) {
+    } else if (
+      cta.linkType === 'internal' &&
+      cta.internalLink &&
+      'href' in cta.internalLink &&
+      cta.internalLink.href
+    ) {
       ctaHref = cta.internalLink.href;
     } else if (cta.linkType === 'external' && cta.externalUrl) {
       ctaHref = stegaClean(cta.externalUrl);
     }
   }
-  const ctaOpenInNewTab = cta?.linkType === 'external' || (cta?.linkType === 'internal' && cta?.openInNewTab);
+  const ctaOpenInNewTab =
+    cta?.linkType === 'external' || (cta?.linkType === 'internal' && cta?.openInNewTab);
 
   return (
     <ServiceItemAnimated variant={variant}>
@@ -134,7 +140,7 @@ const ServiceItem = ({
               {/* Description */}
               {description && (
                 <div
-                  className={`text-brand-white leading-[1.8] mb-5 ${animation.description}`}
+                  className={`text-brand-white leading-[1.8] mb-10 ${animation.description}`}
                   style={animation.descriptionStyle}
                   {...(documentId && documentType
                     ? createSanityDataAttribute(
@@ -168,7 +174,11 @@ const ServiceItem = ({
                   <span
                     className='block font-heading text-body-2xl tracking-[2px] text-brand-white mb-2.5'
                     {...(documentId && documentType
-                      ? createSanityDataAttribute(documentId, documentType, `${fieldPathPrefix}.price`)
+                      ? createSanityDataAttribute(
+                          documentId,
+                          documentType,
+                          `${fieldPathPrefix}.price`,
+                        )
                       : {})}>
                     {price}
                   </span>
