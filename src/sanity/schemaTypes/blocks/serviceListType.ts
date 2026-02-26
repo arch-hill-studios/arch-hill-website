@@ -4,6 +4,7 @@
 
 import { defineArrayMember, defineField, defineType } from 'sanity';
 import { DocumentsIcon } from '@sanity/icons';
+import { createLinkFieldSet } from '../shared/linkSystem';
 
 export const serviceListType = defineType({
   name: 'serviceList',
@@ -34,6 +35,26 @@ export const serviceListType = defineType({
               title: 'Description',
               type: 'blockContent',
               description: 'Rich text description of this service.',
+            }),
+            defineField({
+              name: 'cta',
+              title: 'Call to Action Link',
+              type: 'object',
+              description: 'Optional link button displayed under the description.',
+              options: {
+                collapsible: true,
+                collapsed: true,
+              },
+              fields: [
+                defineField({
+                  name: 'text',
+                  title: 'Button Text',
+                  type: 'string',
+                  description: 'The text that will appear on the button.',
+                  validation: (Rule) => Rule.max(50),
+                }),
+                ...createLinkFieldSet(),
+              ],
             }),
             defineField({
               name: 'price',

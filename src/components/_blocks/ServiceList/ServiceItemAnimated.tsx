@@ -13,6 +13,8 @@ interface AnimationClasses {
   cardStyle: React.CSSProperties;
   description: string;
   descriptionStyle: React.CSSProperties;
+  cta: string;
+  ctaStyle: React.CSSProperties;
   pricing: string;
   pricingStyle: React.CSSProperties;
 }
@@ -72,6 +74,8 @@ const ServiceItemAnimated = ({ variant, children }: ServiceItemAnimatedProps) =>
       cardStyle: {},
       description: '',
       descriptionStyle: {},
+      cta: '',
+      ctaStyle: {},
       pricing: '',
       pricingStyle: {},
     };
@@ -112,6 +116,11 @@ const ServiceItemAnimated = ({ variant, children }: ServiceItemAnimatedProps) =>
     ? 'opacity-100 translate-y-0'
     : 'opacity-0 translate-y-2.5';
 
+  // --- CTA animation ---
+  const ctaClasses = isVisible
+    ? 'opacity-100 translate-y-0'
+    : 'opacity-0 translate-y-2.5';
+
   // --- Pricing animation ---
   const pricingClasses = isVisible
     ? 'opacity-100 translate-y-0'
@@ -141,6 +150,12 @@ const ServiceItemAnimated = ({ variant, children }: ServiceItemAnimatedProps) =>
       transitionDuration: '500ms',
       transitionTimingFunction: EASING,
       transitionDelay: '550ms',
+    },
+    cta: `transition-[opacity,transform] ${ctaClasses}`,
+    ctaStyle: {
+      transitionDuration: '500ms',
+      transitionTimingFunction: EASING,
+      transitionDelay: '625ms',
     },
     pricing: `transition-[opacity,transform] ${pricingClasses}`,
     pricingStyle: {

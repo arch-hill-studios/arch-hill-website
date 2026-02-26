@@ -1,10 +1,13 @@
 import React from 'react';
+import { stegaClean } from 'next-sanity';
 import type { BlockContent, ServiceImageImage } from '@/sanity/types';
+import type { InternalLinkType } from '@/types/shared';
 import { createComponents } from '@/sanity/portableTextComponents';
 import PortableTextWrapper from '@/components/UI/PortableTextWrapper';
 import ServiceImageSlideshow from './ServiceImageSlideshow';
 import { createSanityDataAttribute } from '@/utils/sectionHelpers';
 import ServiceItemAnimated from './ServiceItemAnimated';
+import CTA from '@/components/UI/CTA';
 
 interface ServiceImageItem {
   image?: ServiceImageImage;
@@ -12,11 +15,21 @@ interface ServiceImageItem {
   _key: string;
 }
 
+interface ServiceItemCTA {
+  text?: string;
+  linkType?: string;
+  internalLink?: InternalLinkType;
+  externalUrl?: string;
+  openInNewTab?: boolean;
+  computedHref?: string;
+}
+
 interface ServiceItemProps {
   title?: string;
   description?: BlockContent;
   price?: string;
   disclaimer?: string;
+  cta?: ServiceItemCTA | null;
   images?: ServiceImageItem[];
   index: number;
   documentId?: string;
@@ -29,6 +42,7 @@ const ServiceItem = ({
   description,
   price,
   disclaimer,
+  cta,
   images,
   index,
   documentId,
@@ -40,6 +54,20 @@ const ServiceItem = ({
   const validImages = images?.filter((item) => item.image?.asset) || [];
   const hasImages = validImages.length > 0;
   const components = createComponents('left');
+
+  // Resolve CTA href (using same pattern as CTAButton)
+  let ctaHref = '';
+  const ctaText = stegaClean(cta?.text);
+  if (cta && ctaText) {
+    if (cta.computedHref) {
+      ctaHref = stegaClean(cta.computedHref);
+    } else if (cta.linkType === 'internal' && cta.internalLink && 'href' in cta.internalLink && cta.internalLink.href) {
+      ctaHref = cta.internalLink.href;
+    } else if (cta.linkType === 'external' && cta.externalUrl) {
+      ctaHref = stegaClean(cta.externalUrl);
+    }
+  }
+  const ctaOpenInNewTab = cta?.linkType === 'external' || (cta?.linkType === 'internal' && cta?.openInNewTab);
 
   return (
     <ServiceItemAnimated variant={variant}>
@@ -116,6 +144,19 @@ const ServiceItem = ({
                       )
                     : {})}>
                   <PortableTextWrapper value={description} components={components} />
+                </div>
+              )}
+
+              {/* CTA Link */}
+              {ctaHref && ctaText && (
+                <div className={`mb-5 ${animation.cta}`} style={animation.ctaStyle}>
+                  <CTA
+                    href={ctaHref}
+                    variant='text-link'
+                    target={ctaOpenInNewTab ? '_blank' : undefined}
+                    rel={ctaOpenInNewTab ? 'noopener noreferrer' : undefined}>
+                    {ctaText}
+                  </CTA>
                 </div>
               )}
 

@@ -26,6 +26,7 @@ const ServiceList = ({
           description={service.description}
           price={service.price}
           disclaimer={service.disclaimer}
+          cta={service.cta}
           images={service.images}
           index={index}
           documentId={documentId}

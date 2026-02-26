@@ -79,7 +79,8 @@ const cardContentProjection = `
           hotspot,
           crop
         }
-      }
+      },
+      cta{${fullLinkProjection}}
     }
   }
 `;
@@ -132,7 +133,8 @@ const contentProjection = `
           hotspot,
           crop
         }
-      }
+      },
+      cta{${fullLinkProjection}}
     }
   },
   _type == "pageSection" => {
@@ -201,7 +203,8 @@ const contentProjection = `
               hotspot,
               crop
             }
-          }
+          },
+          cta{${fullLinkProjection}}
         }
       }
     },
@@ -247,7 +250,8 @@ const contentProjection = `
               hotspot,
               crop
             }
-          }
+          },
+          cta{${fullLinkProjection}}
         }
       }
     }
@@ -296,7 +300,8 @@ const contentProjection = `
               hotspot,
               crop
             }
-          }
+          },
+          cta{${fullLinkProjection}}
         }
       }
     }
