@@ -174,10 +174,10 @@ const ImageGalleryModal = ({
       aria-labelledby='image-modal-title'
       aria-describedby='image-modal-description'>
       <div className='w-full h-full flex flex-col justify-center relative pt-6 z-10'>
-        <Heading level='h2' id='gallery-modal-title' className='sr-only'>
+        <Heading level='h2' id='image-modal-title' className='sr-only'>
           Image gallery viewer - Image {currentIndex + 1} of {totalImages}
         </Heading>
-        <div id='gallery-modal-description' className='sr-only'>
+        <div id='image-modal-description' className='sr-only'>
           Image gallery viewer. Navigate with arrow keys, swipe gestures, or click thumbnails. Press
           Escape to close.
         </div>
