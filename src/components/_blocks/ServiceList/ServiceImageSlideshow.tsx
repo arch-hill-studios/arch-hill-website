@@ -17,11 +17,7 @@ interface ServiceImageSlideshowProps {
   variant: 'red' | 'blue';
 }
 
-const ServiceImageSlideshow = ({
-  images,
-  serviceTitle,
-  variant,
-}: ServiceImageSlideshowProps) => {
+const ServiceImageSlideshow = ({ images, serviceTitle, variant }: ServiceImageSlideshowProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const autoPlayTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -59,7 +55,7 @@ const ServiceImageSlideshow = ({
 
       resumeTimerRef.current = setTimeout(startAutoPlay, 10000);
     },
-    [stopAutoPlay, startAutoPlay, validImages.length]
+    [stopAutoPlay, startAutoPlay, validImages.length],
   );
 
   // Pause autoplay when scrolled off-screen
@@ -95,11 +91,11 @@ const ServiceImageSlideshow = ({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full h-[300px] lg:h-[480px] overflow-hidden ${borderClass} ${mobileBorderClass}`}>
+      className={`relative w-full h-75 lg:h-120 overflow-hidden ${borderClass} ${mobileBorderClass}`}>
       {validImages.map((item, index) => (
         <div
           key={item._key}
-          className={`absolute inset-0 transition-opacity duration-[1500ms] ease-in-out ${
+          className={`absolute inset-0 transition-opacity duration-1500 ease-in-out ${
             index === activeIndex ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}>
           <UnifiedImage
@@ -117,7 +113,7 @@ const ServiceImageSlideshow = ({
         <div className='absolute bottom-4 left-0 right-0 flex justify-between px-4 lg:bottom-5 lg:px-5 z-10 pointer-events-none'>
           <button
             onClick={() => handleManualNav('prev')}
-            className='w-[32px] h-[32px] lg:w-[36px] lg:h-[36px] border-none rounded-full bg-brand-dark/35 text-white/60 cursor-pointer flex items-center justify-center transition-colors duration-300 hover:bg-brand-dark/60 hover:text-white/90 pointer-events-auto'
+            className='w-8 h-8 lg:w-9 lg:h-9 border-none rounded-full bg-brand-dark/35 text-white/60 cursor-pointer flex items-center justify-center transition-colors duration-300 hover:bg-brand-dark/60 hover:text-white/90 pointer-events-auto'
             aria-label='Previous image'>
             <svg
               width='20'
@@ -131,7 +127,7 @@ const ServiceImageSlideshow = ({
           </button>
           <button
             onClick={() => handleManualNav('next')}
-            className='w-[32px] h-[32px] lg:w-[36px] lg:h-[36px] border-none rounded-full bg-brand-dark/35 text-white/60 cursor-pointer flex items-center justify-center transition-colors duration-300 hover:bg-brand-dark/60 hover:text-white/90 pointer-events-auto'
+            className='w-8 h-8 lg:w-9 lg:h-9 border-none rounded-full bg-brand-dark/35 text-white/60 cursor-pointer flex items-center justify-center transition-colors duration-300 hover:bg-brand-dark/60 hover:text-white/90 pointer-events-auto'
             aria-label='Next image'>
             <svg
               width='20'
