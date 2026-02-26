@@ -38,36 +38,36 @@ const gearCategories = [
   {
     title: 'Live Room',
     items: [
-      'Pearl professional MX Drumkit 5 Piece',
+      'Pearl Professional MX Drumkit 5 Piece',
       'Peavey Session Bass Amp 250 watts',
       'Ampeg 8x10 Bass Cab',
-      'Galien Gruger 4x 10 Bass Cab',
-      'Randall Rx75R Gat Combo',
+      'Gallien-Krueger 4x10 Bass Cab',
+      'Randall RX75R Guitar Combo',
     ],
   },
   {
     title: 'PA',
     items: [
-      'Allen & Heath Mix Wizard 16:2 sound desk',
+      'Allen & Heath Mix Wizard 16:2 Sound Desk',
       'Mackie DL 1608 Digital Desk',
       '2 x DSC K12 Speakers FOH 1200 watts RMS',
       '2 x Mackie DLM 12 Monitors 1000 watts RMS',
-      '1 x Wharfdale Pro 18" Sub 100watts RMS',
-      'Assortment Of Mic Stands And Cables',
+      '1 x Wharfedale Pro 18" Sub 100 watts RMS',
+      'Assortment of Mic Stands and Cables',
     ],
   },
   {
     title: 'Mics',
     items: [
-      'Neuman TLM 103 Condensor Mic',
-      'Nady TCM 1050 Condensor Mic (Neuman U67 clone)',
-      'Audio Technica AE 2500 Dual Condensor And Dynamic Mic',
-      'Audio Technica AT4041 Pencil Condensor Mic',
-      'SennHeiser MD 421 Vintage Dynamic Mic',
-      '3 x Octava MC 012 Condensor Mics',
-      '2 x Earth works OM1 Condensor Mics',
+      'Neumann TLM 103 Condenser Mic',
+      'Nady TCM 1050 Condenser Mic (Neumann U67 Clone)',
+      'Audio-Technica AE 2500 Dual Condenser and Dynamic Mic',
+      'Audio-Technica AT4041 Pencil Condenser Mic',
+      'Sennheiser MD 421 Vintage Dynamic Mic',
+      '3 x Octava MC 012 Condenser Mics',
+      '2 x Earthworks OM1 Condenser Mics',
       '2 x Shure SM 57 Dynamic Mics',
-      '2x Shure SM 58 Dynamic Mics',
+      '2 x Shure SM 58 Dynamic Mics',
       '1 x Shure PG Drum Mic Kit',
     ],
   },
@@ -77,10 +77,10 @@ const gearCategories = [
       'MOTU 828 ES 10 Channel Master Audio Interface',
       'Audient ASP 008 8 Channel ADAT Audio Interface',
       'Tone Beast TB 12 Mic Pre-Amp',
-      'Joe Meek VC 7 Dual Mic Pre Amps',
-      'GA Project Pre 73 MK111. Dual Mic Amps (Neve Clone)',
+      'Joe Meek VC 7 Dual Mic Pre-Amps',
+      'GA Project Pre-73 MKIII Dual Mic Amps (Neve Clone)',
       '2 x ART Pro MPA Dual Mic Amps',
-      '2 x Genelec 1030a Studio Monitors',
+      '2 x Genelec 1030A Studio Monitors',
       'Apple Mac M1 Mac Mini Studio (Silicon)',
     ],
   },
@@ -104,14 +104,6 @@ function buildGearListBlock(existingKey) {
   };
 }
 
-// Build a content wrapper block containing the gear list
-function buildContentWrapperWithGearList(existingWrapperKey, existingGearListKey) {
-  return {
-    _type: 'contentWrapper',
-    _key: existingWrapperKey || generateKey(),
-    content: [buildGearListBlock(existingGearListKey)],
-  };
-}
 
 async function main() {
   console.log('🔍 Looking for the Gear page in Sanity...\n');
@@ -139,20 +131,23 @@ async function main() {
 
   const content = gearPage.content || [];
 
-  // Look for an existing contentWrapper that already contains a gearList block
-  const existingWrapper = content.find(
-    (block) =>
-      block._type === 'contentWrapper' &&
-      Array.isArray(block.content) &&
-      block.content.some((inner) => inner._type === 'gearList')
-  );
+  // Find the single existing contentWrapper on the page
+  const existingWrapper = content.find((block) => block._type === 'contentWrapper');
 
-  if (existingWrapper) {
-    const existingGearList = existingWrapper.content.find((b) => b._type === 'gearList');
-    console.log(`📋 Found existing Content Wrapper (key: ${existingWrapper._key}) with Gear List inside (key: ${existingGearList._key})`);
+  if (!existingWrapper) {
+    console.error('❌ Could not find a Content Wrapper on the Gear page.');
+    process.exit(1);
+  }
+
+  // Check if the wrapper already has a gearList — update it in place if so
+  const existingGearList = Array.isArray(existingWrapper.content)
+    ? existingWrapper.content.find((b) => b._type === 'gearList')
+    : null;
+
+  if (existingGearList) {
+    console.log(`📋 Found existing Gear List (key: ${existingGearList._key}) inside Content Wrapper (key: ${existingWrapper._key})`);
     console.log('   Replacing categories with new gear list data...\n');
 
-    // Update the gearList block in place using its nested path, preserving both keys
     const updatedGearListBlock = buildGearListBlock(existingGearList._key);
 
     await client
@@ -163,19 +158,18 @@ async function main() {
       })
       .commit();
 
-    console.log('✅ Gear List block updated successfully inside existing Content Wrapper!\n');
+    console.log('✅ Gear List updated successfully inside existing Content Wrapper!\n');
   } else {
-    console.log('📋 No existing Content Wrapper with Gear List found. Appending a new Content Wrapper at the end of the page...\n');
+    console.log(`📋 Appending Gear List into existing Content Wrapper (key: ${existingWrapper._key})...\n`);
 
-    const newWrapper = buildContentWrapperWithGearList();
+    const newGearListBlock = buildGearListBlock();
 
     await client
       .patch(gearPage._id)
-      .setIfMissing({ content: [] })
-      .append('content', [newWrapper])
+      .append(`content[_key=="${existingWrapper._key}"].content`, [newGearListBlock])
       .commit();
 
-    console.log('✅ New Content Wrapper with Gear List appended successfully!\n');
+    console.log('✅ Gear List appended successfully inside existing Content Wrapper!\n');
   }
 
   // Summary
