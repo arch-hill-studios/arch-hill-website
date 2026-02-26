@@ -35,10 +35,8 @@ const GearCategory = ({
 
   return (
     <div
-      className={`relative overflow-hidden ${
-        isRed
-          ? 'border-l-[7px] border-brand-primary rounded-bl-[50px] max-lg:rounded-bl-[30px]'
-          : 'border-r-[7px] border-brand-secondary rounded-br-[50px] max-lg:rounded-br-[30px] ml-auto'
+      className={`relative overflow-hidden rounded-b-[50px] max-lg:rounded-b-[30px] border-x-[7px] lg:w-180 w-full mx-auto ${
+        isRed ? 'border-brand-primary' : 'border-brand-secondary'
       }`}>
       {/* Carpet background overlay */}
       <div
@@ -49,7 +47,7 @@ const GearCategory = ({
       />
 
       {/* Content */}
-      <div className='relative z-10 p-8 lg:p-10'>
+      <div className='relative z-10 p-8 lg:p-10 text-left'>
         {/* Category title */}
         {title && (
           <HeadingTag
@@ -61,15 +59,19 @@ const GearCategory = ({
           </HeadingTag>
         )}
 
-        {/* Items grid */}
+        {/* Items list */}
         {validItems.length > 0 && (
-          <ul className='grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2.5'>
+          <ul className='flex flex-col gap-2.5 w-fit'>
             {validItems.map((item) => (
               <li
                 key={item._key}
                 className='flex items-start gap-3 text-brand-white text-body-base leading-relaxed'
                 {...(documentId && documentType
-                  ? createSanityDataAttribute(documentId, documentType, `${fieldPathPrefix}.items[_key=="${item._key}"].text`)
+                  ? createSanityDataAttribute(
+                      documentId,
+                      documentType,
+                      `${fieldPathPrefix}.items[_key=="${item._key}"].text`,
+                    )
                   : {})}>
                 <span
                   className={`mt-2 shrink-0 w-1.5 h-1.5 rounded-full ${

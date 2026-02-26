@@ -104,6 +104,15 @@ function buildGearListBlock(existingKey) {
   };
 }
 
+// Build a content wrapper block containing the gear list
+function buildContentWrapperWithGearList(existingWrapperKey, existingGearListKey) {
+  return {
+    _type: 'contentWrapper',
+    _key: existingWrapperKey || generateKey(),
+    content: [buildGearListBlock(existingGearListKey)],
+  };
+}
+
 async function main() {
   console.log('🔍 Looking for the Gear page in Sanity...\n');
 
@@ -128,36 +137,45 @@ async function main() {
 
   console.log(`✅ Found page: "${gearPage.title}" (ID: ${gearPage._id})\n`);
 
-  // Check if there's already a gear list block in the content
   const content = gearPage.content || [];
-  const existingGearListIndex = content.findIndex((block) => block._type === 'gearList');
 
-  if (existingGearListIndex >= 0) {
-    const existingBlock = content[existingGearListIndex];
-    console.log(`📋 Found existing Gear List block (key: ${existingBlock._key})`);
+  // Look for an existing contentWrapper that already contains a gearList block
+  const existingWrapper = content.find(
+    (block) =>
+      block._type === 'contentWrapper' &&
+      Array.isArray(block.content) &&
+      block.content.some((inner) => inner._type === 'gearList')
+  );
+
+  if (existingWrapper) {
+    const existingGearList = existingWrapper.content.find((b) => b._type === 'gearList');
+    console.log(`📋 Found existing Content Wrapper (key: ${existingWrapper._key}) with Gear List inside (key: ${existingGearList._key})`);
     console.log('   Replacing categories with new gear list data...\n');
 
-    // Replace the existing block entirely (preserving its _key so Sanity doesn't duplicate it)
-    const updatedGearListBlock = buildGearListBlock(existingBlock._key);
+    // Update the gearList block in place using its nested path, preserving both keys
+    const updatedGearListBlock = buildGearListBlock(existingGearList._key);
 
     await client
       .patch(gearPage._id)
-      .set({ [`content[_key=="${existingBlock._key}"]`]: updatedGearListBlock })
+      .set({
+        [`content[_key=="${existingWrapper._key}"].content[_key=="${existingGearList._key}"]`]:
+          updatedGearListBlock,
+      })
       .commit();
 
-    console.log('✅ Gear List block updated successfully!\n');
+    console.log('✅ Gear List block updated successfully inside existing Content Wrapper!\n');
   } else {
-    console.log('📋 No existing Gear List block found. Appending a new one...\n');
+    console.log('📋 No existing Content Wrapper with Gear List found. Appending a new Content Wrapper at the end of the page...\n');
 
-    const newGearListBlock = buildGearListBlock();
+    const newWrapper = buildContentWrapperWithGearList();
 
     await client
       .patch(gearPage._id)
       .setIfMissing({ content: [] })
-      .append('content', [newGearListBlock])
+      .append('content', [newWrapper])
       .commit();
 
-    console.log('✅ Gear List block added successfully!\n');
+    console.log('✅ New Content Wrapper with Gear List appended successfully!\n');
   }
 
   // Summary

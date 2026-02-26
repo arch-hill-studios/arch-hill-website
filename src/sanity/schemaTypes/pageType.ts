@@ -4,7 +4,7 @@
 
 import { DocumentIcon } from '@sanity/icons';
 import { defineField, defineType } from 'sanity';
-import { PAGE_CONTENT_BLOCK_LIST } from './shared/blockLists';
+import { PAGE_ROOT_BLOCK_LIST } from './shared/blockLists';
 import { createLinkFieldSet } from './shared/linkSystem';
 
 export const pageType = defineType({
@@ -64,8 +64,8 @@ export const pageType = defineType({
       name: 'content',
       title: 'Page Content',
       type: 'array',
-      description: 'Build your page content using page sections and content blocks',
-      of: PAGE_CONTENT_BLOCK_LIST,
+      description: 'Build your page by adding Page Sections (with headings) or Content Wrappers (for grouping blocks without headings)',
+      of: PAGE_ROOT_BLOCK_LIST,
       options: {
         insertMenu: {
           views: [
