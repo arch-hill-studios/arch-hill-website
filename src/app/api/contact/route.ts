@@ -199,10 +199,11 @@ export async function POST(request: Request) {
     if (adminEmailResult.error) {
       // Log detailed Resend error to server console for debugging
       console.error('❌ Failed to send admin notification email');
+      const adminErrorObj = adminEmailResult.error as { statusCode?: number; name?: string; message?: string };
       console.error('Resend Error Details:', {
-        statusCode: (adminEmailResult.error as any).statusCode,
-        name: (adminEmailResult.error as any).name,
-        message: (adminEmailResult.error as any).message,
+        statusCode: adminErrorObj.statusCode,
+        name: adminErrorObj.name,
+        message: adminErrorObj.message,
         fullError: adminEmailResult.error,
       });
       throw new Error('Failed to send notification email');
