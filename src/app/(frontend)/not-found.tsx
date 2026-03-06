@@ -6,6 +6,7 @@ import Container from '@/components/Layout/Container';
 import CTA from '@/components/UI/CTA';
 import Breadcrumb from '@/components/UI/Breadcrumb';
 import { fetchOrganizationName } from '@/lib/organizationInfo';
+import { sitePaddingX } from '@/utils/spacingConstants';
 
 const META_DESCRIPTION = 'Sorry, the page you are looking for could not be found.';
 
@@ -54,11 +55,11 @@ export default function NotFound() {
       <Breadcrumb pageTitle='Page Not Found' />
 
       <Container>
-        <div className='flex flex-col items-center text-center pt-12 md:pb-16'>
-          <div className='max-w-2xl mb-8 md:mb-12'>
-            <p className='text-body-lg leading-relaxed mb-6'>
+        <div className={`flex flex-col items-center text-center pt-24 ${sitePaddingX}`}>
+          <div className='mb-8 md:mb-12'>
+            <p className='text-body-base leading-relaxed mb-6'>
               The page you're looking for doesn't exist or may have been moved. Please check the URL
-              for errors, or explore the links below.
+              for errors.
             </p>
           </div>
 
