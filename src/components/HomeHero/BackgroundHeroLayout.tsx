@@ -102,7 +102,7 @@ const VideoImageBackgroundHeroLayout = (props: VideoImageBackgroundHeroLayoutPro
     <div
       className={`
         w-full flex-1 flex flex-col ${verticalClasses} ${horizontalConfig.items}
-        px-4 sm:px-8 lg:px-[10%]
+        px-8 lg:px-[10%]
       `}
       {...createSanityDataAttribute(documentId, documentType, 'heroContentPosition')}>
       {/* Content container with responsive alignment */}
